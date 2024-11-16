@@ -1,0 +1,102 @@
+.faq-component {
+    font-size: 16px;
+  }
+  .ant-collapse-header-text {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-dark) !important;
+  }
+  .ant-collapse-content-box {
+    font-size: 16px;
+  }
+  .ant-collapse-content-active {
+    padding: 0px 20px !important;
+  }
+  
+  .faq-arrow {
+    transition: transform 0.3s ease;
+    width: 16px; /* Adjust the size as per your design */
+    height: 16px;
+  }
+  .faq-arrow {
+    transform: rotate(90deg); /* Rotate the arrow when the panel is expanded */
+  }
+  .faq-arrow.rotate {
+    transform: rotate(270deg); /* Rotate the arrow when the panel is expanded */
+  }
+  
+  .faq-container {
+    background-color: var(--color-white) !important; /* White background for the entire container */
+    padding: 20px; /* Add padding to the container */
+  }
+  
+  .faq-panel {
+    background-color:#f3f3f6;
+    margin: 20px 0; /* Add margin between panels to separate them */
+    border-radius: 15px; /* Optional: Add rounded corners for a cleaner look */
+    border: none;
+    overflow: hidden; /* Ensure content doesn't overflow rounded corners */
+    padding: 10px 24px;
+    font-size: 26px;
+    font-weight: 500;
+    display: block !important;
+    line-height: 31.47px;
+    text-align: left;
+  }
+  .faq-panel .ant-collapse-header {
+    color: var(--color-dark); /* Initial question color */
+    padding: 10px 0px !important;
+  }
+  
+  .faq-panel.active .ant-collapse-header {
+    color: var(--color-dark); /* Change question color when active */
+    font-weight: 500;
+    padding-bottom: 0px;
+    padding: 0px;
+  }
+  .ant-collapse-header-text {
+    font-weight: 600;
+  }
+  .faq-panel p {
+    margin: 0px;
+    font-size: 16px !important;
+  }
+  .faq-panel.active p {
+    font-size: 16px !important;
+  }
+  .faq-panel p {
+    color: var(--color-dark); /* Answer text color */
+    font-weight: 400;
+  }
+  
+
+  
+
+/* 
+======================================================================
+                            heading
+======================================================================
+*/
+.faq-heading {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin: 0px;
+  }
+  .faq-description {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-muted);
+    margin: 0px;
+    margin-bottom: 50px;
+  }
+  
+  @media screen and (max-width: 576px) {
+    .faq-heading {
+      font-size: 26px;
+    }
+    .faq-description {
+      font-size: 12px;
+    }
+  }
+  

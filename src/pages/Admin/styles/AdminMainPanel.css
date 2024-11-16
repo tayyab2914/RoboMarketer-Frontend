@@ -1,0 +1,75 @@
+.admin-main-panel-header{
+    padding: 21px 25px;
+    border-bottom: 1px solid #e6eaed;
+    display: flex;
+    align-items: center;
+}
+.admin-main-panel-header-text{
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px !important;
+
+}
+.admin-main-panel-search-under-lg{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.admin-main-panel-hamburger{
+    margin-left: 10px;
+}
+.admin-main-panel-header-text img{
+    margin-right: 10px;
+}
+.admin-main-panel-search{
+    justify-content: end;
+    display: flex;
+    align-items: center;
+}
+.admin-main-panel-search-bar {
+    height: 45px !important;
+    width: 220px;
+    margin-right: 20px;
+}
+.admin-main-panel-search-bar .ant-input {
+    height: 30px !important;
+    margin-bottom: 0px !important;
+}
+.generate-one-time-link-btn{
+    width: 250px !important;
+    font-size: 14px !important;
+    margin-top: 0px !important;
+}
+.admin-panel-sign-up-link{
+    display: flex;
+    align-items: center;
+}
+.admin-panel-sign-up-link img{
+    margin-right: 5px;
+    
+}
+.admin-main-panel-table{
+    padding: 20px;
+}
+
+/* Wrapper styling for input and button */
+.header-data {
+    display: flex;
+    gap: 10px; /* Adds space between elements */
+  }
+
+  /* Full-width layout for screens under 510px */
+  @media (max-width: 510px) {
+    .header-data {
+      flex-direction: column;
+    }
+  
+    .admin-main-panel-search-bar,
+    .generate-one-time-link-btn {
+      width: 100%; /* Make both elements take full width */
+    }
+  }
+  

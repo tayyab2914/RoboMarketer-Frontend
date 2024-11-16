@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import ProjectRoutes from './utils/ProjectRoutes'
+import './App.css'
+// import './PreWrittenCode/css/bootstrap.min.css'
+// import './PreWrittenCode/css/normalize.css'
+// import './PreWrittenCode/css/owl.carousel.min.css'
+// import './PreWrittenCode/css/owl.theme.default.min.css'
+// import './PreWrittenCode/css/responsive.css'
+// import './PreWrittenCode/css/style.css'
 
-function App() {
+import { Flex } from 'antd'
+
+const App = () => {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <ProjectRoutes/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

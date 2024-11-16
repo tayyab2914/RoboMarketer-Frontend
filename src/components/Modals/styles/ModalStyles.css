@@ -1,0 +1,270 @@
+.modal-header{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+.input-group{
+    display: flex;
+    justify-content: center;
+    
+}
+.input-group-label{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.input-group-input {
+    width: 70%;
+    height: 40px !important;
+}
+.input-group-input .ant-input-password{
+    height: 40px !important;
+
+}
+.input-group-input .ant-input{
+    height: 40px !important;
+
+}
+.input-group-btn button{
+    height: 40px;
+}
+.input-group-btn {
+    width: 30%;
+    height: 40px !important;
+}
+.input-group-btn button{
+    width: 100%;
+}
+
+
+
+.ant-upload-text{
+    text-align: center;
+}
+.ant-upload-text{
+    margin-bottom: 10px;
+}
+.upload-group{
+    margin-bottom: 10px;
+}
+
+
+.modal-field{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px !important;
+}
+.ant-form{
+    margin-bottom: 10px !important;
+}.modal-field-input-label label{
+    margin-bottom: 0px;
+}
+.modal-field-input{
+    display: flex;
+    align-items: center;
+}
+.modal-field-pre-fix{
+    padding: 6.5px 16px;
+    border: 1px solid #e6eaed;
+    border-radius: 8px 0px 0px 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.modal-field-with-prefix{
+    border: 1px solid #e6eaed;
+    border-radius: 0px 8px 8px 0px;
+    margin-bottom: 0px !important;
+}
+.modal-field-post-fix{
+    padding: 6.5px 16px;
+    border: 1px solid #e6eaed;
+    border-radius: 0px 8px 8px 0px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0px !important;
+}
+.modal-field-with-post-fix{
+    border: 1px solid #e6eaed;
+    border-radius: 8px 0px 0px 8px;
+    margin-bottom: 0px !important;
+}
+.modal-field-without-prefix{
+    border: 1px solid #e6eaed;
+    border-radius: 8px;
+}
+.modal-field-label-block{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.ant-input{
+    height: 40px !important;
+    margin-bottom: 10px;
+}
+.ant-select-selector , .ant-select{
+    height: 45px !important;
+    
+}
+.ant-select{
+    margin-bottom: 10px;
+}
+/* .ant-collapse-item {
+    border: 1px solid #e6eaed !important;
+    border-radius: 8px !important;
+    padding-bottom: 10px !important;
+
+}
+.ant-collapse-header{
+    border: none !important;
+    border-radius: 0px !important;
+}
+.ant-collapse-header:hover{
+    border: none !important;
+    border-radius: 0px !important;
+}
+.ant-collapse-content{
+    padding: 0px 10px !important;
+    border-top: 1px solid #e6eaed !important;
+} */
+ .robo-marketer-collapse{
+    margin-bottom: 10px;
+    font-weight: 500;
+ }
+
+ .modal-actions button {
+    width: 100%;
+    padding: 0px 10px;
+    height: 40px;
+    border: none;
+  }
+  .modal-actions .btn-1 {
+    margin-right: 1% !important;
+  }
+  .modal-actions .btn-2 {
+    margin-left: 1% !important;
+  }
+  
+  .cancel-btn{
+      background-color: rgba(250, 52, 52, 0.1);
+      color: #FA3434;
+  }
+
+
+.ant-radio-group{
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    display: flex;
+    align-items: center;
+}
+.ant-radio-button-wrapper
+{
+    width: 50% !important;
+    text-align: center !important;
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+/* .ant-radio-button-checked{
+    background-color: black !important;
+}*/
+.ant-radio-button-wrapper-checked {
+    color: white !important;
+    background-color: black !important;
+    font-weight: 400;
+} 
+
+  .panel-header{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  .ant-collapse{
+    margin-bottom: 10px;
+    background-color: transparent !important;
+  }
+  .ant-collapse-header{
+    background-color: transparent !important;
+  }
+  
+  .product-modal-header{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    justify-content: space-between;
+}
+  .product-list {
+    margin-top: 16px;
+  }
+  
+  .product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px ;
+    border: 1px solid #e6eaed;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .product-name {
+    font-size: 16px;
+  }
+  
+  .product-actions .edit-icon,
+  .product-actions .delete-icon {
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  
+  .add-product-btn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    margin-right: 20px;
+    border: 1px solid #e6eaed;
+    font-weight: 500;
+  }
+
+
+
+  .funnel-modal-header{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    justify-content: space-between;
+}
+  .funnel-list {
+    margin-top: 16px;
+  }
+  
+  .funnel-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px ;
+    border: 1px solid #e6eaed;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .funnel-name {
+    font-size: 16px;
+  }
+  
+  .funnel-actions .edit-icon,
+  .funnel-actions .delete-icon {
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  
+  .add-funnel-btn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    margin-right: 20px;
+    border: 1px solid #e6eaed;
+    font-weight: 500;
+  }
+  

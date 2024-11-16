@@ -1,0 +1,162 @@
+/* Container for each checkbox item */
+.checkbox-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .modal-scrollable {
+    flex-grow: 1; /* Allows the panel to take up remaining space */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    padding: 10px;
+    height: 60vh;
+
+    border-right: 1px solid #e6eaed;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.modal-scrollable::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+  
+  /* Custom checkbox container */
+  .custom-checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Custom checkmark inside the checkbox */
+  .custom-checkbox .checkmark {
+    visibility: hidden;
+  }
+  
+  /* Checked state of the checkbox */
+  .custom-checkbox.checked {
+    background-color: black;  /* Black background when checked */
+    border-color: black;      /* Border color turns black */
+  }
+  
+  .custom-checkbox.checked .checkmark {
+    visibility: visible;
+    color: white;             /* White cross icon */
+    font-size: 17px;          /* Set the size of the cross icon */
+    height: 35px;
+    width: 35px;
+    padding: 3px;
+  }
+  
+  /* Hover effect on checkbox */
+  .custom-checkbox:hover {
+    border-color: #1b1b1b;
+  }
+  
+  /* Modal and button styles */
+  .settings-btn {
+    border: none;
+    background-color: white;
+    padding: 20px 0;
+    height: 67.8px;
+    color: #575a7b;
+    font-size: 18px;
+    font-weight: 500;
+    border-top: 1px solid #e6eaed;
+    border-left: 1px solid #e6eaed;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .report-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .ant-modal-title{
+    border-bottom: 1px solid #e6eaed !important;
+    padding-bottom: 10px;
+  }
+  .modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.selected-metric-main {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e6eaed;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.selected-metric-elipsis {
+    margin-right: 8px;
+    color: #575a7b;
+    padding: 8px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.selected-metric-name {
+    flex-grow: 1; /* Allows the metric name to take up available space */
+    font-size: 16px;
+    color: #333;
+    padding: 8px;
+    border-right: 1px solid #e6eaed;
+    border-left: 1px solid #e6eaed;
+}
+
+.selected-metric-cross {
+    cursor: pointer;
+    color: #ff4d4f; /* Red color for delete icon */
+    padding: 8px 16px;
+    transition: color 0.3s ease;
+    border-radius: 0px 10px 10px 0px;
+    
+}
+
+.selected-metric-cross:hover {
+    color: #d9534f; /* Slightly darker red on hover */
+}
+.modal-actions{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.modal-actions button {
+  padding: 0px 10px;
+  width: 98%;
+  height: 40px;
+  border: none;
+}
+.modal-actions .btn-2 {
+    width: 100%;
+    text-align: left;
+    margin: 0px;
+}
+.modal-actions .btn-1 {
+    margin: 0px;
+    text-align: right;
+    width: 100%;
+}
+
+.cancel-btn{
+    background-color: rgba(250, 52, 52, 0.1);
+    color: #FA3434;
+}

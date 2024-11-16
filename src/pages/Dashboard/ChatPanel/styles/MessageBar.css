@@ -1,0 +1,24 @@
+.message-arrow-up{
+background-color: black;
+padding: 5px;
+border-radius: 50%;
+margin: 0px 10px;
+}
+.message-bar-plus{
+    border-radius: 50%;
+    padding: 5px;
+    margin: 0px 10px;
+}
+.message-bar-input{
+    height: 40px;
+    margin-bottom: 0px;
+}
+.message-bar{
+    margin-bottom: 10px;
+    background-color: white;
+}
+.disabled-icon {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

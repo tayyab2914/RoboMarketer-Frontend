@@ -1,0 +1,17 @@
+.dashboard-main-drawer-enabler-btn-1, .dashboard-main-drawer-enabler-btn-2{
+    width: 100%;
+    border: none;
+    background-color: white;
+    border: 1px solid #e6eaed;
+    padding: 10px;
+}
+
+.dashboard-main-drawer-enabler-btn-1{
+    border-radius: 10px 0px 0px 10px;
+}
+.dashboard-main-drawer-enabler-btn-2{
+    border-radius: 0px 10px 10px 0px;
+}
+.dashboard-main-drawer-enabler-row{
+    padding: 10px;
+}

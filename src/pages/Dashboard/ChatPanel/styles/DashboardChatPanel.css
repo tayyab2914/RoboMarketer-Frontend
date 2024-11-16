@@ -1,0 +1,17 @@
+.dashboard-chat-panel-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 25px 30px;
+}
+.chat-icon-wrapper {
+  border: 1px solid #e6eaed;
+  border-radius: 8px;
+  height: 48px !important;
+  width: 48px !important;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

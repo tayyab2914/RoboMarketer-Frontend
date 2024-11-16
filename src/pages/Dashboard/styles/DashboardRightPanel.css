@@ -1,0 +1,116 @@
+.right-panel-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid #e6eaed;
+  padding: 0px !important;
+  width: 100%;
+  height: 100vh; /* Make the right panel take full height of the viewport */
+}
+
+.right-panel-container-inner {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px 10px;
+  height: 100%;
+  overflow: hidden; /* Prevent the content from overflowing the container */
+}
+
+.right-panel-logo {
+  width: 70%; /* Reduced width for logo */
+  margin: 10px auto 30px auto; /* Space adjustments for logo */
+}
+
+.right-panel-btn {
+  padding: 10px 12px;
+  height: 45px;
+  width: 100%;
+  color: #575a7b;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e6eaed;
+}
+
+.add-prompt-btn {
+  margin-top: 20px; /* Space between Add Prompt button and other content */
+}
+
+/* Make the remaining content scrollable */
+.right-panel-scrollable {
+  flex-grow: 1; /* Allows the panel to take up remaining space */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px;
+}
+
+/* Style the settings button to be fixed at the bottom */
+
+.right-panel-dropdown {
+  width: 100% !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-prompt-btn {
+  padding: 10px 12px !important;
+  margin-top: 0px !important;
+  margin-bottom: 10px !important;
+}
+
+.add-prompt-span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-header-span {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 18px;
+}
+
+.panel-header-span img {
+  margin-right: 10px;
+}
+
+.add-prompt-span img {
+  margin-right: 5px;
+}
+
+.right-panel-container-inner .ant-collapse-header {
+  padding: 10px 12px !important;
+  font-weight: 500 !important;
+  background-color: white !important;
+  border: 1px solid #e6eaed;
+  margin-bottom: 10px;
+  height: 40px;
+  border-radius: 8px !important;
+}s
+
+.right-panel-container-inner .ant-collapse-header:hover {
+  background-color: rgb(242, 242, 242) !important;
+}
+
+.right-panel-container-inner .ant-collapse {
+  border: none !important;
+  background-color: white !important;
+}
+
+.right-panel-container-inner .ant-collapse-item {
+  border-bottom: 0px !important;
+}
+
+.right-panel-container-inner .ant-collapse-content {
+  border-top: 0px !important;
+}
+
+.right-panel-container-inner .ant-collapse-content-box {
+  border: none !important;
+  padding: 0px !important;
+}

@@ -1,0 +1,61 @@
+.settings-btn {
+    border: none;
+    background-color: white;
+    padding: 20px 0px;
+    color: #575a7b;
+    font-size: 18px;
+    font-weight: 500;
+    border-top: 1px solid #e6eaed;
+    border-right: 1px solid #e6eaed;
+    position: absolute; /* Make it fixed at the bottom */
+    bottom: 0; /* Align it to the bottom */
+    left: 0; /* Align to the left edge */
+    width: 100%; /* Make it take up the full width of the container */
+    text-align: center;
+  }
+  .settings-btn-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .settings-btn img {
+    margin-right: 10px;
+  }
+  
+  .settings-header{
+    display: flex;
+    align-items: center;
+  }
+  .modal-option{
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .modal-option-btn{
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .modal-option-btn img{
+    margin-right: 10px;
+  }
+
+  .ant-modal-content{
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  @media screen and (min-width: 1400px) {
+    .settings-btn {
+      width: 100%; /* Ensure it takes full width on larger screens */
+    }
+  }
+  
+  @media screen and (min-width: 1700px) {
+    .settings-btn {
+      width: 100%; /* Keep it full width */
+    }
+  }
+  

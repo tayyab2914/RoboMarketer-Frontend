@@ -1,0 +1,97 @@
+.left-panel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #e6eaed;
+    padding: 0px !important;
+    width: 100%;
+    height: 100vh; /* Make the left panel take full height of the viewport */
+  }
+  
+  .left-panel-container-inner {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 10px;
+    height: 100%;
+    overflow: hidden; /* Prevent the content from overflowing the container */
+  }
+  
+  .left-panel-logo {
+    width: 220px; /* Reduced width for logo */
+    margin: 10px auto 30px auto; /* Space adjustments for logo */
+  }
+  
+  .left-panel-collapse {
+    margin-bottom: 10px; /* Optional: Adds spacing between collapse sections */
+  }
+  
+  .left-panel-btn {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #e6eaed !important;
+  }
+  
+  
+  /* Make the remaining content scrollable */
+  .left-panel-scrollable {
+    flex-grow: 1; /* Allows the panel to take up remaining space */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px;
+  }
+  
+  /* Style the settings button to be fixed at the bottom */
+
+  .left-panel-dropdown {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+
+  
+  .panel-header-span {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 18px;
+  }
+  
+  .panel-header-span img {
+    margin-right: 10px;
+  }
+  
+  /* .left-panel-container-inner .ant-collapse-header {
+    padding: 10px 12px !important;
+    font-weight: 500 !important;
+    background-color: white !important;
+    border: 1px solid #e6eaed;
+    margin-bottom: 10px;
+    height: 45px;
+    border-radius: 8px !important;
+  }
+  
+  .left-panel-container-inner .ant-collapse-header:hover {
+    background-color: rgb(242, 242, 242) !important;
+  }
+  
+  .left-panel-container-inner .ant-collapse {
+    border: none !important;
+    background-color: white !important;
+  }
+  
+  .left-panel-container-inner .ant-collapse-item {
+    border-bottom: 0px !important;
+  }
+  
+  .left-panel-container-inner .ant-collapse-content {
+    border-top: 0px !important;
+  }
+  
+  .left-panel-container-inner .ant-collapse-content-box {
+    border: none !important;
+    padding: 0px !important;
+  }
+   */

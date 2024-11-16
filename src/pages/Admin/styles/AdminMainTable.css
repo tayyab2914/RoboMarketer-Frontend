@@ -1,0 +1,61 @@
+.admin-table-header {
+  padding: 10px;
+  background-color: #fafafa;
+}
+.admin-table {
+  border: 1px solid #e6eaed;
+  border-radius: 8px;
+}
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+.admin-table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    flex-wrap: wrap; /* Allows elements to wrap under smaller screens */
+  }
+  
+  .admin-table-pagination span,
+  .admin-table-pagination .ant-pagination {
+    width: auto;
+  }
+  
+  /* Apply 100% width under 768px */
+  @media (max-width: 768px) {
+    .admin-table-pagination span,
+    .admin-table-pagination .ant-pagination {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px; /* Adds spacing between elements */
+      justify-content: center;
+    }
+  }
+  
+/* Ensure a minimum width for the table to avoid collapsing columns */
+@media (max-width: 992px) {
+  .table-wrapper .ant-table {
+    min-width: 900px; /* Adjust as needed */
+  }
+}
+.admin-table-header p {
+  margin: 0px;
+}
+.admin-table-header {
+  text-align: center;
+}
+.admin-table-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.ant-table-cell {
+  text-align: center !important;
+  padding: 10px !important;
+}

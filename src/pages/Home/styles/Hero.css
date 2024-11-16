@@ -1,0 +1,47 @@
+.hero-main{
+    background-color: var(--color-deep-dark);
+    text-align: center;
+}
+.hero-new-era-img{
+    width: 70%;
+    height: auto;
+    margin-top: 30px;
+}
+.hero-empowering-img{
+    width: 60%;
+}
+.hero-new-era-text{
+    text-align: center;
+    font-size: 22px;
+    color: var(--color-white);
+    margin: 0px;
+}
+@media screen and (max-width:1200px){
+    .hero-new-era-text{
+        font-size: 20px;
+    }
+}
+@media screen and (max-width:992px){
+    .hero-new-era-img{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:768px){
+    .hero-new-era-text{
+        font-size: 16px;
+    }
+    .hero-empowering-img{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:576px){
+    .hero-new-era-text{
+        font-size: 12px;
+    }
+    .hero-new-era-img{
+        margin-top: 70px;
+        
+    }
+}
