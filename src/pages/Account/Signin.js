@@ -18,6 +18,7 @@ const Signin = ({ toggleCurrentMode }) => {
   
   const handleSignIn = async (email, password) => {
     const response = await API_SIGN_IN(email, password,dispatch,navigate,setShowSpinner);
+    console.log(response)
     if(response){
         if(response.admin)
         {

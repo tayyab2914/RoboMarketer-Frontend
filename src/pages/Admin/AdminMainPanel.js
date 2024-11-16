@@ -1,46 +1,59 @@
-import { Col, Row, Input, Button, Drawer } from "antd";
-import React, { useState } from "react";
+import { Col, Row, Input, Drawer, Spin } from "antd";
+import React, { useEffect, useState } from "react";
 import MyIcon from "../../components/Icon/MyIcon";
 import { SearchOutlined } from "@ant-design/icons";
 import "./styles/AdminMainPanel.css";
-import MyButton from "../../components/Button/Button";
 import AdminMainTable from "./AdminMainTable";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import AdminLeftPanel from "./AdminLeftPanel";
+import CreateSignUpLinkBtn from "./CreateSignUpLinkBtn";
+import { API_DELETE_USER, API_GET_USERS_LIST, API_UPDATE_USER } from "../../apis/AuthApis";
+import { useSelector } from "react-redux";
 
 const AdminMainPanel = () => {
+  const { token } = useSelector((state) => state.authToken);
   const windowWidth = useWindowWidth();
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [usersList, setUsersList] = useState([]);
+  const [filteredUsersList, setFilteredUsersList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Toggle drawer visibility
   const showDrawer = () => setIsDrawerVisible(true);
   const closeDrawer = () => setIsDrawerVisible(false);
 
-  const HEADER_DATA = () => {
-    return (
-      <div className="header-data">
-        <Input
-          placeholder="Search"
-          className="admin-main-panel-search-bar"
-          prefix={<SearchOutlined style={{marginRight:"10px"}} />}
-          size="large"
-          onChange={(e) => console.log(e.target.value)}
-        />
-        <MyButton
-          text={
-            <span className="admin-panel-sign-up-link">
-              <MyIcon type={"sign_up_link"} size="xs" /> Create One-Time Signup
-              Link
-            </span>
-          }
-          className="generate-one-time-link-btn"
-        />
-      </div>
-    );
+  const getUsersList = async () => {
+    setShowSpinner(true);
+    const response = await API_GET_USERS_LIST(token,setShowSpinner);
+    setUsersList(response);
+    setFilteredUsersList(response);
+    setShowSpinner(false);
   };
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (query) {
+      const filteredData = usersList.filter((user) => (user.first_name || "").toLowerCase().includes(query.toLowerCase()) || (user.email || "").toLowerCase().includes(query.toLowerCase()) || (user.phone_number || "").includes(query) );
+      setFilteredUsersList(filteredData);
+    } else {
+      setFilteredUsersList(usersList);
+    }
+  };
+  const handleSaveUserData = async (updatedUser) => {
+    await API_UPDATE_USER(token,updatedUser.id, updatedUser, setShowSpinner);
+    getUsersList()
+};
+  const handleDeleteUser = async (userId) => {
+    await API_DELETE_USER(token,userId,  setShowSpinner);
+    getUsersList()
+};
+  useEffect(() => {
+    getUsersList();
+  }, []);
 
   return (
     <div>
+      {showSpinner && <Spin fullscreen />}
       <Row className="admin-main-panel-header">
         <Col xs={6}>
           <p className="admin-main-panel-header-text">
@@ -48,36 +61,37 @@ const AdminMainPanel = () => {
           </p>
         </Col>
         <Col xs={18} className="admin-main-panel-search">
-          {windowWidth >= 992 && <HEADER_DATA />}
+          {windowWidth >= 992 && (
+            <div className="header-data">
+              <Input placeholder="Search" className="admin-main-panel-search-bar" prefix={<SearchOutlined style={{ marginRight: "10px" }} />} size="large" value={searchQuery} onChange={(e) => handleSearch(e.target.value)} />
+              <CreateSignUpLinkBtn />
+            </div>
+          )}
           {windowWidth < 1200 && (
             <span className="admin-main-panel-hamburger" onClick={showDrawer}>
               <MyIcon type={"hamburger"} size="lg" />
             </span>
           )}
         </Col>
-
         {windowWidth < 992 && (
           <Col xs={24} className="admin-main-panel-search-under-lg">
-            <HEADER_DATA />
+            <div className="header-data">
+              <Input placeholder="Search" className="admin-main-panel-search-bar" prefix={<SearchOutlined style={{ marginRight: "10px" }} />} size="large" value={searchQuery} onChange={(e) => handleSearch(e.target.value)} />
+              <CreateSignUpLinkBtn />
+            </div>
           </Col>
         )}
       </Row>
 
       <Row>
         <Col xs={24} className="admin-main-panel-table">
-          <AdminMainTable />
+          {filteredUsersList?.length > 0 && (
+            <AdminMainTable UsersList={filteredUsersList} onSaveUserData={handleSaveUserData} onDeleteUserData={handleDeleteUser}/>
+          )}
         </Col>
       </Row>
 
-      {/* Drawer Component for AdminLeftPanel */}
-      <Drawer
-        headerStyle={{ display: "none" }}
-        placement="left"
-        onClose={closeDrawer}
-        visible={isDrawerVisible}
-        width={300} // Adjust width as needed
-        bodyStyle={{ padding: 0 }}
-      >
+      <Drawer headerStyle={{ display: "none" }} placement="left" onClose={closeDrawer} visible={isDrawerVisible} width={300} bodyStyle={{ padding: 0 }} >
         <AdminLeftPanel />
       </Drawer>
     </div>

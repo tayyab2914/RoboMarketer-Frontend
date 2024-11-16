@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "antd";
+import { Modal, Button, Popconfirm } from "antd";
 import "./styles/SettingsBtn.css";
 import MyIcon from "../../components/Icon/MyIcon";
 import { RightOutlined } from "@ant-design/icons";
@@ -10,11 +10,12 @@ import RoboMarketerModal from "../../components/Modals/RoboMarketerModal";
 import ProductsModal from "../../components/Modals/ProductsModal";
 import MarketingFunnelsModal from "../../components/Modals/MarketingFunnelsModal";
 import ReportingSettingsModal from "../../components/Modals/ReportingSettingsModal";
+import { useLogoutUser } from "../../hooks/useLogoutUser";
 
-// Import each modal component
-// (Import other modal components here as needed)
 
 const SettingsBtn = () => {
+    const logoutUser = useLogoutUser();
+  
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
 
@@ -37,7 +38,6 @@ const SettingsBtn = () => {
   const handleCloseOptionModal = () => {
     setActiveOption(null);
   };
-
   return (
     <div>
       <button className="settings-btn" onClick={() => setIsModalVisible(true)}>
@@ -45,39 +45,28 @@ const SettingsBtn = () => {
       </button>
 
       <Modal
-        title={
-          <span className="settings-header">
-            <MyIcon type="settings" style={{ marginRight: "5px" }} /> Settings
-          </span>
-        }
+        title={ <span className="settings-header"> <MyIcon type="settings" style={{ marginRight: "5px" }} /> Settings </span> }
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
-        footer={null}
-      >
+        footer={null} 
+    >
         <div className="modal-options">
           {options.map((option) => (
-            <div
-              key={option.name}
-              className="modal-option"
-              onClick={() => handleOptionClick(option)}
-            >
-              <button type="text" className="modal-option-btn">
-                <MyIcon type={option.icon} /> <span>{option.name}</span>
-              </button>
-              <span>
-                <RightOutlined />
-              </span>
+            <div key={option.name} className="modal-option" onClick={() => handleOptionClick(option)} >
+              <button type="text" className="modal-option-btn"> <MyIcon type={option.icon} /> <span>{option.name}</span> </button>
+              <span> <RightOutlined /> </span>
             </div>
           ))}
         </div>
+        <div className="modal-option">
+            <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser}  okText="Yes" cancelText="No" >
+                <button type="text" className="modal-option-btn"><MyIcon type={'logout'} /> <span>Logout</span> </button>
+            </Popconfirm>
+        </div>
       </Modal>
 
-      {/* Render the selected option's modal */}
       {activeOption && (
-        <activeOption.component
-          isVisible={!!activeOption}
-          onClose={handleCloseOptionModal}
-        />
+        <activeOption.component isVisible={!!activeOption} onClose={handleCloseOptionModal} />
       )}
     </div>
   );

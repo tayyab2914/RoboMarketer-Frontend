@@ -9,7 +9,9 @@
 .table-wrapper {
   width: 100%;
   overflow-x: auto; /* Enables horizontal scrolling */
-}
+}.table-wrapper::-webkit-scrollbar {
+    height: 5px; /* Sets the width of the horizontal scrollbar */
+  }
 .admin-table-pagination {
     display: flex;
     align-items: center;
@@ -23,6 +25,16 @@
     width: auto;
   }
   
+  .admin-main-table-form .ant-form-item {
+margin-bottom: 0px;
+  }
+  .admin-main-table-form .ant-form-item-label {
+    font-weight: 500;
+  }
+  .admin-main-table-form button{
+    height: 40px;
+    width: 100%;
+  }
   /* Apply 100% width under 768px */
   @media (max-width: 768px) {
     .admin-table-pagination span,

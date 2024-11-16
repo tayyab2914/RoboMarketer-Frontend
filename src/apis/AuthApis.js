@@ -1,7 +1,7 @@
 import axios from "axios";
 import { message } from "antd";
 
-import { setAuthToken, setLoggedIn } from "../redux/AuthToken/Action";
+import { setAuthToken, setIsAdmin, setLoggedIn } from "../redux/AuthToken/Action";
 
 import { DOMAIN_NAME } from "../utils/GlobalSettings";
 
@@ -52,8 +52,10 @@ export const API_SIGN_IN = async (
     });
 
     // Handle login token
+    console.log('response.data.token',response.data)
     dispatch(setAuthToken(response.data.token));
     dispatch(setLoggedIn(true));
+    dispatch(setIsAdmin(response.data.admin))
     navigate('/');
     message.success("Signed in successfully");
     return response.data;
@@ -201,4 +203,89 @@ export const API_TEST_TOKEN = async (token, setShowSpinner) => {
   } finally {
     setShowSpinner(false);
   }
+};
+
+
+export const API_GENERATE_LINK = async (token, setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+        const response = await axios.post(`${DOMAIN_NAME}/authentication/generate_link/`, {}, {
+            headers: {
+                Authorization: token, 
+            },
+        });
+
+        const { link_token } = response.data; 
+        return link_token
+    } catch (error) {
+        message.error('Failed to generate signup link.');
+    } finally {
+      setShowSpinner(false);
+    }
+  };
+
+  
+export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.get(`${DOMAIN_NAME}/authentication/get_users_list/`, {
+        headers: {
+            Authorization: token, 
+        },
+      });
+  
+      console.log(response)
+      return response.data;
+    } catch (error) {
+      message.error("Invalid or expired token");
+    } finally {
+      setShowSpinner(false);
+    }
+  };
+  
+  
+
+  export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) => {
+    setShowSpinner(true);
+
+    try {
+        const response = await axios.put(`${DOMAIN_NAME}/authentication/edit_user/${id}/`, {
+            username: updatedUser.username,
+            email: updatedUser.email,
+            phone_number: updatedUser.phone_number,
+            total_accounts: updatedUser.total_accounts,
+            first_name: updatedUser.first_name,
+            last_name: updatedUser.last_name,
+        }, {
+            headers: {
+                Authorization: `${token}`, 
+            },
+        });
+        message.success("User Updated Successfully")
+        return response.data;
+    } catch (error) {
+        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        message.error(errorMessage);  
+    } finally {
+        setShowSpinner(false);
+    }
+};
+
+export const API_DELETE_USER = async (token, id,  setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+          const response = await axios.delete(`${DOMAIN_NAME}/authentication/delete_user/${id}/`, {
+            headers: {
+                Authorization: token, 
+            },
+          });
+      
+        message.success("User Deleted Successfully")
+        return response.data;
+    } catch (error) {
+        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        message.error(errorMessage);  
+    } finally {
+        setShowSpinner(false);
+    }
 };

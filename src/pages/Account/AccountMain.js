@@ -8,6 +8,7 @@ import { useNavigate,useLocation, useParams } from "react-router";
 
 const Account = () => {
   const [currentMode, setCurrentMode] = useState("signup");
+  const { token, isLoggedIn,isAdmin } = useSelector((state) => state.authToken);
 //   const { token, isLoggedIn } = useSelector((state) => state.authToken);
 const {link_token}=useParams()
 
@@ -20,8 +21,8 @@ const {link_token}=useParams()
   
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    console.log(link_token)
-  if(!link_token) setCurrentMode("signin")
+    if(!link_token) setCurrentMode("signin")
+    else if(isAdmin) navigate('/admin')
   });
   
   const toggleCurrentMode = (mode) => {
