@@ -21,17 +21,17 @@ const DashboardMain = () => {
   return (
     <div>
       <Row>
-        <Col xs={0} xl={5}>
+        <Col xs={0}  xl={5}>
           <DashboardLeftPanel />
         </Col>
-        <Col xs={24} xl={14}>
+        <Col xs={24}  xl={14}>
             {windowWidth < 1200 && <Row className="dashboard-main-drawer-enabler-row">
                 <Col xs={12}><button onClick={showLeftDrawer} className="dashboard-main-drawer-enabler-btn-1"><MyIcon type={'settings'}/> Settings</button></Col>
                 <Col xs={12}><button onClick={showRightDrawer} className="dashboard-main-drawer-enabler-btn-2"><MyIcon type={'reporting'}/> Reporting</button></Col>
             </Row>}
             <DashboardChatPanel />
         </Col>
-        <Col xs={0} xl={5}>
+        <Col xs={0}  xl={5}>
           <DashboardRightPanel />
         </Col>
       </Row>

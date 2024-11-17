@@ -48,6 +48,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                 first_name: selectedUser.first_name,
                 email: selectedUser.email,
                 phone_number: selectedUser.phone_number,
+                total_accounts: selectedUser.total_accounts,
             });
         }
     }, [selectedUser, form]); // Update form values when selectedUser changes
@@ -103,6 +104,13 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                         label="Email"
                         name="email"
                         rules={[{ required: true, message: 'Please enter the email' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Number of Accounts"
+                        name="total_accounts"
+                        rules={[{ required: true, message: 'Please enter the total number of accounts' }]}
                     >
                         <Input />
                     </Form.Item>

@@ -13,11 +13,11 @@ const Account = () => {
 const {link_token}=useParams()
 
   const navigate = useNavigate()
-//   useEffect(() => {
-//     if (isLoggedIn) {
-//       navigate("/");
-//     }
-//   }, []);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
   
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

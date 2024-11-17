@@ -36,7 +36,7 @@ const MessageBar = ({ disabled }) => {
         <MyIcon
           type={'arrow_up'}
           onClick={handleSendMessage}
-          size='md'
+          size='lg'
           className={`message-arrow-up ${disabled ? 'disabled-icon' : ''}`}
         />
       </Col>

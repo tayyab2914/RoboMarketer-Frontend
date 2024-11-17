@@ -13,13 +13,8 @@ const SignUp = ({ toggleCurrentMode }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Name, setName] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
   const [ShowSignUpComponent, setShowSignUpComponent] = useState(false);
   const [ShowSpinner, setShowSpinner] = useState(false);
-  const { token, isLoggedIn } = useSelector((state) => state.authToken);
 
 
   const checkIfLinkExists = async()=>{
@@ -32,11 +27,7 @@ const SignUp = ({ toggleCurrentMode }) => {
   },[])
 
   const handleSignUp = async (email, password, name,phoneNumber) => {
-    setEmail(email);
-    setPassword(password);
-    setName(name);
-    setPhoneNumber(phoneNumber)
-    const response = await API_SIGN_UP( Email, Password, Name,PhoneNumber, link_token, dispatch, setShowSpinner);
+    const response = await API_SIGN_UP( email, password, name,phoneNumber, link_token, dispatch, setShowSpinner);
     if (response) {
       const searchParams = new URLSearchParams(location.search);
       const next = searchParams.get("next");

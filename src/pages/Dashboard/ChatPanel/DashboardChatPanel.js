@@ -5,7 +5,7 @@ import MessageBar from './MessageBar'
 import AccountSetupComponent from './AccountSetupComponent'
 
 const DashboardChatPanel = () => {
-    const [isAccountSetup, setisAccountSetup] = useState(false);
+    const [isAccountSetup, setisAccountSetup] = useState(true);
 
   return (
     <Row className='dashboard-chat-panel-main'>

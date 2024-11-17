@@ -16,6 +16,11 @@ export const API_SIGN_UP = async (
 ) => {
   setShowSpinner(true);
   try {
+    console.log(email,
+        password,
+        name,
+        PhoneNumber,
+        link_token,)
     const response = await axios.post(`${DOMAIN_NAME}/authentication/signup/`, {
       email: email,
       password: password,
@@ -71,8 +76,6 @@ export const API_DOES_LINK_EXIST = async (
     setShowSpinner
   ) => {
     setShowSpinner(true);
-    console.log("API_DOES_LINK_EXIST", link_token);
-    
     try {
       const response = await axios.get(`${DOMAIN_NAME}/authentication/is_link_exist/`, {
         params: { link_token: link_token },
