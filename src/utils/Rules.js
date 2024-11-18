@@ -25,3 +25,8 @@ export const EMAIL_RULES_REQUIRED = [
     }),
   ];
   
+  export const IS_VALID_URL = (value) => {
+    const urlRegex = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*$/;
+    return urlRegex.test(value);
+  };
+  

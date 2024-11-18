@@ -4,7 +4,8 @@ import {
   SET_AUTH_TOKEN,
   REMOVE_AUTH_TOKEN,
   SET_LOGGED_IN,
-  SET_IS_ADMIN,
+  SET_IS_ADMIN,SET_CURRENT_ACCOUNT,
+  RERENDER_DASHBOARD
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -33,3 +34,16 @@ export const setIsAdmin = (isAdmin) => {
     payload: isAdmin,
   };
 };
+export const setCurrentAccount = (CurrentAccount) => {
+    return {
+      type: SET_CURRENT_ACCOUNT,
+      payload: CurrentAccount,
+    };
+  };
+
+  export const setRerenderDashboard = (rerender_dashboard) => {
+    return {
+      type: RERENDER_DASHBOARD,
+      payload: rerender_dashboard,
+    };
+  };

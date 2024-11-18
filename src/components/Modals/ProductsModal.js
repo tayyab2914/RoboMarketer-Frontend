@@ -1,32 +1,68 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "antd";
+import { Modal, Button, Popconfirm } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./styles/ModalStyles.css";
 import MyIcon from "../Icon/MyIcon";
 import AddProductModal from "./AddProductModal";
+import {
+  API_DELETE_FUNNEL,
+  API_DELETE_PRODUCT,
+  API_LIST_PRODUCTS,
+} from "../../apis/MarketingToolsApis";
+import { useSelector } from "react-redux";
+import EditProductModal from "./EditProductModal";
+// import EditProductModal from "./EditProductModal";
 
 const ProductsModal = ({ isVisible, onClose }) => {
-    const [products, setProducts] = useState([
-        { name: "Product 1", description: "Description for product 1", coreBenefits: "Benefit 1", features: "Feature 1", useCase: "Use case 1", uniqueSellingPoint: "USP 1", customerTestimonials: "Testimonial 1", pricing: "Price 1", targetAudienceDescription: "Audience 1", primaryInterests: "Interest 1", secondaryInterests: "Secondary Interest 1", paidPoints: "Paid Point 1", goals: "Goal 1", desiredBenefits: "Benefit 1", emotionalDrivers: "Driver 1", uniqueNeeds: "Need 1" },
-        { name: "Product 2", description: "Description for product 2", coreBenefits: "Benefit 2", features: "Feature 2", useCase: "Use case 2", uniqueSellingPoint: "USP 2", customerTestimonials: "Testimonial 2", pricing: "Price 2", targetAudienceDescription: "Audience 2", primaryInterests: "Interest 2", secondaryInterests: "Secondary Interest 2", paidPoints: "Paid Point 2", goals: "Goal 2", desiredBenefits: "Benefit 2", emotionalDrivers: "Driver 2", uniqueNeeds: "Need 2" },
-      ]);
-  const [isAddProductModalVisible, setIsAddProductModalVisible] = useState(false);
+  const { token } = useSelector((state) => state.authToken);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [isAddProductModalVisible, setIsAddProductModalVisible] =useState(false);
+  const [isEditProductModalVisible, setIsEditProductModalVisible] =useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const handleAddNewProduct = (newProduct) => {
     setProducts([...products, newProduct]);
-    console.log(newProduct)
+    console.log(newProduct);
   };
 
   const openAddProductModal = () => {
     setIsAddProductModalVisible(true);
   };
 
+  const openEditProductModal = (productId) => {
+    setSelectedProductId(productId); // Set product ID for editing
+    setIsEditProductModalVisible(true);
+  };
+
   useEffect(() => {
     if (!isVisible) {
       setIsAddProductModalVisible(false);
+      setIsEditProductModalVisible(false);
     }
   }, [isVisible]);
 
+  const ListProducts = async () => {
+    const response = await API_LIST_PRODUCTS(token, setShowSpinner);
+    setProducts(response);
+  };
+
+  const onDeleteProduct = async (id) => {
+    const response = await API_DELETE_PRODUCT(token, id, setShowSpinner);
+    ListProducts();
+  };
+
+  const handleEditNewProduct = () => {
+    ListProducts(); // Fetch the updated funnel list after editing
+    setIsEditProductModalVisible(false); // Close the edit modal
+    setSelectedProductId(null); // Reset the selected funnel ID
+  };
+
+  useEffect(() => {}, [selectedProductId]);
+
+  useEffect(() => {
+    ListProducts(); // Fetch the funnels when the component loads
+  }, []);
 
   return (
     <>
@@ -53,22 +89,42 @@ const ProductsModal = ({ isVisible, onClose }) => {
       >
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.name} className="product-item">
-              <span className="product-name">{product.name}</span>
+            <div key={product.id} className="product-item">
+              <span className="product-name">{product.product_name}</span>
               <span className="product-actions">
-                <MyIcon type="edit_btn" size="lg" style={{ marginRight: "5px" }} />
-                <MyIcon type="delete_btn" size="lg" />
+                <MyIcon
+                  type="edit_btn"
+                  size="lg"
+                  style={{ marginRight: "5px" }}
+                  onClick={() => openEditProductModal(product.id)}
+                />
+                <Popconfirm
+                  title="Are you sure you want to delete this product?"
+                  onConfirm={() => onDeleteProduct(product.id)}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <MyIcon type="delete_btn" size="lg" />
+                </Popconfirm>
               </span>
             </div>
           ))}
         </div>
       </Modal>
 
-      {/* AddProductModal for adding new products */}
+      {/* Modals for adding and editing products */}
       <AddProductModal
         isVisible={isAddProductModalVisible}
-        onClose={() => setIsAddProductModalVisible(false)}  // Close AddProductModal
+        onClose={() => setIsAddProductModalVisible(false)}
         onAddProduct={handleAddNewProduct}
+        ListProducts={ListProducts}
+      />
+      <EditProductModal
+        isVisible={isEditProductModalVisible}
+        onClose={() => setIsEditProductModalVisible(false)}
+        productId={selectedProductId}
+        ListProducts={ListProducts}
+        onEditProduct={handleEditNewProduct}
       />
     </>
   );

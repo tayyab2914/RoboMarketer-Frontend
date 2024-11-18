@@ -1,11 +1,12 @@
 // src/redux/reducer.js
 
-import { SET_AUTH_TOKEN, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN } from "./Types";
+import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT } from "./Types";
 
 const initialState = {
   token: null,
   isLoggedIn: false,
-  isAdmin:false
+  isAdmin:false,
+  current_account:{}
 };
 
 export default function authReducer(state = initialState, action) {
@@ -28,6 +29,16 @@ export default function authReducer(state = initialState, action) {
     return {
       ...state,
       isAdmin: action.payload,
+    };
+  }  else if (action.type == SET_CURRENT_ACCOUNT) {
+    return {
+      ...state,
+      current_account: action.payload,
+    };
+  }  else if (action.type == RERENDER_DASHBOARD) {
+    return {
+      ...state,
+      rerender_dashboard: action.payload,
     };
   }else {
     return state;

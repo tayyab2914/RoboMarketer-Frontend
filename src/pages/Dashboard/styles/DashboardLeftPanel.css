@@ -27,11 +27,10 @@
   }
   
   .left-panel-btn {
-    width: 100%;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid #e6eaed !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    border: 1px solid #e6ede6 !important;
   }
   
   

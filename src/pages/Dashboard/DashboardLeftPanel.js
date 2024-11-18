@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IMAGES } from '../../data/ImageData';
 import { Button, Collapse } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
@@ -12,7 +12,6 @@ import SettingsBtn from './SettingsBtn';
 
 const { Panel } = Collapse;
 
-// Array of panel names and keys
 const panelsData = [
   { header: "Campaign", key: "2", icon: 'note' },
   { header: "Analytics", key: "3", icon: 'analytics' },
@@ -29,24 +28,39 @@ const panelsData = [
   { header: "Charts", key: "14", icon: 'chart' }
 ];
 
-const DashboardLeftPanel = () => {
+const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
+  const [CurrentAccount, setCurrentAccount] = useState({});
+  const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
+
+  useEffect(() => {
+    if (Accounts && Accounts.length) {
+      const current = Accounts.find((account) => account.is_current_account);
+      setCurrentAccount(current);
+    }
+  }, [Accounts]);
+
+  const handleAccountSwitch = (accountId) => {
+    SwitchAccount(accountId);
+    setAccountCollapseActiveKey([]); // Close the collapse panel after switching accounts
+  };
+
   return (
     <div className="left-panel-container">
       <div className="left-panel-container-inner">
         <img src={IMAGES.panel_logo} alt="Panel Logo" className="left-panel-logo" />
 
-        <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)',  }} /> )}>
-          <Panel header={<><span className='panel-header-span'><MyIcon type={'user'} /> Account</span></>} key="1">
-            <div><Button type="text" className='left-panel-btn'>Account #1 <MyIcon type={"elipsis"} /></Button></div>
-            <div><Button type="text" className='left-panel-btn'>Account #2 <MyIcon type={"elipsis"} /></Button></div>
-            <div><Button type="text" className='left-panel-btn'>Account #3 <MyIcon type={"elipsis"} /></Button></div>
+        <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} activeKey={AccountCollapseActiveKey} onChange={(key) => setAccountCollapseActiveKey(key)} >
+          <Panel header={<><span className='panel-header-span'><MyIcon type={'user'} /> {CurrentAccount?.name}</span></>} key="1" >
+            {Accounts?.filter(account => !account.is_current_account).map((account) => (
+              <div key={account.id}><Button type="text" className='left-panel-btn' onClick={() => handleAccountSwitch(account.id)}>{account.name}<MyIcon type={"elipsis"} /></Button></div>
+            ))}
           </Panel>
         </Collapse>
 
-        <AddPromptBtn/>
-        
+        <AddPromptBtn />
+
         <div className="left-panel-scrollable">
-        <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)',  }} /> )}>
+          <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} >
             {panelsData.map(panel => (
               <Panel header={<><span className='panel-header-span'><MyIcon type={panel.icon} /> {panel.header}</span></>} key={panel.key}>
                 <div><Button type="text" className='left-panel-btn'>Prompt #1 <MyIcon type={"elipsis"} /></Button></div>
@@ -55,10 +69,10 @@ const DashboardLeftPanel = () => {
               </Panel>
             ))}
           </Collapse>
-          <div style={{height:"40px"}}></div>
+          <div style={{ height: "40px" }}></div>
         </div>
-        </div>
-        <SettingsBtn/>
+      </div>
+      <SettingsBtn />
     </div>
   );
 };

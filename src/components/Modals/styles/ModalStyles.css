@@ -130,7 +130,10 @@
     margin-bottom: 10px;
     font-weight: 500;
  }
-
+.modal-actions{
+    display: flex;
+    justify-content: center;
+}
  .modal-actions button {
     width: 100%;
     padding: 0px 10px;
@@ -138,10 +141,12 @@
     border: none;
   }
   .modal-actions .btn-1 {
-    margin-right: 1% !important;
+    /* margin-right: 1% !important; */
+    width: 50% !important;
   }
   .modal-actions .btn-2 {
-    margin-left: 1% !important;
+    /* margin-left: 1% !important; */
+    width: 50% !important;
   }
   
   .cancel-btn{
@@ -256,6 +261,9 @@
   .funnel-actions .edit-icon,
   .funnel-actions .delete-icon {
     margin-left: 8px;
+    cursor: pointer;
+  }
+  .funnel-actions{
     cursor: pointer;
   }
   

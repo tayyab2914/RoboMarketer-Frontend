@@ -1,34 +1,66 @@
-
-
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "antd";
+import { Modal, Button, Popconfirm } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./styles/ModalStyles.css";
 import MyIcon from "../Icon/MyIcon";
 import AddFunnelModal from "./AddFunnelModal";
+import {
+  API_DELETE_FUNNEL,
+  API_LIST_FUNNELS,
+} from "../../apis/MarketingToolsApis";
+import { useSelector } from "react-redux";
+import EditFunnelModal from "./EditFunnelModal";
 
 const MarketingFunnelsModal = ({ isVisible, onClose }) => {
-    const [Funnels, setFunnels] = useState([
-        { name: "Funnel 1", description: "Description for Funnel 1", coreBenefits: "Benefit 1", features: "Feature 1", useCase: "Use case 1", uniqueSellingPoint: "USP 1", customerTestimonials: "Testimonial 1", pricing: "Price 1", targetAudienceDescription: "Audience 1", primaryInterests: "Interest 1", secondaryInterests: "Secondary Interest 1", paidPoints: "Paid Point 1", goals: "Goal 1", desiredBenefits: "Benefit 1", emotionalDrivers: "Driver 1", uniqueNeeds: "Need 1" },
-        { name: "Funnel 2", description: "Description for Funnel 2", coreBenefits: "Benefit 2", features: "Feature 2", useCase: "Use case 2", uniqueSellingPoint: "USP 2", customerTestimonials: "Testimonial 2", pricing: "Price 2", targetAudienceDescription: "Audience 2", primaryInterests: "Interest 2", secondaryInterests: "Secondary Interest 2", paidPoints: "Paid Point 2", goals: "Goal 2", desiredBenefits: "Benefit 2", emotionalDrivers: "Driver 2", uniqueNeeds: "Need 2" },
-      ]);
+  const { token } = useSelector((state) => state.authToken);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [Funnels, setFunnels] = useState([]);
   const [isAddFunnelModalVisible, setIsAddFunnelModalVisible] = useState(false);
+  const [isEditFunnelModalVisible, setIsEditFunnelModalVisible] =useState(false);
+  const [selectedFunnelId, setSelectedFunnelId] = useState(null); // Add this state to store selected funnel ID
 
   const handleAddNewFunnel = (newFunnel) => {
     setFunnels([...Funnels, newFunnel]);
-    console.log(newFunnel)
+    console.log(newFunnel);
   };
 
   const openAddFunnelModal = () => {
     setIsAddFunnelModalVisible(true);
   };
 
+  const openEditFunnelModal = (funnelId) => {
+    setSelectedFunnelId(funnelId);
+    setIsEditFunnelModalVisible(true);
+  };
+
   useEffect(() => {
     if (!isVisible) {
       setIsAddFunnelModalVisible(false);
+      setIsEditFunnelModalVisible(false);
     }
   }, [isVisible]);
 
+  const ListFunnels = async () => {
+    const response = await API_LIST_FUNNELS(token, setShowSpinner);
+    setFunnels(response);
+  };
+
+  const onDeleteFunnel = async (id) => {
+    const response = await API_DELETE_FUNNEL(token, id, setShowSpinner);
+    ListFunnels(); // Refetch the list of funnels after deleting
+  };
+
+  const handleEditNewFunnel = () => {
+    ListFunnels(); // Fetch the updated funnel list after editing
+    setIsEditFunnelModalVisible(false); // Close the edit modal
+    setSelectedFunnelId(null); // Reset the selected funnel ID
+  };
+
+  useEffect(() => {}, [selectedFunnelId]);
+
+  useEffect(() => {
+    ListFunnels(); // Fetch the funnels when the component loads
+  }, []);
 
   return (
     <>
@@ -36,9 +68,9 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
         title={
           <span className="funnel-modal-header">
             <span>
-              <MyIcon type="marketing_funnels" style={{ marginRight: "5px" }} />
-              Funnels / Websites
-            </span>
+            <MyIcon type="marketing_funnels" style={{ marginRight: "5px" }} />
+              Funnels / Websites{" "}
+            </span>{" "}
             <Button
               icon={<PlusOutlined />}
               className="add-funnel-btn"
@@ -54,23 +86,41 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
         footer={null}
       >
         <div className="funnel-list">
-          {Funnels.map((Funnel) => (
-            <div key={Funnel.name} className="funnel-item">
+          {Funnels?.map((Funnel) => (
+            <div key={Funnel.id} className="funnel-item">
               <span className="funnel-name">{Funnel.name}</span>
               <span className="funnel-actions">
-                <MyIcon type="edit_btn" size="lg" style={{ marginRight: "5px" }} />
-                <MyIcon type="delete_btn" size="lg" />
+                <MyIcon
+                  type="edit_btn"
+                  size="lg"
+                  style={{ marginRight: "5px" }}
+                  onClick={() => openEditFunnelModal(Funnel.id)}
+                />
+                <Popconfirm
+                  title="Are you sure you want to delete this funnel?"
+                  onConfirm={() => onDeleteFunnel(Funnel.id)}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <MyIcon type="delete_btn" size="lg" />
+                </Popconfirm>
               </span>
             </div>
           ))}
         </div>
       </Modal>
-
-      {/* AddFunnelModal for adding new Funnels */}
+      <EditFunnelModal
+        isVisible={isEditFunnelModalVisible}
+        onClose={() => setIsEditFunnelModalVisible(false)}
+        funnelId={selectedFunnelId}
+        onEditFunnel={handleEditNewFunnel}
+        ListFunnels={ListFunnels}
+      />
       <AddFunnelModal
         isVisible={isAddFunnelModalVisible}
-        onClose={() => setIsAddFunnelModalVisible(false)}  // Close AddFunnelModal
+        onClose={() => setIsAddFunnelModalVisible(false)}
         onAddFunnel={handleAddNewFunnel}
+        ListFunnels={ListFunnels}
       />
     </>
   );

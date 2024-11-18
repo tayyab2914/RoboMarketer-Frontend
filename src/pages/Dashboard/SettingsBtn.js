@@ -11,11 +11,14 @@ import ProductsModal from "../../components/Modals/ProductsModal";
 import MarketingFunnelsModal from "../../components/Modals/MarketingFunnelsModal";
 import ReportingSettingsModal from "../../components/Modals/ReportingSettingsModal";
 import { useLogoutUser } from "../../hooks/useLogoutUser";
+import { useDispatch, useSelector } from "react-redux";
+import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 
 
 const SettingsBtn = () => {
     const logoutUser = useLogoutUser();
-  
+    const dispatch = useDispatch()
+    const { isLoggedIn, token,rerender_dashboard } = useSelector((state) => state.authToken);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
 
@@ -37,6 +40,8 @@ const SettingsBtn = () => {
 
   const handleCloseOptionModal = () => {
     setActiveOption(null);
+    console.log('handleCloseOptionModal')
+    dispatch(setRerenderDashboard(!rerender_dashboard))
   };
   return (
     <div>
