@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Popconfirm } from "antd";
+import { Modal, Button, Popconfirm, Spin } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./styles/ModalStyles.css";
 import MyIcon from "../Icon/MyIcon";
@@ -66,6 +66,7 @@ const ProductsModal = ({ isVisible, onClose }) => {
 
   return (
     <>
+    {showSpinner && <Spin fullscreen/>}
       <Modal
         title={
           <span className="product-modal-header">

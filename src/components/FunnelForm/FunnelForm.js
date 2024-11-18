@@ -25,14 +25,14 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
   return (
     <Form form={form} initialValues={initialValues} onFinish={(values) => onFinish({ ...values, steps })} layout="vertical">
       <Form.Item
-        name="funnelName"
+        name="name"
         label="Funnel Name"
         rules={[{ required: true, message: "Funnel Name is required." }]}
       >
         <Input placeholder="Type Name..." />
       </Form.Item>
 
-      <Form.Item name="funnelType" label="Funnel Type" initialValue="sales">
+      <Form.Item name="funnel_type" label="Funnel Type" initialValue="sales">
         <Select placeholder="Select Funnel Type">
           <Option value="sales">Sales Funnel</Option>
           <Option value="marketing">Marketing Funnel</Option>

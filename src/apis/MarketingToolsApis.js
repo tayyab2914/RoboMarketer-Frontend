@@ -219,3 +219,49 @@ export const API_UPDATE_PRODUCT = async ( token, updatedProduct,productId, setSh
         setShowSpinner(false);
     }
 };
+export const API_UPDATE_ROBOMARKETER_IQ  = async ( token, updatedValues, setShowSpinner ) => {
+    console.log('API_UPDATE_ROBOMARKETER_IQ', updatedValues);
+    
+    setShowSpinner(true);
+
+    try {
+        const response = await axios.put(`${DOMAIN_NAME}/tools/update_robomarketeriq/`, 
+            updatedValues
+        , {
+            headers: {
+                Authorization: token,
+            },
+        });
+        console.log(response.data);
+        message.success("ROBOMARKETER updated successfully!")
+        return response.data;
+    } catch (error) {
+        console.log(error)
+        message.error(
+          error.response?.data?.message 
+        );
+        return null; 
+    } finally {
+        setShowSpinner(false);
+    }
+};
+
+
+export const API_GET_ROBOMARKETER_IQ = async (token, setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.get(`${DOMAIN_NAME}/tools/get_robomarketeriq/`, {
+        headers: {
+            Authorization: token, 
+        },
+      });
+  
+      console.log('API_GET_ROBOMARKETER_IQ',response)
+      return response.data;
+    } catch (error) {
+        console.log('API_GET_ROBOMARKETER_IQ',error)
+    //   message.error("Invalid or expired token");
+    } finally {
+      setShowSpinner(false);
+    }
+};

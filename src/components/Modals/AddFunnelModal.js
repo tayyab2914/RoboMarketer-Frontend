@@ -10,12 +10,9 @@ const AddFunnelModal = ({ isVisible, onClose, onAddFunnel, ListFunnels  }) => {
   const [form] = Form.useForm();
 
   const handleAdd = async (values) => {
-    const { funnelName, description, funnelType, steps } = values;
-    const newFunnel = { name: funnelName, description, funnel_type: funnelType, steps };
-
-    const result = await API_CREATE_FUNNEL(token, newFunnel, setShowSpinner);
+    const result = await API_CREATE_FUNNEL(token, values, setShowSpinner);
     if (result) {
-      onAddFunnel(newFunnel);
+      onAddFunnel(values);
       ListFunnels()
       onClose();
     } else {
@@ -24,13 +21,7 @@ const AddFunnelModal = ({ isVisible, onClose, onAddFunnel, ListFunnels  }) => {
   };
 
   return (
-    <Modal 
-        title="Add New Funnel / Website" 
-        visible={isVisible} 
-        onCancel={onClose} 
-        centered 
-        footer={ <></> } 
-    >
+    <Modal title="Add New Funnel / Website" visible={isVisible} onCancel={onClose} centered footer={ <></> } >
       {showSpinner && <Spin fullscreen />}
       <FunnelForm form={form} onFinish={handleAdd} />
     </Modal>

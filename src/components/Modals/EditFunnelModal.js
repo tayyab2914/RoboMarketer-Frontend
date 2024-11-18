@@ -35,23 +35,14 @@ const EditFunnelModal = ({ isVisible, onClose, funnelId,ListFunnels }) => {
   // Ensure form is updated when funnelData changes
   useEffect(() => {
     if (funnelData && Object.keys(funnelData).length > 0) {
-      form.setFieldsValue({
-        funnelName: funnelData.name,
-        funnelType: funnelData.funnel_type,
-        description: funnelData.description,
-        steps: funnelData.steps || [], 
-      });
+      form.setFieldsValue(funnelData);
       setShowForm(true); // Show the form after setting values
     }
   }, [funnelData, form]);
 
   // Handle funnel update
   const handleUpdate = async (values) => {
-    const { name, description, funnelType, steps } = values;
-    const updatedFunnel = { name, description, funnel_type: funnelType, steps };
-
-    console.log(updatedFunnel)
-      await API_UPDATE_FUNNEL(token, updatedFunnel,funnelId,setShowSpinner);
+      await API_UPDATE_FUNNEL(token, values,funnelId,setShowSpinner);
       ListFunnels()
       onClose(); 
   };
