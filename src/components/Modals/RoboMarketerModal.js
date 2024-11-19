@@ -36,8 +36,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
   const handleValueChange = (field, value) => {
     if(field == 'industry_type'){
         setFormValues((prev) => ({ ...prev, industry_type: value }));  
-    }
-    else if (field === "file_group") {
+    } else if (field === "file_group") {
         setFormValues((prev) => ({ ...prev, file_group:value }));  
     } else if (field === "preferences") {
         setFormValues((prev) => ({ ...prev, preferences: value }));  

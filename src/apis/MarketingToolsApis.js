@@ -220,11 +220,6 @@ export const API_UPDATE_PRODUCT = async ( token, updatedProduct,productId, setSh
     }
 };
 export const API_UPDATE_ROBOMARKETER_IQ  = async ( token, formData, setShowSpinner ) => {
-  // Log FormData key-value pairs
-for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
-}
-
     setShowSpinner(true);
 
     try {
