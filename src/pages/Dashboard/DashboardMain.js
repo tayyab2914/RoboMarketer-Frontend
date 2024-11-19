@@ -38,7 +38,6 @@ const [DashboardRerenderer, setDashboardRerenderer] = useState('');
   };
   useEffect(()=>{
     getAccounts()
-    console.log("DASHBOARD RERENDERED")
   },[rerender_dashboard])
 //   useEffect(()=>{},[Accounts])
 //   useEffect(()=>{ getAccounts() },[])

@@ -6,6 +6,7 @@ import './styles/FileUploader.css';
 const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload = () => true, showRemoveIcon = true,accept }) => {
   // Function to render file previews
   const renderFilePreview = (file) => {
+    console.log(file)
     const fileType = file?.type;
 
     if (fileType.startsWith("image/")) {
@@ -14,7 +15,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
 
     if (fileType === "application/pdf") {
       return (
-        <Tooltip title="PDF">
+        <Tooltip title={file?.name}>
           <FilePdfOutlined style={{ fontSize: 30, color: "#FF6F61", margin: "10px" }} />
         </Tooltip>
       );
@@ -22,7 +23,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
 
     if (fileType === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
       return (
-        <Tooltip title="Excel">
+        <Tooltip title={file?.name}>
           <FileExcelOutlined style={{ fontSize: 30, color: "#218838", margin: "10px" }} />
         </Tooltip>
       );
@@ -30,7 +31,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
 
     if (fileType === "application/msword" || fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
       return (
-        <Tooltip title="Word Document">
+        <Tooltip title={file?.name}>
           <FileWordOutlined style={{ fontSize: 30, color: "#1E90FF", margin: "10px" }} />
         </Tooltip>
       );
@@ -60,7 +61,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
         beforeUpload={beforeUpload}
         showUploadList={{ showRemoveIcon }}
         accept={accept}
-        
+        maxCount={3}
       >
         <Button icon={<UploadOutlined />} className="upload-sop-btn">Upload File(s)</Button>
       </Upload>

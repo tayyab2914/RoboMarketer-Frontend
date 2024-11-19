@@ -16,6 +16,6 @@ export const GET_PROMPT_CATEGORIES = [
 
 
       export const FILTER_PROMPTS_BY_CATEGORY = (dataArray, category)=> {
-        console.log(dataArray)
+        // console.log(dataArray)
         return dataArray.filter(item => item.category === category);
       }

@@ -50,6 +50,7 @@ const AddPromptBtn = () => {
   
     file_group?.forEach((file, index) => {
       formData.append(`file_group[${index}]`, file.originFileObj);
+      console.log(file)
     });
   
     await API_CREATE_PROMPT(token,formData,setShowSpinner)
