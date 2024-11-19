@@ -80,7 +80,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
     formData.append("preferences", FormValues.preferences || "");
   
     // Append each file in the file group to FormData
-    FormValues.file_group.forEach((file, index) => {
+    FormValues.file_group?.forEach((file, index) => {
       formData.append(`file_group[${index}]`, file.originFileObj);
     });
   
