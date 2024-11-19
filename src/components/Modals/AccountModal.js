@@ -6,6 +6,7 @@ import MyIcon from "../Icon/MyIcon";
 import { useSelector } from "react-redux";
 import { API_UPDATE_ACCOUNT } from "../../apis/AuthApis";
 import MyButton from "../Button/Button";
+import { DOMAIN_NAME } from "../../utils/GlobalSettings";
 
 const { Dragger } = Upload;
 
@@ -16,6 +17,7 @@ const AccountModal = ({ isVisible, onClose }) => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
+  console.log(current_account)
   const props = {
     name: 'file',
     multiple: false,
@@ -46,6 +48,7 @@ const AccountModal = ({ isVisible, onClose }) => {
       setShowSpinner(false);
       setIsUploading(false);
       setProfilePic(null); 
+      onClose();
     }
   };
 
@@ -55,6 +58,7 @@ const AccountModal = ({ isVisible, onClose }) => {
       return;
     }
     await API_UPDATE_ACCOUNT(token, current_account?.id, name, null, setShowSpinner);
+
     onClose();
   };
 
@@ -71,11 +75,13 @@ const AccountModal = ({ isVisible, onClose }) => {
       <Modal title={ <span className="modal-header"> <MyIcon type={"account"} style={{ marginRight: "5px" }} /> Account (Client) </span> } centered visible={isVisible} onCancel={onClose} footer={null} >
         <div className="modal-content">
           <div className="upload-group" style={{ marginTop: "20px", textAlign: "center" }}>
+          {current_account?.account_image && <img src={`${DOMAIN_NAME}${current_account?.account_image}`} alt="" className="account-modal-img"/>}
             <Dragger {...props} itemRender={() => <></>} disabled={profilePic}>
               <div className="ant-upload-text">
                 {profilePic ? ( <p style={{ color: "#00c514", marginTop: "20px" }}> Profile Picture Selected: {profilePic.name} </p>
                 ) : (
-                  <> <div> <img src={IMAGES.user} alt="" /> </div> Upload Photo </>
+                  <> 
+                  <div> <img src={IMAGES.user} alt="" /> </div> {current_account?.account_image ?"Change":"Upload"} Profile Photo </>
                 )}
               </div>
             </Dragger>
@@ -88,7 +94,6 @@ const AccountModal = ({ isVisible, onClose }) => {
               <Input placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} />
             </span>
             <span className="input-group-btn">
-
               <Button type="primary" className="input-btn" onClick={handleNameUpdate} >  Update </Button>
             </span>
           </div>

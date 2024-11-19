@@ -5,15 +5,19 @@ import { Modal, Select, Input, Button, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import './styles/AddPromptBtn.css';
 import FileUploader from '../../components/FileUploader/FileUploader';
+import { API_CREATE_PROMPT } from '../../apis/ChatApis';
+import { useSelector } from 'react-redux';
 
 const { TextArea } = Input;
 
 const AddPromptBtn = () => {
+    const [showSpinner, setShowSpinner] = useState(false);
+  const { isLoggedIn, token, current_account } = useSelector((state) => state.authToken);
   const [isModalVisible, setIsModalVisible] = useState(false); // State to manage modal visibility
   const [category, setCategory] = useState(null); // State for selected category
-  const [promptName, setPromptName] = useState(''); // State for prompt name
+  const [prompt_name, setprompt_name] = useState(''); // State for prompt name
   const [prompt, setPrompt] = useState(''); // State for prompt content
-  const [fileList, setFileList] = useState([]); // State for uploaded files
+  const [file_group, setfile_group] = useState([]); // State for uploaded files
 
   // Function to show the modal
   const showModal = () => {
@@ -32,17 +36,13 @@ const AddPromptBtn = () => {
     } else if (info?.file?.status === 'error') {
     //   message.error(`${info.file.name} file upload failed.`);
     }
-    setFileList(info?.file?.fileList); 
+    setfile_group(info?.fileList); 
+    console.log(info?.fileList)
   };
 
-  const handleCreatePrompt = () => {
-    console.log({
-      category,
-      promptName,
-      prompt,
-      files: fileList,
-    });
-    message.success('Prompt created successfully!');
+  const handleCreatePrompt = async () => {
+    await API_CREATE_PROMPT(token,{category,prompt_name,prompt,file_group},setShowSpinner)
+
     setIsModalVisible(false);
   };
 
@@ -56,6 +56,7 @@ const AddPromptBtn = () => {
         <div className="">
             <p className="modal-field-label-block">Select Category</p>
             <Select value={category} onChange={setCategory} style={{ width: '100%',height:"40px" }} placeholder="Select a category" >
+              {}
               <Select.Option value="category1">Category 1</Select.Option>
               <Select.Option value="category2">Category 2</Select.Option>
               <Select.Option value="category3">Category 3</Select.Option>
@@ -65,7 +66,7 @@ const AddPromptBtn = () => {
           
           <div className="">
             <p className="modal-field-label-block">Prompt Name</p>
-            <Input value={promptName} onChange={(e) => setPromptName(e.target.value)} placeholder="Enter prompt name" />
+            <Input value={prompt_name} onChange={(e) => setprompt_name(e.target.value)} placeholder="Enter prompt name" />
           </div>
 
           
@@ -78,13 +79,14 @@ const AddPromptBtn = () => {
           <div className="">
             <p className="modal-field-label-block">Upload SOP Docs</p>
             <FileUploader
-              fileList={fileList}
+              fileList={file_group}
               onFileChange={handleFileChange}
               multiple={true}
               beforeUpload={() => true}  
               showRemoveIcon={true}
               
             />
+
           </div>
 
           <div className="modal-actions">

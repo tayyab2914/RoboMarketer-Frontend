@@ -1,24 +1,15 @@
-export const UTILS_COMBINE_DATA = (
-    FormValues,
-) => {
-    // console.log('UTILS_COMBINE_DATA',FormValues)
-  // Get form values
-  const combinedData = {
-    industry_type: FormValues.industryType,
-    max_daily_budget: FormValues.maxDailyBudget,
-    clickthrough_rate_percentage: FormValues.ctr,
-    cost_per_click_cpc: FormValues.cpc,
-    cost_per_lead_cpl: FormValues.cpl,
-    cost_per_appointment: FormValues.cpa,
-    cost_per_sale_cpa: FormValues.cts,
-    leads: FormValues.leads,
-    appointments: FormValues.appointments,
-    sales: FormValues.sales,
-    revenue: FormValues.revenue,
-    preferences: FormValues.preferences,
-    file_group: FormValues.fileList,
-    
-  };
-
-  return combinedData;
-};
+export const GET_PROMPT_CATEGORIES = [
+        { header: "Campaign", key: "2", icon: 'note' },
+        { header: "Analytics", key: "3", icon: 'analytics' },
+        { header: "Questions", key: "4", icon: 'question' },
+        { header: "Help", key: "5", icon: 'help' },
+        { header: "Copywriting", key: "6", icon: 'copywriting' },
+        { header: "Recommendations", key: "7", icon: 'recommendations' },
+        { header: "CRO", key: "8", icon: 'cro' },
+        { header: "Funnels", key: "9", icon: 'funnels' },
+        { header: "Marketing", key: "10", icon: 'marketing' },
+        { header: "Strategy", key: "11", icon: 'strategy' },
+        { header: "Offer", key: "12", icon: 'offer' },
+        { header: "Competitors", key: "13", icon: 'competitor' },
+        { header: "Charts", key: "14", icon: 'chart' }
+      ];

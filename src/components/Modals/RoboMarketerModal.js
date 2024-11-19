@@ -126,7 +126,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
         <Panel header="Standard Operating Procedures (SOP)" key="1">
           <div className="">
             <p className="modal-field-label-block">Upload SOP Docs</p>
-            <FileUploader fileList={FormValues.file_group.sop_files} onFileChange={({ fileList }) => handleValueChange("file_group", fileList)} multiple={true} beforeUpload={() => true} showRemoveIcon={true} />
+            <FileUploader fileList={FormValues?.file_group?.sop_files} onFileChange={({ fileList }) => handleValueChange("file_group", fileList)} multiple={true} beforeUpload={() => true} showRemoveIcon={true} />
         </div>
         </Panel>
       </Collapse>

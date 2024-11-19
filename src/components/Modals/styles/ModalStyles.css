@@ -179,7 +179,11 @@
     background-color: black !important;
     font-weight: 400;
 } 
-
+.account-modal-img{
+    width: 200px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
   .panel-header{
     display: flex;
     align-items: center;

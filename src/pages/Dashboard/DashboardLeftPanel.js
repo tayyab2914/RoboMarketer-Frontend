@@ -9,24 +9,10 @@ import { ICONS } from '../../data/IconData';
 import AddPromptBtn from './AddPromptBtn';
 import { DownOutlined } from '@ant-design/icons';
 import SettingsBtn from './SettingsBtn';
+import { GET_PROMPT_CATEGORIES } from '../../utils/Methods';
 
 const { Panel } = Collapse;
 
-const panelsData = [
-  { header: "Campaign", key: "2", icon: 'note' },
-  { header: "Analytics", key: "3", icon: 'analytics' },
-  { header: "Questions", key: "4", icon: 'question' },
-  { header: "Help", key: "5", icon: 'help' },
-  { header: "Copywriting", key: "6", icon: 'copywriting' },
-  { header: "Recommendations", key: "7", icon: 'recommendations' },
-  { header: "CRO", key: "8", icon: 'cro' },
-  { header: "Funnels", key: "9", icon: 'funnels' },
-  { header: "Marketing", key: "10", icon: 'marketing' },
-  { header: "Strategy", key: "11", icon: 'strategy' },
-  { header: "Offer", key: "12", icon: 'offer' },
-  { header: "Competitors", key: "13", icon: 'competitor' },
-  { header: "Charts", key: "14", icon: 'chart' }
-];
 
 const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const [CurrentAccount, setCurrentAccount] = useState({});
@@ -61,7 +47,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
 
         <div className="left-panel-scrollable">
           <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} >
-            {panelsData.map(panel => (
+            {GET_PROMPT_CATEGORIES?.map(panel => (
               <Panel header={<><span className='panel-header-span'><MyIcon type={panel.icon} /> {panel.header}</span></>} key={panel.key}>
                 <div><Button type="text" className='left-panel-btn'>Prompt #1 <MyIcon type={"elipsis"} /></Button></div>
                 <div><Button type="text" className='left-panel-btn'>Prompt #2 <MyIcon type={"elipsis"} /></Button></div>
