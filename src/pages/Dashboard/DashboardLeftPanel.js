@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IMAGES } from '../../data/ImageData';
-import { Button, Collapse, Spin } from 'antd';
+import { Button, Collapse, Popconfirm, Spin } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import './styles/DashboardLeftPanel.css';
 import MyButton from '../../components/Button/Button';
@@ -9,17 +9,20 @@ import { ICONS } from '../../data/IconData';
 import AddPromptBtn from './AddPromptBtn';
 import { DownOutlined } from '@ant-design/icons';
 import SettingsBtn from './SettingsBtn';
-import { GET_PROMPT_CATEGORIES } from '../../utils/Methods';
-import { API_GET_PROMPTS } from '../../apis/ChatApis';
-import { useSelector } from 'react-redux';
+import { FILTER_PROMPTS_BY_CATEGORY, GET_PROMPT_CATEGORIES } from '../../utils/Methods';
+import { API_DELETE_PROMPT, API_GET_PROMPTS } from '../../apis/ChatApis';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRerenderDashboard } from '../../redux/AuthToken/Action';
 
 const { Panel } = Collapse;
 
 
 const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
+    const dispatch= useDispatch()
     const [showSpinner, setShowSpinner] = useState(false);
-  const { isLoggedIn, token, current_account } = useSelector((state) => state.authToken);
+    const { isLoggedIn, token,rerender_dashboard } = useSelector((state) => state.authToken);
   const [CurrentAccount, setCurrentAccount] = useState({});
+  const [FetchedPrompts, setFetchedPrompts] = useState([]);
   const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
 
   useEffect(() => {
@@ -31,16 +34,23 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
 
   const getPrompts = async()=>{
     const response = await API_GET_PROMPTS(token,setShowSpinner)
+    setFetchedPrompts(response)
   }
   useEffect(()=>{
     getPrompts()
   },[])
-
+  useEffect(()=>{
+    getPrompts()
+  },[rerender_dashboard])
   const handleAccountSwitch = (accountId) => {
     SwitchAccount(accountId);
     setAccountCollapseActiveKey([]); 
   };
 
+  const handleDeletePrompt = async(id)=>{
+    await API_DELETE_PROMPT(token,id,setShowSpinner)
+    dispatch(setRerenderDashboard(!rerender_dashboard))
+  }
   return (
     <div className="left-panel-container">
         {showSpinner &&<Spin fullscreen/>}
@@ -61,9 +71,15 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
           <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} >
             {GET_PROMPT_CATEGORIES?.map(panel => (
               <Panel header={<><span className='panel-header-span'><MyIcon type={panel.icon} /> {panel.header}</span></>} key={panel.key}>
-                <div><Button type="text" className='left-panel-btn'>Prompt #1 <MyIcon type={"elipsis"} /></Button></div>
-                <div><Button type="text" className='left-panel-btn'>Prompt #2 <MyIcon type={"elipsis"} /></Button></div>
-                <div><Button type="text" className='left-panel-btn'>Prompt #3 <MyIcon type={"elipsis"} /></Button></div>
+                {FILTER_PROMPTS_BY_CATEGORY(FetchedPrompts,panel.header).map((item)=>
+                 <div><Button type="text" className='left-panel-btn'>
+                    {item?.prompt_name}
+                    <Popconfirm title="Are you sure you want to delete this prompt?" onConfirm={() => handleDeletePrompt(item?.id)} okText="Yes" cancelText="No" >
+                    <MyIcon  type="elipsis"   style={{ cursor: 'pointer', marginLeft: 10 }}  />
+                </Popconfirm>
+                    </Button></div>
+                )}
+               
               </Panel>
             ))}
           </Collapse>

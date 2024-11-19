@@ -52,3 +52,23 @@ export const API_GET_PROMPTS = async (token, setShowSpinner) => {
       setShowSpinner(false);
     }
 };
+
+
+export const API_DELETE_PROMPT = async (token, id,  setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+          const response = await axios.delete(`${DOMAIN_NAME}/chat/delete_prompt/${id}/`, {
+            headers: {
+                Authorization: token, 
+            },
+          });
+      
+        message.success("Prompt Deleted Successfully")
+        return response.data;
+    } catch (error) {
+        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        message.error(errorMessage);  
+    } finally {
+        setShowSpinner(false);
+    }
+};
