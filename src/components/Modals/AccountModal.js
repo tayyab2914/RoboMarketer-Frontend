@@ -41,7 +41,7 @@ const AccountModal = ({ isVisible, onClose }) => {
       const formData = new FormData();
       formData.append("profile_pic", profilePic);
       const response = await API_UPDATE_ACCOUNT(token, current_account?.id, null, profilePic, setShowSpinner);
-
+        console.log(profilePic)
     } catch (error) {
       message.error("Failed to upload profile picture.");
     } finally {

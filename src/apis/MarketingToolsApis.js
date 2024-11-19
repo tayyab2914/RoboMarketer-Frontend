@@ -219,14 +219,17 @@ export const API_UPDATE_PRODUCT = async ( token, updatedProduct,productId, setSh
         setShowSpinner(false);
     }
 };
-export const API_UPDATE_ROBOMARKETER_IQ  = async ( token, updatedValues, setShowSpinner ) => {
-    console.log('API_UPDATE_ROBOMARKETER_IQ', updatedValues);
-    
+export const API_UPDATE_ROBOMARKETER_IQ  = async ( token, formData, setShowSpinner ) => {
+  // Log FormData key-value pairs
+for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+}
+
     setShowSpinner(true);
 
     try {
         const response = await axios.put(`${DOMAIN_NAME}/tools/update_robomarketeriq/`, 
-            updatedValues
+            formData
         , {
             headers: {
                 Authorization: token,

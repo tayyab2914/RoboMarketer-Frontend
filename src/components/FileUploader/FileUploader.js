@@ -6,10 +6,10 @@ import './styles/FileUploader.css';
 const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload = () => true, showRemoveIcon = true,accept }) => {
   // Function to render file previews
   const renderFilePreview = (file) => {
-    const fileType = file.type;
+    const fileType = file?.type;
 
     if (fileType.startsWith("image/")) {
-      return <img src={URL.createObjectURL(file.originFileObj)} alt={file.name} style={{ width: 30, height: 30, margin: "10px" }} />;
+      return <img src={URL.createObjectURL(file?.originFileObj)} alt={file?.name} style={{ width: 30, height: 30, margin: "10px" }} />;
     }
 
     if (fileType === "application/pdf") {
@@ -38,7 +38,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
 
     // For other files, just show the file name
     return (
-      <Tooltip title={file.name}>
+      <Tooltip title={file?.name}>
         <FileOutlined style={{ fontSize: 30, margin: "10px" }} />
       </Tooltip>
     );
@@ -46,7 +46,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
 
   // Function to handle file removal
   const onRemove = (fileToRemove) => {
-    const updatedFileList = fileList.filter(file => file.uid !== fileToRemove.uid);
+    const updatedFileList = fileList.filter(file => file?.uid !== fileToRemove.uid);
     onFileChange({ fileList: updatedFileList }); // Trigger the onFileChange with the updated list
   };
 
@@ -68,7 +68,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
       {/* Display uploaded images and files with delete badge */}
       <div className="uploaded-files-preview" style={{ display: "flex", alignItems: "center",marginTop:"10px" }}>
         {fileList && fileList?.map((file) => (
-          <span key={file.uid} className="uploaded-file-item" style={{ position: 'relative' }}>
+          <span key={file?.uid} className="uploaded-file-item" style={{ position: 'relative' }}>
             <Badge
               count={<CloseCircleOutlined onClick={() => onRemove(file)} style={{ color: 'red', cursor: 'pointer' }} />}
               offset={[-5, 5]}

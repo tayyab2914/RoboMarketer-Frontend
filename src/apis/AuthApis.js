@@ -302,7 +302,7 @@ export const API_UPDATE_PROFILE = async (token, email = null, password = null, s
 };
 export const API_UPDATE_ACCOUNT = async (token, account_id, name = null, account_image = null, setShowSpinner) => {
     setShowSpinner(true);
-  
+
     try {
       const config = {
         headers: {
