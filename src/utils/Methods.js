@@ -13,3 +13,6 @@ export const GET_PROMPT_CATEGORIES = [
         { header: "Competitors", key: "13", icon: 'competitor' },
         { header: "Charts", key: "14", icon: 'chart' }
       ];
+
+
+    

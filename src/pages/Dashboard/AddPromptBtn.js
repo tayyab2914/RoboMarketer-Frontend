@@ -41,7 +41,18 @@ const AddPromptBtn = () => {
   };
 
   const handleCreatePrompt = async () => {
-    await API_CREATE_PROMPT(token,{category,prompt_name,prompt,file_group},setShowSpinner)
+    const formData = new FormData();
+    
+    // Append each form field to the FormData object
+    formData.append("category", category || "");
+    formData.append("prompt_name", prompt_name || "");
+    formData.append("prompt", prompt || "");
+  
+    file_group?.forEach((file, index) => {
+      formData.append(`file_group[${index}]`, file.originFileObj);
+    });
+  
+    await API_CREATE_PROMPT(token,formData,setShowSpinner)
 
     setIsModalVisible(false);
     dispatch(setRerenderDashboard(!rerender_dashboard))

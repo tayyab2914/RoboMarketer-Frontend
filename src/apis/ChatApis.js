@@ -32,3 +32,23 @@ export const API_CREATE_PROMPT = async ( token, newPrompt, setShowSpinner ) => {
         setShowSpinner(false);
     }
 };
+
+export const API_GET_PROMPTS = async (token, setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.get(`${DOMAIN_NAME}/chat/get_prompts/`, {
+        headers: {
+            Authorization: token, 
+        },
+      });
+  
+      console.log(response)
+      return response.data;
+    } catch (error) {
+        message.error(
+          error.response?.data?.message 
+        );
+    } finally {
+      setShowSpinner(false);
+    }
+};

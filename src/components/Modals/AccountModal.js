@@ -11,10 +11,10 @@ import { DOMAIN_NAME } from "../../utils/GlobalSettings";
 const { Dragger } = Upload;
 
 const AccountModal = ({ isVisible, onClose }) => {
+    const [showSpinner, setShowSpinner] = useState(false);
   const { isLoggedIn, token, current_account } = useSelector((state) => state.authToken);
   const [name, setName] = useState(current_account?.name);
   const [profilePic, setProfilePic] = useState(null);
-  const [showSpinner, setShowSpinner] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
   console.log(current_account)

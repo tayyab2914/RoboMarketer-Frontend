@@ -79,12 +79,10 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
     formData.append("industry_type", FormValues.industry_type || "");
     formData.append("preferences", FormValues.preferences || "");
   
-    // Append each file in the file group to FormData
     FormValues.file_group?.forEach((file, index) => {
       formData.append(`file_group[${index}]`, file.originFileObj);
     });
   
-    // Call the API and pass the FormData object
     const response = await API_UPDATE_ROBOMARKETER_IQ(token, formData, setShowSpinner);
     
     if (response) {

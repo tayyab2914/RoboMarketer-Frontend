@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IMAGES } from '../../data/ImageData';
-import { Button, Collapse } from 'antd';
+import { Button, Collapse, Spin } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import './styles/DashboardLeftPanel.css';
 import MyButton from '../../components/Button/Button';
@@ -10,11 +10,15 @@ import AddPromptBtn from './AddPromptBtn';
 import { DownOutlined } from '@ant-design/icons';
 import SettingsBtn from './SettingsBtn';
 import { GET_PROMPT_CATEGORIES } from '../../utils/Methods';
+import { API_GET_PROMPTS } from '../../apis/ChatApis';
+import { useSelector } from 'react-redux';
 
 const { Panel } = Collapse;
 
 
 const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
+    const [showSpinner, setShowSpinner] = useState(false);
+  const { isLoggedIn, token, current_account } = useSelector((state) => state.authToken);
   const [CurrentAccount, setCurrentAccount] = useState({});
   const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
 
@@ -26,7 +30,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   }, [Accounts]);
 
   const getPrompts = async()=>{
-
+    const response = await API_GET_PROMPTS(token,setShowSpinner)
   }
   useEffect(()=>{
     getPrompts()
@@ -34,11 +38,12 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
 
   const handleAccountSwitch = (accountId) => {
     SwitchAccount(accountId);
-    setAccountCollapseActiveKey([]); // Close the collapse panel after switching accounts
+    setAccountCollapseActiveKey([]); 
   };
 
   return (
     <div className="left-panel-container">
+        {showSpinner &&<Spin fullscreen/>}
       <div className="left-panel-container-inner">
         <img src={IMAGES.panel_logo} alt="Panel Logo" className="left-panel-logo" />
 
