@@ -61,12 +61,38 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
     getRobomarketerIq()
   },[])
 
-  const handleSave = async() => {
-    console.log(FormValues)
-    const response =API_UPDATE_ROBOMARKETER_IQ(token,FormValues,setShowSpinner)
-    onClose();
+  const handleSave = async () => {
+    const formData = new FormData();
+    
+    // Append each form field to the FormData object
+    formData.append("max_daily_budget", FormValues.max_daily_budget || "");
+    formData.append("clickthrough_rate_percentage", FormValues.clickthrough_rate_percentage || "");
+    formData.append("cost_per_click_cpc", FormValues.cost_per_click_cpc || "");
+    formData.append("cost_per_lead_cpl", FormValues.cost_per_lead_cpl || "");
+    formData.append("cost_per_appointment", FormValues.cost_per_appointment || "");
+    formData.append("cost_per_sale_cpa", FormValues.cost_per_sale_cpa || "");
+    formData.append("return_on_ad_spend_roas", FormValues.return_on_ad_spend_roas || "");
+    formData.append("leads", FormValues.leads || "");
+    formData.append("appointments", FormValues.appointments || "");
+    formData.append("sales", FormValues.sales || "");
+    formData.append("revenue", FormValues.revenue || "");
+    formData.append("industry_type", FormValues.industry_type || "");
+    formData.append("preferences", FormValues.preferences || "");
+  
+    // Append each file in the file group to FormData
+    FormValues.file_group.forEach((file, index) => {
+      formData.append(`file_group[${index}]`, file.originFileObj);
+    });
+  
+    // Call the API and pass the FormData object
+    const response = await API_UPDATE_ROBOMARKETER_IQ(token, formData, setShowSpinner);
+    
+    if (response) {
+      console.log("Form submitted successfully", response);
+      onClose();
+    }
   };
-
+  
   return (
     <>
     {showSpinner && <Spin fullscreen/>}
