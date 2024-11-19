@@ -6,30 +6,30 @@ import { UploadOutlined } from '@ant-design/icons';
 import './styles/AddPromptBtn.css';
 import FileUploader from '../../components/FileUploader/FileUploader';
 import { API_CREATE_PROMPT } from '../../apis/ChatApis';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { GET_PROMPT_CATEGORIES } from '../../utils/Methods';
+import { setRerenderDashboard } from '../../redux/AuthToken/Action';
 
 const { TextArea } = Input;
 
 const AddPromptBtn = () => {
+    const dispatch = useDispatch()
     const [showSpinner, setShowSpinner] = useState(false);
-  const { isLoggedIn, token, current_account } = useSelector((state) => state.authToken);
+  const { isLoggedIn, token, current_account,rerender_dashboard } = useSelector((state) => state.authToken);
   const [isModalVisible, setIsModalVisible] = useState(false); // State to manage modal visibility
   const [category, setCategory] = useState(null); // State for selected category
   const [prompt_name, setprompt_name] = useState(''); // State for prompt name
   const [prompt, setPrompt] = useState(''); // State for prompt content
   const [file_group, setfile_group] = useState([]); // State for uploaded files
 
-  // Function to show the modal
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  // Function to close the modal
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
-  // Handle file upload change
   const handleFileChange = (info) => {
     if (info?.file?.status === 'done') {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -44,6 +44,8 @@ const AddPromptBtn = () => {
     await API_CREATE_PROMPT(token,{category,prompt_name,prompt,file_group},setShowSpinner)
 
     setIsModalVisible(false);
+    dispatch(setRerenderDashboard(!rerender_dashboard))
+    
   };
 
   return (
@@ -56,10 +58,7 @@ const AddPromptBtn = () => {
         <div className="">
             <p className="modal-field-label-block">Select Category</p>
             <Select value={category} onChange={setCategory} style={{ width: '100%',height:"40px" }} placeholder="Select a category" >
-              {}
-              <Select.Option value="category1">Category 1</Select.Option>
-              <Select.Option value="category2">Category 2</Select.Option>
-              <Select.Option value="category3">Category 3</Select.Option>
+              {GET_PROMPT_CATEGORIES?.map((item)=><Select.Option value={item.header}>{item.header}</Select.Option>)}
             </Select>
           </div>
 
@@ -84,7 +83,7 @@ const AddPromptBtn = () => {
               multiple={true}
               beforeUpload={() => true}  
               showRemoveIcon={true}
-              
+              accept={".docs, .docx"}
             />
 
           </div>

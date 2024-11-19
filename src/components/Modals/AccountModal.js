@@ -76,7 +76,7 @@ const AccountModal = ({ isVisible, onClose }) => {
         <div className="modal-content">
           <div className="upload-group" style={{ marginTop: "20px", textAlign: "center" }}>
           {current_account?.account_image && <img src={`${DOMAIN_NAME}${current_account?.account_image}`} alt="" className="account-modal-img"/>}
-            <Dragger {...props} itemRender={() => <></>} disabled={profilePic}>
+            <Dragger {...props} itemRender={() => <></>} disabled={profilePic} accept=".png, .jpg, .svg">
               <div className="ant-upload-text">
                 {profilePic ? ( <p style={{ color: "#00c514", marginTop: "20px" }}> Profile Picture Selected: {profilePic.name} </p>
                 ) : (

@@ -3,7 +3,7 @@ import { Upload, Button, Tooltip, Badge } from "antd";
 import { UploadOutlined, FilePdfOutlined, FileExcelOutlined, FileWordOutlined, FileOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import './styles/FileUploader.css';
 
-const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload = () => true, showRemoveIcon = true }) => {
+const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload = () => true, showRemoveIcon = true,accept }) => {
   // Function to render file previews
   const renderFilePreview = (file) => {
     const fileType = file.type;
@@ -59,6 +59,8 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
         onChange={onFileChange}
         beforeUpload={beforeUpload}
         showUploadList={{ showRemoveIcon }}
+        accept={accept}
+        
       >
         <Button icon={<UploadOutlined />} className="upload-sop-btn">Upload File(s)</Button>
       </Upload>

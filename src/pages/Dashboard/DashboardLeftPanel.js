@@ -25,6 +25,13 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
     }
   }, [Accounts]);
 
+  const getPrompts = async()=>{
+
+  }
+  useEffect(()=>{
+    getPrompts()
+  },[])
+
   const handleAccountSwitch = (accountId) => {
     SwitchAccount(accountId);
     setAccountCollapseActiveKey([]); // Close the collapse panel after switching accounts

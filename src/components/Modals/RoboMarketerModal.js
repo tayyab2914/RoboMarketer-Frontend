@@ -31,7 +31,7 @@ const InputRow = ({ label, value, onChange, prefix, suffix, placeholder }) => (
 const RoboMarketerModal = ({ isVisible, onClose }) => {
     const { token } = useSelector((state) => state.authToken);
     const [showSpinner, setShowSpinner] = useState(false);
-  const [FormValues, setFormValues] = useState({ max_daily_budget: "", clickthrough_rate_percentage: "", cost_per_click_cpc: "", cost_per_lead_cpl: "", cost_per_appointment: "", cost_per_sale_cpa: "",return_on_ad_spend_roas:"", leads: "", appointments: "", sales: "", revenue: "", industry_type: "", preferences: "", file_group: { sop_files:[], desription:'', id:'' } });
+  const [FormValues, setFormValues] = useState({ max_daily_budget: "", clickthrough_rate_percentage: "", cost_per_click_cpc: "", cost_per_lead_cpl: "", cost_per_appointment: "", cost_per_sale_cpa: "",return_on_ad_spend_roas:"", leads: "", appointments: "", sales: "", revenue: "", industry_type: "", preferences: "", file_group: [] });
 
   const handleValueChange = (field, value) => {
     if(field == 'industry_type'){
@@ -39,7 +39,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
         
     }
     else if (field === "file_group") {
-      setFormValues((prev) => ({ ...prev, file_group: {sop_files:value} }));  
+      setFormValues((prev) => ({ ...prev, file_group:value }));  
     } else if (field === "preferences") {
         setFormValues((prev) => ({ ...prev, preferences: value }));  
     }
@@ -126,7 +126,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
         <Panel header="Standard Operating Procedures (SOP)" key="1">
           <div className="">
             <p className="modal-field-label-block">Upload SOP Docs</p>
-            <FileUploader fileList={FormValues?.file_group?.sop_files} onFileChange={({ fileList }) => handleValueChange("file_group", fileList)} multiple={true} beforeUpload={() => true} showRemoveIcon={true} />
+            <FileUploader fileList={FormValues?.file_group} onFileChange={({ fileList }) => handleValueChange("file_group", fileList)} multiple={true} beforeUpload={() => true} showRemoveIcon={true} accept={".docs, .docx"}/>
         </div>
         </Panel>
       </Collapse>
