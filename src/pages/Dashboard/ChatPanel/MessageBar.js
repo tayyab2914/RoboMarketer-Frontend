@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import './styles/MessageBar.css';
-import { Col, Input, Row, Tooltip } from 'antd';
+import { Col, Input, Row, Badge } from 'antd';
 import MyIcon from '../../../components/Icon/MyIcon';
+import { CloseOutlined } from '@ant-design/icons';
 import { API_GET_RESPONSE } from '../../../apis/ChatApis';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRerenderChatPanel } from '../../../redux/AuthToken/Action';
+import { setRerenderChatPanel, setRerenderDashboard } from '../../../redux/AuthToken/Action';
 import { FilePdfOutlined, FileExcelOutlined, FileWordOutlined, FileOutlined } from '@ant-design/icons';
 import { RENDER_FILE_PREVIEW } from '../../../utils/Methods';
 
-const MessageBar = ({ disabled }) => {
+const MessageBar = () => {
   const dispatch = useDispatch();
+  const [disabled, setdisabled] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const { isLoggedIn, token, rerender_chat_panel } = useSelector((state) => state.authToken);
   const [message, setMessage] = useState("");
@@ -24,50 +26,81 @@ const MessageBar = ({ disabled }) => {
     }
   };
 
+  // Reset the file input's value when file is removed
+  const handleRemoveFile = () => {
+    setFile(null);
+    // Reset the input's value to allow re-uploading
+    const fileInput = document.getElementById("file-upload");
+    fileInput.value = null; // Reset input value
+  };
+
   // Function to send file or message
   const handleSendMessage = async () => {
-        if (!disabled) {
-          if (message.trim() || file) {
-            setShowSpinner(true);
-    
-            const formData = new FormData();
-            if (file) {
-              formData.append('file_group', file); // Add file to formData
-            }
-            formData.append('message', message); // Add message to formData
-    
-            try {
-              await API_GET_RESPONSE(token, message || null, formData, setShowSpinner);
-              dispatch(setRerenderChatPanel(!rerender_chat_panel));
-            } catch (error) {
-              console.error("Error sending message/file:", error);
-            } finally {
-              setMessage("");
-              setFile(null);
-              setShowSpinner(false);
-            }
-          }
+    if (!disabled) {
+      if (message.trim() || file) {
+        setShowSpinner(true);
+
+        const formData = new FormData();
+        if (file) {
+          formData.append('file_group', file); // Add file to formData
         }
-    
-    
+        formData.append('message', message); // Add message to formData
+
+        try {
+            setdisabled(true)
+          await API_GET_RESPONSE(token, message || null, formData, setShowSpinner);
+          dispatch(setRerenderChatPanel(!rerender_chat_panel));
+        } catch (error) {
+          console.error("Error sending message/file:", error);
+        } finally {
+          setMessage("");
+          setdisabled(false)
+          handleRemoveFile();
+          setShowSpinner(false);
+        }
+      }
+    }
   };
+
   return (
-    <>
     <Row align="middle" className="message-bar">
-      <Col className='file-preview-container'>
+      <Col className="file-preview-container">
         <label htmlFor="file-upload">
           <MyIcon
-            type={'plus_black'}
+            type={"plus_black"}
             className={`message-bar-plus ${disabled ? 'disabled-icon' : ''}`}
-            size='xl'
+            size="xl"
           />
         </label>
-        
-    {file && (
-        <span className="file-preview-container">
-          {RENDER_FILE_PREVIEW(file)}
-        </span>
-      )}
+
+        {file && (
+          <div className="file-preview-container">
+            {/* Render file preview */}
+           
+            {/* Badge with Close Icon */}
+            <Badge
+              count={
+                <CloseOutlined
+                  onClick={handleRemoveFile}
+                  style={{
+                    fontSize: 14,
+                    color: 'red',
+                    cursor: 'pointer',
+                  }}
+                />
+              }
+              style={{
+                marginLeft: '0px',
+                cursor: 'pointer',
+                position:"relative",
+                left:"-20px",
+                top:"-20px"
+              }}
+            > {RENDER_FILE_PREVIEW(file)}
+</Badge>
+          </div>
+        )}
+
         <input
           id="file-upload"
           type="file"
@@ -76,27 +109,27 @@ const MessageBar = ({ disabled }) => {
           disabled={disabled}
         />
       </Col>
+
       <Col flex="auto">
         <Input
           placeholder="Type a message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onPressEnter={handleSendMessage}
-          className='message-bar-input'
+          className="message-bar-input"
           disabled={disabled}
         />
       </Col>
+
       <Col>
         <MyIcon
-          type={'arrow_up'}
-          onClick={handleSendMessage}
-          size='lg'
-          className={`message-arrow-up ${disabled ? 'disabled-icon' : ''}`}
+          type={"arrow_up"}
+          onClick={message ? () => handleSendMessage() : null}
+          size="lg"
+          className={`message-arrow-up ${message && !disabled ? "" : "disabled-icon"}`}
         />
       </Col>
-
     </Row>
-    </>
   );
 };
 
