@@ -35,8 +35,6 @@ export const API_SIGN_IN = async ( email, password, dispatch, navigate, setShowS
       password: password,
     });
 
-    // Handle login token
-    console.log('response.data.token',response.data)
     dispatch(setAuthToken(response.data.token));
     dispatch(setLoggedIn(true));
     dispatch(setIsAdmin(response.data.admin))
@@ -189,7 +187,6 @@ export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
         },
       });
   
-      console.log(response)
       return response.data;
     } catch (error) {
       message.error("Invalid or expired token");
@@ -249,7 +246,6 @@ export const API_GET_ACCOUNTS = async (token, setShowSpinner) => {
         },
       });
   
-      console.log(response)
       return response.data;
     } catch (error) {
       message.error("Invalid or expired token");

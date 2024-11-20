@@ -10,9 +10,9 @@ import AddPromptBtn from './AddPromptBtn';
 import { DownOutlined } from '@ant-design/icons';
 import SettingsBtn from './SettingsBtn';
 import { FILTER_PROMPTS_BY_CATEGORY, GET_PROMPT_CATEGORIES } from '../../utils/Methods';
-import { API_DELETE_PROMPT, API_GET_PROMPTS } from '../../apis/ChatApis';
+import { API_DELETE_PROMPT, API_GET_PROMPTS, API_GET_RESPONSE } from '../../apis/ChatApis';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRerenderDashboard } from '../../redux/AuthToken/Action';
+import { setRerenderChatPanel, setRerenderDashboard } from '../../redux/AuthToken/Action';
 
 const { Panel } = Collapse;
 
@@ -20,7 +20,7 @@ const { Panel } = Collapse;
 const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
     const dispatch= useDispatch()
     const [showSpinner, setShowSpinner] = useState(false);
-    const { isLoggedIn, token,rerender_dashboard } = useSelector((state) => state.authToken);
+    const { isLoggedIn, token,rerender_dashboard,rerender_chat_panel } = useSelector((state) => state.authToken);
   const [CurrentAccount, setCurrentAccount] = useState({});
   const [FetchedPrompts, setFetchedPrompts] = useState([]);
   const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
@@ -35,6 +35,11 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const getPrompts = async()=>{
     const response = await API_GET_PROMPTS(token,setShowSpinner)
     setFetchedPrompts(response)
+  }
+  const handlePromptClick = async(message)=>{
+    
+    await API_GET_RESPONSE(token,message,setShowSpinner)
+    dispatch(setRerenderChatPanel(!rerender_chat_panel))
   }
   useEffect(()=>{
     getPrompts()
@@ -72,7 +77,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             {GET_PROMPT_CATEGORIES?.map(panel => (
               <Panel header={<><span className='panel-header-span'><MyIcon type={panel.icon} /> {panel.header}</span></>} key={panel.key}>
                 {FILTER_PROMPTS_BY_CATEGORY(FetchedPrompts,panel.header).map((item)=>
-                 <div><Button type="text" className='left-panel-btn'>
+                 <div><Button type="text" className='left-panel-btn' onClick={()=>handlePromptClick(item?.prompt)}>
                     {item?.prompt_name}
                     <Popconfirm title="Are you sure you want to delete this prompt?" onConfirm={() => handleDeletePrompt(item?.id)} okText="Yes" cancelText="No" >
                     <MyIcon  type="elipsis"   style={{ cursor: 'pointer', marginLeft: 10 }}  />

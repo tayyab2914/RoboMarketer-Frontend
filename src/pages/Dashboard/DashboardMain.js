@@ -15,7 +15,7 @@ const DashboardMain = () => {
   const { isLoggedIn, token,rerender_dashboard } = useSelector((state) => state.authToken);
   const [ShowSpinner, setShowSpinner] = useState(false);
   const [Accounts, setAccounts] = useState([]);
-const [DashboardRerenderer, setDashboardRerenderer] = useState('');
+  const [DashboardRerenderer, setDashboardRerenderer] = useState('');
   const [isLeftDrawerVisible, setIsLeftDrawerVisible] = useState(false);
   const [isRightDrawerVisible, setIsRightDrawerVisible] = useState(false);
 
@@ -39,8 +39,8 @@ const [DashboardRerenderer, setDashboardRerenderer] = useState('');
   useEffect(()=>{
     getAccounts()
   },[rerender_dashboard])
-//   useEffect(()=>{},[Accounts])
-//   useEffect(()=>{ getAccounts() },[])
+
+
 
   return (
     <div>

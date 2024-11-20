@@ -5,7 +5,8 @@ import {
   REMOVE_AUTH_TOKEN,
   SET_LOGGED_IN,
   SET_IS_ADMIN,SET_CURRENT_ACCOUNT,
-  RERENDER_DASHBOARD
+  RERENDER_DASHBOARD,
+  RERENDER_CHAT_PANEL
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -45,5 +46,11 @@ export const setCurrentAccount = (CurrentAccount) => {
     return {
       type: RERENDER_DASHBOARD,
       payload: rerender_dashboard,
+    };
+  };
+  export const setRerenderChatPanel = (rerender_chat_panel) => {
+    return {
+      type: RERENDER_CHAT_PANEL,
+      payload: rerender_chat_panel,
     };
   };

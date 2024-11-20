@@ -2,24 +2,68 @@ import React, { useState } from 'react';
 import './styles/MessageBar.css';
 import { Col, Input, Row } from 'antd';
 import MyIcon from '../../../components/Icon/MyIcon';
+import { API_GET_RESPONSE } from '../../../apis/ChatApis';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRerenderChatPanel } from '../../../redux/AuthToken/Action';
 
 const MessageBar = ({ disabled }) => {
+  const dispatch = useDispatch();
+  const [showSpinner, setShowSpinner] = useState(false);
+  const { isLoggedIn, token, rerender_chat_panel } = useSelector((state) => state.authToken);
   const [message, setMessage] = useState("");
+  const [file, setFile] = useState(null); // State to handle selected files
 
-  const handleSendMessage = () => {
-    if (message.trim() && !disabled) {
-      console.log("Message sent:", message);
-      setMessage(""); 
+  // Function to handle file selection
+  const handleFileSelect = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      console.log("File selected:", selectedFile.name);
+    }
+  };
+
+  // Function to send file or message
+  const handleSendMessage = async () => {
+    if (!disabled) {
+      if (message.trim() || file) {
+        setShowSpinner(true);
+
+        const formData = new FormData();
+        if (file) {
+          formData.append('file_group', file); // Add file to formData
+        }
+        formData.append('message', message); // Add message to formData
+
+        try {
+          await API_GET_RESPONSE(token, message || null, file ? formData : null, setShowSpinner);
+          dispatch(setRerenderChatPanel(!rerender_chat_panel));
+        } catch (error) {
+          console.error("Error sending message/file:", error);
+        } finally {
+          setMessage("");
+          setFile(null);
+          setShowSpinner(false);
+        }
+      }
     }
   };
 
   return (
     <Row align="middle" className="message-bar">
       <Col>
-        <MyIcon
-          type={'plus_black'}
-          className={`message-bar-plus ${disabled ? 'disabled-icon' : ''}`}
-          size='xl'
+        <label htmlFor="file-upload">
+          <MyIcon
+            type={'plus_black'}
+            className={`message-bar-plus ${disabled ? 'disabled-icon' : ''}`}
+            size='xl'
+          />
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          style={{ display: 'none' }}
+          onChange={handleFileSelect}
+          disabled={disabled}
         />
       </Col>
       <Col flex="auto">
