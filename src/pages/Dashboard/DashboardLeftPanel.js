@@ -76,7 +76,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
           <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} >
             {GET_PROMPT_CATEGORIES?.map(panel => (
               <Panel header={<><span className='panel-header-span'><MyIcon type={panel.icon} /> {panel.header}</span></>} key={panel.key}>
-                {FILTER_PROMPTS_BY_CATEGORY(FetchedPrompts,panel.header).map((item)=>
+                {FILTER_PROMPTS_BY_CATEGORY(FetchedPrompts,panel.header)?.map((item)=>
                  <div><Button type="text" className='left-panel-btn' onClick={()=>handlePromptClick(item?.prompt)}>
                     {item?.prompt_name}
                     <Popconfirm title="Are you sure you want to delete this prompt?" onConfirm={() => handleDeletePrompt(item?.id)} okText="Yes" cancelText="No" >

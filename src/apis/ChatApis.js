@@ -72,39 +72,27 @@ export const API_DELETE_PROMPT = async (token, id,  setShowSpinner) => {
         setShowSpinner(false);
     }
 };
-export const API_GET_RESPONSE = async ( token, messageInput,file_group, setShowSpinner ) => {
-    console.log('API_GET_RESPONSE', messageInput);
-    console.log('file_group',file_group)
-    
-    // setShowSpinner(true);
-    // file_group.forEach((value, key) => {
-    //     console.log(`${key}: ${value}`);
-    // });
+export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowSpinner) => {
+    setShowSpinner(true);
 
     try {
-        const response = await axios.post(`${DOMAIN_NAME}/chat/get_response/`, 
-            {
-                ...(messageInput && { message:messageInput }),
-                ...(file_group && { file_group })
-            }
-        , {
+        const response = await axios.post(`${DOMAIN_NAME}/chat/get_response/`, file_group, {
             headers: {
                 Authorization: token,
             },
         });
+
         console.log(response.data);
-        // message.success("Prompt created successfully!")
         return response.data;
     } catch (error) {
-        console.log(error)
-        message.error(
-          error.response?.data?.message 
-        );
+        console.log(error);
+        message.error(error.response?.data?.message);
         return null; 
     } finally {
-        // setShowSpinner(false);
+        setShowSpinner(false);
     }
 };
+
 export const API_GET_HISTORY = async (token, account_id, setShowSpinner) => {
 
     setShowSpinner(true);

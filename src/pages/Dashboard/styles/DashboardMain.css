@@ -1,5 +1,12 @@
-.dashboard-main-drawer-enabler-btn-1, .dashboard-main-drawer-enabler-btn-2{
-    width: 100%;
+
+
+.dashboard-main-drawer-enabler-row{
+    /* display: flex; */
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+}.dashboard-main-drawer-enabler-btn-1, .dashboard-main-drawer-enabler-btn-2{
+    width: 50vw ;
     border: none;
     background-color: white;
     border: 1px solid #e6eaed;
@@ -13,5 +20,5 @@
     border-radius: 0px 10px 10px 0px;
 }
 .dashboard-main-drawer-enabler-row{
-    padding: 10px;
+    /* padding: 10px; */
 }

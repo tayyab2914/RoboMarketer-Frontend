@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './styles/MessageBar.css';
-import { Col, Input, Row } from 'antd';
+import { Col, Input, Row, Tooltip } from 'antd';
 import MyIcon from '../../../components/Icon/MyIcon';
 import { API_GET_RESPONSE } from '../../../apis/ChatApis';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRerenderChatPanel } from '../../../redux/AuthToken/Action';
+import { FilePdfOutlined, FileExcelOutlined, FileWordOutlined, FileOutlined } from '@ant-design/icons';
+import { RENDER_FILE_PREVIEW } from '../../../utils/Methods';
 
 const MessageBar = ({ disabled }) => {
   const dispatch = useDispatch();
@@ -24,33 +26,35 @@ const MessageBar = ({ disabled }) => {
 
   // Function to send file or message
   const handleSendMessage = async () => {
-    if (!disabled) {
-      if (message.trim() || file) {
-        setShowSpinner(true);
-
-        const formData = new FormData();
-        if (file) {
-          formData.append('file_group', file); // Add file to formData
+        if (!disabled) {
+          if (message.trim() || file) {
+            setShowSpinner(true);
+    
+            const formData = new FormData();
+            if (file) {
+              formData.append('file_group', file); // Add file to formData
+            }
+            formData.append('message', message); // Add message to formData
+    
+            try {
+              await API_GET_RESPONSE(token, message || null, formData, setShowSpinner);
+              dispatch(setRerenderChatPanel(!rerender_chat_panel));
+            } catch (error) {
+              console.error("Error sending message/file:", error);
+            } finally {
+              setMessage("");
+              setFile(null);
+              setShowSpinner(false);
+            }
+          }
         }
-        formData.append('message', message); // Add message to formData
-
-        try {
-          await API_GET_RESPONSE(token, message || null, file ? formData : null, setShowSpinner);
-          dispatch(setRerenderChatPanel(!rerender_chat_panel));
-        } catch (error) {
-          console.error("Error sending message/file:", error);
-        } finally {
-          setMessage("");
-          setFile(null);
-          setShowSpinner(false);
-        }
-      }
-    }
+    
+    
   };
-
   return (
+    <>
     <Row align="middle" className="message-bar">
-      <Col>
+      <Col className='file-preview-container'>
         <label htmlFor="file-upload">
           <MyIcon
             type={'plus_black'}
@@ -58,6 +62,12 @@ const MessageBar = ({ disabled }) => {
             size='xl'
           />
         </label>
+        
+    {file && (
+        <span className="file-preview-container">
+          {RENDER_FILE_PREVIEW(file)}
+        </span>
+      )}
         <input
           id="file-upload"
           type="file"
@@ -84,7 +94,9 @@ const MessageBar = ({ disabled }) => {
           className={`message-arrow-up ${disabled ? 'disabled-icon' : ''}`}
         />
       </Col>
+
     </Row>
+    </>
   );
 };
 
