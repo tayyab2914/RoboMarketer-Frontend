@@ -28,11 +28,15 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
         name="name"
         label="Funnel Name"
         rules={[{ required: true, message: "Funnel Name is required." }]}
+                className='form-item'
+                required={false}
       >
         <Input placeholder="Type Name..." />
       </Form.Item>
 
-      <Form.Item name="funnel_type" label="Funnel Type" initialValue="sales">
+      <Form.Item name="funnel_type" label="Funnel Type" initialValue="sales"
+                className='form-item'
+                required={false}>
         <Select placeholder="Select Funnel Type">
           <Option value="sales">Sales Funnel</Option>
           <Option value="marketing">Marketing Funnel</Option>
@@ -45,6 +49,8 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
         name="description"
         label="Description"
         rules={[{ required: true, message: "Description is required." }]}
+                className='form-item'
+                required={false}
       >
         <Input.TextArea rows={4} placeholder="Type Description..." />
       </Form.Item>
@@ -58,13 +64,15 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
           />
         )}
       >
-        <Panel header={<span className="panel-header"><MyIcon type="products" style={{ marginRight: "5px" }} />Funnel Steps</span>} key="1">
+        <Panel header={<span className="modal-panel-header"><MyIcon type="products" style={{ marginRight: "5px" }} />Funnel Steps</span>} key="1">
           {steps.map((step, index) => (
             <div key={index} className="funnel-step">
               <Form.Item
                 name={['steps', index, 'name']}
                 label={`Funnel Step #${index + 1} - Name`}
                 rules={[{ required: true, message: "Step Name is required." }]}
+                className='form-item'
+                required={false}
               >
                 <Input placeholder="Type Step Name..." onChange={(e) => handleStepChange(index, 'name', e.target.value)} />
               </Form.Item>
@@ -73,6 +81,8 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
                 name={['steps', index, 'description']}
                 label="Step Description"
                 rules={[{ required: true, message: "Step Description is required." }]}
+                className='form-item'
+                required={false}
               >
                 <Input.TextArea rows={2} placeholder="Type Step Description..." onChange={(e) => handleStepChange(index, 'description', e.target.value)} />
               </Form.Item>
@@ -84,27 +94,29 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
                   { required: true, message: "URL is required." },
                   { type: 'url', message: "Invalid URL format." }
                 ]}
+                className='form-item'
+                required={false}
               >
                 <Input placeholder="Paste URL..." onChange={(e) => handleStepChange(index, 'url', e.target.value)} />
               </Form.Item>
             </div>
           ))}
 
-          <Button type="dashed" onClick={handleAddStep} icon={<PlusOutlined />} style={{ marginTop: '10px' }}>
+          <Button type="dashed" className={'add-funnel-step'} onClick={handleAddStep} icon={<PlusOutlined />} style={{ marginTop: '10px' }}>
             Add Funnel Step
           </Button>
         </Panel>
       </Collapse>
 
         <div className="modal-actions">
-        <span className="btn-1">
-        <Button onClick={onCancel} style={{ marginRight: '10px' }} className="cancel-btn">
-        <MyIcon type={"cross_red"} /> Cancel
-        </Button>
-          </span>
-          <span className="btn-2">
+          <span className="modal-actions-btn-2">
         <Button type="primary" htmlType="submit" className="create-btn">
         <MyIcon type={"tick"} />Add Funnel
+        </Button>
+          </span>
+        <span className="modal-actions-btn-1">
+        <Button onClick={onCancel} className="cancel-btn">
+        <MyIcon type={"cross_red"} /> Cancel
         </Button>
           </span>
         </div>

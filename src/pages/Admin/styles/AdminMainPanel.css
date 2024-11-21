@@ -31,8 +31,13 @@
 }
 .admin-main-panel-search-bar {
     height: 45px !important;
-    width: 220px;
-    margin-right: 20px;
+    width:230px;
+    margin-right: 10px;
+}
+
+.admin-main-panel-search-bar input::placeholder{
+    /* font-weight: 500 !important; */
+    color: #575A7B !important;
 }
 .admin-main-panel-search-bar .ant-input {
     height: 30px !important;
@@ -46,13 +51,20 @@
 .admin-panel-sign-up-link{
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;;
+}
+.generate-one-time-link-btn{
+
+    width: 100%;
+    padding: 13px 15px;
 }
 .admin-panel-sign-up-link img{
-    margin-right: 5px;
+    margin-right: 8px;
     
 }
 .admin-main-panel-table{
-    padding: 20px;
+    padding: 25px;
 }
 
 /* Wrapper styling for input and button */

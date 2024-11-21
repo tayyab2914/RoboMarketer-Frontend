@@ -63,7 +63,7 @@ const AdminMainPanel = () => {
         <Col xs={18} className="admin-main-panel-search">
           {windowWidth >= 992 && (
             <div className="header-data">
-              <Input placeholder="Search" className="admin-main-panel-search-bar" prefix={<SearchOutlined style={{ marginRight: "10px" }} />} size="large" value={searchQuery} onChange={(e) => handleSearch(e.target.value)} />
+              <Input placeholder="Search" className="admin-main-panel-search-bar" prefix={<SearchOutlined style={{ marginRight: "5px" }} />} size="large" value={searchQuery} onChange={(e) => handleSearch(e.target.value)} />
               <CreateSignUpLinkBtn />
             </div>
           )}

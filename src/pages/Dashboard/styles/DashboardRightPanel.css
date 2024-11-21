@@ -21,7 +21,6 @@
   width: 70%; /* Reduced width for logo */
   margin: 10px auto 30px auto; /* Space adjustments for logo */
 }
-
 .right-panel-btn {
   padding: 10px 12px;
   height: 45px;
@@ -56,23 +55,11 @@
   justify-content: space-between;
 }
 
-.add-prompt-btn {
-  padding: 10px 12px !important;
-  margin-top: 0px !important;
-  margin-bottom: 10px !important;
-}
-
-.add-prompt-span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .panel-header-span {
   display: flex;
   align-items: center;
   justify-content: start;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .panel-header-span img {
@@ -82,13 +69,12 @@
 .add-prompt-span img {
   margin-right: 5px;
 }
-
 .right-panel-container-inner .ant-collapse-header {
   padding: 10px 12px !important;
   font-weight: 500 !important;
   background-color: white !important;
   border: 1px solid #e6eaed;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   height: 40px;
   border-radius: 8px !important;
 }s

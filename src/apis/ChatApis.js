@@ -73,7 +73,7 @@ export const API_DELETE_PROMPT = async (token, id,  setShowSpinner) => {
     }
 };
 export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
 
     try {
         const response = await axios.post(`${DOMAIN_NAME}/chat/get_response/`, file_group, {
@@ -89,7 +89,7 @@ export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowS
         message.error(error.response?.data?.message);
         return null; 
     } finally {
-        setShowSpinner(false);
+        // setShowSpinner(false);
     }
 };
 

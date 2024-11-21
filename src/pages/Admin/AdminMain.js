@@ -9,11 +9,22 @@ const AdminMain = () => {
   const windowWidth = useWindowWidth();
 
   return (
-    <Row style={{ width: "100%" }}>
-      <Col xs={0} xl={5}>
-        <AdminLeftPanel />
-      </Col>
-      <Col xs={24} xl={19}>
+    <Row style={{ width: "100vw" }}>
+      {windowWidth > 1200 && (
+        <Col
+          style={{
+            width: "260px",
+            flex: "0 0 260px", 
+          }}
+        >
+          <AdminLeftPanel />
+        </Col>
+      )}
+      <Col
+        style={{
+          width: windowWidth > 1200 ? "calc(100vw - 260px)" : "100vw",
+        }}
+      >
         <AdminMainPanel />
       </Col>
     </Row>

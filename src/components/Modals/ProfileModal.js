@@ -59,17 +59,17 @@ const ProfileModal = ({ isVisible, onClose }) => {
     {ShowSpinner && <Spin fullscreen/>}
     <Modal title={ <span className="modal-header"> <MyIcon type={"profile"} style={{ marginRight: "5px" }} /> Profile (User) </span> } visible={isVisible} centered onCancel={onClose} footer={null} >
       <Form form={form} onFinish={onFinish} layout="vertical" className="modal-content">
-        <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED}>
+        <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED} required={false} className="form-item">
           <div className="input-group">
-            <span className="input-group-input"> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} /> </span>
-            <span className="input-group-btn"> <Button type="primary" className="input-btn" onClick={handleEmailUpdate}  > Update </Button> </span>
+            <span className="input-group-input"> <Input placeholder="Email"  className="inline-input"value={email} onChange={(e) => setEmail(e.target.value)} required={false}/> </span>
+            <span className="input-group-btn"> <Button type="primary"  className="inline-input-btn" onClick={handleEmailUpdate}  > Update </Button> </span>
           </div>
         </Form.Item>
 
-        <Form.Item label="Password" name="password" rules={PASSWORD_RULES_REQUIRED}>
+        <Form.Item label="Password" name="password" rules={PASSWORD_RULES_REQUIRED} required={false} className="form-item">
           <div className="input-group">
-            <span className="input-group-input"> <Input.Password placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /> </span>
-            <span className="input-group-btn"> <Button type="primary" className="input-btn" onClick={handlePasswordUpdate}  > Update </Button></span>
+            <span className="input-group-input"> <Input.Password className="inline-input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /> </span>
+            <span className="input-group-btn"> <Button type="primary"  className="inline-input-btn" onClick={handlePasswordUpdate}  > Update </Button></span>
           </div>
         </Form.Item>
       </Form>

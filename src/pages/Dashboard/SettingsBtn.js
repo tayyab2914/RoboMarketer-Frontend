@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Popconfirm } from "antd";
+import { Modal, Button, Popconfirm, Divider } from "antd";
 import "./styles/SettingsBtn.css";
 import MyIcon from "../../components/Icon/MyIcon";
 import { RightOutlined } from "@ant-design/icons";
@@ -54,13 +54,18 @@ const SettingsBtn = () => {
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null} 
+        centered
     >
         <div className="modal-options">
           {options.map((option) => (
+            <>
+            
             <div key={option.name} className="modal-option" onClick={() => handleOptionClick(option)} >
               <button type="text" className="modal-option-btn"> <MyIcon type={option.icon} /> <span>{option.name}</span> </button>
               <span> <RightOutlined /> </span>
             </div>
+            <Divider style={{margin:"0px 0px"}}/></>
+
           ))}
         </div>
         <div className="modal-option">

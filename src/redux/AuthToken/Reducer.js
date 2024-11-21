@@ -1,6 +1,6 @@
 // src/redux/reducer.js
 
-import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL } from "./Types";
+import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE } from "./Types";
 
 const initialState = {
   token: null,
@@ -8,7 +8,8 @@ const initialState = {
   isAdmin:false,
   current_account:{},
   rerender_dashboard:false,
-  rerender_chat_panel:true
+  rerender_chat_panel:true,
+  temporary_message:null
 };
 
 export default function authReducer(state = initialState, action) {
@@ -46,6 +47,11 @@ export default function authReducer(state = initialState, action) {
     return {
       ...state,
       rerender_chat_panel: action.payload,
+    };
+  }  else if (action.type == TEMPORARY_MESSAGE) {
+    return {
+      ...state,
+      temporary_message: action.payload,
     };
   }else {
     return state;

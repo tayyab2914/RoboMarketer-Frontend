@@ -55,7 +55,8 @@ const EditProductModal = ({ isVisible, onClose, productId,ListProducts }) => {
 
   return (
     <Modal
-    title="Edit Funnel / Website"
+
+    title="Edit Product / Service"
     visible={isVisible}
     onCancel={onClose}
     centered

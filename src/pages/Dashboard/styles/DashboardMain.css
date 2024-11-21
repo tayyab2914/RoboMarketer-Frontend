@@ -4,7 +4,7 @@
     /* display: flex; */
     position: fixed;
     top: 0;
-    z-index: 2000;
+    z-index: 100;
 }.dashboard-main-drawer-enabler-btn-1, .dashboard-main-drawer-enabler-btn-2{
     width: 50vw ;
     border: none;

@@ -4,9 +4,11 @@
   margin-bottom: 20px;
   font-weight: 700;
   text-align: center;
-  color: var(--color-dark);
+  color: black;
 }
-
+.account-main-row{
+    padding-top: 40px;
+}
 .account-logo{
     width: 90%;
     margin-bottom: 20px;
@@ -21,9 +23,10 @@
 }
 .signin-form {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  margin: 20px  40px !important;
+  /* margin: 20px  40px !important; */
   padding: 40px;
-  width: 70%;
+  width: 100%;
+  max-width: 480px;
   border-radius: 15px;
 }
 
@@ -33,7 +36,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .logo-container img {
@@ -72,59 +75,75 @@
 }
 
 /* Input Field Styling */
-.input-field {
+.signin-input-field {
   height: 40px !important; 
   margin-top: 6px;
+  /* padding: 16px !important; */
+  height: 52px !important;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding:0px 20px;
+}
+.signin-input-field input{
+    font-weight: 500 !important;
 }
 .signin-form .ant-input
 {
     height: 30px !important;
     margin-bottom: 0px !important;
 }
-.input-field .ant-input-prefix {
+.signin-input-field .ant-input-prefix {
   margin-right: 15px;
 }
-.form-item{
-    
-  margin-bottom: 10px !important;
+.remove-required-icon .ant-input-prefix {
+    display: none !important;
 }
-.form-item label {
+.signin-form-item{
+    
+  margin-bottom: 24px !important;
+}
+.signin-form-item label {
   /* margin-top: 14px !important; */
   font-weight: 600 !important;
+}
+.signin-form-item .ant-form-item-label{
+    padding: 0px;
+    color: black !important;
 }
 .ant-input-affix-wrapper{
     margin-top: 0px !important;
 }
-.form-item .ant-form-item-label{
-    padding: 0px;
-    color: var(--color-dark) !important;
-}
 .ant-form-item-required{
-    /* color: var(--color-dark) !important; */
+    /* color: black !important; */
 }
 /* Forgot Password Styling */
 .password-helper {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   margin: 0px;
+  margin-bottom: 16px;
 }
 
 .forgot-password-btn {
   margin: 0px;
-  color: var(--color-dark);
+  color: black;
   font-weight: 700;
 }
 
 .submit-btn {
   height: 40px;
-  background-color: var(--color-dark);
+  background-color: black;
   border: none;
   margin-top: 20px;
   font-weight: 600;
 }
+.signin-submit-btn{
+    border-radius: 10px !important;
+}
 
 .signup-toggle {
-  color: var(--color-dark);
+  color: black;
   font-weight: 700;
 }
 .signup-toggle:hover {
@@ -139,7 +158,7 @@
 }
 .google-btn div{
 background-color: var(--color-white) !important;
-color: var(--color-dark) !important;
+color: black !important;
 }
 .google-btn{
     display: flex;

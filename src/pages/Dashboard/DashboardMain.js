@@ -8,11 +8,11 @@ import './styles/DashboardMain.css'
 import DashboardChatPanel from "./ChatPanel/DashboardChatPanel";
 import { API_GET_ACCOUNTS, API_SWITCH_ACCOUNT } from "../../apis/AuthApis";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthToken, setCurrentAccount, setRerenderDashboard } from "../../redux/AuthToken/Action";
+import { setAuthToken, setCurrentAccount, setRerenderChatPanel, setRerenderDashboard } from "../../redux/AuthToken/Action";
 const DashboardMain = () => {
   const windowWidth = useWindowWidth();
   const dispatch = useDispatch()
-  const { isLoggedIn, token,rerender_dashboard } = useSelector((state) => state.authToken);
+  const { isLoggedIn, token,rerender_dashboard,rerender_chat_panel } = useSelector((state) => state.authToken);
   const [ShowSpinner, setShowSpinner] = useState(false);
   const [Accounts, setAccounts] = useState([]);
   const [DashboardRerenderer, setDashboardRerenderer] = useState('');
@@ -35,6 +35,7 @@ const DashboardMain = () => {
       
       dispatch(setAuthToken(response));
       dispatch(setRerenderDashboard(!rerender_dashboard))
+      dispatch(setRerenderChatPanel(!rerender_chat_panel))
   };
   useEffect(()=>{
     getAccounts()
@@ -45,25 +46,41 @@ const DashboardMain = () => {
   return (
     <div>
         {ShowSpinner && <Spin fullscreen/>}
-      <Row>
-        <Col xs={0}  xl={5}>
+        <Row style={{ width: "100vw" }}>
+        
+      {windowWidth > 1200 && (<Col
+          style={{
+            width: "310px",
+            flex: "0 0 310px", 
+          zIndex:'3000 !important'
+          }}>
           <DashboardLeftPanel Accounts={Accounts} SwitchAccount={SwitchAccount}/>
-        </Col>
-        <Col xs={24}  xl={14}>
+        </Col>)}
+
+        <Col  style={{
+          width: windowWidth > 1200 ? "calc(100vw - 620px)" : "100vw",
+        }}>
             {windowWidth < 1200 && <Row className="dashboard-main-drawer-enabler-row">
                 <Col xs={12}><button onClick={showLeftDrawer} className="dashboard-main-drawer-enabler-btn-1"><MyIcon type={'settings'}/> Settings</button></Col>
                 <Col xs={12}><button onClick={showRightDrawer} className="dashboard-main-drawer-enabler-btn-2"><MyIcon type={'reporting'}/> Reporting</button></Col>
             </Row>}
             <DashboardChatPanel />
         </Col>
-        <Col xs={0}  xl={5}>
+        
+      {windowWidth > 1200 && (
+        <Col
+        style={{
+          width: "310px",
+          flex: "0 0 310px", 
+        //   zIndex:'900 !important'
+        }}>
           <DashboardRightPanel />
-        </Col>
+        </Col>)}
       </Row>
 
       {windowWidth < 1200 && (
         <Drawer headerStyle={{ display: "none" }} placement="left" onClose={closeLeftDrawer} visible={isLeftDrawerVisible} width={300}  bodyStyle={{ padding: 0 }} >
-          <DashboardLeftPanel />
+          <DashboardLeftPanel  Accounts={Accounts} SwitchAccount={SwitchAccount}/>
         </Drawer>
       )}
 

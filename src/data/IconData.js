@@ -52,12 +52,40 @@ import arrow_up from "../assets/icons/arrow_up.svg";
 import plus_black from "../assets/icons/plus_black.svg";
 import robot from "../assets/icons/robot.svg";
 import facebook from "../assets/icons/facebook.svg";
+import signin_email from "../assets/icons/signin_email.svg";
+import signin_password from "../assets/icons/signin_password.svg";
+import signin_user from "../assets/icons/signin_user.svg";
+import signin_phone from "../assets/icons/signin_phone.svg";
+import target_kpi_modal from "../assets/icons/target_kpi_modal.svg";
+import select_industry from "../assets/icons/select_industry.svg";
+import target_monthly_goal from "../assets/icons/target_monthly_goal.svg";
+import preferences from "../assets/icons/preferences.svg";
+import products_white from "../assets/icons/products_white.svg";
+import service_white from "../assets/icons/service_white.svg";
+import service from "../assets/icons/service.svg";
+import psychographics from "../assets/icons/psychographics.svg";
+import demographics from "../assets/icons/demographics.svg";
+import product_service_details from "../assets/icons/product_service_details.svg";
 
 export const ICONS = {
-    facebook: facebook,
-    arrow_up: arrow_up,
-    robot: robot,
-    plus_black: plus_black,
+    product_service_details: product_service_details,
+    demographics: demographics,
+    psychographics: psychographics,
+    service: service,
+    products_white: products_white,
+    service_white: service_white,
+    preferences: preferences,
+    target_monthly_goal: target_monthly_goal,
+    signin_email: signin_email,
+    signin_password: signin_password,
+  target_kpi_modal: target_kpi_modal,
+  select_industry: select_industry,
+  signin_user: signin_user,
+  signin_phone: signin_phone,
+  facebook: facebook,
+  arrow_up: arrow_up,
+  robot: robot,
+  plus_black: plus_black,
   account: account,
   profile: profile,
   integrations: integrations,

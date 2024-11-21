@@ -8,6 +8,18 @@ export const EMAIL_RULES_REQUIRED = [
   export const PHONE_NUMBER_RULES_REQUIRED = [
     { required: true, message: "Please input your name!" },
   ];
+  export const ACCOUNT_RULES_REQUIRED = [
+    { required: true, message: "Please input number of accounts!" },
+    {
+      validator: (_, value) => {
+        if (!value || (Number(value) > 0 && Number.isInteger(Number(value)))) {
+          return Promise.resolve();
+        }
+        return Promise.reject(new Error("Please enter a valid positive number!"));
+      },
+    },
+  ];
+  
   export const PASSWORD_RULES_REQUIRED = [
     { required: true, message: "Please input your password!" },
     { min: 3, message: "Password must be at least 8 characters long!" }, // Validate minimum password length

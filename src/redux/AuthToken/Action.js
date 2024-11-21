@@ -6,7 +6,7 @@ import {
   SET_LOGGED_IN,
   SET_IS_ADMIN,SET_CURRENT_ACCOUNT,
   RERENDER_DASHBOARD,
-  RERENDER_CHAT_PANEL
+  RERENDER_CHAT_PANEL,TEMPORARY_MESSAGE
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -52,5 +52,11 @@ export const setCurrentAccount = (CurrentAccount) => {
     return {
       type: RERENDER_CHAT_PANEL,
       payload: rerender_chat_panel,
+    };
+  };
+  export const setTemporaryMessage = (temp_message) => {
+    return {
+      type: TEMPORARY_MESSAGE,
+      payload: temp_message,
     };
   };

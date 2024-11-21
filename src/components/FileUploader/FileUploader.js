@@ -29,11 +29,11 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
       </Upload>
 
       {/* Display uploaded images and files with delete badge */}
-      <div className="uploaded-files-preview" style={{ display: "flex", alignItems: "center",marginTop:"10px" }}>
+      <div className="uploaded-files-preview" style={{ display: "flex", alignItems: "center",marginTop:"20px" }}>
         {fileList && fileList?.map((file) => (
           <span key={file?.uid} className="uploaded-file-item" style={{ position: 'relative' }}>
             <Badge
-              count={<CloseCircleOutlined onClick={() => onRemove(file)} style={{ color: 'red', cursor: 'pointer' }} />}
+              count={<CloseCircleOutlined onClick={() => onRemove(file)} style={{ color: 'red', cursor: 'pointer', fontSize:"20px" }} />}
               offset={[-5, 5]}
             >
               {RENDER_FILE_PREVIEW(file)}

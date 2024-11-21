@@ -3,6 +3,7 @@ import { Modal, Button, message, Form, Spin } from "antd";
 import ProductForm from "../ProductForm/ProductForm";
 import { API_CREATE_PRODUCT } from "../../apis/MarketingToolsApis";
 import { useSelector } from "react-redux";
+import MyIcon from "../Icon/MyIcon";
 
 const AddProductModal = ({
   isVisible,
@@ -27,7 +28,13 @@ const AddProductModal = ({
 
   return (
     <Modal
-      title="Add Product / Service"
+    
+      title={<span className="product-modal-header">
+        <span>
+          <MyIcon type="products" style={{ marginRight: "5px" }} />
+          Add Product / Service
+        </span>
+      </span>}
       visible={isVisible}
       onCancel={onClose}
       centered

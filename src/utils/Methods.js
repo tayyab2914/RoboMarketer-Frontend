@@ -28,38 +28,47 @@ export const GET_PROMPT_CATEGORIES = [
         const fileType = file?.type;
     
         if (fileType.startsWith("image/")) {
-          return <img src={URL.createObjectURL(file?.originFileObj)} alt={file?.name} style={{ width: 30, height: 30, margin: "10px" }} />;
+          return <img src={URL.createObjectURL(file?.originFileObj)} alt={file?.name} style={{ width: 75, height: 75, margin: "10px" }} />;
         }
     
         if (fileType === "application/pdf") {
           return (
+            <span style={{display:"flex", flexDirection:"column"}}>
             <Tooltip title={file?.name}>
-              <FilePdfOutlined style={{ fontSize: 30, color: "#FF6F61", margin: "10px" }} />
+              <FilePdfOutlined style={{ fontSize: 75, color: "#FF6F61", margin: "10px" }} />
             </Tooltip>
+            <span style={{color: "#101136"}} >{file?.name?.slice(0,13)}</span></span>
+
           );
         }
     
         if (fileType === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
           return (
+            <span style={{display:"flex", flexDirection:"column"}}>
             <Tooltip title={file?.name}>
-              <FileExcelOutlined style={{ fontSize: 30, color: "#218838", margin: "10px" }} />
+              <FileExcelOutlined style={{ fontSize: 75, color: "#218838", margin: "10px" }} />
             </Tooltip>
+            <span style={{color: "#101136"}} >{file?.name?.slice(0,13)}</span></span>
           );
         }
     
         if (fileType === "application/msword" || fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
           return (
+            <span style={{display:"flex", flexDirection:"column"}}>
             <Tooltip title={file?.name}>
-              <FileWordOutlined style={{ fontSize: 30, color: "#1E90FF", margin: "10px" }} />
+              <FileWordOutlined style={{ fontSize: 75, color: "#1E90FF", margin: "10px" }} />
             </Tooltip>
+            <span style={{color: "#101136"}} >{file?.name?.slice(0,13)}</span></span>
           );
         }
     
         // For other files, just show the file name
         return (
+            <span style={{display:"flex", flexDirection:"column"}}>
           <Tooltip title={file?.name}>
-            <FileOutlined style={{ fontSize: 30, margin: "10px" }} />
+            <FileOutlined style={{ fontSize: 75, margin: "10px" }} />
           </Tooltip>
+            <span style={{color: "#101136"}} >{file?.name?.slice(0,13)}</span></span>
         );
       };
     

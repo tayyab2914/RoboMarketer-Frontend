@@ -97,24 +97,31 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
     <Modal title={ <span className="modal-header"> <MyIcon type={"robomarketer"} style={{ marginRight: "5px" }} /> RoboMarketerIQ </span> } visible={isVisible} centered onCancel={onClose}
       footer={[
         <div className="modal-actions" key="footer">
-          <span className="btn-1"> <Button onClick={onClose} className="cancel-btn"> <MyIcon type={"cross_red"} /> Cancel </Button> </span>
-          <span className="btn-2"> <Button type="primary" onClick={handleSave} className="create-btn"> <MyIcon type={"tick"} /> Save </Button></span>
+          <span className="modal-actions-btn-2"> <Button type="primary" onClick={handleSave} className="create-btn"> <MyIcon type={"tick"} /> Save </Button></span>
+          <span className="modal-actions-btn-1"> <Button onClick={onClose} className="cancel-btn"> <MyIcon type={"cross_red"} /> Cancel </Button> </span>
         </div>
       ]}
     >
-      {/* Industry Type Select */}
+      <p className="modal-description">Customize your RoboMarketer AI Agent With Your Target KPIs, Monthly Goals, And Preferences</p>
       <div>
-        <p className="modal-field-label-block">Select Industry Type</p>
-        <Select style={{ width: "100%" }} placeholder="Select industry type" value={FormValues.industry_type} onChange={(value) => handleValueChange("industry_type", value)} >
-          <Option value="technology">Technology</Option>
-          <Option value="finance">Finance</Option>
-          <Option value="healthcare">Healthcare</Option>
-        </Select>
+        {/* <p className="modal-field-label-block">Select Industry Type</p> */}
+        <Select 
+  style={{ width: "100%" }}
+  className="modal-select"
+  placeholder={<p className="select-placeholder"><MyIcon type={'select_industry'}/>Select industry type</p>}
+  value={FormValues.industry_type || undefined} // Shows placeholder if industry_type is undefined or empty
+  onChange={(value) => handleValueChange("industry_type", value)}
+>
+  <Option value="technology">Technology</Option>
+  <Option value="finance">Finance</Option>
+  <Option value="healthcare">Healthcare</Option>
+</Select>
+
       </div>
 
       {/* Target KPIs Collapse */}
-      <Collapse className="left-panel-collapse" defaultActiveKey={[1]} expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )} >
-        <Panel header="Target KPIs" key="1">
+      <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )} >
+        <Panel header={<p className="modal-panel-header"><MyIcon type={'target_kpi_modal'}/> Target KPIs</p>} key="1">
           <InputRow label="Max Daily Budget (Account)" value={FormValues.max_daily_budget} onChange={(e) => handleValueChange("max_daily_budget", e.target.value)} prefix="$" placeholder="0.00" />
           <InputRow label="Click Through Rate (CTR)" value={FormValues.clickthrough_rate_percentage} onChange={(e) => handleValueChange("clickthrough_rate_percentage", e.target.value)} suffix="%" placeholder="0.00" />
           <InputRow label="Cost Per Click (CPX)" value={FormValues.cost_per_click_cpc} onChange={(e) => handleValueChange("cost_per_click_cpc", e.target.value)} prefix="$" placeholder="0.00" />
@@ -126,8 +133,8 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
       </Collapse>
 
       {/* Target Monthly Goals Collapse */}
-      <Collapse className="left-panel-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
-        <Panel header="Target Monthly Goals" key="1">
+      <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
+        <Panel header={<p className="modal-panel-header"><MyIcon type={'target_monthly_goal'}/> Target Monthly Goals</p>} key="1">
           <InputRow label="Leads" value={FormValues.leads} onChange={(e) => handleValueChange("leads", e.target.value)} placeholder="0" />
           <InputRow label="Appointments" value={FormValues.appointments} onChange={(e) => handleValueChange("appointments", e.target.value)} placeholder="0" />
           <InputRow label="Sales" value={FormValues.sales} onChange={(e) => handleValueChange("sales", e.target.value)} prefix="$" placeholder="0.00" />
@@ -136,16 +143,17 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
       </Collapse>
 
       {/* Preferences and File Uploader Collapse */}
-      <Collapse className="left-panel-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
-        <Panel header="Preferences" key="1">
+      <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
+        <Panel header={<p className="modal-panel-header"><MyIcon type={'preferences'}/> Preferences</p>} key="1">
           <div>
-            <p className="modal-field-label-block"> Type specific goals, preferences, or strategies that you would like your AI Agent RoboMarketer to follow </p>
+      <p className="modal-description">Type specific goals, preferences, or strategies that you would like your AI Agent RoboMarketer to follow</p>
+           
             <Input.TextArea rows={4} placeholder="Type Preferences..." value={FormValues.preferences} onChange={(e) => handleValueChange("preferences", e.target.value)} />
           </div>
         </Panel>
         </Collapse>
-        <Collapse className="left-panel-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
-        <Panel header="Standard Operating Procedures (SOP)" key="1">
+        <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
+        <Panel header={<p className="modal-panel-header"><MyIcon type={'preferences'}/> Standard Operating Procedures (SOP)</p>} key="1">
           <div className="">
             <p className="modal-field-label-block">Upload SOP Docs</p>
             <FileUploader fileList={FormValues?.file_group} onFileChange={({ fileList }) => handleValueChange("file_group", fileList)} multiple={true} beforeUpload={() => true} showRemoveIcon={true} accept={".docs, .docx"}/>

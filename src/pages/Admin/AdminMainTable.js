@@ -3,6 +3,7 @@ import { Table, Pagination, Modal, Input, Button, Form, Popconfirm } from "antd"
 import './styles/AdminMainTable.css';
 import MyIcon from "../../components/Icon/MyIcon";
 import moment from "moment"; // Import moment.js for date formatting
+import { ACCOUNT_RULES_REQUIRED, EMAIL_RULES_REQUIRED, NAME_RULES_REQUIRED, PHONE_NUMBER_RULES_REQUIRED } from "../../utils/Rules";
 
 const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
     const formattedData = UsersList.map((user, index) => ({
@@ -10,7 +11,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
         first_name: user.first_name || 'N/A', 
         email: user.email,
         phone: user.phone_number || 'N/A', 
-        lastLogin: user.last_login ? moment(user.last_login).format('DD/MM/YYYY hh:mm A') : 'N/A', 
+        lastLogin: user.last_login ? moment(user.last_login).format('DD/MM/YY hh:mm A') : 'N/A', 
         accounts: user.total_accounts || 0,
         actions: (
             <>
@@ -23,10 +24,10 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
     }));
 
     const columns = [
-        { title: 'NAME', dataIndex: 'first_name', key: 'name', width: '15%' },
-        { title: 'EMAIL', dataIndex: 'email', key: 'email', width: '25%' },
+        { title: 'NAME', dataIndex: 'first_name', key: 'name', width: '10%' },
+        { title: 'EMAIL', dataIndex: 'email', key: 'email', width: '20%' },
         { title: 'PHONE', dataIndex: 'phone', key: 'phone', width: '17.5%' },
-        { title: 'LAST LOGIN', dataIndex: 'lastLogin', key: 'lastLogin', width: '17.5%' },
+        { title: 'LAST LOGIN', dataIndex: 'lastLogin', key: 'lastLogin', width: '22.5%' },
         { title: 'ROBOMARKETER ACCOUNTS', dataIndex: 'accounts', key: 'accounts', width: '10%' },
         { title: 'ACTIONS', dataIndex: 'actions', key: 'actions', width: '15%' },
     ];
@@ -80,50 +81,21 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                 <Pagination current={currentPage} pageSize={pageSize} total={formattedData.length} onChange={handlePageChange} showSizeChanger={false} />
             </div>
 
-            <Modal
-                title="Edit User"
-                visible={isModalVisible}
-                onCancel={() => setIsModalVisible(false)}
-                footer={null}
-            >
-                <Form
-                    form={form} // Use form instance
-                    layout="vertical"
-                    onFinish={handleSave}
-                    className="admin-main-table-form"
-                >
-                    <Form.Item
-                        label="First Name"
-                        name="first_name"
-                        rules={[{ required: true, message: 'Please enter the first name' }]}
-                    >
-                        <Input />
+            <Modal title="Edit User" visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null}>
+                <Form form={form} layout="vertical" onFinish={handleSave} className="admin-main-table-form" >
+                    <Form.Item label="First Name" name="first_name" rules={NAME_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                        <Input   prefix={<MyIcon type={'signin_user'}/>}/>
                     </Form.Item>
-
-                    <Form.Item
-                        label="Email"
-                        name="email"
-                        rules={[{ required: true, message: 'Please enter the email' }]}
-                    >
-                        <Input />
+                    <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                        <Input   prefix={<MyIcon type={'signin_email'}/>}/>
                     </Form.Item>
-                    <Form.Item
-                        label="Number of Accounts"
-                        name="total_accounts"
-                        rules={[{ required: true, message: 'Please enter the total number of accounts' }]}
-                    >
-                        <Input />
+                    <Form.Item label="Number of Accounts" name="total_accounts" rules={ACCOUNT_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                        <Input type="number"  prefix={<MyIcon type={'users'}/>}/>
                     </Form.Item>
-
-                    <Form.Item
-                        label="Phone Number"
-                        name="phone_number"
-                        rules={[{ required: true, message: 'Please enter the phone number' }]}
-                    >
-                        <Input />
+                    <Form.Item label="Phone Number" name="phone_number" rules={PHONE_NUMBER_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                        <Input   prefix={<MyIcon type={'signin_password'}/>}/>
                     </Form.Item>
-
-                    <Button type="primary" htmlType="submit"> Save Changes </Button>
+                    <Button type="primary" htmlType="submit" className="admin-main-table-edit-submit-btn"> Save Changes </Button>
                 </Form>
             </Modal>
         </div>

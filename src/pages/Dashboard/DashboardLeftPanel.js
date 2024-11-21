@@ -12,7 +12,7 @@ import SettingsBtn from './SettingsBtn';
 import { FILTER_PROMPTS_BY_CATEGORY, GET_PROMPT_CATEGORIES } from '../../utils/Methods';
 import { API_DELETE_PROMPT, API_GET_PROMPTS, API_GET_RESPONSE } from '../../apis/ChatApis';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRerenderChatPanel, setRerenderDashboard } from '../../redux/AuthToken/Action';
+import { setRerenderChatPanel, setRerenderDashboard, setTemporaryMessage } from '../../redux/AuthToken/Action';
 
 const { Panel } = Collapse;
 
@@ -38,8 +38,14 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   }
   const handlePromptClick = async(message)=>{
     
-    await API_GET_RESPONSE(token,message,setShowSpinner)
+
+    const formData = new FormData();
+    formData.append('message', message); 
+    dispatch(setTemporaryMessage(message))
+    await API_GET_RESPONSE(token,message,formData,setShowSpinner)
     dispatch(setRerenderChatPanel(!rerender_chat_panel))
+    dispatch(setTemporaryMessage(null))
+
   }
   useEffect(()=>{
     getPrompts()
@@ -60,9 +66,13 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
     <div className="left-panel-container">
         {showSpinner &&<Spin fullscreen/>}
       <div className="left-panel-container-inner">
+        <div className="left-panel-logo-wrapper">
+            
         <img src={IMAGES.panel_logo} alt="Panel Logo" className="left-panel-logo" />
+        </div>
 
-        <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} activeKey={AccountCollapseActiveKey} onChange={(key) => setAccountCollapseActiveKey(key)} >
+        <div className="side-bar-btn-wrapper">
+        <Collapse className="left-panel-collapse-account" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} activeKey={AccountCollapseActiveKey} onChange={(key) => setAccountCollapseActiveKey(key)} >
           <Panel header={<><span className='panel-header-span'><MyIcon type={'user'} /> {CurrentAccount?.name}</span></>} key="1" >
             {Accounts?.filter(account => !account.is_current_account).map((account) => (
               <div key={account.id}><Button type="text" className='left-panel-btn' onClick={() => handleAccountSwitch(account.id)}>{account.name}<MyIcon type={"elipsis"} /></Button></div>
@@ -71,7 +81,9 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
         </Collapse>
 
         <AddPromptBtn />
+        </div>
 
+        {/* <div className="side-bar-btn-wrapper"> */}
         <div className="left-panel-scrollable">
           <Collapse className="left-panel-collapse" expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }} /> )} >
             {GET_PROMPT_CATEGORIES?.map(panel => (
@@ -80,7 +92,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                  <div><Button type="text" className='left-panel-btn' onClick={()=>handlePromptClick(item?.prompt)}>
                     {item?.prompt_name}
                     <Popconfirm title="Are you sure you want to delete this prompt?" onConfirm={() => handleDeletePrompt(item?.id)} okText="Yes" cancelText="No" >
-                    <MyIcon  type="elipsis"   style={{ cursor: 'pointer', marginLeft: 10 }}  />
+                    <MyIcon  type="elipsis"   style={{ cursor: 'pointer', marginLeft: 10, marginRight:"0px" }}  />
                 </Popconfirm>
                     </Button></div>
                 )}
@@ -89,6 +101,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             ))}
           </Collapse>
           <div style={{ height: "40px" }}></div>
+          {/* </div> */}
         </div>
       </div>
       <SettingsBtn />

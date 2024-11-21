@@ -58,7 +58,7 @@ const CreateSignUpLinkBtn = () => {
         <MyButton
           text={
             <span className="admin-panel-sign-up-link">
-              <MyIcon type={"sign_up_link"} size="xs" />
+              <MyIcon type={"sign_up_link"} size="xs"  />
               Create One-Time Signup Link
             </span>
           }
