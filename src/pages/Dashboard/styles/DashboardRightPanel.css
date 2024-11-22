@@ -39,11 +39,25 @@
 .add-prompt-btn {
   margin-top: 20px; /* Space between Add Prompt button and other content */
 }
+.right-panel-collapse{
+    z-index: 500 !important;
+}
 .right-panel-collapse .ant-collapse-item{
     height: 50px;
 }
 .right-panel-collapse .ant-collapse-header{
     height: 50px !important;
+    margin-bottom: 10px !important;
+}
+.right-panel-collapse{
+    padding-bottom: 10px;
+}
+.right-panel-collapse .ant-picker{
+    height: 40px !important;
+}
+.right-panel-collapse .ant-collapse-content{
+    padding: 0px 10px 10px 10px !important;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.065));
 }
 /* Make the remaining content scrollable */
 .right-panel-scrollable {
@@ -68,6 +82,17 @@
 }
 
 .panel-header-span img {
+  margin-right: 10px;
+}
+
+.calendar-panel-header-span {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 16px;
+}
+
+.calendar-panel-header-span img {
   margin-right: 10px;
 }
 

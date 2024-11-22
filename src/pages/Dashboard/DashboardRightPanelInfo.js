@@ -3,6 +3,7 @@ import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/DashboardRightPanelInfo.css";
 
 const DashboardRightPanelInfo = ({reportingData}) => {
+    console.log('reportingData',reportingData)
   return (
     <div className="right-panel-scrollable">
       {reportingData.map((item, index) => (
@@ -10,9 +11,10 @@ const DashboardRightPanelInfo = ({reportingData}) => {
           <span className="reporting-text">
             <MyIcon type={item.key} /> {item.label}
           </span>
-          <span className={`reporting-data rd-${item.trend}`}>{item.value}</span>
+          <span className={`reporting-data rd-${item.trend}`}>{item.value ? item.value : 0}</span>
         </p>
       ))}
+      <div style={{height:"50px"}}></div>
     </div>
   );
 };

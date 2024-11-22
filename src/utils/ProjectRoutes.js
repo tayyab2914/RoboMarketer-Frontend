@@ -15,9 +15,9 @@ const ProjectRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<DashboardMain />} />
+        <Route path="/" element={isLoggedIn ? <DashboardMain /> : <Navigate to="/account" replace />}  />
         <Route path="/admin" element={isAdmin ? <AdminMain /> : <Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={isLoggedIn ? <DashboardMain /> : <Navigate to="/account" replace />} />
+        {/* <Route path="/dashboard" element={isLoggedIn ? <DashboardMain /> : <Navigate to="/account" replace />} /> */}
         <Route path="/account" element={<Account />} />
         <Route path="/account/:link_token" element={<Account />} />
       </Routes>

@@ -3,43 +3,84 @@ import { Modal } from "antd";
 import "./styles/ModalStyles.css";
 import MyIcon from "../Icon/MyIcon";
 import ReportingModal from "../ReportingModal/ReportingModal";
+import { API_GET_INSIGHTS, API_GET_REPORTING, API_UPDATE_REPORTING } from "../../apis/FacebookInsightsApis";
+import { useDispatch, useSelector } from "react-redux";
+import { getMetricsStatus } from "../../utils/Methods";
+import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 
 const availableMetrics = [
-    { icon: "ad_spend", label: "Ad Spend", value: "$200", trend: "green" },
-    { icon: "impressions", label: "Impressions", value: "200", trend: "red" },
-    { icon: "clicks", label: "Clicks", value: "200", trend: "red" },
-    { icon: "cpm", label: "CPM", value: "$200", trend: "green" },
-    { icon: "ctr", label: "CTR", value: "200%", trend: "green" },
-    { icon: "cpc", label: "CPC", value: "$200", trend: "red" },
-    { icon: "optin_rate", label: "Optin Rate", value: "$200", trend: "green" },
-    { icon: "cpl", label: "CPL", value: "$200", trend: "red" },
-    { icon: "apt_rate", label: "Appt Rate", value: "200%", trend: "green" },
-    { icon: "cost_per_appt", label: "Cost Per Appt", value: "$200", trend: "red" },
-    { icon: "leads", label: "Leads", value: "200", trend: "green" },
-    { icon: "appts", label: "Appts", value: "200", trend: "red" },
-    { icon: "close_rate", label: "Close Rate", value: "200%", trend: "red" },
-    { icon: "sales", label: "Sales", value: "200", trend: "red" },
-    { icon: "cpa", label: "CPA", value: "$200", trend: "red" }
+    { key: "spend", label: "Ad Spend", value: " ", trend: "green" },
+    { key: "impressions", label: "Impressions", value: " ", trend: "red" },
+    { key: "clicks", label: "Clicks", value: " ", trend: "red" },
+    { key: "cpm", label: "CPM", value: " ", trend: "green" },
+    { key: "ctr", label: "CTR", value: "  ", trend: "green" },
+    { key: "cpc", label: "CPC", value: " ", trend: "red" },
+    { key: "optin_rate", label: "Optin Rate", value: " ", trend: "green" },
+    { key: "cpl", label: "CPL", value: " ", trend: "red" },
+    { key: "appointment_rate", label: "Appt Rate", value: "  ", trend: "green" },
+    { key: "cost_per_appointment", label: "Cost Per Appt", value: " ", trend: "red" },
+    { key: "leads", label: "Leads", value: " ", trend: "green" },
+    { key: "appointments", label: "Appts", value: " ", trend: "red" },
+    { key: "close_rate", label: "Close Rate", value: "  ", trend: "red" },
+    { key: "sales", label: "Sales", value: " ", trend: "red" },
+  //   { key: "cpa", label: "CPA", value: " ", trend: "red" },
+    { key: "roas", label: "Return on Ad Spend", value: " ", trend: "red" },
+    { key: "profit", label: "Profit", value: " ", trend: "red" },
+    { key: "revenue", label: "Revenue", value: " ", trend: "red" },
   ];
+
+  function updateMetrics(metrics, values) {
+    return metrics.map(metric => {
+      if (values?.hasOwnProperty(metric.key)) {
+        return { ...metric, value: values[metric.key] };
+      }
+      return metric;
+    });
+  }
   
 const ReportingSettingsModal = ({ isVisible, onClose }) => {
+    const dispatch = useDispatch()
     const [selectedMetrics, setSelectedMetrics] = useState([]);
+    const [Metrics, setMetrics] = useState([]);
+    const [showSpinner, setShowSpinner] = useState(false);
+    const { isLoggedIn, token, current_account,rerender_dashboard } = useSelector(
+      (state) => state.authToken
+    );
+
     useEffect(() => {
-        const fetchSelectedMetrics = () => {
-          const apiSelectedMetrics = ["Ad Spend", "Clicks", "Impressions"];
-          setSelectedMetrics(apiSelectedMetrics);
+        const fetchSelectedMetrics = async () => {
+          const apiSelectedMetrics = [];
+          const response = await API_GET_REPORTING(token, setShowSpinner);
+          console.log('API_GET_REPORTING',response)
+          const resultArray = Object.entries(response)
+            .filter(([key, value]) => value === true)
+            .map(([key]) => key);
+          setSelectedMetrics(resultArray);
         };
-        
+    
         fetchSelectedMetrics();
       }, []);
+      useEffect(() => {
+        const getHistoricalData = async () => {
+          const apiSelectedMetrics = [];
+        //   const response = await API_GET_HISTORICAL_DATA(token, setShowSpinner);
+          const response = await API_GET_INSIGHTS(token,'2024-09-22','2024-11-21',setShowSpinner)
+          const updatedMetrics = updateMetrics(availableMetrics, response)
+          setMetrics(updatedMetrics)
+          console.log('API_GET_HISTORICAL_DATA',updatedMetrics)
+        };
     
-      const handleSaveSelectedMetrics = (metrics) => {
+        getHistoricalData();
+      }, []);
+      const handleSaveSelectedMetrics =async (metrics) => {
         setSelectedMetrics(metrics);
-        console.log(metrics)
+        const response = await API_UPDATE_REPORTING(token,getMetricsStatus(metrics),setShowSpinner)
+        dispatch(setRerenderDashboard(!rerender_dashboard))
+        console.log("RERENDER CALLED")
       };
     return ( 
         <ReportingModal
-          availableMetrics={availableMetrics}
+        availableMetrics={Metrics}
           selectedMetrics={selectedMetrics}
           onSave={handleSaveSelectedMetrics}
           isModalVisible={isVisible}

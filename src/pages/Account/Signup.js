@@ -34,7 +34,7 @@ const SignUp = ({ toggleCurrentMode }) => {
       if (next) {
         navigate(next);
       } else {
-        navigate("/dashboard");
+        navigate("/");
       }
     }
   };

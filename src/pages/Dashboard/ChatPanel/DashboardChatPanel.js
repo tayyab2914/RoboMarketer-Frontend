@@ -11,7 +11,6 @@ const DashboardChatPanel = () => {
   const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
   
   useEffect(()=>{
-console.log(current_account)
 setisAccountSetup(current_account?.is_facebook_connected)
   },[current_account?.is_facebook_connected])
   return (
