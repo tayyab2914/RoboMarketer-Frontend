@@ -13,5 +13,6 @@ export const useLogoutUser = () => {
     navigate('/account');
   };
 
+  
   return logoutUser;
 };

@@ -63,11 +63,9 @@ const ReportingSettingsModal = ({ isVisible, onClose }) => {
       useEffect(() => {
         const getHistoricalData = async () => {
           const apiSelectedMetrics = [];
-        //   const response = await API_GET_HISTORICAL_DATA(token, setShowSpinner);
           const response = await API_GET_INSIGHTS(token,'2024-09-22','2024-11-21',setShowSpinner)
           const updatedMetrics = updateMetrics(availableMetrics, response)
           setMetrics(updatedMetrics)
-          console.log('API_GET_HISTORICAL_DATA',updatedMetrics)
         };
     
         getHistoricalData();

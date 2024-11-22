@@ -6,6 +6,7 @@ import "./styles/DashboardChatPanel.css";
 import {
   API_FETCH_TOKEN,
   API_GENERATE_AUTH_URL,
+  API_GET_HISTORICAL_DATA,
   API_SELECT_ACCOUNT,
 } from "../../../apis/FacebookInsightsApis";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,8 +58,8 @@ const AccountSetupComponent = () => {
     if(response)
     {
         dispatch(setRerenderDashboard(!rerender_dashboard))
+        const response = await API_GET_HISTORICAL_DATA(token, setShowSpinner);
     }
-    console.log(id);
   };
   return (
     <Row className="account-setup-component-main">
