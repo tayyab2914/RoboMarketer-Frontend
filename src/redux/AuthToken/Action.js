@@ -4,9 +4,13 @@ import {
   SET_AUTH_TOKEN,
   REMOVE_AUTH_TOKEN,
   SET_LOGGED_IN,
-  SET_IS_ADMIN,SET_CURRENT_ACCOUNT,
+  SET_IS_ADMIN,
+  SET_CURRENT_ACCOUNT,
   RERENDER_DASHBOARD,
-  RERENDER_CHAT_PANEL,TEMPORARY_MESSAGE
+  RERENDER_CHAT_PANEL,
+  TEMPORARY_MESSAGE,
+  SET_FACEBOOK_STATE,
+  SET_IS_FB_SETUP,
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -36,27 +40,39 @@ export const setIsAdmin = (isAdmin) => {
   };
 };
 export const setCurrentAccount = (CurrentAccount) => {
-    return {
-      type: SET_CURRENT_ACCOUNT,
-      payload: CurrentAccount,
-    };
+  return {
+    type: SET_CURRENT_ACCOUNT,
+    payload: CurrentAccount,
   };
+};
 
-  export const setRerenderDashboard = (rerender_dashboard) => {
-    return {
-      type: RERENDER_DASHBOARD,
-      payload: rerender_dashboard,
-    };
+export const setRerenderDashboard = (rerender_dashboard) => {
+  return {
+    type: RERENDER_DASHBOARD,
+    payload: rerender_dashboard,
   };
-  export const setRerenderChatPanel = (rerender_chat_panel) => {
-    return {
-      type: RERENDER_CHAT_PANEL,
-      payload: rerender_chat_panel,
-    };
+};
+export const setRerenderChatPanel = (rerender_chat_panel) => {
+  return {
+    type: RERENDER_CHAT_PANEL,
+    payload: rerender_chat_panel,
   };
-  export const setTemporaryMessage = (temp_message) => {
-    return {
-      type: TEMPORARY_MESSAGE,
-      payload: temp_message,
-    };
+};
+export const setTemporaryMessage = (temp_message) => {
+  return {
+    type: TEMPORARY_MESSAGE,
+    payload: temp_message,
   };
+};
+export const setFacebookState = (facebook_state) => {
+  return {
+    type: SET_FACEBOOK_STATE,
+    payload: facebook_state,
+  };
+};
+export const setIsFacebookSetup = (is_facebook_setup) => {
+  return {
+    type: SET_IS_FB_SETUP,
+    payload: is_facebook_setup,
+  };
+};

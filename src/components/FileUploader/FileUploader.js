@@ -4,7 +4,7 @@ import { UploadOutlined, FilePdfOutlined, FileExcelOutlined, FileWordOutlined, F
 import './styles/FileUploader.css';
 import { RENDER_FILE_PREVIEW } from "../../utils/Methods";
 
-const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload = () => true, showRemoveIcon = true,accept }) => {
+const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload = () => true, showRemoveIcon = true,accept, size=70, showName = true}) => {
   // Function to render file previews
   
   // Function to handle file removal
@@ -36,7 +36,7 @@ const FileUploader = ({ fileList, onFileChange, multiple = false, beforeUpload =
               count={<CloseCircleOutlined onClick={() => onRemove(file)} style={{ color: 'red', cursor: 'pointer', fontSize:"20px" }} />}
               offset={[-5, 5]}
             >
-              {RENDER_FILE_PREVIEW(file)}
+              {RENDER_FILE_PREVIEW(file, size,showName)}
             </Badge>
           </span>
         ))}

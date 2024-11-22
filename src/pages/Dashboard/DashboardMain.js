@@ -26,7 +26,7 @@ const DashboardMain = () => {
 
   const getAccounts =async()=>{
     const response = await API_GET_ACCOUNTS(token,setShowSpinner)
-    
+    console.log(response)
     dispatch(setCurrentAccount(response?.find((account) => account?.is_current_account)))
     setAccounts(response)
   }
@@ -60,10 +60,10 @@ const DashboardMain = () => {
         <Col  style={{
           width: windowWidth > 1200 ? "calc(100vw - 620px)" : "100vw",
         }}>
-            {windowWidth < 1200 && <Row className="dashboard-main-drawer-enabler-row">
-                <Col xs={12}><button onClick={showLeftDrawer} className="dashboard-main-drawer-enabler-btn-1"><MyIcon type={'settings'}/> Settings</button></Col>
-                <Col xs={12}><button onClick={showRightDrawer} className="dashboard-main-drawer-enabler-btn-2"><MyIcon type={'reporting'}/> Reporting</button></Col>
-            </Row>}
+            {windowWidth < 1200 && <div className="dashboard-main-drawer-enabler-row">
+                <button onClick={showLeftDrawer} className="dashboard-main-drawer-enabler-btn-1"><MyIcon type={'settings'}/> Settings</button>
+                <button onClick={showRightDrawer} className="dashboard-main-drawer-enabler-btn-2"><MyIcon type={'reporting'}/> Reporting</button>
+            </div>}
             <DashboardChatPanel />
         </Col>
         

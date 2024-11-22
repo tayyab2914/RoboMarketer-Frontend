@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { API_GET_HISTORY } from "../../../apis/ChatApis";
 import "./styles/Chats.css";
 import { RobotOutlined } from "@ant-design/icons"; // Importing icons from Ant Design
+import DOMPurify from "dompurify";
+import MyIcon from "../../../components/Icon/MyIcon";
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
@@ -25,7 +27,6 @@ const Chats = () => {
       setShowSpinner
     );
     setChatData(response?.reverse());
-    console.log(response);
   };
 
   useEffect(() => {
@@ -35,10 +36,15 @@ const Chats = () => {
   useEffect(() => {
     // Scroll to the bottom when the chat data changes (new messages added)
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
-  }, [ChatData,temporary_message]); // Scrolls every time ChatData is updated
-
+  }, [ChatData, temporary_message]); // Scrolls every time ChatData is updated
+  const parseHTML = (htmlContent) => {
+    return {
+      __html: DOMPurify.sanitize(htmlContent), // Sanitize HTML to prevent XSS attacks
+    };
+  };
   return (
     <div className="chat-container" ref={chatContainerRef}>
       {ChatData?.map((item, index) => (
@@ -49,23 +55,28 @@ const Chats = () => {
               <span className="message">{item?.message}</span>
             </div>
 
-            {/* Bot's response */}
             <div className="bot-response">
+              <span className="robot-icon-wrapper">
+                <MyIcon type={"robot"} className={"response-icon"} size="md" />
+              </span>
               <div className="response-content">
-                <RobotOutlined className="response-icon" />{" "}
-                {/* Bot icon from Ant Design */}
-                <span className="response-text">{item?.response}</span>
+                <div />
+                <span
+                  className="response-text"
+                  dangerouslySetInnerHTML={parseHTML(item?.response)}
+                ></span>
               </div>
             </div>
           </div>
-         
         </>
       ))}
-          <div className="chat-message-container">
-      {temporary_message && 
-      <div className="user-message">
-        <span className="message">{temporary_message}</span>
-    </div>}</div>
+      {temporary_message && (
+        <div className="chat-message-container">
+          <div className="user-message">
+            <span className="message">{temporary_message}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

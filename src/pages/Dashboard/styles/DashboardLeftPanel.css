@@ -9,6 +9,7 @@
 }
 .left-panel-container-inner {
   text-align: center;
+  overflow-y: hidden;
 }
 .left-panel-dropdown {
   width: 100% !important;

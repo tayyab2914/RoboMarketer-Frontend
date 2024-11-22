@@ -1,82 +1,113 @@
 /* Container for the chat */
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    /* max-width: 600px; */
-    /* margin: auto; */
-    background-color: #ffffff; /* Dark background */
-    border-radius: 10px;
-    overflow-y: auto;
-    height: calc(100vh - 120px);
-  }
-  
-  /* Chat message container for individual messages */
-  .chat-message-container {
-    margin-bottom: 20px;
-  }
-  
-  /* User's message styling */
-  .user-message {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .user-message .message {
-    background-color: #f1f1f1; /* Dark grey */
-    color: black;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 75%;
-    word-wrap: break-word;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Bot's response styling */
-  .bot-response {
-    display: flex;
-    justify-content: flex-start;
-    padding: 10px;
-  }
-  
-  .response-content {
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5; /* Lighter grey */
-    color: black;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 75%;
-    word-wrap: break-word;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Bot's icon styling */
-  .response-icon {
-    color: #00bcd4; /* Blue color for the bot icon */
-    font-size: 18px;
-    margin-right: 10px;
-  }
-  
-  /* Text inside the response bubble */
-  .response-text {
-    flex-grow: 1;
-  }
-  
-  /* Optional Spinner */
-  .spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* max-width: 600px; */
+  /* margin: auto; */
+  background-color: #ffffff; /* Dark background */
+  border-radius: 10px;
+  overflow-y: auto;
+  height: calc(100vh - 90px);
+}
 
-  @media screen and (max-width:1200px){/* Container for the chat */
-    /* .chat-container {
+/* Chat message container for individual messages */
+.chat-message-container {
+  margin-bottom: 20px;
+}
+
+/* User's message styling */
+.user-message {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.user-message .message {
+  background-color: #f8f8f8; /* Dark grey */
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 75%;
+  word-wrap: break-word;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+}
+
+/* Bot's response styling */
+.bot-response {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+.response-content {
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8; /* Lighter grey */
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 75%;
+  word-wrap: break-word;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+}
+
+/* Bot's icon styling */
+.response-icon {
+  color: #00bcd4; /* Blue color for the bot icon */
+  font-size: 18px;
+  margin-right: 0px;
+}
+.robot-icon-wrapper {
+  border: 1px solid #e6eaed;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+/* Text inside the response bubble */
+.response-text {
+  flex-grow: 1;
+}
+.response-text p,
+.response-text h1 {
+  margin-bottom: 0px;
+}
+
+/* Optional Spinner */
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+@media screen and (max-width: 1200px) {
+  /* Container for the chat */
+  /* .chat-container {
         height: calc(100vh - 125px);
       }
        */
+}
+
+@media screen and (max-width: 500px) {
+  /* Container for the chat */
+  .chat-container {
+    padding: 0px;
+    height: calc(100vh - 70px);
   }
+  .response-icon {
+    color: #00bcd4; /* Blue color for the bot icon */
+    font-size: 14px;
+    margin-right: 0px;
+  }
+  .robot-icon-wrapper {
+    height: 30px;
+    width: 30px;
+  }
+}

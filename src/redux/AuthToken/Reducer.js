@@ -1,6 +1,6 @@
 // src/redux/reducer.js
 
-import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE } from "./Types";
+import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP } from "./Types";
 
 const initialState = {
   token: null,
@@ -9,7 +9,9 @@ const initialState = {
   current_account:{},
   rerender_dashboard:false,
   rerender_chat_panel:true,
-  temporary_message:null
+  temporary_message:null,
+  facebook_state:null,
+  is_facebook_setup:false
 };
 
 export default function authReducer(state = initialState, action) {
@@ -52,6 +54,16 @@ export default function authReducer(state = initialState, action) {
     return {
       ...state,
       temporary_message: action.payload,
+    };
+  }  else if (action.type == SET_FACEBOOK_STATE) {
+    return {
+      ...state,
+      facebook_state: action.payload,
+    };
+  }  else if (action.type == SET_IS_FB_SETUP) {
+    return {
+      ...state,
+      is_facebook_setup: action.payload,
     };
   }else {
     return state;

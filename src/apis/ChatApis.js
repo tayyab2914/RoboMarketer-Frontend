@@ -8,8 +8,6 @@ import { DOMAIN_NAME } from "../utils/GlobalSettings";
 
 
 export const API_CREATE_PROMPT = async ( token, newPrompt, setShowSpinner ) => {
-    console.log('API_CREATE_PROMPT', newPrompt);
-    
     setShowSpinner(true);
 
     try {
@@ -20,7 +18,6 @@ export const API_CREATE_PROMPT = async ( token, newPrompt, setShowSpinner ) => {
                 Authorization: token,
             },
         });
-        console.log(response.data);
         message.success("Prompt created successfully!")
         return response.data;
     } catch (error) {
@@ -42,7 +39,6 @@ export const API_GET_PROMPTS = async (token, setShowSpinner) => {
         },
       });
   
-      console.log(response)
       return response.data;
     } catch (error) {
         message.error(
@@ -82,10 +78,8 @@ export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowS
             },
         });
 
-        console.log(response.data);
         return response.data;
     } catch (error) {
-        console.log(error);
         message.error(error.response?.data?.message);
         return null; 
     } finally {
@@ -104,10 +98,8 @@ export const API_GET_HISTORY = async (token, account_id, setShowSpinner) => {
             params: { account_id },
         });
 
-        console.log(response.data);
         return response.data;
     } catch (error) {
-        console.log(error)
         message.error(
             error.response?.data?.message || "An error occurred while fetching history."
         );

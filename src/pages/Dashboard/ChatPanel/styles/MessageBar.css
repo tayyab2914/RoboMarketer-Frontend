@@ -38,3 +38,20 @@ cursor: pointer;
     display: flex;
     align-items: center;
   }
+  .file-preview-container-badge-icon{
+    font-size: 10px;
+    color: red;
+    cursor: pointer;
+    position: relative;
+    left: 10px;
+    top: 5px !important;
+  }
+  .file-preview-container-badge{
+    margin-left: 0px;
+    cursor: pointer;
+  }
+  @media screen and (max-width:500px){/* Container for the chat */
+    .message-bar{
+        margin-bottom: 10px;
+    }
+      }

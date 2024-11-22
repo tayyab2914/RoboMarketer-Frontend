@@ -189,7 +189,8 @@ export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
   
       return response.data;
     } catch (error) {
-      message.error("Invalid or expired token");
+        console.log(error)
+      message.error(error?.response?.data?.message);
     } finally {
       setShowSpinner(false);
     }
