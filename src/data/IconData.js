@@ -23,10 +23,10 @@ import edit_btn from "../assets/icons/edit_btn.svg";
 import cpa from "../assets/icons/cpa.svg";
 import sales from "../assets/icons/sales.svg";
 import close_rate from "../assets/icons/close_rate.svg";
-import appts from "../assets/icons/appts.svg";
+import appointments from "../assets/icons/appts.svg";
 import leads from "../assets/icons/leads.svg";
-import cost_per_appt from "../assets/icons/cost_per_appt.svg";
-import apt_rate from "../assets/icons/apt_rate.svg";
+import cost_per_appointment from "../assets/icons/cost_per_appt.svg";
+import appointment_rate from "../assets/icons/apt_rate.svg";
 import cpl from "../assets/icons/cpl.svg";
 import optin_rate from "../assets/icons/optin_rate.svg";
 import cpc from "../assets/icons/cpc.svg";
@@ -34,7 +34,7 @@ import ctr from "../assets/icons/ctr.svg";
 import cpm from "../assets/icons/cpm.svg";
 import clicks from "../assets/icons/clicks.svg";
 import impressions from "../assets/icons/impressions.svg";
-import ad_spend from "../assets/icons/ad_spend.svg";
+import spend from "../assets/icons/ad_spend.svg";
 import calendar from "../assets/icons/calendar.svg";
 import hamburger from "../assets/icons/hamburger.svg";
 import settings from "../assets/icons/settings.svg";
@@ -66,9 +66,11 @@ import service from "../assets/icons/service.svg";
 import psychographics from "../assets/icons/psychographics.svg";
 import demographics from "../assets/icons/demographics.svg";
 import product_service_details from "../assets/icons/product_service_details.svg";
+import account_setup from "../assets/icons/account_setup.svg";
 
 export const ICONS = {
     product_service_details: product_service_details,
+    account_setup: account_setup,
     demographics: demographics,
     psychographics: psychographics,
     service: service,
@@ -100,18 +102,19 @@ export const ICONS = {
   cpa: cpa,
   sales: sales,
   close_rate: close_rate,
-  appts: appts,
+  appointments: appointments,
   leads: leads,
-  cost_per_appt: cost_per_appt,
-  apt_rate: apt_rate,
+  cost_per_appointment: cost_per_appointment,
+  appointment_rate: appointment_rate,
   cpl: cpl,
   optin_rate: optin_rate,
   cpc: cpc,
+  roas: cpl,
   ctr: ctr,
   cpm: cpm,
   clicks: clicks,
   impressions: impressions,
-  ad_spend: ad_spend,
+  spend: spend,
   plus: PlusIcon,
   calendar: calendar,
   elipsis: ElipsisIcon,
@@ -126,8 +129,9 @@ export const ICONS = {
   marketing: marketing,
   offer: offer,
   question: question,
-  strategy: strategy,
   recommendations: recommendations,
+  strategy: strategy,
+  profit: strategy,
   user: user,
   logout: logout,
   users: users,

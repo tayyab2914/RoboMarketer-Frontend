@@ -39,7 +39,12 @@
 .add-prompt-btn {
   margin-top: 20px; /* Space between Add Prompt button and other content */
 }
-
+.right-panel-collapse .ant-collapse-item{
+    height: 50px;
+}
+.right-panel-collapse .ant-collapse-header{
+    height: 50px !important;
+}
 /* Make the remaining content scrollable */
 .right-panel-scrollable {
   flex-grow: 1; /* Allows the panel to take up remaining space */

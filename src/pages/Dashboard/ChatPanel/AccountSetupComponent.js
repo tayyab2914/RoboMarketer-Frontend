@@ -75,7 +75,7 @@ const AccountSetupComponent = () => {
         <div className="account-setup-component-content">
           {AccountList ? (
             <>
-              <p className="account-setup-component-title">Select Account</p>
+              <p className="account-setup-component-title"><MyIcon type={'account_setup'} size="md"/> Select Account</p>
               <div className="account-list-wrapper">
                 {AccountList?.map((item) => (
                   <div
@@ -89,7 +89,7 @@ const AccountSetupComponent = () => {
             </>
           ) : (
             <>
-              <p className="account-setup-component-title">Account Setup</p>
+              <p className="account-setup-component-title"><MyIcon type={'account_setup'} size="md"/> Account Setup</p>
               <div className="account-setup-component-description">
                 <p>Let's get your account setup by integrating your accounts</p>
                 <div className="account-setup-component-account">

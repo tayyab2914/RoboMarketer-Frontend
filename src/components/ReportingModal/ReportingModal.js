@@ -4,30 +4,23 @@ import { Modal, Row, Col, Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/ReportingModal.css";
+import { GET_METRIC_NAME_FROM_KEY } from "../../utils/Methods";
 
-const ReportingModal = ({
-  availableMetrics,
-  selectedMetrics,
-  onSave,
-  isModalVisible,
-  onCloseModal,
-}) => {
+const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisible, onCloseModal }) => {
   const [localSelectedMetrics, setLocalSelectedMetrics] = useState([]);
 
-  // Sync local state with selectedMetrics prop on first render or when it updates
   useEffect(() => {
+    console.log(selectedMetrics)
     setLocalSelectedMetrics(selectedMetrics);
   }, [selectedMetrics]);
 
-  const handleCheckboxChange = (label) => {
-    const updatedMetrics = localSelectedMetrics.includes(label)
-      ? localSelectedMetrics.filter((item) => item !== label)
-      : [...localSelectedMetrics, label];
+  const handleCheckboxChange = (key) => {
+    const updatedMetrics = localSelectedMetrics.includes(key)? localSelectedMetrics.filter((item) => item !== key): [...localSelectedMetrics, key];
     setLocalSelectedMetrics(updatedMetrics);
   };
 
-  const handleRemoveMetric = (label) => {
-    setLocalSelectedMetrics(localSelectedMetrics.filter((item) => item !== label));
+  const handleRemoveMetric = (key) => {
+    setLocalSelectedMetrics(localSelectedMetrics.filter((item) => item !== key));
   };
 
   const handleSave = () => {
@@ -64,16 +57,16 @@ const ReportingModal = ({
         <Col xs={12} className="modal-scrollable">
           <p className="modal-title">Choose Metrics</p>
           {availableMetrics.map((item) => (
-            <div key={item.label} className="checkbox-item">
-              <span>{item.label}</span>
+            <div key={item.key} className="checkbox-item">
+              <span>{GET_METRIC_NAME_FROM_KEY(item.key)}</span>
               <div
                 className={`custom-checkbox ${
-                  localSelectedMetrics.includes(item.label) ? "checked" : ""
+                  localSelectedMetrics.includes(item.key) ? "checked" : ""
                 }`}
-                onClick={() => handleCheckboxChange(item.label)}
+                onClick={() => handleCheckboxChange(item.key)}
               >
                 <span className="checkmark">
-                  {localSelectedMetrics.includes(item.label) && (
+                  {localSelectedMetrics.includes(item.key) && (
                     <CloseOutlined />
                   )}
                 </span>
@@ -88,7 +81,7 @@ const ReportingModal = ({
               <span className="selected-metric-elipsis">
                 <MyIcon type={"elipsis"} />
               </span>
-              <span className="selected-metric-name">{metric}</span>
+              <span className="selected-metric-name">{GET_METRIC_NAME_FROM_KEY(metric)}</span>
               <span
                 className="selected-metric-cross"
                 onClick={() => handleRemoveMetric(metric)}

@@ -27,7 +27,6 @@ export const API_GENERATE_AUTH_URL = async (token, setShowSpinner) => {
 };
 export const API_FETCH_TOKEN = async (token,  redirect_response, state, setShowSpinner) => {
     setShowSpinner(true);
-    console.log('redirect_response',redirect_response,'state',state)
     try {
       const response = await axios.get(
         `${DOMAIN_NAME}/facebookinsights/fetch_token/`,
@@ -76,3 +75,51 @@ export const API_FETCH_TOKEN = async (token,  redirect_response, state, setShowS
     }
   };
   
+
+  export const API_GET_REPORTING = async (token, setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.get(
+        `${DOMAIN_NAME}/facebookinsights/get_reporting/`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      //   message.error(error.response?.data?.message || "Wrong credentials");
+      return false;
+    } finally {
+      setShowSpinner(false);
+    }
+  };
+
+  
+export const API_UPDATE_REPORTING = async ( token, updated_metrics, setShowSpinner ) => {
+    console.log('API_CREATE_FUNNEL', updated_metrics);
+    
+    setShowSpinner(true);
+
+    try {
+        const response = await axios.put(`${DOMAIN_NAME}/facebookinsights/update_reporting/`, 
+            updated_metrics
+        , {
+            headers: {
+                Authorization: token,
+            },
+        });
+        console.log(response.data);
+        message.success("updated_metrics updated successfully!")
+        return response.data;
+    } catch (error) {
+        message.error(
+          error.response?.data?.message 
+        );
+        return null; 
+    } finally {
+        setShowSpinner(false);
+    }
+};
