@@ -62,7 +62,7 @@ const AccountSetupComponent = () => {
     }
   };
   return (
-    <Row>
+    <Row style={{width:"100%"}}>
       <Col
         xs={24}
         sm={24}
