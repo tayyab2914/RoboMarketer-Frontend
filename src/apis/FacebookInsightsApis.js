@@ -193,3 +193,30 @@ export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
     setShowSpinner(false);
   }
 };
+
+export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
+    console.log(token); // For debugging, remove this in production
+    // setShowSpinner(true);
+    try {
+      const response = await axios.post(
+        `${DOMAIN_NAME}/facebookinsights/update_insights_data/`,
+        {}, // Request body (empty object if no body is needed)
+        {
+          headers: {
+            Authorization: token, // Correct Authorization header format
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      // Handle error properly
+      if (error.response?.data?.message) {
+        message.error(error.response?.data?.message); // Display error message from response
+      } else {
+        // message.error("An error occurred while fetching historical data.");
+      }
+      return false;
+    } finally {
+    //   setShowSpinner(false);
+    }
+  };

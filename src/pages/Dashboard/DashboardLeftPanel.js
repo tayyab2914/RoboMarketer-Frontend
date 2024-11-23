@@ -50,11 +50,11 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   };
 
   // Handle prompt click
-  const handlePromptClick = async (message) => {
+  const handlePromptClick = async (prompt) => {
     const formData = new FormData();
-    formData.append("message", message);
-    dispatch(setTemporaryMessage(message));
-    await API_GET_RESPONSE(token, message, formData, setShowSpinner);
+    formData.append("prompt", prompt);
+    dispatch(setTemporaryMessage(prompt));
+    await API_GET_RESPONSE(token, prompt, formData, setShowSpinner);
     dispatch(setRerenderChatPanel(!rerender_chat_panel));
     dispatch(setTemporaryMessage(null));
   };
