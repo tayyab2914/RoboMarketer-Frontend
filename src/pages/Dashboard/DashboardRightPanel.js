@@ -58,6 +58,7 @@ const DashboardRightPanel = () => {
   const [Metrics, setMetrics] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [CurrentMetricRangeName, setCurrentMetricRangeName] = useState('Today');
   const [dateRange, setDateRange] = useState([
     moment().startOf("day"),
     moment().endOf("day"),
@@ -97,10 +98,12 @@ const DashboardRightPanel = () => {
 
   // Date range selection handlers
   const handleToday = () => {
+    setCurrentMetricRangeName("Today")
     setCollapseKey(null);
     setDateRange([moment().startOf("day"), moment().endOf("day")]);
   };
   const handleYesterday = () => {
+    setCurrentMetricRangeName("Yesterday")
     setCollapseKey(null);
     setDateRange([
       moment().subtract(1, "days").startOf("day"),
@@ -108,19 +111,23 @@ const DashboardRightPanel = () => {
     ]);
   };
   const handleThisWeek = () => {
+    setCurrentMetricRangeName("This Week")
     setCollapseKey(null);
     setDateRange([moment().startOf("week"), moment().endOf("week")]);
   };
   const handleThisMonth = () => {
+    setCurrentMetricRangeName("This Month")
     setCollapseKey(null);
     setDateRange([moment().startOf("month"), moment().endOf("month")]);
   };
   const handleThisYear = () => {
+    setCurrentMetricRangeName("This Year")
     setCollapseKey(null);
     setDateRange([moment().startOf("year"), moment().endOf("year")]);
   };
 
   const handleCustomRangeChange = (dates) => {
+    setCurrentMetricRangeName("Custom Range")
     setCollapseKey(null);
     if (dates) setDateRange(dates);
   };
@@ -157,7 +164,7 @@ const DashboardRightPanel = () => {
           <Panel
             header={
               <span className="panel-header-span">
-                <MyIcon type={"calendar"} /> Select Date Range
+                <MyIcon type={"calendar"} /> {CurrentMetricRangeName}
               </span>
             }
             key="1"

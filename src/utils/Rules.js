@@ -22,7 +22,7 @@ export const EMAIL_RULES_REQUIRED = [
   
   export const PASSWORD_RULES_REQUIRED = [
     { required: true, message: "Please input your password!" },
-    { min: 3, message: "Password must be at least 8 characters long!" }, // Validate minimum password length
+    { min: 8, message: "Password must be at least 8 characters long!" }, // Validate minimum password length
   ];
   export const VALIDATE_CONFIRM_PASSWORD = [
     { required: true, message: "Please confirm your password!" },
