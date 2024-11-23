@@ -169,7 +169,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                         className="left-panel-btn"
                         
                       >
-                        <span style={{width:"100%", textAlign:"start"}} onClick={() => handlePromptClick(item?.prompt)}> {item?.prompt_name}</span>
+                        <span style={{width:"100%", textAlign:"start"}} onClick={() => handlePromptClick(item?.id)}> {item?.prompt_name}</span>
                         <Popconfirm
                           title="Are you sure you want to delete this prompt?"
                           onConfirm={() => handleDeletePrompt(item?.id)}

@@ -2,6 +2,7 @@ import React from "react";
 import { Modal } from "antd";
 import "./styles/ModalStyles.css";
 import MyIcon from "../Icon/MyIcon";
+import AccountSetupComponent from "../../pages/Dashboard/ChatPanel/AccountSetupComponent";
 
 const IntegrationsModal = ({ isVisible, onClose }) => (
   <Modal
@@ -11,7 +12,7 @@ const IntegrationsModal = ({ isVisible, onClose }) => (
     footer={null}
     centered
   >
-    <p>Integrations settings or content goes here.</p>
+    <AccountSetupComponent/>
   </Modal>
 );
 

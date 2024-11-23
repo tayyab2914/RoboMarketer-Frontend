@@ -16,7 +16,9 @@ setisAccountSetup(current_account?.is_facebook_connected)
   return (
     <Row className="dashboard-chat-panel-main">
       <Col>
-      {!isAccountSetup && <AccountSetupComponent />}
+      {!isAccountSetup && <div className="account-setup-component-main">
+        <AccountSetupComponent />
+        </div>}
      <Chats />
       </Col>
 

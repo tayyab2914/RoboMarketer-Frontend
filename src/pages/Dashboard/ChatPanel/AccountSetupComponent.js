@@ -62,7 +62,7 @@ const AccountSetupComponent = () => {
     }
   };
   return (
-    <Row className="account-setup-component-main">
+    <Row>
       <Col
         xs={24}
         sm={24}
