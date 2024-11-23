@@ -220,3 +220,27 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     //   setShowSpinner(false);
     }
   };
+  export const API_DISCONNECT_FACEBOOK = async (token, setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.post(
+        `${DOMAIN_NAME}/facebookinsights/disconnect_facebook/`,
+        {}, // no data is sent in the body here, so we can pass an empty object
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      message.success("Account disconnected successfully")
+      return response.data;
+    } catch (error) {
+      if (error.response?.data?.message) {
+        message.error(error.response.data.message);
+      }
+      return false;
+    } finally {
+      setShowSpinner(false);
+    }
+  };
+  

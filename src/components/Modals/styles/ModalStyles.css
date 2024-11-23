@@ -374,3 +374,34 @@
 .inline-input input {
     height: 30px !important;
   }
+  .fb-integration-modal-description{
+    color: #101136;
+    font-weight: 500;
+  }
+  .fb-integration-modal-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .fb-integration-modal-name{
+    color: #101136;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+  .fb-integration-modal-btn button{
+    border: 1px solid red;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: 500;
+    background-color: rgb(255, 234, 234);
+    color: red;
+    display: flex;
+    align-items: center;
+  }
+  .fb-integration-modal-name img {
+    margin-right: 10px;
+  }
+  .fb-integration-modal-btn button img{
+    margin-right: 10px;
+  }
