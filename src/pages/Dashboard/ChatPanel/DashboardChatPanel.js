@@ -8,10 +8,11 @@ import { useSelector } from "react-redux";
 
 const DashboardChatPanel = () => {
     const { isLoggedIn, token,rerender_dashboard,rerender_chat_panel,current_account } = useSelector((state) => state.authToken);
-  const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
+//   const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
+  const [isAccountSetup, setisAccountSetup] = useState(false);
   
   useEffect(()=>{
-setisAccountSetup(current_account?.is_facebook_connected)
+// setisAccountSetup(current_account?.is_facebook_connected)
   },[current_account?.is_facebook_connected])
   return (
     <Row className="dashboard-chat-panel-main">

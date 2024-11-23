@@ -50,11 +50,11 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   };
 
   // Handle prompt click
-  const handlePromptClick = async (prompt) => {
+  const handlePromptClick = async (message,id) => {
     const formData = new FormData();
-    formData.append("prompt", prompt);
-    dispatch(setTemporaryMessage(prompt));
-    await API_GET_RESPONSE(token, prompt, formData, setShowSpinner);
+    formData.append("prompt", id);
+    dispatch(setTemporaryMessage(message));
+    await API_GET_RESPONSE(token, id, formData, setShowSpinner);
     dispatch(setRerenderChatPanel(!rerender_chat_panel));
     dispatch(setTemporaryMessage(null));
   };
@@ -169,7 +169,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                         className="left-panel-btn"
                         
                       >
-                        <span style={{width:"100%", textAlign:"start"}} onClick={() => handlePromptClick(item?.id)}> {item?.prompt_name}</span>
+                        <span style={{width:"100%", textAlign:"start"}} onClick={() => handlePromptClick(item?.prompt,item?.id)}> {item?.prompt_name}</span>
                         <Popconfirm
                           title="Are you sure you want to delete this prompt?"
                           onConfirm={() => handleDeletePrompt(item?.id)}
