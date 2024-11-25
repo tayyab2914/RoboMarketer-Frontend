@@ -1,5 +1,6 @@
 // Importing images
 import LogoImage from '../assets/images/logo.svg';
+import logo_png from '../assets/images/logo.png';
 import PanelLogoImage from '../assets/images/logo_panel.svg';
 import user from '../assets/images/user.svg'
 
@@ -7,5 +8,6 @@ import user from '../assets/images/user.svg'
 export const IMAGES = {
     logo: LogoImage,
     panel_logo:PanelLogoImage,
-    user:user
+    user:user,
+    logo_png:logo_png
 };

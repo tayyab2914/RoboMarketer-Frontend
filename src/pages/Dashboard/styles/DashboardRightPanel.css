@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 20px 10px;
+  padding: 25px 12px;
   height: 100%;
   overflow: hidden; /* Prevent the content from overflowing the container */
 }
@@ -23,13 +23,14 @@
 }
 .right-panel-btn {
   padding: 10px 12px;
-  height: 45px;
+  height: 40px;
   width: 100%;
-  color: #575a7b;
-  font-size: 18px;
+  color: #000000;
+  font-size: 16px;
   font-weight: 500;
   border-radius: 8px;
-  margin-bottom: 10px;
+  font-family: "Inter", serif;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,13 +42,15 @@
 }
 .right-panel-collapse{
     z-index: 500 !important;
+    margin-bottom: 0px !important;
 }
 .right-panel-collapse .ant-collapse-item{
-    height: 50px;
+    height: 40.96px;
 }
 .right-panel-collapse .ant-collapse-header{
-    height: 50px !important;
-    margin-bottom: 10px !important;
+    height: 40.96px !important;
+    margin-bottom: 0px !important;
+    padding-top: 10px !important;
 }
 .right-panel-collapse{
     padding-bottom: 10px;
@@ -63,6 +66,7 @@
 .right-panel-scrollable {
   flex-grow: 1; /* Allows the panel to take up remaining space */
   overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: none;
   padding: 10px;
 }
 
@@ -87,7 +91,7 @@
 
 .calendar-panel-header-span {
   display: flex;
-  align-items: center;
+  align-items: center !important;
   justify-content: start;
   font-size: 16px;
 }
@@ -104,8 +108,9 @@
   font-weight: 500 !important;
   background-color: white !important;
   border: 1px solid #e6eaed;
-  margin-bottom: 0px;
-  height: 40px;
+  margin-bottom: 0px !important;
+  height: 40.8px;
+  font-family: "Inter", serif;
   border-radius: 8px !important;
 }s
 

@@ -1,21 +1,22 @@
-// ReportingModal.js
 import React, { useEffect, useState } from "react";
 import { Modal, Row, Col, Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/ReportingModal.css";
 import { GET_METRIC_NAME_FROM_KEY } from "../../utils/Methods";
+import MyScrollableList from "../SortableList";
 
 const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisible, onCloseModal }) => {
   const [localSelectedMetrics, setLocalSelectedMetrics] = useState([]);
 
   useEffect(() => {
-    console.log(selectedMetrics)
     setLocalSelectedMetrics(selectedMetrics);
   }, [selectedMetrics]);
 
   const handleCheckboxChange = (key) => {
-    const updatedMetrics = localSelectedMetrics.includes(key)? localSelectedMetrics.filter((item) => item !== key): [...localSelectedMetrics, key];
+    const updatedMetrics = localSelectedMetrics.includes(key)
+      ? localSelectedMetrics.filter((item) => item !== key)
+      : [...localSelectedMetrics, key];
     setLocalSelectedMetrics(updatedMetrics);
   };
 
@@ -23,7 +24,24 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
     setLocalSelectedMetrics(localSelectedMetrics.filter((item) => item !== key));
   };
 
+  // Handle the end of the drag and update the order
+  const onDragEnd = (result) => {
+    const { destination, source } = result;
+
+    // If dropped outside the list, do nothing
+    if (!destination) return;
+
+    // Reordering the list
+    const reorderedMetrics = Array.from(localSelectedMetrics);
+    const [removed] = reorderedMetrics.splice(source.index, 1);
+    reorderedMetrics.splice(destination.index, 0, removed);
+
+    // Update the localSelectedMetrics state with the new order
+    setLocalSelectedMetrics(reorderedMetrics);
+  };
+
   const handleSave = () => {
+    console.log(localSelectedMetrics)
     onSave(localSelectedMetrics);
     onCloseModal();
   };
@@ -66,31 +84,17 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
                 onClick={() => handleCheckboxChange(item.key)}
               >
                 <span className="checkmark">
-                  {localSelectedMetrics.includes(item.key) && (
-                    <CloseOutlined />
-                  )}
+                  {localSelectedMetrics.includes(item.key) && <CloseOutlined />}
                 </span>
               </div>
             </div>
           ))}
         </Col>
-        <Col xs={12} className="modal-scrollable">
-          <p className="modal-title">Selected Metrics</p>
-          {localSelectedMetrics.map((metric) => (
-            <div key={metric} className="selected-metric-main">
-              <span className="selected-metric-elipsis">
-                <MyIcon type={"elipsis"} />
-              </span>
-              <span className="selected-metric-name">{GET_METRIC_NAME_FROM_KEY(metric)}</span>
-              <span
-                className="selected-metric-cross"
-                onClick={() => handleRemoveMetric(metric)}
-              >
-                <MyIcon type={"cross"} size="xs" />
-              </span>
-            </div>
-          ))}
-        </Col>
+        <MyScrollableList
+          localSelectedMetrics={localSelectedMetrics}
+          handleRemoveMetric={handleRemoveMetric}
+          onDragEnd={onDragEnd} // Pass the onDragEnd function here
+        />
       </Row>
     </Modal>
   );

@@ -5,6 +5,7 @@
   color: white;
   padding: 5px 15px;
   text-align: center;
+  font-weight: 500;
 }
 .btn-outlined-filled {
   background-color: var(--color-light-accent);
@@ -13,6 +14,7 @@
   color: var(--color-accent);
   padding: 5px 15px;
   text-align: center;
+  font-weight: 500;
 }
 .btn-outlined-dark {
   background-color: transparent;
@@ -21,6 +23,7 @@
   color: var(--color-accent);
   padding: 5px 15px;
   text-align: center;
+  font-weight: 500;
 }
 .btn-outlined {
   background-color: transparent;
@@ -32,7 +35,9 @@
 }
 
 .btn-filled:hover {
-  background-color: var(--color-accent-hover);
+  background-color: white;
+  border: 2px solid black;
+  color: black;
   cursor: pointer;
 }
 .btn-outlined-filled:hover {

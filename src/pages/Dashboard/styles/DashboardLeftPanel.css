@@ -19,7 +19,8 @@
 .add-prompt-btn {
   padding: 10px 12px !important;
   margin-top: 0px !important;
-  margin-bottom: 10px !important;
+  margin-bottom: 0px !important;
+  /* margin-bottom: 10px !important; */
 }
 .add-prompt-span {
   display: flex;
@@ -28,12 +29,12 @@
 }
 .panel-header-span {
   display: flex;
-  align-items: center;
+  align-items: center !important;
   justify-content: start;
   font-size: 18px;
 }
 .panel-header-span img {
-  margin-right: 10px;
+  margin-right: 15px !important;
 }
 .add-prompt-span img {
   margin-right: 5px;
@@ -44,7 +45,8 @@
   background-color: white !important;
   border: 1px solid #e6eaed;
   margin-bottom: 10px;
-  height: 45px;
+  height: 40.8px;
+  font-family: "Inter", serif;
   border-radius: 8px !important;
 }
 .left-panel-container-inner .ant-collapse-header:hover {
@@ -65,22 +67,28 @@
   padding: 0px !important;
 }
 .left-panel-logo {
-  width: 205px;
+  width: 220px;
 }
 .left-panel-logo-wrapper {
   width: 100%;
-  padding: 23px 15px;
+  padding: 25px 15px;
 }
 .left-panel-collapse-account .ant-collapse-header {
-  height: 46px !important;
+  height: 40px !important;
+}
+.left-panel-collapse-account .ant-collapse-header{
+    padding-top: 10px !important;
+    display: flex !important;
+    align-items: center !important;
 }
 .left-panel-btn {
-  padding: 10px 12px;
+  padding: 10px 8px 10px 12px;
   border: 1px solid #e6eaed !important;
   height: 45px;
   width: 100%;
-  color: #575a7b;
-  font-size: 18px;
+  color: #000000;
+  font-family: "Inter", serif;
+  font-size: 16px;
   font-weight: 500;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -90,6 +98,7 @@
 }
 .left-panel-btn img {
   margin-right: 10px;
+  height: 13px !important;
 }
 .side-bar-btn-wrapper {
   padding: 0px 15px;
@@ -101,8 +110,9 @@
 .left-panel-scrollable {
   flex-grow: 1; /* Allows the panel to take up remaining space */
   overflow-y: auto; /* Enable vertical scrolling */
-  padding: 10px;
+  padding: 10px 15px ;
   height: calc(100vh - 180px);
+  scrollbar-width: none;
 }
 .ellipsis {
   margin-left: 8px;

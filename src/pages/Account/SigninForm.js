@@ -23,15 +23,17 @@ const SigninForm = ({ handleSignIn, handleForgotPassword, handleSignUpToggle }) 
 
   return (
     <Form form={form} name="signinForm" className="signin-form" layout="vertical" >
-    <img src={IMAGES.logo} alt="" className="account-logo"/>
+        <div className="account-logo-wrapper">
+        <img src={IMAGES.logo_png} alt="" className="account-logo"/>
+        </div>
 
 
       <Form.Item hasFeedback label="Email Address" name="email" rules={EMAIL_RULES_REQUIRED} className="signin-form-item" required={false}>
-        <Input placeholder="Enter your email" className="signin-input-field" prefix={<MyIcon type={'signin_email'}/>} />
+        <Input placeholder="Email" className="signin-input-field" prefix={<MyIcon type={'signin_email'}/>} />
       </Form.Item>
 
       <Form.Item hasFeedback label="Password" name="password" rules={PASSWORD_RULES_REQUIRED} className="signin-form-item " required={false}> 
-        <Input.Password placeholder="Enter your password" className="signin-input-field "  prefix={<MyIcon type={'signin_password'}/>}  />
+        <Input.Password placeholder="Password" className="signin-input-field "  prefix={<MyIcon type={'signin_password'}/>}  />
       </Form.Item>
 
 

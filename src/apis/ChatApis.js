@@ -18,7 +18,7 @@ export const API_CREATE_PROMPT = async ( token, newPrompt, setShowSpinner ) => {
                 Authorization: token,
             },
         });
-        message.success("Prompt created successfully!")
+        // message.success("Prompt created successfully!")
         return response.data;
     } catch (error) {
         message.error(
@@ -59,7 +59,7 @@ export const API_DELETE_PROMPT = async (token, id,  setShowSpinner) => {
             },
           });
       
-        message.success("Prompt Deleted Successfully")
+        // message.success("Prompt Deleted Successfully")
         return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";

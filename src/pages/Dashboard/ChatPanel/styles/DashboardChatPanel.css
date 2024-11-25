@@ -4,6 +4,7 @@
   justify-content: space-between;
   height: 100vh;
   padding: 0px;
+  overflow-y: auto;
 }
 .chat-icon-wrapper {
   border: 1px solid #e6eaed;
@@ -25,7 +26,7 @@
 }
 
 .dashboard-chat-panel-main-message-bar {
-  padding: 0px 20px;
+  padding: 0px 30px;
 }
 
 @media screen and (max-width: 1200px) {

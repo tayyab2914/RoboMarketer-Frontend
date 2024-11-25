@@ -2,16 +2,20 @@
     border: none;
     background-color: white;
     padding: 20px 0px;
-    color: #575a7b;
-    font-size: 18px;
+    color: #000000 !important;
+    font-family: "Inter", serif;
+    font-size: 16px !important;
     font-weight: 500;
     border-top: 1px solid #e6eaed;
-    border-right: 1px solid #e6eaed;
+    border-right: 1px solid #e6eaed !important;
     position: absolute; /* Make it fixed at the bottom */
     bottom: 0; /* Align it to the bottom */
     left: 0; /* Align to the left edge */
     width: 100%; /* Make it take up the full width of the container */
     text-align: center;
+  }
+  .settings-btn:hover{
+    background-color: rgb(230, 230, 230);
   }
   .settings-btn-wrapper{
     display: flex;

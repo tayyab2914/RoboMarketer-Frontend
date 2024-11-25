@@ -6,12 +6,12 @@
   text-align: center;
   color: black;
 }
-.account-main-row{
-    padding-top: 40px;
-}
 .account-logo{
     width: 90%;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
+}
+.account-logo-wrapper{
+    text-align: center;
 }
 .password-helper {
   display: block;
@@ -22,7 +22,6 @@
   width: 100%;
 }
 .signin-form {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   /* margin: 20px  40px !important; */
   padding: 40px;
   width: 100%;
@@ -76,10 +75,9 @@
 
 /* Input Field Styling */
 .signin-input-field {
-  height: 40px !important; 
   margin-top: 6px;
   /* padding: 16px !important; */
-  height: 52px !important;
+  height: 45px !important;
   display: flex;
   align-items: center;
   border-radius: 10px;

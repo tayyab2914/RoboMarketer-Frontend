@@ -13,9 +13,9 @@ const ReportingBtn = ({ availableMetrics, onSave, selectedMetrics }) => {
 
   return (
     <>
-      <Button onClick={handleShowModal} className="settings-btn">
-        <MyIcon type={"reporting"} /> Reporting
-      </Button>
+    <button className="settings-btn" onClick={handleShowModal}>
+        <span className="settings-btn-wrapper"><MyIcon type="reporting" /> Reporting</span>
+      </button>
 
       <ReportingModal
         availableMetrics={availableMetrics}

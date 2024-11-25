@@ -7,7 +7,7 @@ import { ConfigProvider } from "antd";
 import store, { persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import { BUTTON_COLORS, CHECKBOX_COLORS, FORM_COLORS, INPUT_COLORS, NOTIFICATION_COLORS,PAGINATION_COLORS, POPCONFIRM_COLORS, PROGRESS_COLORS, RADIO_COLORS, SELECT_COLORS, SWITCH_COLORS, TAB_COLORS, UPLOAD_COLORS } from "./utils/AntdColors";
+import { BUTTON_COLORS, CHECKBOX_COLORS, FORM_COLORS, INPUT_COLORS, NOTIFICATION_COLORS,PAGINATION_COLORS, POPCONFIRM_COLORS, PROGRESS_COLORS, RADIO_COLORS, SELECT_COLORS, SWITCH_COLORS, TAB_COLORS, TABLE_COLORS, UPLOAD_COLORS } from "./utils/AntdColors";
 // import { BUTTON, INPUT, POPOVER, TOOLTIP } from "./components/Generic/Colors";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -27,6 +27,7 @@ root.render(
         Progress:PROGRESS_COLORS,
         Button:BUTTON_COLORS,
         Checkbox:CHECKBOX_COLORS,
+        Table:TABLE_COLORS
       },
     }}
   >

@@ -7,8 +7,6 @@ import { DOMAIN_NAME } from "../utils/GlobalSettings";
 
 
 export const API_CREATE_FUNNEL = async ( token, newFunnel, setShowSpinner ) => {
-    console.log('API_CREATE_FUNNEL', newFunnel);
-    
     setShowSpinner(true);
 
     try {
@@ -19,8 +17,7 @@ export const API_CREATE_FUNNEL = async ( token, newFunnel, setShowSpinner ) => {
                 Authorization: token,
             },
         });
-        console.log(response.data);
-        message.success("Funnel created successfully!")
+        // message.success("Funnel created successfully!")
         return response.data;
     } catch (error) {
         message.error(
@@ -41,7 +38,6 @@ export const API_LIST_FUNNELS = async (token, setShowSpinner) => {
         },
       });
   
-      console.log(response)
       return response.data;
     } catch (error) {
       message.error("Invalid or expired token");
@@ -59,7 +55,7 @@ export const API_DELETE_FUNNEL = async (token, id,  setShowSpinner) => {
             },
           });
       
-        message.success("Funnel Deleted Successfully")
+        // message.success("Funnel Deleted Successfully")
         return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
@@ -77,7 +73,6 @@ export const API_GET_FUNNEL = async (token,id, setShowSpinner) => {
         },
       });
   
-      console.log('API_GET_FUNNEL',response)
       return response.data;
     } catch (error) {
     //   message.error("Invalid or expired token");
@@ -87,7 +82,6 @@ export const API_GET_FUNNEL = async (token,id, setShowSpinner) => {
 };
 
 export const API_UPDATE_FUNNEL = async ( token, updatedFunnel,funnelId, setShowSpinner ) => {
-    console.log('API_CREATE_FUNNEL', updatedFunnel);
     
     setShowSpinner(true);
 
@@ -99,8 +93,6 @@ export const API_UPDATE_FUNNEL = async ( token, updatedFunnel,funnelId, setShowS
                 Authorization: token,
             },
         });
-        console.log(response.data);
-        message.success("Funnel updated successfully!")
         return response.data;
     } catch (error) {
         message.error(
@@ -113,7 +105,6 @@ export const API_UPDATE_FUNNEL = async ( token, updatedFunnel,funnelId, setShowS
 };
 
 export const API_CREATE_PRODUCT = async ( token, newProduct, setShowSpinner ) => {
-    console.log('API_CREATE_FUNNEL', newProduct);
     
     setShowSpinner(true);
 
@@ -125,11 +116,9 @@ export const API_CREATE_PRODUCT = async ( token, newProduct, setShowSpinner ) =>
                 Authorization: token,
             },
         });
-        console.log(response.data);
-        message.success("Product created successfully!")
+        // message.success("Product created successfully!")
         return response.data;
     } catch (error) {
-        console.log(error)
         message.error(
           error.response?.data?.message 
         );
@@ -148,7 +137,6 @@ export const API_LIST_PRODUCTS = async (token, setShowSpinner) => {
         },
       });
   
-      console.log(response)
       return response.data;
     } catch (error) {
       message.error("Invalid or expired token");
@@ -166,7 +154,7 @@ export const API_DELETE_PRODUCT = async (token, id,  setShowSpinner) => {
             },
           });
       
-        message.success("Product Deleted Successfully")
+        // message.success("Product Deleted Successfully")
         return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
@@ -184,7 +172,6 @@ export const API_GET_PRODUCT = async (token,id, setShowSpinner) => {
         },
       });
   
-      console.log('API_GET_FUNNEL',response)
       return response.data;
     } catch (error) {
     //   message.error("Invalid or expired token");
@@ -194,7 +181,6 @@ export const API_GET_PRODUCT = async (token,id, setShowSpinner) => {
 };
 
 export const API_UPDATE_PRODUCT = async ( token, updatedProduct,productId, setShowSpinner ) => {
-    console.log('API_UPDATE_PRODUCT', updatedProduct);
     
     setShowSpinner(true);
 
@@ -206,11 +192,9 @@ export const API_UPDATE_PRODUCT = async ( token, updatedProduct,productId, setSh
                 Authorization: token,
             },
         });
-        console.log(response.data);
-        message.success("Product updated successfully!")
+        // message.success("Product updated successfully!")
         return response.data;
     } catch (error) {
-        console.log(error)
         message.error(
           error.response?.data?.message 
         );
@@ -230,11 +214,9 @@ export const API_UPDATE_ROBOMARKETER_IQ  = async ( token, formData, setShowSpinn
                 Authorization: token,
             },
         });
-        console.log(response.data);
-        message.success("ROBOMARKETER updated successfully!")
+        // message.success("ROBOMARKETER updated successfully!")
         return response.data;
     } catch (error) {
-        console.log(error)
         message.error(
           error.response?.data?.message 
         );
@@ -254,10 +236,8 @@ export const API_GET_ROBOMARKETER_IQ = async (token, setShowSpinner) => {
         },
       });
   
-      console.log('API_GET_ROBOMARKETER_IQ',response)
       return response.data;
     } catch (error) {
-        console.log('API_GET_ROBOMARKETER_IQ',error)
     //   message.error("Invalid or expired token");
     } finally {
       setShowSpinner(false);

@@ -19,7 +19,7 @@ export const API_SIGN_UP = async ( email, password, name, PhoneNumber, link_toke
     dispatch(setAuthToken(response.data.token));
     dispatch(setLoggedIn(true));
 
-    message.success("User signed up successfully");
+    // message.success("User signed up successfully");
     return response.data;
   } catch (error) {
     message.error(error.response?.data?.message || "Signup failed");
@@ -39,7 +39,7 @@ export const API_SIGN_IN = async ( email, password, dispatch, navigate, setShowS
     dispatch(setLoggedIn(true));
     dispatch(setIsAdmin(response.data.admin))
     navigate('/');
-    message.success("Signed in successfully");
+    // message.success("Signed in successfully");
     return response.data;
   } catch (error) {
     message.error(error.response?.data?.message || "Wrong credentials");
@@ -73,7 +73,7 @@ export const API_SEND_VERIFICATION_EMAIL = async ( email, forgotPassword = false
       }
     );
 
-    message.success("Verification email sent");
+    // message.success("Verification email sent");
     return response.data.code_token;
   } catch (error) {
     message.error(
@@ -95,7 +95,7 @@ export const API_AUTHENTICATE_CODE = async ( verificationCode, codeToken, setSho
       }
     );
 
-    message.success("Verification code is correct");
+    // message.success("Verification code is correct");
     return response.data;
   } catch (error) {
     message.error(error.response?.data?.message || "Wrong verification code");
@@ -114,7 +114,7 @@ export const API_SET_NEW_PASSWORD = async ( email, newPassword, verificationCode
       code_token: codeToken,
     });
 
-    message.success("Password reset successful");
+    // message.success("Password reset successful");
     setShowForgotPassword(false)
     return response.data;
   } catch (error) {
@@ -136,7 +136,7 @@ export const API_GOOGLE_SIGN_IN = async (authCode,dispatch,navigate, setShowSpin
     dispatch(setAuthToken(response.data.token));
     dispatch(setLoggedIn(true));
     navigate('/');
-    message.success("Google sign-in successful");
+    // message.success("Google sign-in successful");
     return response.data;
   } catch (error) {
     message.error("Google sign-in failed");
@@ -153,7 +153,7 @@ export const API_TEST_TOKEN = async (token, setShowSpinner) => {
       },
     });
 
-    message.success("Token is valid");
+    // message.success("Token is valid");
     return response.data;
   } catch (error) {
     message.error("Invalid or expired token");
@@ -189,7 +189,6 @@ export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
   
       return response.data;
     } catch (error) {
-        console.log(error)
       message.error(error?.response?.data?.message);
     } finally {
       setShowSpinner(false);
@@ -211,7 +210,7 @@ export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) =>
                 Authorization: `${token}`, 
             },
         });
-        message.success("User Updated Successfully")
+        // message.success("User Updated Successfully")
         return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
@@ -229,7 +228,7 @@ export const API_DELETE_USER = async (token, id,  setShowSpinner) => {
             },
           });
       
-        message.success("User Deleted Successfully")
+        // message.success("User Deleted Successfully")
         return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
@@ -275,7 +274,6 @@ export const API_SWITCH_ACCOUNT = async (token,id, setShowSpinner) => {
 };
 export const API_UPDATE_PROFILE = async (token, email = null, password = null, setShowSpinner) => {
     setShowSpinner(true);
-    console.log(email,password)
     try {
         const response = await axios.put(
             `${DOMAIN_NAME}/authentication/update_profile/`,
@@ -324,7 +322,7 @@ export const API_UPDATE_ACCOUNT = async (token, account_id, name = null, account
       }
   
       const response = await axios.put(`${DOMAIN_NAME}/authentication/update_account/`, data, config);
-      message.success(response?.data?.message)
+    //   message.success(response?.data?.message)
       return response.data;
     } catch (error) {
       const errorMessage = error?.response?.data?.message || "An error occurred while updating the account.";

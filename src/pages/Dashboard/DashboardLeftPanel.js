@@ -97,12 +97,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             className="left-panel-collapse-account"
             expandIconPosition={"end"}
             expandIcon={({ isActive }) => (
-              <DownOutlined
-                style={{
-                  transition: "transform 0.3s ease",
-                  transform: isActive ? "rotate(-180deg)" : "rotate(0deg)",
-                }}
-              />
+              <img src={ICONS.arrow_up_down}style={{ height:"14px", transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)", }} />
             )}
             activeKey={AccountCollapseActiveKey}
             onChange={(key) => setAccountCollapseActiveKey(key)}
@@ -142,12 +137,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             className="left-panel-collapse"
             expandIconPosition={"end"}
             expandIcon={({ isActive }) => (
-              <DownOutlined
-                style={{
-                  transition: "transform 0.3s ease",
-                  transform: isActive ? "rotate(-180deg)" : "rotate(0deg)",
-                }}
-              />
+                <img src={ICONS.arrow_down}style={{ height:"5.5px", transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)", }} />
             )}
           >
             {GET_PROMPT_CATEGORIES?.map((panel) => (

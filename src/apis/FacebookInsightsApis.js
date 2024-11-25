@@ -16,7 +16,6 @@ export const API_GENERATE_AUTH_URL = async (token, setShowSpinner) => {
         },
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     //   message.error(error.response?.data?.message || "Wrong credentials");
@@ -45,10 +44,8 @@ export const API_FETCH_TOKEN = async (
         },
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
     message.error(error.response?.data?.message || "");
     return false;
   } finally {
@@ -96,7 +93,6 @@ export const API_GET_REPORTING = async (token, setShowSpinner) => {
         },
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     //   message.error(error.response?.data?.message || "Wrong credentials");
@@ -111,7 +107,6 @@ export const API_UPDATE_REPORTING = async (
   updated_metrics,
   setShowSpinner
 ) => {
-  console.log("API_CREATE_FUNNEL", updated_metrics);
 
   setShowSpinner(true);
 
@@ -125,8 +120,7 @@ export const API_UPDATE_REPORTING = async (
         },
       }
     );
-    console.log(response.data);
-    message.success("updated_metrics updated successfully!");
+    // message.success("updated_metrics updated successfully!");
     return response.data;
   } catch (error) {
     message.error(error.response?.data?.message);
@@ -156,7 +150,6 @@ export const API_GET_INSIGHTS = async (
         },
       }
     );
-    console.log(response.data);
     // message.success("updated_metrics updated successfully!");
     return response.data;
   } catch (error) {
@@ -168,7 +161,6 @@ export const API_GET_INSIGHTS = async (
 };
 
 export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
-  console.log(token); // For debugging, remove this in production
   setShowSpinner(true);
   try {
     const response = await axios.post(
@@ -195,7 +187,6 @@ export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
 };
 
 export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
-    console.log(token); // For debugging, remove this in production
     // setShowSpinner(true);
     try {
       const response = await axios.post(
@@ -232,7 +223,7 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
           },
         }
       );
-      message.success("Account disconnected successfully")
+    //   message.success("Account disconnected successfully")
       return response.data;
     } catch (error) {
       if (error.response?.data?.message) {

@@ -38,6 +38,22 @@ export const INPUT_COLORS = {
   colorPrimaryBorder: THEME_COLORS.colorAccent,
   colorPrimaryHover: THEME_COLORS.colorAccent,
 };
+export const TABLE_COLORS = {
+        itemActiveColor: "#fff",
+        itemHoverColor: "#fff",
+        itemSelectedColor: "#fff",
+        inkBarColor: "#fff",
+        colorPrimaryBorder: "#000",
+        colorLink: "#000",
+        colorLinkActive: "#000",
+        colorLinkHover: "#000",
+        colorPrimary: "#000",
+        colorPrimaryActive: "#000",
+        colorPrimaryBorder: "#000",
+        rowSelectedBg:'#e2e3e3',
+        rowSelectedHoverBg:'#e2e3e3',
+        colorPrimaryHover: "#000",
+}
 export const CHECKBOX_COLORS = {
   colorLink: THEME_COLORS.colorAccent,
   colorLinkActive: THEME_COLORS.colorAccent,

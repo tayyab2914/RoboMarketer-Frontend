@@ -8,9 +8,11 @@
     font-size: 16px;
 }
 .reporting-text{
-
+    font-family: "Inter", serif;
+    font-weight: 500;
 }
 .reporting-text img{
+    color: black !important;
     margin-right: 10px;
 }
 .reporting-data{

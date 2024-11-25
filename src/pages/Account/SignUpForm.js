@@ -20,21 +20,23 @@ const SignUpForm = ({ handleSignUp, handleSignInToggle }) => {
 
   return (
     <Form form={form} name="signupForm" className="signin-form" layout="vertical" >
-      <img src={IMAGES.logo} alt="" className="account-logo"/>
+      <div className="account-logo-wrapper">
+        <img src={IMAGES.logo_png} alt="" className="account-logo"/>
+        </div>
 
       <Form.Item hasFeedback label="Full Name" name="name" rules={NAME_RULES_REQUIRED} className="signin-form-item" required={false}>
-        <Input placeholder="Enter your name" className="signin-input-field"  prefix={<MyIcon type={'signin_user'}/>}/>
+        <Input placeholder="Full name" className="signin-input-field"  prefix={<MyIcon type={'signin_user'}/>}/>
       </Form.Item>
 
       <Form.Item hasFeedback label="Email Address" name="email" rules={EMAIL_RULES_REQUIRED} className="signin-form-item" required={false}>
-        <Input placeholder="Enter your email" className="signin-input-field"  prefix={<MyIcon type={'signin_email'}/>} />
+        <Input placeholder="Email" className="signin-input-field"  prefix={<MyIcon type={'signin_email'}/>} />
       </Form.Item>
 
       <Form.Item hasFeedback label="Phone Number" name="phoneNumber" rules={PHONE_NUMBER_RULES_REQUIRED} className="signin-form-item" required={false}>
-        <Input placeholder="Enter your phone number" className="signin-input-field"  prefix={<MyIcon type={'signin_phone'}/>} />
+        <Input placeholder="Phone number" className="signin-input-field"  prefix={<MyIcon type={'signin_phone'}/>} />
       </Form.Item>
       <Form.Item hasFeedback label="Password" name="password" rules={PASSWORD_RULES_REQUIRED} className="signin-form-item" required={false}>
-        <Input.Password placeholder="Enter your password" className="signin-input-field" prefix={<MyIcon type={'signin_password'}/>}/>
+        <Input.Password placeholder="Password" className="signin-input-field" prefix={<MyIcon type={'signin_password'}/>}/>
       </Form.Item>
     
       <Form.Item> 

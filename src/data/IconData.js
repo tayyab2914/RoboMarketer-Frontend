@@ -67,8 +67,12 @@ import psychographics from "../assets/icons/psychographics.svg";
 import demographics from "../assets/icons/demographics.svg";
 import product_service_details from "../assets/icons/product_service_details.svg";
 import account_setup from "../assets/icons/account_setup.svg";
+import arrow_up_down from "../assets/icons/arrow_up_down.svg";
+import arrow_down from "../assets/icons/arrow_down.svg";
 
 export const ICONS = {
+  arrow_down: arrow_down,
+  arrow_up_down: arrow_up_down,
   product_service_details: product_service_details,
   account_setup: account_setup,
   demographics: demographics,
