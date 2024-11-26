@@ -66,6 +66,26 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
           </div></div>
         </Modal>
       )}
+      {!isAccountSetup && showModal &&     <Modal
+          title={ false }
+          centered
+          visible={isVisible}
+          onCancel={onClose}
+          closable={false}
+          footer={null}
+        >
+            
+            <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="integrations" style={{ marginRight: "5px" }} size="md"/> Integrations</span>
+    <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
+    </div>
+            
+    <div className="custom-modal-content modal-content">
+          <p className="fb-integration-modal-description" style={{height:"200px", display:"flex",alignItems:"center", justifyContent:"center"}}>
+          <MyIcon type="integrations" style={{ marginRight: "5px" }} size="md"/> No Integrations to show
+          </p>
+         </div>
+        </Modal>}
     </>
   );
 };

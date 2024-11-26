@@ -118,7 +118,7 @@ export const API_GET_ORDERING = async (token, setShowSpinner) => {
       );
       return response.data;
     } catch (error) {
-        message.error(error.response?.data?.message || "Wrong credentials");
+        message.error(error.response?.data?.message);
       return false;
     } finally {
       setShowSpinner(false);
