@@ -109,7 +109,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
               header={
                 <>
                   <span className="panel-header-span">
-                    {CurrentAccount?.account_image?<img src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px"}}/>:<MyIcon type={"user"} />} {CurrentAccount?.name}
+                    {CurrentAccount?.account_image?<img src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px",borderRadius:"50%"}}/>:<MyIcon type={"user"} />} {CurrentAccount?.name}
                   </span>
                 </>
               }
@@ -121,11 +121,11 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                     <Button
                       type="text"
                       className="left-panel-btn"
+                      style={{justifyContent:"left"}}
                       onClick={() => handleAccountSwitch(account.id)}
                     >
-                        {account?.account_image?<img src={`${DOMAIN_NAME}${account?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px"}}/>:<MyIcon type={"user"} />} {account.name}
+                        {account?.account_image?<img src={`${DOMAIN_NAME}${account?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px",borderRadius:"50%"}}/>:<MyIcon type={"user"} />} {account.name}
                
-                      <MyIcon type={"elipsis"} />
                     </Button>
                   </div>
                 )
@@ -153,7 +153,6 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                     </span>
                   </>
                 }
-                className="hello"
                 key={panel.key}
               >
                 {FILTER_PROMPTS_BY_CATEGORY(FetchedPrompts, panel.header)?.map(
@@ -188,7 +187,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
               </Panel>
             ))}
           </Collapse>
-          <div style={{ height: "40px" }}></div>
+          <div style={{ height: "70px" }}></div>
         </div>
       </div>
       <SettingsBtn />

@@ -39,12 +39,7 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
   
         if (code && !CodeExtracted) {
           const decodedRedirectResponse = decodeURIComponent(window.location.href);
-          const response = await API_FETCH_TOKEN(
-            token,
-            decodedRedirectResponse,
-            facebook_state,
-            setShowSpinner
-          );
+          const response = await API_FETCH_TOKEN( token, decodedRedirectResponse, facebook_state, setShowSpinner );
           setAccountList(response?.account_list);
           setCodeExtracted(true);
         }
