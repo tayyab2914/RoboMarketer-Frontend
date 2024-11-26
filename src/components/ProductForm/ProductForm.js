@@ -30,8 +30,8 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
   return(
     
    <>
-    <div className="custom-modal-content modal-content">
   <Form form={form} onFinish={onFinish} layout="vertical">
+  <div className="custom-modal-content modal-content">
     <Form.Item name="type" initialValue="product">
     <Radio.Group onChange={handleTypeChange}>
           <Radio.Button value="product">
@@ -94,8 +94,7 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
         <InputSection name="emotional_drivers" label="Emotional Drivers" placeholder="Emotional Drivers..." />
         <InputSection name="unique_needs_or_preferences" label="Unique Needs / Preferences" placeholder="Unique Needs / Preferences..." />
       </Panel>
-    </Collapse>
-  </Form></div>
+    </Collapse></div>
     <div className="modal-actions">
           <span className="btn-2">
         <Button type="primary" htmlType="submit" className="create-btn">
@@ -107,7 +106,8 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
         <MyIcon type={"cross_red"} /> Cancel
         </Button>
           </span>
-        </div></>
+        </div>
+        </Form></>
         
 );}
 

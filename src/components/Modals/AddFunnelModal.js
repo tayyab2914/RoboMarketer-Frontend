@@ -11,6 +11,7 @@ const AddFunnelModal = ({ isVisible, onClose, onAddFunnel, ListFunnels }) => {
   const [form] = Form.useForm();
 
   const handleAdd = async (values) => {
+    console.log(values)
     const result = await API_CREATE_FUNNEL(token, values, setShowSpinner);
     if (result) {
       onAddFunnel(values);

@@ -40,7 +40,8 @@ export const API_LIST_FUNNELS = async (token, setShowSpinner) => {
   
       return response.data;
     } catch (error) {
-      message.error("Invalid or expired token");
+        const errorMessage = error?.response?.data?.message || "";
+        message.error(errorMessage);  
     } finally {
       setShowSpinner(false);
     }
@@ -58,7 +59,7 @@ export const API_DELETE_FUNNEL = async (token, id,  setShowSpinner) => {
         // message.success("Funnel Deleted Successfully")
         return response.data;
     } catch (error) {
-        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        const errorMessage = error?.response?.data?.message || "";
         message.error(errorMessage);  
     } finally {
         setShowSpinner(false);
@@ -107,7 +108,7 @@ export const API_UPDATE_FUNNEL = async ( token, updatedFunnel,funnelId, setShowS
 export const API_CREATE_PRODUCT = async ( token, newProduct, setShowSpinner ) => {
     
     setShowSpinner(true);
-
+console.log(newProduct)
     try {
         const response = await axios.post(`${DOMAIN_NAME}/tools/create_product/`, 
             newProduct

@@ -87,7 +87,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
       <div className="left-panel-container-inner">
         <div className="left-panel-logo-wrapper">
           <img
-            src={IMAGES.panel_logo}
+            src={IMAGES.logo_png}
             alt="Panel Logo"
             className="left-panel-logo"
           />

@@ -3,6 +3,7 @@ import { Collapse, Input, Button, Select, Form } from "antd";
 import MyIcon from "../Icon/MyIcon";
 import { DownOutlined, PlusOutlined } from "@ant-design/icons";
 import "../Modals/styles/ModalStyles.css";
+import { ICONS } from "../../data/IconData";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -32,9 +33,9 @@ const EditFunnelForm = ({ initialValues = {}, onFinish,onClose }) => {
 
   return (
    <>
-    <div className="custom-modal-content modal-content">
+    
     <Form form={form} initialValues={initialValues} onFinish={(values) => onFinish({ ...values, steps })} layout="vertical" >
-      <Form.Item name="name" label="Funnel Name" rules={[{ required: true, message: "Funnel Name is required." }]}   className='form-item'
+    <div className="custom-modal-content modal-content"> <Form.Item name="name" label="Funnel Name" rules={[{ required: true, message: "Funnel Name is required." }]}   className='form-item'
                 required={false}>
         <Input placeholder="Type Name..." />
       </Form.Item>
@@ -54,7 +55,7 @@ const EditFunnelForm = ({ initialValues = {}, onFinish,onClose }) => {
         <Input.TextArea rows={4} placeholder="Type Description..." />
       </Form.Item>
 
-      <Collapse defaultActiveKey={[1]} expandIconPosition="end" expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)", }} /> )} >
+      <Collapse defaultActiveKey={[0]} expandIconPosition="end" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={ <span className="panel-header"> <MyIcon type="products" style={{ marginRight: "5px" }} /> Funnel Steps </span> } key="1" >
           {steps.map((step, index) => (
             <div key={index} className="funnel-step">
@@ -79,8 +80,8 @@ const EditFunnelForm = ({ initialValues = {}, onFinish,onClose }) => {
           </Button>
         </Panel>
       </Collapse>
-
-    </Form></div>
+      </div>
+    
     
     <div className="modal-actions">
     <span className="btn-2">
@@ -96,7 +97,7 @@ const EditFunnelForm = ({ initialValues = {}, onFinish,onClose }) => {
   <MyIcon type={"cross_red"} /> Cancel
   </Button>
     </span>
-  </div></>
+  </div></Form></>
   
   );
 };

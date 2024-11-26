@@ -4,6 +4,7 @@ import MyIcon from "../Icon/MyIcon";
 import { DownOutlined } from "@ant-design/icons";
 import "../Modals/styles/ModalStyles.css";
 import { NAME_RULES_REQUIRED } from "../Modals/AccountModal";
+import { ICONS } from "../../data/IconData";
 
 const { Panel } = Collapse;
 
@@ -35,8 +36,8 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
   };
   return (
    <>
-    <div className="custom-modal-content modal-content">
     <Form form={form} onFinish={onFinish} layout="vertical">
+    <div className="custom-modal-content modal-content">
       <Form.Item name="type" initialValue="product">
       <Radio.Group onChange={handleTypeChange}>
           <Radio.Button value="product">
@@ -54,7 +55,7 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
         </Radio.Group>
       </Form.Item>
 
-      <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+      <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={ <span className="modal-panel-header"> <MyIcon type="product_service_details" style={{ marginRight: "5px" }} /> Product / Service Details </span> } key="1"  >
           <InputSection name="product_name" label="Product / Service Name" placeholder="Type Name..." />
           <InputSection name="product_description" label="Description" placeholder="Type Description..." />
@@ -68,13 +69,13 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
         </Panel>
       </Collapse>
 
-      <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+      <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={ <span className="modal-panel-header"> <MyIcon type="user" style={{ marginRight: "5px" }} /> Target Audience </span> } key="1" >
           <InputSection name="target_audience_description" label="Target Audience Description" placeholder="Describe the target audience..." isTextArea />
         </Panel>
       </Collapse>
 
-      <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+      <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={ <span className="modal-panel-header"> <MyIcon type="demographics" style={{ marginRight: "5px" }} /> Demographics </span> } key="1" >
           <InputSection name="demographics_age_range" label="Age Range" placeholder="Age Range (e.g., 18-25)" />
           <InputSection name="demographics_gender" label="Gender" placeholder="Gender (e.g., Male, Female, Other)" />
@@ -84,14 +85,14 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
         </Panel>
       </Collapse>
 
-      <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+      <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={ <span className="modal-panel-header"> <MyIcon type="user" style={{ marginRight: "5px" }} /> Interests </span> } key="1" >
           <InputSection name="primary_interest" label="Primary Interests" placeholder="Primary Interests..." />
           <InputSection name="secondary_interest" label="Secondary Interests" placeholder="Secondary Interests..." />
         </Panel>
       </Collapse>
 
-      <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+      <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={ <span className="modal-panel-header"> <MyIcon type="psychographics" style={{ marginRight: "5px" }} /> Psychographics </span> } key="1" >
           <InputSection name="paid_points_or_challenges" label="Paid Points / Challenges" placeholder="Paid Points / Challenges..." />
           <InputSection name="goals_motivation" label="Goals / Motivations" placeholder="Goals / Motivations..." />
@@ -99,8 +100,8 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
           <InputSection name="emotional_drivers" label="Emotional Drivers" placeholder="Emotional Drivers..." />
           <InputSection name="unique_needs_or_preferences" label="Unique Needs / Preferences" placeholder="Unique Needs / Preferences..." />
         </Panel>
-      </Collapse>
-    </Form></div>
+      </Collapse></div>
+    
     
     <div className="modal-actions">
     <span className="btn-2">
@@ -115,7 +116,7 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
   <MyIcon type={"cross_red"} /> Cancel
   </Button>
     </span>
-  </div>
+  </div></Form>
   </>
   );
 };

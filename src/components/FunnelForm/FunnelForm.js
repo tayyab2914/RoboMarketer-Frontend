@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import MyIcon from '../Icon/MyIcon';
 import { DownOutlined, PlusOutlined } from "@ant-design/icons";
 import '../Modals/styles/ModalStyles.css'
+import { ICONS } from '../../data/IconData';
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -25,9 +26,10 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
   return (
     
    <>
-    <div className="custom-modal-content modal-content">
+    
     <Form form={form} initialValues={initialValues} onFinish={(values) => onFinish({ ...values, steps })} layout="vertical">
-      <Form.Item
+    <div className="custom-modal-content modal-content">
+         <Form.Item
         name="name"
         label="Funnel Name"
         rules={[{ required: true, message: "Funnel Name is required." }]}
@@ -59,13 +61,9 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
       </Form.Item>
 
       <Collapse
-        defaultActiveKey={[1]}
+        defaultActiveKey={[0]}
         expandIconPosition="end"
-        expandIcon={({ isActive }) => (
-          <DownOutlined
-            style={{ transition: 'transform 0.3s ease', transform: isActive ? 'rotate(-180deg)' : 'rotate(0deg)' }}
-          />
-        )}
+        expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}
       >
         <Panel header={<span className="modal-panel-header"><MyIcon type="products" style={{ marginRight: "5px" }} />Funnel Steps</span>} key="1">
           {steps.map((step, index) => (
@@ -110,9 +108,8 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
           </Button>
         </Panel>
       </Collapse>
-
-    </Form>
-    </div>
+      </div>
+    
         <div className="modal-actions">
           <span className="btn-2">
         <Button type="primary" htmlType="submit" className="create-btn">
@@ -124,7 +121,8 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
         <MyIcon type={"cross_red"} /> Cancel
         </Button>
           </span>
-        </div></>
+        </div>
+        </Form></>
         
   );
 };

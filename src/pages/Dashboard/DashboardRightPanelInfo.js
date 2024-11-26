@@ -5,9 +5,6 @@ import "./styles/DashboardRightPanelInfo.css";
 const DashboardRightPanelInfo = ({reportingData}) => {
 
     const getSuffix = (label) => {
-        if (["Ad Spend", "CPC", "CPM", "Profit","Revenue"].includes(label)) {
-            return "$";
-        }
         if (["Return on Ad Spend"].includes(label)) {
             return "X";
         }
@@ -16,6 +13,16 @@ const DashboardRightPanelInfo = ({reportingData}) => {
         }
         return ""; 
     };
+    const getPrefix = (label)=>{
+        
+        if (["Ad Spend", "CPC", "CPM", "Profit","Revenue"].includes(label)) {
+            return "$";
+        }
+        else
+        {
+            return ""
+        }
+    }
     function formatWithCommas(number) {
         // Convert the number to a string and use a regular expression to format it
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -27,7 +34,7 @@ const DashboardRightPanelInfo = ({reportingData}) => {
           <span className="reporting-text" style={{color: "black !important"  }}>
             <MyIcon type={item.key} /> {item.label}
           </span>
-          <span className={`reporting-data rd-${item.trend}`}>{item.value ? formatWithCommas(item.value) : 0}{getSuffix(item.label)}</span>
+          <span className={`reporting-data rd-${item.trend}`}>{getPrefix(item.label)}{item.value ? formatWithCommas(item.value) : 0}{getSuffix(item.label)}</span>
         </p>
       ))}
       <div style={{height:"50px"}}></div>

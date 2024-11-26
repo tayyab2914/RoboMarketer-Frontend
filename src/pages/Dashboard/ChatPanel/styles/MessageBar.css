@@ -10,7 +10,7 @@ cursor: pointer;
 .message-bar-plus{
     border-radius: 50%;
     padding: 5px;
-    margin: 0px 10px;
+    margin: 0px 5px 0px 10px;
     cursor: pointer;
 }
 .message-bar-input{

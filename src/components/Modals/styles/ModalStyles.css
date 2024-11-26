@@ -69,6 +69,11 @@
 }
 .custom-modal-option{
     padding: 10px 15px !important;
+    
+}
+.custom-modal-option:hover{
+    background-color: #e9e9e9;
+    cursor: pointer;
 }
 .custom-modal-header{
     display: flex;
@@ -79,6 +84,21 @@
 }
 .custom-modal-content{
     padding: 5px 0px 5px 0px;
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+}
+.no-info-to-show{
+    font-weight: 500;
+    height: 150px;
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+}
+.no-info-to-show img{
+    margin-right: 10px;
 }
 .custom-modal-options{
     padding: 0px 15px;

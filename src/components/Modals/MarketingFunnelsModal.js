@@ -90,29 +90,37 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
     </div>
             
     <div className="custom-modal-content modal-content">
-        <div className="funnel-list">
-          {Funnels?.map((Funnel) => (
-            <div key={Funnel.id} className="funnel-item">
-              <span className="funnel-name">{Funnel.name}</span>
-              <span className="funnel-actions">
-                <MyIcon
-                  type="edit_btn"
-                  size="lg"
-                  style={{ marginRight: "5px" }}
-                  onClick={() => openEditFunnelModal(Funnel.id)}
-                />
-                <Popconfirm
-                  title="Are you sure you want to delete this funnel?"
-                  onConfirm={() => onDeleteFunnel(Funnel.id)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <MyIcon type="delete_btn" size="lg" />
-                </Popconfirm>
-              </span>
-            </div>
-          ))}</div>
+  <div className="funnel-list">
+    {Funnels.length > 0 ? (
+      Funnels.map((Funnel) => (
+        <div key={Funnel.id} className="funnel-item">
+          <span className="funnel-name">{Funnel.name}</span>
+          <span className="funnel-actions">
+            <MyIcon
+              type="edit_btn"
+              size="lg"
+              style={{ marginRight: "5px" }}
+              onClick={() => openEditFunnelModal(Funnel.id)}
+            />
+            <Popconfirm
+              title="Are you sure you want to delete this funnel?"
+              onConfirm={() => onDeleteFunnel(Funnel.id)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <MyIcon type="delete_btn" size="lg" />
+            </Popconfirm>
+          </span>
         </div>
+      ))
+    ) : (
+      <div className="no-info-to-show">
+        <MyIcon type="marketing_funnels" size="lg" />
+        No Funnels to show
+      </div>
+    )}
+  </div>
+</div>
       </Modal>
       <EditFunnelModal
         isVisible={isEditFunnelModalVisible}

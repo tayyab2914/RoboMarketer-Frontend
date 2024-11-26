@@ -32,6 +32,7 @@ const ProductsModal = ({ isVisible, onClose }) => {
     setIsAddProductModalVisible(true);
   };
 
+  console.log(products)
   const openEditProductModal = (productId) => {
     setSelectedProductId(productId); // Set product ID for editing
     setIsEditProductModalVisible(true);
@@ -108,7 +109,7 @@ const ProductsModal = ({ isVisible, onClose }) => {
 
         <div className="custom-modal-content modal-content">
           <div className="product-list">
-            {products.map((product) => (
+            {products.length > 0 ? products.map((product) => (
               <div key={product.id} className="product-item">
                 <span className="product-name">{product.product_name}</span>
                 <span className="product-actions">
@@ -128,7 +129,10 @@ const ProductsModal = ({ isVisible, onClose }) => {
                   </Popconfirm>
                 </span>
               </div>
-            ))}
+            )):
+            <div className="no-info-to-show">
+                <MyIcon type={'products'} size="lg"/>
+                No Products to show</div>}
           </div>
         </div>
       </Modal>

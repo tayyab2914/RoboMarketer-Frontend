@@ -14,7 +14,7 @@ const AdminLeftPanel = () => {
       <span className="admin-left-panel-container-inner">
         <div className="admin-left-panel-logo-wrapper">
           <img
-            src={IMAGES.panel_logo}
+            src={IMAGES.logo_png}
             alt="Panel Logo"
             className="admin-left-panel-logo"
           />
