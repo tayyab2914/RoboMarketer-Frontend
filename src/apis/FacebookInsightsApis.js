@@ -56,14 +56,17 @@ export const API_FETCH_TOKEN = async (
 export const API_SELECT_ACCOUNT = async (
   token,
   fb_account_id,
+  fb_account_name,
   setShowSpinner
 ) => {
+    console.log(fb_account_id,fb_account_name)
   setShowSpinner(true);
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/facebookinsights/select_account/`,
       {
         fb_account_id,
+        fb_account_name
       },
 
       {
