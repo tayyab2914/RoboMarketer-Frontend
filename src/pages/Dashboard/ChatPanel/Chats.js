@@ -59,7 +59,7 @@ const Chats = () => {
               <span className="robot-icon-wrapper">
                 <MyIcon type={"robot"} className={"response-icon"} size="md" />
               </span>
-              <div className="response-content">
+              <div className="bot-response-content">
                 <div />
                 <span
                   className="response-text"

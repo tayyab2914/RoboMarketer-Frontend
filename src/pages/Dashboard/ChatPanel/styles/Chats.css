@@ -49,12 +49,25 @@
     background-color: #f8f8f8; /* Lighter grey */
     color: black;
     padding: 10px;
+    font-size: 16px;
     border-radius: 8px;
     max-width: 75%;
     word-wrap: break-word;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
   }
-  
+    
+  .bot-response-content {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* Lighter grey */
+    color: black;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 75%;
+    word-wrap: break-word;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+  }
   /* Bot's icon styling */
   .response-icon {
     color: #00bcd4; /* Blue color for the bot icon */

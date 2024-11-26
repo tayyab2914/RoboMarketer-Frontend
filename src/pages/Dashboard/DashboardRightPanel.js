@@ -5,6 +5,7 @@ import ReportingBtn from "./ReportingBtn";
 import DashboardRightPanelInfo from "./DashboardRightPanelInfo";
 import "./styles/DashboardRightPanel.css";
 import { DownOutlined } from "@ant-design/icons";
+import dayjs from 'dayjs';
 import {
   API_GET_INSIGHTS,
   API_GET_REPORTING,
@@ -16,7 +17,7 @@ import moment from "moment";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 
 const { Panel } = Collapse;
-const { RangePicker } = DatePicker;
+const { RangePicker } = DatePicker; // Use RangePicker instead of DatePicker
 const availableMetrics = [
   { key: "spend", label: "Ad Spend", value: "", trend: "green" },
   { key: "impressions", label: "Impressions", value: "", trend: "red" },
@@ -37,7 +38,6 @@ const availableMetrics = [
   { key: "appointments", label: "Appts", value: "", trend: "red" },
   { key: "close_rate", label: "Close Rate", value: "", trend: "red" },
   { key: "sales", label: "Sales", value: "", trend: "red" },
-  //   { key: "cpa", label: "CPA", value: " ", trend: "red" },
   { key: "roas", label: "Return on Ad Spend", value: "", trend: "red" },
   { key: "profit", label: "Profit", value: "", trend: "red" },
   { key: "revenue", label: "Revenue", value: "", trend: "red" },
@@ -59,10 +59,7 @@ const DashboardRightPanel = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [CurrentMetricRangeName, setCurrentMetricRangeName] = useState('Today');
-  const [dateRange, setDateRange] = useState([
-    moment().startOf("day"),
-    moment().endOf("day"),
-  ]);
+  const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
   const [collapseKey, setCollapseKey] = useState("0");
 
   const { token, rerender_dashboard } = useSelector((state) => state.authToken);
@@ -98,39 +95,33 @@ const DashboardRightPanel = () => {
 
   // Date range selection handlers
   const handleToday = () => {
-    setCurrentMetricRangeName("Today")
+    setCurrentMetricRangeName("Today");
     setCollapseKey(null);
     setDateRange([moment().startOf("day"), moment().endOf("day")]);
   };
+
   const handleYesterday = () => {
-    setCurrentMetricRangeName("Yesterday")
+    setCurrentMetricRangeName("Yesterday");
     setCollapseKey(null);
-    setDateRange([
+    setDateRange([ 
       moment().subtract(1, "days").startOf("day"),
       moment().subtract(1, "days").endOf("day"),
     ]);
   };
-  const handleThisWeek = () => {
-    setCurrentMetricRangeName("This Week")
-    setCollapseKey(null);
-    setDateRange([moment().startOf("week"), moment().endOf("week")]);
-  };
-  const handleThisMonth = () => {
-    setCurrentMetricRangeName("This Month")
-    setCollapseKey(null);
-    setDateRange([moment().startOf("month"), moment().endOf("month")]);
-  };
-  const handleThisYear = () => {
-    setCurrentMetricRangeName("This Year")
-    setCollapseKey(null);
-    setDateRange([moment().startOf("year"), moment().endOf("year")]);
-  };
 
   const handleCustomRangeChange = (dates) => {
-    setCurrentMetricRangeName("Custom Range")
-    setCollapseKey(null);
-    if (dates) setDateRange(dates);
+    if (dates) {
+      // Format the start and end date as 'DD/MM/YY'
+      const startDate = dates[0].format('DD/MM/YY'); // Formats to e.g., "27/11/24"
+      const endDate = dates[1].format('DD/MM/YY');   // Formats to e.g., "03/12/24"
+      
+      // Set the custom range as the current range name
+      setCurrentMetricRangeName(`From ${startDate} to ${endDate}`);
+      setCollapseKey(null);
+      setDateRange(dates); // Update the date range state
+    }
   };
+  
 
   const handleSaveSelectedMetrics = async (metrics) => {
     setSelectedMetrics(metrics);
@@ -143,6 +134,33 @@ const DashboardRightPanel = () => {
   };
 
   const handleShowModal = () => setIsModalVisible(true);
+  const rangePresets = [
+    {
+      label: 'Today',
+      value: [dayjs().startOf('day'), dayjs().endOf('day')], // Starts from midnight to the end of the day
+    },
+    {
+      label: 'Yesterday',
+      value: [dayjs().subtract(1, 'day').startOf('day'), dayjs().subtract(1, 'day').endOf('day')], // Previous day range
+    },
+    {
+      label: 'Last 7 Days',
+      value: [dayjs().subtract(7, 'days'), dayjs()], // Last 7 days range
+    },
+    {
+      label: 'Last 14 Days',
+      value: [dayjs().subtract(14, 'days'), dayjs()], // Last 14 days range
+    },
+    {
+      label: 'Last 30 Days',
+      value: [dayjs().subtract(30, 'days'), dayjs()], // Last 30 days range
+    },
+    {
+      label: 'Last 90 Days',
+      value: [dayjs().subtract(90, 'days'), dayjs()], // Last 90 days range
+    },
+  ];
+  
 
   return (
     <div className="right-panel-container">
@@ -169,43 +187,11 @@ const DashboardRightPanel = () => {
             }
             key="1"
           >
-            <Button
-              type="text"
-              className="right-panel-btn"
-              onClick={handleToday}
-            >
-              Today
-            </Button>
-            <Button
-              type="text"
-              className="right-panel-btn"
-              onClick={handleYesterday}
-            >
-              Yesterday
-            </Button>
-            <Button
-              type="text"
-              className="right-panel-btn"
-              onClick={handleThisWeek}
-            >
-              This Week
-            </Button>
-            <Button
-              type="text"
-              className="right-panel-btn"
-              onClick={handleThisMonth}
-            >
-              This Month
-            </Button>
-            <Button
-              type="text"
-              className="right-panel-btn"
-              onClick={handleThisYear}
-            >
-              This Year
-            </Button>
             <Space direction="vertical" size={12} style={{ marginTop: "10px" }}>
-              <RangePicker onChange={handleCustomRangeChange} />
+              <RangePicker // Changed DatePicker to RangePicker
+                onChange={handleCustomRangeChange} 
+                presets={rangePresets}
+              />
             </Space>
           </Panel>
         </Collapse>
