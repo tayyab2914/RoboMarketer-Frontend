@@ -8,7 +8,9 @@ import { DownOutlined } from "@ant-design/icons";
 import dayjs from 'dayjs';
 import {
   API_GET_INSIGHTS,
+  API_GET_ORDERING,
   API_GET_REPORTING,
+  API_UPDATE_ORDERING,
   API_UPDATE_REPORTING,
 } from "../../apis/FacebookInsightsApis";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,13 +69,25 @@ const DashboardRightPanel = () => {
   useEffect(() => {
     const fetchSelectedMetrics = async () => {
       const response = await API_GET_REPORTING(token, setShowSpinner);
+      const response2 = await API_GET_ORDERING(token, setShowSpinner);
+      console.log('response', response);
+      console.log('response2', response2.metric_order);
+    
+      // Step 1: Filter to get metrics set to true
       const resultArray = Object.entries(response)
         .filter(([key, value]) => value === true)
         .map(([key]) => key);
-      setSelectedMetrics(resultArray);
+    
+      // Step 2: Sort based on response2.metric_order
+      const orderedMetrics = response2.metric_order.filter(metric => resultArray.includes(metric));
+    
+      console.log('orderedMetrics', orderedMetrics);
+      setSelectedMetrics(orderedMetrics);
     };
+    
     fetchSelectedMetrics();
   }, [rerender_dashboard]);
+  
 
   const getInsights = async (startDate, endDate) => {
     const response = await API_GET_INSIGHTS(
@@ -83,6 +97,7 @@ const DashboardRightPanel = () => {
       setShowSpinner
     );
     const updatedMetrics = updateMetrics(availableMetrics, response);
+    
     setMetrics(updatedMetrics);
   };
 
@@ -130,6 +145,7 @@ const DashboardRightPanel = () => {
       getMetricsStatus(metrics),
       setShowSpinner
     );
+    await API_UPDATE_ORDERING(token,metrics,setShowSpinner)
     dispatch(setRerenderDashboard(!rerender_dashboard));
   };
 
@@ -197,10 +213,11 @@ const DashboardRightPanel = () => {
         </Collapse>
 
         <DashboardRightPanelInfo
-          reportingData={Metrics.filter((metric) =>
-            selectedMetrics.includes(metric.key)
-          )}
-        />
+  reportingData={selectedMetrics.map((key) => 
+    Metrics.find((metric) => metric.key === key)
+  ).filter(Boolean)}
+/>
+
 
         <ReportingBtn
           availableMetrics={Metrics}

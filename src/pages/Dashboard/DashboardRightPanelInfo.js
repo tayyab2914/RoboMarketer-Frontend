@@ -3,7 +3,7 @@ import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/DashboardRightPanelInfo.css";
 
 const DashboardRightPanelInfo = ({reportingData}) => {
-
+console.log('reportingData',reportingData)
     const getSuffix = (label) => {
         if (["Return on Ad Spend"].includes(label)) {
             return "X";
@@ -15,7 +15,7 @@ const DashboardRightPanelInfo = ({reportingData}) => {
     };
     const getPrefix = (label)=>{
         
-        if (["Ad Spend", "CPC", "CPM", "Profit","Revenue"].includes(label)) {
+        if (["Ad Spend", "CPC", "CPM", "Profit","Revenue","CPL","Cost Per Appt"].includes(label)) {
             return "$";
         }
         else

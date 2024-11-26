@@ -9,6 +9,7 @@ import MyScrollableList from "../SortableList";
 const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisible, onCloseModal }) => {
   const [localSelectedMetrics, setLocalSelectedMetrics] = useState([]);
 
+  console.log('selectedMetrics',selectedMetrics)
   useEffect(() => {
     setLocalSelectedMetrics(selectedMetrics);
   }, [selectedMetrics]);

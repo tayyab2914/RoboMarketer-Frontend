@@ -5,7 +5,7 @@ import { API_UPDATE_INSIGHTS } from './apis/FacebookInsightsApis';
 import { useSelector } from 'react-redux';
 const App = () => {
     const { isLoggedIn, isAdmin, token, current_account } = useSelector((state) => state.authToken);
-  console.log(current_account)
+//   console.log(current_account)
   
     useEffect(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });

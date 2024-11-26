@@ -24,6 +24,7 @@ import {
   setTemporaryMessage,
 } from "../../redux/AuthToken/Action";
 import { DOMAIN_NAME } from "../../utils/GlobalSettings";
+import { AnimatedSidebar } from "../../components/AnimatedSidebar";
 
 const { Panel } = Collapse;
 
@@ -86,6 +87,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
       {showSpinner && <Spin fullscreen />}
       <div className="left-panel-container-inner">
         <div className="left-panel-logo-wrapper">
+            {/* <AnimatedSidebar/> */}
           <img
             src={IMAGES.logo_png}
             alt="Panel Logo"

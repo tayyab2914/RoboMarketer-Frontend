@@ -26,7 +26,7 @@ useEffect(() => {
      <Chats isaccount_open={!isAccountSetup}/>
       </Col>
 
-      <Col className="dashboard-chat-panel-main-message-bar" style={{maxHeight:"80px"}}>
+      <Col className="dashboard-chat-panel-main-message-bar" >
         <MessageBar isDisabled={!isAccountSetup} />
       </Col>
     </Row>

@@ -105,6 +105,26 @@ export const API_GET_REPORTING = async (token, setShowSpinner) => {
   }
 };
 
+export const API_GET_ORDERING = async (token, setShowSpinner) => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.get(
+        `${DOMAIN_NAME}/facebookinsights/get_ordering/`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+        message.error(error.response?.data?.message || "Wrong credentials");
+      return false;
+    } finally {
+      setShowSpinner(false);
+    }
+  };
+  
 export const API_UPDATE_REPORTING = async (
   token,
   updated_metrics,
@@ -238,3 +258,31 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     }
   };
   
+
+  export const API_UPDATE_ORDERING = async (
+    token,
+    metric_order,
+    setShowSpinner
+  ) => {
+  console.log('metric_order',metric_order)
+    setShowSpinner(true);
+  
+    try {
+      const response = await axios.put(
+        `${DOMAIN_NAME}/facebookinsights/update_ordering/`,
+        { metric_order },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    //   message.success("updated_metrics updated successfully!");
+      return response.data;
+    } catch (error) {
+      message.error(error.response?.data?.message);
+      return null;
+    } finally {
+      setShowSpinner(false);
+    }
+  };
