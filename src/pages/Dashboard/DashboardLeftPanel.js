@@ -117,7 +117,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             >
               {Accounts?.filter((account) => !account.is_current_account).map(
                 (account) => (
-                  <div key={account.id}>
+                  <div key={account.id} >
                     <Button
                       type="text"
                       className="left-panel-btn"

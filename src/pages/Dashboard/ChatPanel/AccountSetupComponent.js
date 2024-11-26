@@ -60,6 +60,7 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
       if (selectedAccount) {
         const response = await API_SELECT_ACCOUNT(token, selectedAccount.account_id,selectedAccount.name, setShowSpinner);
         if (response) {
+            dispatch(setFacebookState(null))
           dispatch(setRerenderDashboard(!rerender_dashboard));
           const historicalDataResponse = await API_GET_HISTORICAL_DATA(token, setShowSpinner);
           onClose();
