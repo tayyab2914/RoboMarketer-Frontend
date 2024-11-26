@@ -18,7 +18,7 @@ const MyIcon = ({ type, size = 'sm',onClick,className,style }) => {
 
   const sizeClass = sizeClasses[size] || sizeClasses.md; 
 
-  return SelectedIcon ? <img src={SelectedIcon} alt={`${type} icon`} className={`${sizeClass} ${className}`} onClick={onClick} style={style}/>  : null;
+  return SelectedIcon ? <img src={SelectedIcon} alt={`${type} icon`} className={`${sizeClass} ${className} icon-class`} onClick={onClick} style={style}/>  : null;
 };
 
 export default MyIcon;

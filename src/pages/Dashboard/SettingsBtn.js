@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Popconfirm, Divider } from "antd";
 import "./styles/SettingsBtn.css";
+import "../../components/Modals/styles/ModalStyles.css";
 import MyIcon from "../../components/Icon/MyIcon";
 import { RightOutlined } from "@ant-design/icons";
 import ProfileModal from "../../components/Modals/ProfileModal";
@@ -13,6 +14,8 @@ import ReportingSettingsModal from "../../components/Modals/ReportingSettingsMod
 import { useLogoutUser } from "../../hooks/useLogoutUser";
 import { useDispatch, useSelector } from "react-redux";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
+import { IMAGES } from "../../data/ImageData";
+import { ICONS } from "../../data/IconData";
 
 
 const SettingsBtn = () => {
@@ -44,35 +47,44 @@ const SettingsBtn = () => {
     dispatch(setRerenderDashboard(!rerender_dashboard))
   };
   return (
-    <div>
+    <div className="setting-modals">
       <button className="settings-btn" onClick={() => setIsModalVisible(true)}>
         <span className="settings-btn-wrapper"><MyIcon type="settings" /> Settings</span>
       </button>
 
       <Modal
-        title={ <span className="settings-header"> <MyIcon type="settings" style={{ marginRight: "5px" }} /> Settings </span> }
+        title={ false }
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null} 
         centered
+        closable={false}
     >
-        <div className="modal-options">
+            
+    <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="settings" style={{ marginRight: "5px" }} /> Settings </span>
+ <span ><MyIcon type={'close_icon'} onClick={()=>setIsModalVisible(false)} size="lg" className="close-icon"/></span>
+    </div>
+            
+    <div className="custom-modal-content">
+    <div className="">
           {options.map((option) => (
             <>
             
-            <div key={option.name} className="modal-option" onClick={() => handleOptionClick(option)} >
-              <button type="text" className="modal-option-btn"> <MyIcon type={option.icon} /> <span>{option.name}</span> </button>
-              <span> <RightOutlined /> </span>
+            <div key={option.name} className="modal-option custom-modal-option" onClick={() => handleOptionClick(option)} >
+              <button type="text" className="modal-option-btn"> <img src={ICONS[option.icon]} alt="" height={20} /> <span>{option.name}</span> </button>
+              <span> <img src={ICONS.arrow_right} style={{height:"10px"}}/> </span>
             </div>
             <Divider style={{margin:"0px 0px"}}/></>
 
           ))}
         </div>
-        <div className="modal-option">
+        <div className=" custom-modal-option modal-option">
             <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser}  okText="Yes" cancelText="No" >
                 <button type="text" className="modal-option-btn"><MyIcon type={'logout'} /> <span>Logout</span> </button>
             </Popconfirm>
         </div>
+    </div>
       </Modal>
 
       {activeOption && (

@@ -23,6 +23,7 @@ import {
   setRerenderDashboard,
   setTemporaryMessage,
 } from "../../redux/AuthToken/Action";
+import { DOMAIN_NAME } from "../../utils/GlobalSettings";
 
 const { Panel } = Collapse;
 
@@ -106,7 +107,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
               header={
                 <>
                   <span className="panel-header-span">
-                    <MyIcon type={"user"} /> {CurrentAccount?.name}
+                    {CurrentAccount?.account_image?<img src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px"}}/>:<MyIcon type={"user"} />} {CurrentAccount?.name}
                   </span>
                 </>
               }

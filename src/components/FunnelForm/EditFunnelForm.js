@@ -31,6 +31,8 @@ const EditFunnelForm = ({ initialValues = {}, onFinish,onClose }) => {
   };
 
   return (
+   <>
+    <div className="custom-modal-content modal-content">
     <Form form={form} initialValues={initialValues} onFinish={(values) => onFinish({ ...values, steps })} layout="vertical" >
       <Form.Item name="name" label="Funnel Name" rules={[{ required: true, message: "Funnel Name is required." }]}   className='form-item'
                 required={false}>
@@ -78,22 +80,24 @@ const EditFunnelForm = ({ initialValues = {}, onFinish,onClose }) => {
         </Panel>
       </Collapse>
 
-        <div className="modal-actions">
-          <span className="modal-actions-btn-2">
-        <Button type="primary" htmlType="submit" className="create-btn">
-        <MyIcon type={"tick"} />Update Funnel
-        </Button>
-          </span>
-        <span className="modal-actions-btn-1">
-        <Button onClick={() => {
-            form.resetFields()
-            onClose()
-        }} className="cancel-btn">
-        <MyIcon type={"cross_red"} /> Cancel
-        </Button>
-          </span>
-        </div>
-    </Form>
+    </Form></div>
+    
+    <div className="modal-actions">
+    <span className="btn-2">
+  <Button type="primary" htmlType="submit" className="create-btn">
+  <MyIcon type={"tick"} />Update Funnel
+  </Button>
+    </span>
+  <span className="btn-1">
+  <Button onClick={() => {
+      form.resetFields()
+      onClose()
+  }} className="cancel-btn">
+  <MyIcon type={"cross_red"} /> Cancel
+  </Button>
+    </span>
+  </div></>
+  
   );
 };
 

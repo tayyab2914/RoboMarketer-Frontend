@@ -48,29 +48,22 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
 
   return (
     <Modal
-      title={
-        <span className="reporting-modal-header">
-          <MyIcon type={"reporting"} style={{ marginRight: "5px" }} /> Reporting
-        </span>
-      }
-      visible={isModalVisible}
-      width={700}
-      onCancel={onCloseModal}
-      footer={[
-        <div className="modal-actions">
-          <span className="btn-2">
-            <Button type="primary" onClick={handleSave} className="create-btn">
-              <MyIcon type={"tick"} /> Save
-            </Button>
-          </span>
-          <span className="btn-1">
-            <Button onClick={onCloseModal} className="cancel-btn">
-              <MyIcon type={"cross_red"} /> Cancel
-            </Button>
-          </span>
-        </div>,
-      ]}
-    >
+    title={ false }
+    centered
+    visible={isModalVisible}
+    onCancel={onCloseModal}
+    closable={false}
+    footer={false}
+    width={650}
+  >
+
+                   <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="reporting" style={{ marginRight: "5px" }} size="md"/> Reporting
+ </span>
+ <span ><MyIcon type={'close_icon'} onClick={onCloseModal} size="lg" className="close-icon"/></span>
+    </div>
+            
+    <div className="custom-modal-content modal-content">
       <Row gutter={16}>
         <Col xs={12} className="modal-scrollable">
           <p className="modal-title">Choose Metrics</p>
@@ -95,7 +88,20 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
           handleRemoveMetric={handleRemoveMetric}
           onDragEnd={onDragEnd} // Pass the onDragEnd function here
         />
-      </Row>
+      </Row></div>
+      <div className="modal-actions">
+          <span className="btn-2">
+            <Button type="primary" onClick={handleSave} className="create-btn">
+              <MyIcon type={"tick"} /> Save
+            </Button>
+          </span>
+          <span className="btn-1">
+            <Button onClick={onCloseModal} className="cancel-btn">
+              <MyIcon type={"cross_red"} /> Cancel
+            </Button>
+          </span>
+        </div>
+
     </Modal>
   );
 };

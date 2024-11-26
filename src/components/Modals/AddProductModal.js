@@ -28,18 +28,20 @@ const AddProductModal = ({
 
   return (
     <Modal
-    
-      title={<span className="product-modal-header">
-        <span>
-          <MyIcon type="products" style={{ marginRight: "5px" }} />
-          Add Product / Service
-        </span>
-      </span>}
-      visible={isVisible}
-      onCancel={onClose}
-      centered
-      footer={null}
-    >
+    title={ false }
+    centered
+    visible={isVisible}
+    onCancel={onClose}
+    closable={false}
+    footer={false}
+  >
+                               
+                               <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="products" style={{ marginRight: "5px" }} size="md"/> Add Product / Service
+ </span>
+ <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
+    </div>
+            
       {showSpinner && <Spin fullscreen />}
       <ProductForm form={form} onFinish={handleAdd} />
     </Modal>

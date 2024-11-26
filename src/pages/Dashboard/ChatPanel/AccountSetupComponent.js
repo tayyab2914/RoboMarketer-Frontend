@@ -87,13 +87,21 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
   };
   return (
     <Modal
-      title="Account Setup"
-      visible={isVisible}
-      onCancel={onClose}
-      footer={null}
-      width={700}
-      className="account-setup-modal"
-    >
+    title={ false }
+    width={700}
+    visible={isVisible}
+    onCancel={onClose}
+    closable={false}
+    footer={false}
+  >
+                               
+                               <div className="custom-modal-header">
+    <span className="modal-header">Account Setup
+ </span>
+ <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
+    </div>
+            
+    <div className="custom-modal-content modal-content">
       <Row style={{ width: "100%" }}>
         <Col
           xs={24}
@@ -173,7 +181,7 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
             )}
           </div>
         </Col>
-      </Row>
+      </Row></div>
     </Modal>
   );
 };

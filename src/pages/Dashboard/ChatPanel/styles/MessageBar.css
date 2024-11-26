@@ -16,6 +16,15 @@ cursor: pointer;
 .message-bar-input{
     height: 40px;
     margin-bottom: 0px;
+    border: none !important;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    font-family: "Inter", serif;
+}
+.message-bar-input::placeholder{
+    
+    font-weight: 500;
 }
 .message-bar{
     background-color: white;
@@ -31,9 +40,10 @@ cursor: pointer;
     cursor: not-allowed;
   }
   
+  .message-bar-input
   .message-bar .ant-input{
     background-color: white !important;
-    border: none !important;
+    /* border: none !important; */
   }
   .file-preview-container{
     display: flex;

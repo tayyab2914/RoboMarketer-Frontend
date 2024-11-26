@@ -5,6 +5,7 @@ import MyIcon from "../Icon/MyIcon";
 import { DownOutlined } from "@ant-design/icons";
 import "../Modals/styles/ModalStyles.css";
 import { NAME_RULES_REQUIRED } from "../../utils/Rules";
+import { ICONS } from "../../data/IconData";
 
 const { Panel } = Collapse;
 
@@ -27,6 +28,9 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
     setSelectedType(e.target.value);
   };
   return(
+    
+   <>
+    <div className="custom-modal-content modal-content">
   <Form form={form} onFinish={onFinish} layout="vertical">
     <Form.Item name="type" initialValue="product">
     <Radio.Group onChange={handleTypeChange}>
@@ -45,7 +49,7 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
         </Radio.Group>
     </Form.Item>
 
-    <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+    <Collapse defaultActiveKey={["0"]} expandIconPosition="right"  expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
       <Panel header={<span className="modal-panel-header"> <MyIcon type="product_service_details" style={{ marginRight: "5px" }} /> Product / Service Details </span>} key="1">
         <InputSection name="product_name" label="Product / Service Name" placeholder="Type Name..." />
         <InputSection name="product_description" label="Description" placeholder="Type Description..." />
@@ -59,13 +63,13 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
       </Panel>
     </Collapse>
 
-    <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+    <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
       <Panel header={<span className="modal-panel-header"> <MyIcon type="user" style={{ marginRight: "5px" }} /> Target Audience</span>} key="1">
         <InputSection name="target_audience_description" label="Target Audience Description" placeholder="Describe the target audience..." isTextArea />
       </Panel>
     </Collapse>
 
-    <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+    <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
       <Panel header={<span className="modal-panel-header"> <MyIcon type="demographics" style={{ marginRight: "5px" }} /> Demographics</span>} key="1">
         <InputSection name="demographics_age_range" label="Age Range" placeholder="Age Range (e.g., 18-25)" />
         <InputSection name="demographics_gender" label="Gender" placeholder="Gender (e.g., Male, Female, Other)" />
@@ -75,14 +79,14 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
       </Panel>
     </Collapse>
 
-    <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+    <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
       <Panel header={<span className="modal-panel-header"> <MyIcon type="user" style={{ marginRight: "5px" }} /> Interests</span>} key="1">
         <InputSection name="primary_interest" label="Primary Interests" placeholder="Primary Interests..." />
         <InputSection name="secondary_interest" label="Secondary Interests" placeholder="Secondary Interests..." />
       </Panel>
     </Collapse>
 
-    <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+    <Collapse defaultActiveKey={["0"]} expandIconPosition="right" expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
       <Panel header={<span className="modal-panel-header"> <MyIcon type="psychographics" style={{ marginRight: "5px" }} /> Psychographics</span>} key="1">
         <InputSection name="paid_points_or_challenges" label="Paid Points / Challenges" placeholder="Paid Points / Challenges..." />
         <InputSection name="goals_motivation" label="Goals / Motivations" placeholder="Goals / Motivations..." />
@@ -91,19 +95,20 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
         <InputSection name="unique_needs_or_preferences" label="Unique Needs / Preferences" placeholder="Unique Needs / Preferences..." />
       </Panel>
     </Collapse>
+  </Form></div>
     <div className="modal-actions">
-          <span className="modal-actions-btn-2">
+          <span className="btn-2">
         <Button type="primary" htmlType="submit" className="create-btn">
         <MyIcon type={"tick"} />Create Product/Service
         </Button>
           </span>
-        <span className="modal-actions-btn-1">
+        <span className="btn-1">
         <Button onClick={onCancel} className="cancel-btn">
         <MyIcon type={"cross_red"} /> Cancel
         </Button>
           </span>
-        </div>
-  </Form>
+        </div></>
+        
 );}
 
 export default ProductForm;

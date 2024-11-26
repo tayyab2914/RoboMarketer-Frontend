@@ -3,6 +3,7 @@ import { Modal, Spin, message, Form } from "antd";
 import { useSelector } from "react-redux";
 import EditProductForm from "../ProductForm/EditProductForm";
 import { API_GET_PRODUCT, API_UPDATE_PRODUCT } from "../../apis/MarketingToolsApis";
+import MyIcon from "../Icon/MyIcon";
 
 const EditProductModal = ({ isVisible, onClose, productId,ListProducts }) => {
 
@@ -55,13 +56,20 @@ const EditProductModal = ({ isVisible, onClose, productId,ListProducts }) => {
 
   return (
     <Modal
-
-    title="Edit Product / Service"
+    title={ false }
+    centered
     visible={isVisible}
     onCancel={onClose}
-    centered
-    footer={null}
+    closable={false}
+    footer={false}
   >
+                       
+                       <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="products" style={{ marginRight: "5px" }} size="md"/> Edit Product / Service
+ </span>
+ <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
+    </div>
+            
     {showSpinner && <Spin fullscreen />}
     {showForm && (
       <EditProductForm

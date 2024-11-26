@@ -9,6 +9,7 @@ import { API_CREATE_PROMPT } from '../../apis/ChatApis';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_PROMPT_CATEGORIES } from '../../utils/Methods';
 import { setRerenderDashboard } from '../../redux/AuthToken/Action';
+import { ICONS } from '../../data/IconData';
 
 const { TextArea } = Input;
 
@@ -64,22 +65,32 @@ const AddPromptBtn = () => {
   return (
     <div>
       <MyButton variant="filled" text={<span className="add-prompt-span"><MyIcon type={'plus'} /> Add Prompt</span>} className="add-prompt-btn" onClick={showModal} />
-
-      <Modal 
-        title={<span className='create-prompt-header'><MyIcon type={'note'} style={{ marginRight: "5px" }} />Create Prompt</span>}  
-        visible={isModalVisible}   
-        onCancel={handleCancel}    
-        footer={null}   
-        width={600}>
+      <Modal
+    title={ false }
+    centered
+    visible={isModalVisible}
+    onCancel={handleCancel}
+    closable={false}
+    footer={false}
+    width={500}
+  >
         
-        <div>
+        <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="note" style={{ marginRight: "5px" }} /> Create Prompt
+ </span>
+ <span ><MyIcon type={'close_icon'} onClick={handleCancel} size="lg" className="close-icon"/></span>
+    </div>
+            
+    <div className="custom-modal-content modal-content">
           <div className="">
             <p className="modal-field-label-block">Select Category</p>
             <Select 
               value={category} 
               onChange={setCategory} 
               style={{ width: '100%', height: "40px" }} 
-              placeholder="Select a category" 
+              placeholder="Category" 
+              className='add-prompt-btn-select'
+              suffixIcon={<img src={ICONS.arrow_down} height={7}/>}
             >
               {GET_PROMPT_CATEGORIES?.map((item) => <Select.Option key={item.header} value={item.header}>{item.header}</Select.Option>)}
             </Select>
@@ -88,25 +99,27 @@ const AddPromptBtn = () => {
           <div className="">
             <p className="modal-field-label-block">Prompt Name</p>
             <Input 
-              style={{ height: "40px" }} 
+              height={70}
               value={prompt_name} 
               onChange={(e) => setPromptName(e.target.value)} 
               placeholder="Enter prompt name" 
+              className='add-prompt-btn-input'
             />
           </div>
 
           <div className="">
             <p className="modal-field-label-block">Prompt</p>
             <TextArea 
+              className='add-prompt-btn-text-area'
+            rows={5}
               value={prompt} 
               onChange={(e) => setPrompt(e.target.value)} 
-              rows={4} 
               autoSize={false} 
               placeholder="Enter prompt details" 
             />
           </div>
 
-          <div className="">
+          <div className="add-prompt-upload-sop-docs">
             <p className="modal-field-label-block">Upload SOP Docs</p>
             <FileUploader
               fileList={file_group}

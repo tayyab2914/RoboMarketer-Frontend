@@ -17,14 +17,16 @@ const { Dragger } = Upload;
 
 const AccountModal = ({ isVisible, onClose }) => {
   const [showSpinner, setShowSpinner] = useState(false);
-  const { isLoggedIn, token, current_account } = useSelector((state) => state.authToken);
+  const { isLoggedIn, token, current_account } = useSelector(
+    (state) => state.authToken
+  );
   const [profilePic, setProfilePic] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [name, setName] = useState(current_account?.name);
+  const [isEditingPhoto, setIsEditingPhoto] = useState(false); // Track if the user is editing the photo
 
-  console.log(current_account);
   const props = {
-    name: 'file',
+    name: "file",
     multiple: false,
     beforeUpload(file) {
       if (profilePic) {
@@ -45,7 +47,13 @@ const AccountModal = ({ isVisible, onClose }) => {
     try {
       const formData = new FormData();
       formData.append("profile_pic", profilePic);
-      const response = await API_UPDATE_ACCOUNT(token, current_account?.id, null, profilePic, setShowSpinner);
+      const response = await API_UPDATE_ACCOUNT(
+        token,
+        current_account?.id,
+        null,
+        profilePic,
+        setShowSpinner
+      );
       console.log(profilePic);
     } catch (error) {
       message.error("Failed to upload profile picture.");
@@ -53,6 +61,7 @@ const AccountModal = ({ isVisible, onClose }) => {
       setShowSpinner(false);
       setIsUploading(false);
       setProfilePic(null);
+      setIsEditingPhoto(false); // Reset editing state after upload
       onClose();
     }
   };
@@ -62,7 +71,13 @@ const AccountModal = ({ isVisible, onClose }) => {
       message.error("Please enter a name.");
       return;
     }
-    await API_UPDATE_ACCOUNT(token, current_account?.id, name, null, setShowSpinner);
+    await API_UPDATE_ACCOUNT(
+      token,
+      current_account?.id,
+      name,
+      null,
+      setShowSpinner
+    );
 
     onClose();
   };
@@ -70,36 +85,92 @@ const AccountModal = ({ isVisible, onClose }) => {
   useEffect(() => {
     if (!isVisible) {
       setProfilePic(null);
+      setIsEditingPhoto(false); // Reset editing state when modal is closed
     }
   }, [isVisible]);
 
   return (
     <>
       {showSpinner && <Spin fullscreen />}
-      <Modal title={<span className="modal-header"><MyIcon type={"account"} style={{ marginRight: "5px" }} /> Account (Client) </span>} centered visible={isVisible} onCancel={onClose} footer={null} >
+      <Modal
+        className=""
+        title={false}
+        centered
+        visible={isVisible}
+        onCancel={onClose}
+        closable={false}
+        footer={null}
+      >
+        <div className="custom-modal-header">
+          <span className="modal-header">
+            <MyIcon type="account" style={{ marginRight: "5px" }} size="md" /> 
+            Account (Client) Settings
+          </span>
+          <span>
+            <MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" />
+          </span>
+        </div>
+
         <div className="modal-content">
-          <div className="account-modal-upload-group " style={{ marginTop: "20px", textAlign: "center" }}>
-            {current_account?.account_image && <img src={`${DOMAIN_NAME}${current_account?.account_image}`} alt="" className="account-modal-img" />}
-            <Dragger {...props} itemRender={() => <></>} disabled={profilePic} accept=".png, .jpg, .svg" className="account-modal-dragger">
-              <div className="ant-upload-text">
-                {profilePic ? (
-                  <p style={{ color: "#00c514", marginTop: "20px" }}> Profile Picture Selected: {profilePic.name} </p>
-                ) : (
-                  <>
-                    <div><img src={IMAGES.user} alt="" /></div>
-                    {current_account?.account_image ? "Change" : "Upload"} Profile Photo
-                  </>
-                )}
-              </div>
-            </Dragger>
+          <div
+            style={{ marginTop: "20px", textAlign: "center" }}
+          >
+            {/* {current_account?.account_image && (
+              
+            )} */}
+            {isEditingPhoto || !current_account?.account_image ? (
+              <Dragger
+                {...props}
+                itemRender={() => <></>}
+                disabled={profilePic}
+                accept=".png, .jpg, .svg"
+                className="account-modal-dragger"
+              >
+                <div className="ant-upload-text">
+                  {profilePic ? (
+                    <p style={{ color: "#00c514", marginTop: "20px" }}>
+                      Profile Picture Selected: {profilePic.name}
+                    </p>
+                  ) : (
+                    <>
+                      <div>
+                        <img src={IMAGES.user} alt="" />
+                      </div>
+                      {current_account?.account_image ? "Change" : "Upload"} Photo
+                    </>
+                  )}
+                </div>
+              </Dragger>
+            ) : (
+                <>
+                <div style={{textAlign:"center"}}> 
+                <img
+                src={`${DOMAIN_NAME}${current_account?.account_image}`}
+                alt=""
+                style={{height:"auto",maxWidth:"300px",maxHeight:"200px"}}
+                // className="account-modal-img"
+              />
+                </div>
+              <MyButton
+                text={"Edit Profile Photo"}
+                variant="filled"
+                onClick={() => setIsEditingPhoto(true)}
+                className={"form-item"}
+              />
+              </>
+            )}
           </div>
           {profilePic && (
-            <MyButton text={'Upload Photo'} variant="filled" onClick={handleUploadClick} className={'form-item'} />
+            <MyButton
+              text={"Upload Photo"}
+              variant="filled"
+              onClick={handleUploadClick}
+              className={"form-item"}
+            />
           )}
           <p className="input-group-label">Account Name</p>
           <div className="input-group form-item">
             <span className="input-group-input">
-              {/* Wrap the Input with Form.Item to apply the validation rules */}
               <Form initialValues={{ account_name: current_account?.name }}>
                 <Form.Item
                   name="account_name"
@@ -108,7 +179,7 @@ const AccountModal = ({ isVisible, onClose }) => {
                 >
                   <Input
                     placeholder="Type account name"
-                    value={current_account?.name} // Set the default value as current_account.name
+                    value={current_account?.name}
                     onChange={(e) => setName(e.target.value)}
                     className="inline-input"
                   />
@@ -116,7 +187,11 @@ const AccountModal = ({ isVisible, onClose }) => {
               </Form>
             </span>
             <span className="input-group-btn">
-              <Button type="primary" className="inline-input-btn" onClick={handleNameUpdate} required={false}>
+              <Button
+                type="primary"
+                className="inline-input-btn"
+                onClick={handleNameUpdate}
+              >
                 Update
               </Button>
             </span>

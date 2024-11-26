@@ -82,6 +82,7 @@ export const SELECT_COLORS = {
   fontFamily: "montserrat",
   controlOutline: THEME_COLORS.colorAccent,
   optionSelectedBg: THEME_COLORS.colorLightAccent,
+  colorBorder:"#E6EAED"
 };
 
 export const RADIO_COLORS = {

@@ -82,7 +82,7 @@ const MessageBar = ({isDisabled}) => {
           <MyIcon
             type={"plus_black"}
             className={`message-bar-plus ${disabled ? "disabled-icon" : ""}`}
-            size="xl"
+            size="lg"
           />{" "}
         </label>
         {file && (
@@ -106,18 +106,19 @@ const MessageBar = ({isDisabled}) => {
           type="file"
           style={{ display: "none" }}
           onChange={handleFileSelect}
-          disabled={disabled}
+        //   disabled={disabled}
         />
       </Col>
       <Col flex="auto">
-        <Input
-          placeholder="Type a message..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onPressEnter={handleSendMessage}
-          className="message-bar-input"
-          disabled={disabled}
-        />
+      <input
+  type="text" 
+  placeholder="Type Message..."
+  value={message}  // Bind the input value to the `message` state
+  onChange={(e) => setMessage(e.target.value)}  // Update the state on input change
+  className="message-bar-input"
+  disabled={disabled}
+/>
+
       </Col>
       <Col>
         <MyIcon

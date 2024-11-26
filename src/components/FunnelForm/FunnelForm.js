@@ -23,6 +23,9 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
   };
 
   return (
+    
+   <>
+    <div className="custom-modal-content modal-content">
     <Form form={form} initialValues={initialValues} onFinish={(values) => onFinish({ ...values, steps })} layout="vertical">
       <Form.Item
         name="name"
@@ -108,19 +111,21 @@ const FunnelForm = ({ initialValues = {}, onFinish, onCancel}) => {
         </Panel>
       </Collapse>
 
+    </Form>
+    </div>
         <div className="modal-actions">
-          <span className="modal-actions-btn-2">
+          <span className="btn-2">
         <Button type="primary" htmlType="submit" className="create-btn">
         <MyIcon type={"tick"} />Add Funnel
         </Button>
           </span>
-        <span className="modal-actions-btn-1">
+        <span className="btn-1">
         <Button onClick={onCancel} className="cancel-btn">
         <MyIcon type={"cross_red"} /> Cancel
         </Button>
           </span>
-        </div>
-    </Form>
+        </div></>
+        
   );
 };
 

@@ -64,9 +64,16 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
 
   return (
     <>
-      <Modal
-        title={
-          <span className="funnel-modal-header">
+       <Modal
+          title={ false }
+          centered
+          visible={isVisible}
+          onCancel={onClose}
+          closable={false}
+          footer={false}
+        >
+                   <div className="custom-modal-header">
+                   <span className="funnel-modal-header" style={{width:"100%"}}>
             <span>
             <MyIcon type="marketing_funnels" style={{ marginRight: "5px" }} />
               Funnels / Websites{" "}
@@ -79,12 +86,10 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
               Add New
             </Button>
           </span>
-        }
-        centered
-        visible={isVisible}
-        onCancel={onClose}
-        footer={null}
-      >
+          <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
+    </div>
+            
+    <div className="custom-modal-content modal-content">
         <div className="funnel-list">
           {Funnels?.map((Funnel) => (
             <div key={Funnel.id} className="funnel-item">
@@ -106,7 +111,7 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
                 </Popconfirm>
               </span>
             </div>
-          ))}
+          ))}</div>
         </div>
       </Modal>
       <EditFunnelModal

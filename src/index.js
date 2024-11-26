@@ -27,7 +27,8 @@ root.render(
         Progress:PROGRESS_COLORS,
         Button:BUTTON_COLORS,
         Checkbox:CHECKBOX_COLORS,
-        Table:TABLE_COLORS
+        Table:TABLE_COLORS,
+        Collapse:{colorBorder:"#E6EAED"}
       },
     }}
   >

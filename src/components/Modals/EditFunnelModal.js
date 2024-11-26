@@ -3,6 +3,7 @@ import { Modal, Spin, message, Form } from "antd";
 import { useSelector } from "react-redux";
 import EditFunnelForm from "../FunnelForm/EditFunnelForm";
 import { API_GET_FUNNEL, API_UPDATE_FUNNEL } from "../../apis/MarketingToolsApis";
+import MyIcon from "../Icon/MyIcon";
 
 const EditFunnelModal = ({ isVisible, onClose, funnelId,ListFunnels }) => {
   const { token } = useSelector((state) => state.authToken);
@@ -49,12 +50,19 @@ const EditFunnelModal = ({ isVisible, onClose, funnelId,ListFunnels }) => {
 
   return (
     <Modal
-      title="Edit Funnel / Website"
-      visible={isVisible}
-      onCancel={onClose}
-      centered
-      footer={null}
-    >
+    title={ false }
+    centered
+    visible={isVisible}
+    onCancel={onClose}
+    closable={false}
+    footer={false}
+  >
+                   
+                   <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="marketing_funnels" style={{ marginRight: "5px" }} size="md"/> Edit Funnel / Website
+ </span>a
+    </div>
+            
       {showSpinner && <Spin fullscreen />}
       {showForm && (
         <EditFunnelForm

@@ -7,6 +7,7 @@ import FileUploader from "../FileUploader/FileUploader";
 import { UTILS_COMBINE_DATA } from "../../utils/Methods";
 import { API_GET_ROBOMARKETER_IQ, API_UPDATE_ROBOMARKETER_IQ } from "../../apis/MarketingToolsApis";
 import { useSelector } from "react-redux";
+import { ICONS } from "../../data/IconData";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -94,14 +95,22 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
   return (
     <>
     {showSpinner && <Spin fullscreen/>}
-    <Modal title={ <span className="modal-header"> <MyIcon type={"robomarketer"} style={{ marginRight: "5px" }} /> RoboMarketerIQ </span> } visible={isVisible} centered onCancel={onClose}
-      footer={[
-        <div className="modal-actions" key="footer">
-          <span className="modal-actions-btn-2"> <Button type="primary" onClick={handleSave} className="create-btn"> <MyIcon type={"tick"} /> Save </Button></span>
-          <span className="modal-actions-btn-1"> <Button onClick={onClose} className="cancel-btn"> <MyIcon type={"cross_red"} /> Cancel </Button> </span>
-        </div>
-      ]}
-    >
+    <Modal
+          title={ false }
+          centered
+          visible={isVisible}
+          onCancel={onClose}
+          closable={false}
+          footer={false}
+        >
+           
+           <div className="custom-modal-header">
+    <span className="modal-header"> <MyIcon type="robomarketer" style={{ marginRight: "5px" }} size="md"/> RoboMarketerIQ
+ </span>
+ <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
+    </div>
+            
+    <div className="custom-modal-content modal-content">
       <p className="modal-description">Customize your RoboMarketer AI Agent With Your Target KPIs, Monthly Goals, And Preferences</p>
       <div>
         {/* <p className="modal-field-label-block">Select Industry Type</p> */}
@@ -111,6 +120,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
   placeholder={<p className="select-placeholder"><MyIcon type={'select_industry'}/>Select industry type</p>}
   value={FormValues.industry_type || undefined} // Shows placeholder if industry_type is undefined or empty
   onChange={(value) => handleValueChange("industry_type", value)}
+  suffixIcon={<img src={ICONS.arrow_down} height={7}/>}
 >
   <Option value="technology">Technology</Option>
   <Option value="finance">Finance</Option>
@@ -120,7 +130,8 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
       </div>
 
       {/* Target KPIs Collapse */}
-      <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )} >
+      <Collapse className="modal-collapse" defaultActiveKey={[0]} expandIconPosition={"end"} expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )} 
+               >
         <Panel header={<p className="modal-panel-header"><MyIcon type={'target_kpi_modal'}/> Target KPIs</p>} key="1">
           <InputRow label="Max Daily Budget (Account)" value={FormValues.max_daily_budget} onChange={(e) => handleValueChange("max_daily_budget", e.target.value)} prefix="$" placeholder="0.00" />
           <InputRow label="Click Through Rate (CTR)" value={FormValues.clickthrough_rate_percentage} onChange={(e) => handleValueChange("clickthrough_rate_percentage", e.target.value)} suffix="%" placeholder="0.00" />
@@ -133,7 +144,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
       </Collapse>
 
       {/* Target Monthly Goals Collapse */}
-      <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
+      <Collapse className="modal-collapse" defaultActiveKey={[0]} expandIconPosition={"end"}  expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={<p className="modal-panel-header"><MyIcon type={'target_monthly_goal'}/> Target Monthly Goals</p>} key="1">
           <InputRow label="Leads" value={FormValues.leads} onChange={(e) => handleValueChange("leads", e.target.value)} placeholder="0" />
           <InputRow label="Appointments" value={FormValues.appointments} onChange={(e) => handleValueChange("appointments", e.target.value)} placeholder="0" />
@@ -143,7 +154,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
       </Collapse>
 
       {/* Preferences and File Uploader Collapse */}
-      <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
+      <Collapse className="modal-collapse" defaultActiveKey={[0]} expandIconPosition={"end"}expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={<p className="modal-panel-header"><MyIcon type={'preferences'}/> Preferences</p>} key="1">
           <div>
       <p className="modal-description">Type specific goals, preferences, or strategies that you would like your AI Agent RoboMarketer to follow</p>
@@ -152,7 +163,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
           </div>
         </Panel>
         </Collapse>
-        <Collapse className="modal-collapse" defaultActiveKey={[1]} expandIconPosition={"end"}>
+        <Collapse className="modal-collapse" defaultActiveKey={[0]} expandIconPosition={"end"}  expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={<p className="modal-panel-header"><MyIcon type={'preferences'}/> Standard Operating Procedures (SOP)</p>} key="1">
           <div className="">
             <p className="modal-field-label-block">Upload SOP Docs</p>
@@ -160,6 +171,11 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
         </div>
         </Panel>
       </Collapse>
+      </div>
+      <div className="modal-actions" key="footer">
+              <span className="btn-2"> <Button type="primary" onClick={handleSave} className="create-btn"> <MyIcon type={"tick"} /> Save </Button></span>
+              <span className="btn-1"> <Button onClick={onClose} className="cancel-btn"> <MyIcon type={"cross_red"} /> Cancel </Button> </span>
+            </div>
     </Modal></>
   );
 };

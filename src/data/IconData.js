@@ -69,8 +69,14 @@ import product_service_details from "../assets/icons/product_service_details.svg
 import account_setup from "../assets/icons/account_setup.svg";
 import arrow_up_down from "../assets/icons/arrow_up_down.svg";
 import arrow_down from "../assets/icons/arrow_down.svg";
+import close_icon from "../assets/icons/close_icon.svg";
+import arrow_right from "../assets/icons/arrow_right.svg";
+import upload from "../assets/icons/upload.svg";
 
 export const ICONS = {
+  arrow_right: arrow_right,
+  upload: upload,
+  close_icon: close_icon,
   arrow_down: arrow_down,
   arrow_up_down: arrow_up_down,
   product_service_details: product_service_details,
@@ -102,7 +108,8 @@ export const ICONS = {
   cross: cross,
   cross_red: cross_red,
   settings: settings,
-  reporting: reporting,
+//   reporting: reporting,
+  reporting: analytics,
   cpa: cpa,
   sales: sales,
   close_rate: close_rate,

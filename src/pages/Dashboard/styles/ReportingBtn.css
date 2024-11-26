@@ -3,9 +3,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
+    padding-bottom: 25px;
   }
   .modal-scrollable {
     flex-grow: 1; /* Allows the panel to take up remaining space */
@@ -91,8 +91,8 @@
     padding-bottom: 10px;
   }
   .modal-title {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 500;
     margin-bottom: 10px;
 }
 
@@ -101,7 +101,7 @@
     align-items: center;
     border: 1px solid #e6eaed;
     border-radius: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     font-weight: 500;
 }
 
@@ -114,7 +114,7 @@
 
 .selected-metric-name {
     flex-grow: 1; /* Allows the metric name to take up available space */
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
     padding: 8px;
     border-right: 1px solid #e6eaed;
@@ -140,22 +140,28 @@
 }
 
 .modal-actions button {
-  padding: 0px 10px;
-  width: 98%;
-  height: 40px;
-  border: none;
-}
-.modal-actions .btn-2 {
     width: 100%;
-    text-align: left;
-    margin: 0px;
-}
-.modal-actions .btn-1 {
-    margin: 0px;
-    text-align: right;
-    width: 100%;
-}
-
+    padding: 0px 10px;
+    height: 52px;
+    border: none;
+  }
+  .modal-actions .btn-1 {
+      width: 49% !important;
+      height: 52px !important;
+  }
+  .modal-actions .btn-2 {
+      width: 49% !important;
+      height: 52px !important;
+  
+  }
+  .modal-actions .btn-2 button:hover{
+      background-color: rgb(39, 39, 39) !important;
+  }
+  
+  .modal-actions .btn-1 button:hover{
+      background-color: rgb(255, 222, 222) !important;
+  }
+  
 .cancel-btn{
     background-color: rgba(250, 52, 52, 0.1);
     color: #FA3434;

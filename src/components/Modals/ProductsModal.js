@@ -17,8 +17,10 @@ const ProductsModal = ({ isVisible, onClose }) => {
   const { token } = useSelector((state) => state.authToken);
   const [showSpinner, setShowSpinner] = useState(false);
   const [products, setProducts] = useState([]);
-  const [isAddProductModalVisible, setIsAddProductModalVisible] =useState(false);
-  const [isEditProductModalVisible, setIsEditProductModalVisible] =useState(false);
+  const [isAddProductModalVisible, setIsAddProductModalVisible] =
+    useState(false);
+  const [isEditProductModalVisible, setIsEditProductModalVisible] =
+    useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
   const handleAddNewProduct = (newProduct) => {
@@ -66,12 +68,24 @@ const ProductsModal = ({ isVisible, onClose }) => {
 
   return (
     <>
-    {showSpinner && <Spin fullscreen/>}
+      {showSpinner && <Spin fullscreen />}
+
       <Modal
-        title={
-          <span className="product-modal-header">
+        title={false}
+        centered
+        visible={isVisible}
+        onCancel={onClose}
+        closable={false}
+        footer={false}
+      >
+        <div className="custom-modal-header" style={{ display: "flex" }}>
+          <span className="product-modal-header" style={{ width: "100%" }}>
             <span>
-              <MyIcon type="products" style={{ marginRight: "5px" }} />
+              <MyIcon
+                type="products"
+                style={{ marginRight: "5px" }}
+                size="md"
+              />
               Products / Services
             </span>
             <Button
@@ -82,34 +96,40 @@ const ProductsModal = ({ isVisible, onClose }) => {
               Add New
             </Button>
           </span>
-        }
-        centered
-        visible={isVisible}
-        onCancel={onClose}
-        footer={null}
-      >
-        <div className="product-list">
-          {products.map((product) => (
-            <div key={product.id} className="product-item">
-              <span className="product-name">{product.product_name}</span>
-              <span className="product-actions">
-                <MyIcon
-                  type="edit_btn"
-                  size="lg"
-                  style={{ marginRight: "5px" }}
-                  onClick={() => openEditProductModal(product.id)}
-                />
-                <Popconfirm
-                  title="Are you sure you want to delete this product?"
-                  onConfirm={() => onDeleteProduct(product.id)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <MyIcon type="delete_btn" size="lg" />
-                </Popconfirm>
-              </span>
-            </div>
-          ))}
+          <span>
+            <MyIcon
+              type={"close_icon"}
+              onClick={onClose}
+              size="lg"
+              className="close-icon"
+            />
+          </span>
+        </div>
+
+        <div className="custom-modal-content modal-content">
+          <div className="product-list">
+            {products.map((product) => (
+              <div key={product.id} className="product-item">
+                <span className="product-name">{product.product_name}</span>
+                <span className="product-actions">
+                  <MyIcon
+                    type="edit_btn"
+                    size="lg"
+                    style={{ marginRight: "5px" }}
+                    onClick={() => openEditProductModal(product.id)}
+                  />
+                  <Popconfirm
+                    title="Are you sure you want to delete this product?"
+                    onConfirm={() => onDeleteProduct(product.id)}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <MyIcon type="delete_btn" size="lg" />
+                  </Popconfirm>
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </Modal>
 

@@ -4,8 +4,8 @@ import './App.css'
 import { API_UPDATE_INSIGHTS } from './apis/FacebookInsightsApis';
 import { useSelector } from 'react-redux';
 const App = () => {
-    const { isLoggedIn, isAdmin, token, facebook_state } = useSelector((state) => state.authToken);
-  
+    const { isLoggedIn, isAdmin, token, current_account } = useSelector((state) => state.authToken);
+  console.log(current_account)
   
     useEffect(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });

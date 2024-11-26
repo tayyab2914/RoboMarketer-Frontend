@@ -34,6 +34,8 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
     setSelectedType(e.target.value);
   };
   return (
+   <>
+    <div className="custom-modal-content modal-content">
     <Form form={form} onFinish={onFinish} layout="vertical">
       <Form.Item name="type" initialValue="product">
       <Radio.Group onChange={handleTypeChange}>
@@ -98,21 +100,23 @@ const EditProductForm = ({ initialValues = {}, onFinish, onClose }) => {
           <InputSection name="unique_needs_or_preferences" label="Unique Needs / Preferences" placeholder="Unique Needs / Preferences..." />
         </Panel>
       </Collapse>
-      <div className="modal-actions">
-          <span className="modal-actions-btn-2">
-        <Button type="primary" htmlType="submit" className="create-btn">
-        <MyIcon type={"tick"} />Update Product
-        </Button>
-          </span>
-        <span className="modal-actions-btn-1">
-        <Button onClick={() => {
-            form.resetFields()
-            onClose()}} className="cancel-btn">
-        <MyIcon type={"cross_red"} /> Cancel
-        </Button>
-          </span>
-        </div>
-    </Form>
+    </Form></div>
+    
+    <div className="modal-actions">
+    <span className="btn-2">
+  <Button type="primary" htmlType="submit" className="create-btn">
+  <MyIcon type={"tick"} />Update Product
+  </Button>
+    </span>
+  <span className="btn-1">
+  <Button onClick={() => {
+      form.resetFields()
+      onClose()}} className="cancel-btn">
+  <MyIcon type={"cross_red"} /> Cancel
+  </Button>
+    </span>
+  </div>
+  </>
   );
 };
 
