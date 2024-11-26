@@ -41,7 +41,12 @@ const MessageBar = ({isDisabled}) => {
     fileInput.value = null;
   };
   const handleSendMessage = async () => {
-    if (!disabled) {
+    // if (!disabled) {
+    if(!message)
+    {
+        setMessage(" ")
+    }
+    console.log('hello')
       dispatch(setTemporaryMessage(message));
       if (message.trim() || file) {
         setShowSpinner(true);
@@ -56,7 +61,7 @@ const MessageBar = ({isDisabled}) => {
           setdisabled(true);
           await API_GET_RESPONSE(
             token,
-            message || null,
+            message || " ",
             formData,
             setShowSpinner
           );
@@ -70,21 +75,13 @@ const MessageBar = ({isDisabled}) => {
           dispatch(setTemporaryMessage(null));
           setShowSpinner(false);
         }
-      }
+    //   }
     }
   };
 
   return (
     <Row align="middle" className="message-bar">
-      <Col className="file-preview-container">
-        <label htmlFor="file-upload">
-          {" "}
-          <MyIcon
-            type={"plus_black"}
-            className={`message-bar-plus ${disabled ? "disabled-icon" : ""}`}
-            size="lg"
-          />{" "}
-        </label>
+        <Col xs={24} style={{marginLeft:"10px"}}>
         {file && (
           <div className="file-preview-container">
             {" "}
@@ -97,10 +94,22 @@ const MessageBar = ({isDisabled}) => {
               }
               className="file-preview-container-badge"
             >
-              {RENDER_FILE_PREVIEW(file, 20, false)}
+              {RENDER_FILE_PREVIEW(file, 30, false)}
             </Badge>
           </div>
         )}
+        </Col>
+      <Col className="file-preview-container">
+     
+        <label htmlFor="file-upload">
+          {" "}
+          <MyIcon
+            type={"plus_black"}
+            className={`message-bar-plus ${disabled ? "disabled-icon" : ""}`}
+            size="lg"
+          />{" "}
+        </label>
+        
         <input
           id="file-upload"
           type="file"
@@ -116,7 +125,7 @@ const MessageBar = ({isDisabled}) => {
   value={message}  // Bind the input value to the `message` state
   onChange={(e) => setMessage(e.target.value)}  // Update the state on input change
   className="message-bar-input"
-  disabled={disabled}
+//   disabled={disabled}
 />
 
       </Col>
@@ -125,9 +134,10 @@ const MessageBar = ({isDisabled}) => {
           type={"arrow_up"}
           onClick={message ? () => handleSendMessage() : null}
           size="lg"
-          className={`message-arrow-up ${
-            message && !disabled ? "" : "disabled-icon"
-          }`}
+          className={'message-arrow-up'}
+        //   className={`message-arrow-up ${
+        //     message && !disabled ? "" : "disabled-icon"
+        //   }`}
         />
       </Col>
     </Row>

@@ -29,7 +29,7 @@ console.log('reportingData',reportingData)
       }
   return (
     <div className="right-panel-scrollable">
-      {reportingData.map((item, index) => (
+      {reportingData?.map((item, index) => (
         <p className="reporting-single-row" key={index}>
           <span className="reporting-text" style={{color: "black !important"  }}>
             <MyIcon type={item.key} /> {item.label}

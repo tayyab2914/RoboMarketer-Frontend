@@ -15,7 +15,7 @@ const MyScrollableList = ({ localSelectedMetrics, handleRemoveMetric, onDragEnd 
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {localSelectedMetrics.map((metric, index) => (
+              {localSelectedMetrics?.map((metric, index) => (
                 <Draggable key={metric} draggableId={metric} index={index}>
                   {(provided) => (
                     <div

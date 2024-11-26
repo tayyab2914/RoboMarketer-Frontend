@@ -15,15 +15,18 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
   }, [selectedMetrics]);
 
   const handleCheckboxChange = (key) => {
-    const updatedMetrics = localSelectedMetrics.includes(key)
-      ? localSelectedMetrics.filter((item) => item !== key)
-      : [...localSelectedMetrics, key];
+    const metricsArray = Array.isArray(localSelectedMetrics) ? localSelectedMetrics : [];
+    const updatedMetrics = metricsArray.includes(key)
+      ? metricsArray.filter((item) => item !== key)
+      : [...metricsArray, key];
     setLocalSelectedMetrics(updatedMetrics);
   };
-
+  
   const handleRemoveMetric = (key) => {
-    setLocalSelectedMetrics(localSelectedMetrics.filter((item) => item !== key));
+    const metricsArray = Array.isArray(localSelectedMetrics) ? localSelectedMetrics : [];
+    setLocalSelectedMetrics(metricsArray.filter((item) => item !== key));
   };
+  
 
   // Handle the end of the drag and update the order
   const onDragEnd = (result) => {
@@ -73,12 +76,12 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
               <span>{GET_METRIC_NAME_FROM_KEY(item.key)}</span>
               <div
                 className={`custom-checkbox ${
-                  localSelectedMetrics.includes(item.key) ? "checked" : ""
+                  localSelectedMetrics?.includes(item.key) ? "checked" : ""
                 }`}
                 onClick={() => handleCheckboxChange(item.key)}
               >
                 <span className="checkmark">
-                  {localSelectedMetrics.includes(item.key) && <CloseOutlined />}
+                  {localSelectedMetrics?.includes(item.key) && <CloseOutlined />}
                 </span>
               </div>
             </div>

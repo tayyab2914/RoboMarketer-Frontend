@@ -123,7 +123,8 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                       className="left-panel-btn"
                       onClick={() => handleAccountSwitch(account.id)}
                     >
-                      {account.name}
+                        {account?.account_image?<img src={`${DOMAIN_NAME}${account?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px"}}/>:<MyIcon type={"user"} />} {account.name}
+               
                       <MyIcon type={"elipsis"} />
                     </Button>
                   </div>

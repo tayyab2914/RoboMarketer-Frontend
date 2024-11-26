@@ -33,15 +33,16 @@ export const RENDER_FILE_PREVIEW = (file, size, showName) => {
   console.log(file);
   const fileType = file?.type;
 
-  if (fileType.startsWith("image/")) {
-    return (
-      <img
-        src={URL.createObjectURL(file?.originFileObj)}
-        alt={file?.name}
-        style={{ width: size, height: size, margin: "10px" }}
-      />
-    );
-  }
+    if (fileType?.startsWith("image/") && file?.originFileObj instanceof Blob) {
+        return (
+          <img
+            src={URL.createObjectURL(file.originFileObj)}
+            alt={file?.name}
+            style={{ width: size, height: size, margin: "10px" }}
+          />
+        );
+      }
+    
 
   if (fileType === "application/pdf") {
     return (

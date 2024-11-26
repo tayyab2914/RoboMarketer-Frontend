@@ -74,12 +74,10 @@ const DashboardRightPanel = () => {
       console.log('response2', response2.metric_order);
     
       // Step 1: Filter to get metrics set to true
-      const resultArray = Object.entries(response)
-        .filter(([key, value]) => value === true)
-        .map(([key]) => key);
+      const resultArray = Object.entries(response)?.filter(([key, value]) => value === true)?.map(([key]) => key);
     
       // Step 2: Sort based on response2.metric_order
-      const orderedMetrics = response2.metric_order.filter(metric => resultArray.includes(metric));
+      const orderedMetrics = response2?.metric_order?.filter(metric => resultArray.includes(metric));
     
       console.log('orderedMetrics', orderedMetrics);
       setSelectedMetrics(orderedMetrics);
@@ -213,9 +211,9 @@ const DashboardRightPanel = () => {
         </Collapse>
 
         <DashboardRightPanelInfo
-  reportingData={selectedMetrics.map((key) => 
-    Metrics.find((metric) => metric.key === key)
-  ).filter(Boolean)}
+  reportingData={selectedMetrics?.map((key) => 
+    Metrics?.find((metric) => metric.key === key)
+  )?.filter(Boolean)}
 />
 
 
