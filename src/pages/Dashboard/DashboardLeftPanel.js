@@ -153,6 +153,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                     </span>
                   </>
                 }
+                className="hello"
                 key={panel.key}
               >
                 {FILTER_PROMPTS_BY_CATEGORY(FetchedPrompts, panel.header)?.map(

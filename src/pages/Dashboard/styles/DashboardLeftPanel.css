@@ -134,3 +134,15 @@
 .logout-btn img {
   margin-right: 10px;
 }
+
+
+.hello{
+    position: absolute;
+    width: calc(100% - 30px);
+}
+.left-panel-collapse{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between !important;
+}

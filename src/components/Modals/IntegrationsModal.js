@@ -31,7 +31,7 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
   return (
     <>
       {showSpinner && <Spin fullscreen />}
-      {isAccountSetup && (
+      {isAccountSetup && showModal && (
           <Modal
           title={ false }
           centered
