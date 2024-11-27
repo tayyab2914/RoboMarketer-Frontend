@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/DashboardRightPanelInfo.css";
 import { useSelector } from "react-redux";
@@ -7,6 +7,9 @@ import { Spin } from "antd";
 const DashboardRightPanelInfo = ({reportingData}) => {
     const { isLoggedIn, token,rerender_dashboard,current_account } = useSelector((state) => state.authToken);
   
+    useEffect(()=>{
+
+    },[current_account?.historical_data_progress])
     const getSuffix = (label) => {
         if (["Return on Ad Spend"].includes(label)) {
             return "X";
