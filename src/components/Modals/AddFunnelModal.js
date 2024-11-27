@@ -38,7 +38,7 @@ const AddFunnelModal = ({ isVisible, onClose, onAddFunnel, ListFunnels }) => {
     </div>
             
       {showSpinner && <Spin fullscreen />}
-      <FunnelForm form={form} onFinish={handleAdd} />
+      <FunnelForm form={form} onFinish={handleAdd} onCancel={onClose}/>
     </Modal>
   );
 };

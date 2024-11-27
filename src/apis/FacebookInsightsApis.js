@@ -6,7 +6,7 @@ import {} from "../redux/AuthToken/Action";
 import { DOMAIN_NAME } from "../utils/GlobalSettings";
 
 export const API_GENERATE_AUTH_URL = async (token, setShowSpinner) => {
-  setShowSpinner(true);
+//   setShowSpinner(true);
   try {
     const response = await axios.get(
       `${DOMAIN_NAME}/facebookinsights/generate_auth_url/`,
@@ -21,7 +21,7 @@ export const API_GENERATE_AUTH_URL = async (token, setShowSpinner) => {
     //   message.error(error.response?.data?.message || "Wrong credentials");
     return false;
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 export const API_FETCH_TOKEN = async (
@@ -30,7 +30,7 @@ export const API_FETCH_TOKEN = async (
   state,
   setShowSpinner
 ) => {
-  setShowSpinner(true);
+//   setShowSpinner(true);
   try {
     const response = await axios.get(
       `${DOMAIN_NAME}/facebookinsights/fetch_token/`,
@@ -49,7 +49,7 @@ export const API_FETCH_TOKEN = async (
     // message.error(error.response?.data?.message || "");
     return false;
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 
@@ -60,7 +60,7 @@ export const API_SELECT_ACCOUNT = async (
   setShowSpinner
 ) => {
     console.log(fb_account_id,fb_account_name)
-  setShowSpinner(true);
+//   setShowSpinner(true);
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/facebookinsights/select_account/`,
@@ -81,12 +81,12 @@ export const API_SELECT_ACCOUNT = async (
       message.error(error.response?.data?.message);
     return false;
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 
 export const API_GET_REPORTING = async (token, setShowSpinner) => {
-  setShowSpinner(true);
+//   setShowSpinner(true);
   try {
     const response = await axios.get(
       `${DOMAIN_NAME}/facebookinsights/get_reporting/`,
@@ -101,12 +101,12 @@ export const API_GET_REPORTING = async (token, setShowSpinner) => {
     //   message.error(error.response?.data?.message || "Wrong credentials");
     return false;
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 
 export const API_GET_ORDERING = async (token, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
     try {
       const response = await axios.get(
         `${DOMAIN_NAME}/facebookinsights/get_ordering/`,
@@ -118,10 +118,10 @@ export const API_GET_ORDERING = async (token, setShowSpinner) => {
       );
       return response.data;
     } catch (error) {
-        message.error(error.response?.data?.message);
+        // message.error(error.response?.data?.message);
       return false;
     } finally {
-      setShowSpinner(false);
+    //   setShowSpinner(false);
     }
   };
   
@@ -131,7 +131,7 @@ export const API_UPDATE_REPORTING = async (
   setShowSpinner
 ) => {
 
-  setShowSpinner(true);
+//   setShowSpinner(true);
 
   try {
     const response = await axios.put(
@@ -149,7 +149,7 @@ export const API_UPDATE_REPORTING = async (
     message.error(error.response?.data?.message);
     return null;
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 export const API_GET_INSIGHTS = async (
@@ -158,7 +158,7 @@ export const API_GET_INSIGHTS = async (
   date_stop,
   setShowSpinner
 ) => {
-  setShowSpinner(true);
+//   setShowSpinner(true);
 
   try {
     const response = await axios.get(
@@ -179,12 +179,12 @@ export const API_GET_INSIGHTS = async (
     // message.error(error.response?.data?.message || "An error occurred");
     return null;
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 
 export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
-  setShowSpinner(true);
+//   setShowSpinner(true);
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/facebookinsights/fetch_historical_data/`,
@@ -235,7 +235,7 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     }
   };
   export const API_DISCONNECT_FACEBOOK = async (token, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
     try {
       const response = await axios.post(
         `${DOMAIN_NAME}/facebookinsights/disconnect_facebook/`,
@@ -264,8 +264,7 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     metric_order,
     setShowSpinner
   ) => {
-  console.log('metric_order',metric_order)
-    setShowSpinner(true);
+    // setShowSpinner(true);
   
     try {
       const response = await axios.put(
@@ -283,6 +282,6 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
       message.error(error.response?.data?.message);
       return null;
     } finally {
-      setShowSpinner(false);
+    //   setShowSpinner(false);
     }
   };

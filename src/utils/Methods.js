@@ -1,4 +1,5 @@
 import { Tooltip } from "antd";
+import { useEffect } from "react";
 import {
   UploadOutlined,
   FilePdfOutlined,
@@ -108,6 +109,90 @@ export const RENDER_FILE_PREVIEW = (file, size, showName) => {
     </span>
   );
 };
+
+function renderFile(url, fileName, size = 40, showName = false) {
+  const getFileTypeFromURL = (url) => {
+    const extension = url?.split('.')?.pop()?.toLowerCase();
+    const mimeTypes = {
+      pdf: "application/pdf",
+      png: "image/png",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      gif: "image/gif",
+      xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      xls: "application/vnd.ms-excel",
+      doc: "application/msword",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    };
+    return mimeTypes[extension] || "unknown";
+  };
+
+  const fileType = getFileTypeFromURL(url);
+
+  if (fileType.startsWith("image/")) {
+    return (
+      <img
+        src={url}
+        alt={fileName}
+        style={{ width: 'auto', height:  'auto',maxHeight:100,maxWidth:100,objectFit:"cover", marginBottom:"20px"  }}
+      />
+    );
+  }
+
+  if (fileType === "application/pdf") {
+    return (
+      <span style={{ display: "flex", flexDirection: "column" }}>
+        <Tooltip title={fileName}>
+          <FilePdfOutlined
+            style={{ fontSize: size, color: "#FF6F61", marginBottom:"20px" }}
+          />
+        </Tooltip>
+        {showName && <span style={{ color: "#101136" }}>{fileName?.slice(0, 13)}</span>}
+      </span>
+    );
+  }
+
+  if (fileType === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+    return (
+      <span style={{ display: "flex", flexDirection: "column" }}>
+        <Tooltip title={fileName}>
+          <FileExcelOutlined
+            style={{ fontSize: size, color: "#218838", marginBottom:"20px" }}
+          />
+        </Tooltip>
+        {showName && <span style={{ color: "#101136" }}>{fileName?.slice(0, 13)}</span>}
+      </span>
+    );
+  }
+
+  if (
+    fileType === "application/msword" ||
+    fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  ) {
+    return (
+      <span style={{ display: "flex", flexDirection: "column" }}>
+        <Tooltip title={fileName}>
+          <FileWordOutlined
+            style={{ fontSize: size, color: "#1E90FF", marginBottom:"20px" }}
+          />
+        </Tooltip>
+        {showName && <span style={{ color: "#101136" }}>{fileName?.slice(0, 13)}</span>}
+      </span>
+    );
+  }
+
+  // For other files, render a generic file icon
+  return (
+    <span style={{ display: "flex", flexDirection: "column" }}>
+      <Tooltip title={fileName}>
+        <FileOutlined style={{ fontSize: size, marginBottom:"20px" }} />
+      </Tooltip>
+      {showName && <span style={{ color: "#101136" }}>{fileName?.slice(0, 13)}</span>}
+    </span>
+  );
+}
+
+export default renderFile;
 
 export const AVAILABLE_METRICS = [
   { key: "spend", label: "Ad Spend" },

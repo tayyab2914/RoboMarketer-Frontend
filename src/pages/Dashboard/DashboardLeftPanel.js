@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IMAGES } from "../../data/ImageData";
-import { Button, Collapse, Popconfirm, Spin } from "antd";
-import { SettingOutlined, DownOutlined } from "@ant-design/icons";
+import { Button, Collapse, Popconfirm, Spin, Dropdown, Menu } from "antd";
+import { SettingOutlined, DownOutlined, EllipsisOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";  // Import EllipsisOutlined for the dropdown
 import "./styles/DashboardLeftPanel.css";
 import MyButton from "../../components/Button/Button";
 import MyIcon from "../../components/Icon/MyIcon";
@@ -24,19 +24,21 @@ import {
   setTemporaryMessage,
 } from "../../redux/AuthToken/Action";
 import { DOMAIN_NAME } from "../../utils/GlobalSettings";
-import { AnimatedSidebar } from "../../components/AnimatedSidebar";
+import EditPromptModal from "../../components/Modals/EditPromptModal";  // Assuming you have this modal component
 
 const { Panel } = Collapse;
 
 const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const dispatch = useDispatch();
   const [showSpinner, setShowSpinner] = useState(false);
-  const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel } =
+  const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel ,current_account} =
     useSelector((state) => state.authToken);
   const [CurrentAccount, setCurrentAccount] = useState({});
   const [FetchedPrompts, setFetchedPrompts] = useState([]);
   const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
-
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);  // State to control visibility of EditPromptModal
+  const [selectedPrompt, setselectedPrompt] = useState(null);  // State to store the selected prompt ID for editing
+console.log(current_account)
   // Effect to set the current account
   useEffect(() => {
     if (Accounts && Accounts.length) {
@@ -49,16 +51,17 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const getPrompts = async () => {
     const response = await API_GET_PROMPTS(token, setShowSpinner);
     setFetchedPrompts(response);
+    console.log(response);
   };
 
   // Handle prompt click
-  const handlePromptClick = async (message,id) => {
+  const handlePromptClick = async (message, id) => {
     const formData = new FormData();
     formData.append("prompt", id);
-    dispatch(setTemporaryMessage(message));
+    dispatch(setTemporaryMessage({ message }));
     await API_GET_RESPONSE(token, id, formData, setShowSpinner);
     dispatch(setRerenderChatPanel(!rerender_chat_panel));
-    dispatch(setTemporaryMessage(null));
+    dispatch(setTemporaryMessage({}));
   };
 
   // UseEffect to fetch prompts on initial render and when rerender_dashboard changes
@@ -82,12 +85,49 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
     dispatch(setRerenderDashboard(!rerender_dashboard));
   };
 
+  // Show the edit modal
+  const handleEditPrompt = (item) => {
+    console.log("item",item)
+    setselectedPrompt(item);  // Store the selected prompt ID
+    setIsEditModalVisible(true);  // Show the EditPromptModal
+  };
+
+  // Close the edit modal
+  const closeEditModal = () => {
+    setIsEditModalVisible(false);
+    setselectedPrompt(null);
+  };
+
+  // Menu for dropdown
+  const renderDropdownMenu = (item) => (
+    <Menu>
+    <Menu.Item key="edit" onClick={() => handleEditPrompt(item)}>
+      <span style={{ display: "flex", alignItems: "center" }}>
+        <EditOutlined style={{ marginRight: '10px' }} /> Edit
+      </span>
+    </Menu.Item>
+    <Menu.Item key="delete">
+      <Popconfirm
+        title="Are you sure you want to delete this prompt?"
+        onConfirm={() => handleDeletePrompt(item?.id)}
+        okText="Yes"
+        cancelText="No"
+      >
+        <span style={{ display: "flex", alignItems: "center" }}>
+          <DeleteOutlined style={{ marginRight: '10px' }} /> Delete
+        </span>
+      </Popconfirm>
+    </Menu.Item>
+  </Menu>
+  
+  );
+
   return (
     <div className="left-panel-container">
       {showSpinner && <Spin fullscreen />}
       <div className="left-panel-container-inner">
         <div className="left-panel-logo-wrapper">
-            {/* <AnimatedSidebar/> */}
+          {/* <AnimatedSidebar/> */}
           <img
             src={IMAGES.logo_png}
             alt="Panel Logo"
@@ -100,7 +140,14 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             className="left-panel-collapse-account"
             expandIconPosition={"end"}
             expandIcon={({ isActive }) => (
-              <img src={ICONS.arrow_up_down}style={{ height:"14px", transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)", }} />
+              <img
+                src={ICONS.arrow_up_down}
+                style={{
+                  height: "14px",
+                  transition: "transform 0.3s ease",
+                  transform: isActive ? "rotate(-180deg)" : "rotate(0deg)",
+                }}
+              />
             )}
             activeKey={AccountCollapseActiveKey}
             onChange={(key) => setAccountCollapseActiveKey(key)}
@@ -109,7 +156,22 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
               header={
                 <>
                   <span className="panel-header-span">
-                    {CurrentAccount?.account_image?<img src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px",borderRadius:"50%"}}/>:<MyIcon type={"user"} />} {CurrentAccount?.name}
+                    {CurrentAccount?.account_image ? (
+                      <img
+                        src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`}
+                        alt=""
+                        height={25}
+                        style={{
+                          height: "auto",
+                          maxWidth: "30px",
+                          maxHeight: "25px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    ) : (
+                      <MyIcon type={"user"} />
+                    )}
+                    {CurrentAccount?.name}
                   </span>
                 </>
               }
@@ -117,15 +179,29 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             >
               {Accounts?.filter((account) => !account.is_current_account).map(
                 (account) => (
-                  <div key={account.id} >
+                  <div key={account.id}>
                     <Button
                       type="text"
                       className="left-panel-btn"
-                      style={{justifyContent:"left"}}
+                      style={{ justifyContent: "left" }}
                       onClick={() => handleAccountSwitch(account.id)}
                     >
-                        {account?.account_image?<img src={`${DOMAIN_NAME}${account?.account_image}`} alt="" height={25} style={{height:"auto",maxWidth:"30px",maxHeight:"25px",borderRadius:"50%"}}/>:<MyIcon type={"user"} />} {account.name}
-               
+                      {account?.account_image ? (
+                        <img
+                          src={`${DOMAIN_NAME}${account?.account_image}`}
+                          alt=""
+                          height={25}
+                          style={{
+                            height: "auto",
+                            maxWidth: "30px",
+                            maxHeight: "25px",
+                            borderRadius: "50%",
+                          }}
+                        />
+                      ) : (
+                        <MyIcon type={"user"} />
+                      )}
+                      {account.name}
                     </Button>
                   </div>
                 )
@@ -141,7 +217,14 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             className="left-panel-collapse"
             expandIconPosition={"end"}
             expandIcon={({ isActive }) => (
-                <img src={ICONS.arrow_down}style={{ height:"5.5px", transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)", }} />
+              <img
+                src={ICONS.arrow_down}
+                style={{
+                  height: "5.5px",
+                  transition: "transform 0.3s ease",
+                  transform: isActive ? "rotate(-180deg)" : "rotate(0deg)",
+                }}
+              />
             )}
           >
             {GET_PROMPT_CATEGORIES?.map((panel) => (
@@ -158,28 +241,28 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                 {FILTER_PROMPTS_BY_CATEGORY(FetchedPrompts, panel.header)?.map(
                   (item) => (
                     <div key={item.id}>
-                      <Button
-                        type="text"
-                        className="left-panel-btn"
-                        
-                      >
-                        <span style={{width:"100%", textAlign:"start"}} onClick={() => handlePromptClick(item?.prompt,item?.id)}> {item?.prompt_name}</span>
-                        <Popconfirm
-                          title="Are you sure you want to delete this prompt?"
-                          onConfirm={() => handleDeletePrompt(item?.id)}
-                          okText="Yes"
-                          cancelText="No"
+                      <Button type="text" className="left-panel-btn">
+                        <span
+                          style={{ width: "100%", textAlign: "start" }}
+                          onClick={() => handlePromptClick(item?.prompt, item?.id)}
                         >
-                          <MyIcon
-                            type="elipsis"
-                            style={{
-                              cursor: "pointer",
-                              marginLeft: 10,
-                              marginRight: "0px",
-                            }}
-                            onClick={(e) => e.stopPropagation()} // Prevent button click
-                          />
-                        </Popconfirm>
+                          {" "}
+                          {item?.prompt_name}
+                        </span>
+                        <Dropdown
+                          overlay={renderDropdownMenu(item)}
+                          trigger={["click"]}
+                        >
+
+<MyIcon
+type="elipsis"
+style={{
+cursor: "pointer",
+marginLeft: 10,
+marginRight: "0px",
+}}
+/>
+                        </Dropdown>
                       </Button>
                     </div>
                   )
@@ -191,6 +274,15 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
         </div>
       </div>
       <SettingsBtn />
+
+      {/* Edit Prompt Modal */}
+      {isEditModalVisible && (
+        <EditPromptModal
+          visible={isEditModalVisible}
+          onClose={closeEditModal}
+          prompt={selectedPrompt}
+        />
+      )}
     </div>
   );
 };

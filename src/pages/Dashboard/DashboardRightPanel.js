@@ -70,8 +70,6 @@ const DashboardRightPanel = () => {
     const fetchSelectedMetrics = async () => {
       const response = await API_GET_REPORTING(token, setShowSpinner);
       const response2 = await API_GET_ORDERING(token, setShowSpinner);
-      console.log('response', response);
-      console.log('response2', response2.metric_order);
     
       // Step 1: Filter to get metrics set to true
       const resultArray = Object.entries(response)?.filter(([key, value]) => value === true)?.map(([key]) => key);
@@ -79,15 +77,15 @@ const DashboardRightPanel = () => {
       // Step 2: Sort based on response2.metric_order
       const orderedMetrics = response2?.metric_order?.filter(metric => resultArray.includes(metric));
     
-      console.log('orderedMetrics', orderedMetrics);
       setSelectedMetrics(orderedMetrics);
     };
     
     fetchSelectedMetrics();
-  }, [rerender_dashboard]);
+  }, []);
   
 
   const getInsights = async (startDate, endDate) => {
+    console.log(startDate,endDate)
     const response = await API_GET_INSIGHTS(
       token,
       startDate,
@@ -95,38 +93,23 @@ const DashboardRightPanel = () => {
       setShowSpinner
     );
     const updatedMetrics = updateMetrics(availableMetrics, response);
-    
+    console.log('getInsights',response)
     setMetrics(updatedMetrics);
   };
 
   useEffect(() => {
     getInsights(
-      dateRange[0].format("YYYY-MM-DD"),
-      dateRange[1].format("YYYY-MM-DD")
+      dateRange[0].format("MM-DD-YYYY"),
+      dateRange[1].format("MM-DD-YYYY")
     );
   }, [dateRange]);
 
-  // Date range selection handlers
-  const handleToday = () => {
-    setCurrentMetricRangeName("Today");
-    setCollapseKey(null);
-    setDateRange([moment().startOf("day"), moment().endOf("day")]);
-  };
-
-  const handleYesterday = () => {
-    setCurrentMetricRangeName("Yesterday");
-    setCollapseKey(null);
-    setDateRange([ 
-      moment().subtract(1, "days").startOf("day"),
-      moment().subtract(1, "days").endOf("day"),
-    ]);
-  };
 
   const handleCustomRangeChange = (dates) => {
     if (dates) {
       // Format the start and end date as 'DD/MM/YY'
-      const startDate = dates[0].format('DD/MM/YY'); // Formats to e.g., "27/11/24"
-      const endDate = dates[1].format('DD/MM/YY');   // Formats to e.g., "03/12/24"
+      const startDate = dates[0].format('MM/DD/YY'); // Formats to e.g., "27/11/24"
+      const endDate = dates[1].format('MM/DD/YY');   // Formats to e.g., "03/12/24"
       
       // Set the custom range as the current range name
       setCurrentMetricRangeName(`From ${startDate} to ${endDate}`);
@@ -173,7 +156,20 @@ const DashboardRightPanel = () => {
       label: 'Last 90 Days',
       value: [dayjs().subtract(90, 'days'), dayjs()], // Last 90 days range
     },
+    {
+      label: 'Last 6 Months',
+      value: [dayjs().subtract(6, 'months'), dayjs()], // Last 6 months range
+    },
+    {
+      label: 'Last Year',
+      value: [dayjs().subtract(1, 'year'), dayjs()], // Last year range
+    },
+    {
+      label: 'Lifetime',
+      value: [dayjs('1970-01-01'), dayjs()], // Lifetime range, from the Unix epoch to now
+    },
   ];
+  
   
 
   return (

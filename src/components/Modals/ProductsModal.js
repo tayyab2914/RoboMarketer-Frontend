@@ -116,7 +116,7 @@ const ProductsModal = ({ isVisible, onClose }) => {
                   <MyIcon
                     type="edit_btn"
                     size="lg"
-                    style={{ marginRight: "5px" }}
+                    style={{ marginRight: "5px",cursor:"pointer" }}
                     onClick={() => openEditProductModal(product.id)}
                   />
                   <Popconfirm
@@ -125,7 +125,8 @@ const ProductsModal = ({ isVisible, onClose }) => {
                     okText="Yes"
                     cancelText="No"
                   >
-                    <MyIcon type="delete_btn" size="lg" />
+                    <MyIcon type="delete_btn" size="lg" 
+                    style={{ cursor:"pointer" }}/>
                   </Popconfirm>
                 </span>
               </div>

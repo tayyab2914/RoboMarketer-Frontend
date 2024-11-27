@@ -122,9 +122,9 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
   onChange={(value) => handleValueChange("industry_type", value)}
   suffixIcon={<img src={ICONS.arrow_down} height={7}/>}
 >
-  <Option value="technology">Technology</Option>
-  <Option value="finance">Finance</Option>
-  <Option value="healthcare">Healthcare</Option>
+  <Option value="technology" className="modal-select-item">Technology</Option>
+  <Option value="finance" className="modal-select-item">Finance</Option>
+  <Option value="healthcare" className="modal-select-item">Healthcare</Option>
 </Select>
 
       </div>
@@ -135,10 +135,10 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
         <Panel header={<p className="modal-panel-header"><MyIcon type={'target_kpi_modal'}/> Target KPIs</p>} key="1">
           <InputRow label="Max Daily Budget (Account)" value={FormValues.max_daily_budget} onChange={(e) => handleValueChange("max_daily_budget", e.target.value)} prefix="$" placeholder="0.00" />
           <InputRow label="Click Through Rate (CTR)" value={FormValues.clickthrough_rate_percentage} onChange={(e) => handleValueChange("clickthrough_rate_percentage", e.target.value)} suffix="%" placeholder="0.00" />
-          <InputRow label="Cost Per Click (CPX)" value={FormValues.cost_per_click_cpc} onChange={(e) => handleValueChange("cost_per_click_cpc", e.target.value)} prefix="$" placeholder="0.00" />
+          <InputRow label="Cost Per Click (CPC)" value={FormValues.cost_per_click_cpc} onChange={(e) => handleValueChange("cost_per_click_cpc", e.target.value)} prefix="$" placeholder="0.00" />
           <InputRow label="Cost Per Lead (CPL)" value={FormValues.cost_per_lead_cpl} onChange={(e) => handleValueChange("cost_per_lead_cpl", e.target.value)} prefix="$" placeholder="0.00" />
           <InputRow label="Cost Per Appt" value={FormValues.cost_per_appointment} onChange={(e) => handleValueChange("cost_per_appointment", e.target.value)} prefix="$" placeholder="0.00" />
-          <InputRow label="Cost Per Sale (CPS)" value={FormValues.cost_per_sale_cpa} onChange={(e) => handleValueChange("cost_per_sale_cpa", e.target.value)} prefix="$" placeholder="0.00" />
+          <InputRow label="Cost Per Sale (CPA)" value={FormValues.cost_per_sale_cpa} onChange={(e) => handleValueChange("cost_per_sale_cpa", e.target.value)} prefix="$" placeholder="0.00" />
           <InputRow label="Return On Ad Spend (ROAS)" value={FormValues.return_on_ad_spend_roas} onChange={(e) => handleValueChange("return_on_ad_spend_roas", e.target.value)} suffix="X" placeholder="0.00" />
         </Panel>
       </Collapse>

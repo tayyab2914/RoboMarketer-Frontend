@@ -26,8 +26,10 @@ const DashboardMain = () => {
 
   const getAccounts =async()=>{
     const response = await API_GET_ACCOUNTS(token,setShowSpinner)
+    console.log('API_GET_ACCOUNTS',response)
     dispatch(setCurrentAccount(response?.find((account) => account?.is_current_account)))
     setAccounts(response)
+    // dispatch(setRerenderDashboard(!rerender_dashboard));
   }
   const SwitchAccount = async (id) => {
       const response = await API_SWITCH_ACCOUNT(token, id, setShowSpinner);
@@ -38,6 +40,7 @@ const DashboardMain = () => {
   };
   useEffect(()=>{
     getAccounts()
+    console.log("DASHBOARD RERENDERED")
   },[rerender_dashboard])
 
 

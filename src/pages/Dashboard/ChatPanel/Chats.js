@@ -1,82 +1,103 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_GET_HISTORY } from "../../../apis/ChatApis";
 import "./styles/Chats.css";
-import { RobotOutlined } from "@ant-design/icons"; // Importing icons from Ant Design
 import DOMPurify from "dompurify";
 import MyIcon from "../../../components/Icon/MyIcon";
+import { setTemporaryMessage } from "../../../redux/AuthToken/Action";
+import renderFile from "../../../utils/Methods";
+import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
+import {CiCircleFilled } from "@ant-design/icons";  
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
-  const {
-    isLoggedIn,
-    token,
-    current_account,
-    rerender_chat_panel,
-    temporary_message,
-  } = useSelector((state) => state.authToken);
+  const { token, current_account, rerender_chat_panel, temporary_message } = useSelector((state) => state.authToken);
   const [ChatData, setChatData] = useState([]);
-
-  // Reference to the container that holds the messages
   const chatContainerRef = useRef(null);
+  const dispatch = useDispatch();
 
+  // Fetch chat history
   const get_history = async () => {
-    const response = await API_GET_HISTORY(
-      token,
-      current_account?.id,
-      setShowSpinner
-    );
-    setChatData(response?.reverse());
+    const response = await API_GET_HISTORY(token, current_account?.id, setShowSpinner);
+    setChatData(response?.reverse() || []);
+    dispatch(setTemporaryMessage({})); // Clear temporary message after fetching
   };
 
   useEffect(() => {
     get_history();
   }, [rerender_chat_panel]);
 
+  // Add temporary message to ChatData
   useEffect(() => {
-    // Scroll to the bottom when the chat data changes (new messages added)
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+    if (temporary_message?.message || temporary_message?.file) {
+      setChatData((prev) => [
+        ...prev,
+        {
+          message: temporary_message?.message,
+          response: null,
+          isLoading: true,
+          uploads: temporary_message?.file ? [temporary_message.file] : [],
+        },
+      ]);
+      get_history();
     }
-  }, [ChatData, temporary_message]); // Scrolls every time ChatData is updated
-  const parseHTML = (htmlContent) => {
-    return {
-      __html: DOMPurify.sanitize(htmlContent), // Sanitize HTML to prevent XSS attacks
-    };
-  };
+  }, [temporary_message]);
+
+  // Auto-scroll to the bottom
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [ChatData]);
+
+  // Sanitize HTML
+  const parseHTML = (htmlContent) => ({
+    __html: DOMPurify.sanitize(htmlContent),
+  });
+
   return (
     <div className="chat-container" ref={chatContainerRef}>
-      {ChatData?.map((item, index) => (
-        <>
-          <div key={index} className="chat-message-container">
-            {/* User's message */}
-            <div className="user-message">
-              <span className="message">{item?.message}</span>
-            </div>
-
-            <div className="bot-response">
-              <span className="robot-icon-wrapper">
-                <MyIcon type={"robot"} className={"response-icon"} size="md" />
-              </span>
-              <div className="bot-response-content">
-                <div />
-                <span
-                  className="response-text"
-                  dangerouslySetInnerHTML={parseHTML(item?.response)}
-                ></span>
-              </div>
-            </div>
-          </div>
-        </>
-      ))}
-      {temporary_message && (
-        <div className="chat-message-container">
+      {ChatData.map((item, index) => (
+        <div key={index} className="chat-message-container">
+          {/* User's message */}
           <div className="user-message">
-            <span className="message">{temporary_message}</span>
+  <div style={{ display: "block" }}>
+    {item?.uploads &&
+      item?.uploads.map((upload, idx) => (
+        <div key={idx}>{renderFile(`${DOMAIN_NAME}${upload.file}`, upload.file)}</div>
+      ))}
+  </div>
+  <div>
+    <span className="message">{item?.message}</span>
+  </div>
+</div>
+
+
+          {/* Bot response */}
+          <div className="bot-response">
+            <span className="robot-icon-wrapper">
+              <MyIcon
+                type="robot"
+                className="response-icon"
+                size="md"
+                style={item.isLoading ? { opacity: 0.5 } : { opacity: 1 }}
+              />
+            </span>
+            <div className="bot-response-content">
+              {item.isLoading ? (
+                <span className="response-text"></span>
+              ) : (
+                <span
+  className="response-text"
+  dangerouslySetInnerHTML={{
+    __html: item?.response ? DOMPurify.sanitize(item?.response) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/></svg>',
+  }}
+></span>
+              )}
+            </div>
           </div>
         </div>
-      )}
+      ))}
     </div>
   );
 };

@@ -10,7 +10,7 @@
   .modal-scrollable {
     flex-grow: 1; /* Allows the panel to take up remaining space */
     overflow-y: scroll; /* Enable vertical scrolling */
-    padding: 10px;
+    padding: 20px;
     height: 60vh;
 
     border-right: 1px solid #e6eaed;

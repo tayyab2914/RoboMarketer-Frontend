@@ -43,7 +43,7 @@ const AddProductModal = ({
     </div>
             
       {showSpinner && <Spin fullscreen />}
-      <ProductForm form={form} onFinish={handleAdd} />
+      <ProductForm form={form} onFinish={handleAdd} onCancel={onClose} />
     </Modal>
   );
 };

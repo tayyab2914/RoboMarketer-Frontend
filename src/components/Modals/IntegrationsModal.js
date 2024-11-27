@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Spin } from "antd";
 import "./styles/ModalStyles.css";
 import MyIcon from "../Icon/MyIcon";
@@ -17,75 +17,74 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
     rerender_dashboard,
     rerender_chat_panel,
     current_account,
+    facebook_state
   } = useSelector((state) => state.authToken);
-  const [isAccountSetup, setisAccountSetup] = useState(
-    current_account?.is_facebook_connected
-  );
-  const [showModal, setshowModal] = useState(true);
 
   const disconnectFacebook = async () => {
     const response = await API_DISCONNECT_FACEBOOK(token, setShowSpinner);
-    setshowModal(false);
-    dispatch(setRerenderDashboard(!rerender_dashboard));
+    dispatch(setRerenderDashboard(!rerender_dashboard));    
+
+
+    onClose();
   };
+  useEffect(()=>{},[rerender_dashboard])
+  console.log(current_account)
+console.log(facebook_state,current_account?.is_facebook_connected)
   return (
     <>
-      {showSpinner && <Spin fullscreen />}
-      {isAccountSetup && showModal  && (
-          <Modal
-          title={ false }
+        <Modal
+          title={false}
           centered
           visible={isVisible}
           onCancel={onClose}
           closable={false}
           footer={null}
-        >
-            
-            <div className="custom-modal-header">
-    <span className="modal-header"> <MyIcon type="integrations" style={{ marginRight: "5px" }} size="md"/> Integrations</span>
-    <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
-    </div>
-            
-    <div className="custom-modal-content modal-content">
-          <p className="fb-integration-modal-description">
-            Facebook Integration
-          </p>
-          <div className="fb-integration-modal-info">
-            <span className="fb-integration-modal-name">
+          width={700}
+        >{
+            !facebook_state && current_account?.is_facebook_connected ? <>
+             <div className="custom-modal-header">
+            <span className="modal-header">
               {" "}
-              <MyIcon type={"facebook"} size="md" />
-              {current_account?.name}{" "}
+              <MyIcon
+                type="integrations"
+                style={{ marginRight: "5px" }}
+                size="md"
+              />{" "}
+              Integrations
             </span>
-            <span className="fb-integration-modal-btn">
-              <button onClick={disconnectFacebook}>
+            <span>
+              <MyIcon
+                type={"close_icon"}
+                onClick={onClose}
+                size="lg"
+                className="close-icon"
+              />
+            </span>
+          </div>
+
+          <div className="custom-modal-content modal-content">
+            <p className="fb-integration-modal-description">
+              Facebook Integration
+            </p>
+            <div className="fb-integration-modal-info">
+              <span className="fb-integration-modal-name">
                 {" "}
-                <MyIcon type={"cross_red"} />
-                Disconnect
-              </button>
-            </span>
-          </div></div>
+                <MyIcon type={"facebook"} size="md" />
+                {current_account?.name}{" "}
+              </span>
+              <span className="fb-integration-modal-btn">
+                <button onClick={disconnectFacebook}>
+                  {" "}
+                  <MyIcon type={"cross_red"} />
+                  Disconnect
+                </button>
+              </span>
+            </div>
+          </div></>:
+          <AccountSetupComponent />
+
+        }
         </Modal>
-      )}
-      {!isAccountSetup && showModal &&     <Modal
-          title={ false }
-          centered
-          visible={isVisible}
-          onCancel={onClose}
-          closable={false}
-          footer={null}
-        >
-            
-            <div className="custom-modal-header">
-    <span className="modal-header"> <MyIcon type="integrations" style={{ marginRight: "5px" }} size="md"/> Integrations</span>
-    <span ><MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon"/></span>
-    </div>
-            
-    <div className="custom-modal-content modal-content">
-          <p className="fb-integration-modal-description" style={{height:"200px", display:"flex",alignItems:"center", justifyContent:"center"}}>
-          <MyIcon type="integrations" style={{ marginRight: "5px" }} size="md"/> No Integrations to show
-          </p>
-         </div>
-        </Modal>}
     </>
   );
 };

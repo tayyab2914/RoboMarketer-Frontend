@@ -14,14 +14,11 @@ const EditFunnelModal = ({ isVisible, onClose, funnelId,ListFunnels }) => {
 
   // Function to fetch funnel data
   const ListFunnel = async () => {
-    setShowSpinner(true);
     form.resetFields(); // Reset the form before API call
     try {
       const response = await API_GET_FUNNEL(token, funnelId, setShowSpinner);
       setFunnelData(response); // Set fetched funnel data
-      setShowSpinner(false); // Hide the spinner after data is fetched
     } catch (error) {
-      setShowSpinner(false);
       message.error("Failed to load funnel data.");
     }
   };

@@ -45,10 +45,9 @@ const AdminLeftPanel = () => {
           okText="Yes"
           cancelText="No"
         >
-          <button className="admin-logout-btn">
-            {" "}
-            <MyIcon type="logout" /> Logout{" "}
-          </button>
+              <button className="settings-btn" >
+        <span className="settings-btn-wrapper"><MyIcon type="logout" /> Logout</span>
+      </button>
         </Popconfirm>
       </span>
     </div>

@@ -10,7 +10,7 @@ import {
   API_SELECT_ACCOUNT,
 } from "../../../apis/FacebookInsightsApis";
 import { useDispatch, useSelector } from "react-redux";
-import { setFacebookState, setRerenderDashboard } from "../../../redux/AuthToken/Action";
+import { setCurrentAccount, setFacebookState, setRerenderDashboard } from "../../../redux/AuthToken/Action";
 import { FRONTEND_DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import MyButton from "../../../components/Button/Button";
 const AccountSetupComponent = ({ isVisible, onClose }) => {
@@ -54,9 +54,15 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
     const handleAccountClick = async () => {
       if (selectedAccount) {
         const response = await API_SELECT_ACCOUNT(token, selectedAccount.account_id,selectedAccount.name, setShowSpinner);
+  
         if (response) {
             dispatch(setFacebookState(null))
           dispatch(setRerenderDashboard(!rerender_dashboard));
+          dispatch(setCurrentAccount((prevState) => ({
+            ...prevState,
+            is_facebook_connected: false,
+          })));
+          
           const historicalDataResponse = await API_GET_HISTORICAL_DATA(token, setShowSpinner);
           onClose();
         }
@@ -86,14 +92,7 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
     };
   
     return (
-      <Modal
-        title={false}
-        width={700}
-        visible={isVisible}
-        onCancel={onClose}
-        closable={false}
-        footer={false}
-      >
+       <>
         <div className="custom-modal-header">
           <span className="modal-header">Account Setup</span>
           <span>
@@ -180,7 +179,7 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
             </Col>
           </Row>
         </div>
-      </Modal>
+        </>
     );
   };
   

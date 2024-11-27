@@ -132,8 +132,8 @@ const AddPromptBtn = () => {
           </div>
           </div>
           <div className="modal-actions">
-            <span className='btn-1'><Button onClick={handleCancel} className="cancel-btn"><MyIcon type={'cross_red'} />Cancel</Button></span>
             <span className='btn-2'><Button type="primary" onClick={handleCreatePrompt} className="create-btn"><MyIcon type={'tick'} />Create Prompt</Button></span>
+            <span className='btn-1'><Button onClick={handleCancel} className="cancel-btn"><MyIcon type={'cross_red'} />Cancel</Button></span>
           </div>
       </Modal>
     </div>

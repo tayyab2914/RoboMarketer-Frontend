@@ -43,8 +43,7 @@ const SettingsBtn = () => {
 
   const handleCloseOptionModal = () => {
     setActiveOption(null);
-    console.log('handleCloseOptionModal')
-    dispatch(setRerenderDashboard(!rerender_dashboard))
+    // dispatch(setRerenderDashboard(!rerender_dashboard))
   };
   return (
     <div className="setting-modals">

@@ -15,12 +15,10 @@ const EditProductModal = ({ isVisible, onClose, productId,ListProducts }) => {
 
 
     const ListProduct = async () => {
-        setShowSpinner(true);
         form.resetFields(); // Reset the form before API call
         try {
           const response = await API_GET_PRODUCT(token, productId, setShowSpinner);
           setProductData(response); // Set fetched funnel data
-          setShowSpinner(false); // Hide the spinner after data is fetched
         } catch (error) {
           setShowSpinner(false);
           message.error("Failed to load producy data.");

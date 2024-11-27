@@ -65,6 +65,11 @@
 }
 .admin-main-panel-table{
     padding: 25px;
+    
+  flex-grow: 1; 
+  overflow-y: auto; 
+  height: calc(100vh - 90px);
+  scrollbar-width: none;
 }
 
 /* Wrapper styling for input and button */

@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
-import "./styles/MessageBar.css";
-import { Col, Input, Row, Badge } from "antd";
+import React, { useState } from "react";
+import { Row, Col, Badge } from "antd";
 import MyIcon from "../../../components/Icon/MyIcon";
 import { CloseOutlined } from "@ant-design/icons";
-import { API_GET_RESPONSE } from "../../../apis/ChatApis";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setRerenderChatPanel,
-  setRerenderDashboard,
   setTemporaryMessage,
 } from "../../../redux/AuthToken/Action";
-import {
-  FilePdfOutlined,
-  FileExcelOutlined,
-  FileWordOutlined,
-  FileOutlined,
-} from "@ant-design/icons";
+import { API_GET_RESPONSE } from "../../../apis/ChatApis";
 import { RENDER_FILE_PREVIEW } from "../../../utils/Methods";
+import "./styles/MessageBar.css";
 
-const MessageBar = ({isDisabled}) => {
+const MessageBar = ({ isDisabled }) => {
   const dispatch = useDispatch();
-  const [disabled, setdisabled] = useState(false);
-  const [showSpinner, setShowSpinner] = useState(false);
-  const { isLoggedIn, token, rerender_chat_panel, temporary_message } =
-    useSelector((state) => state.authToken);
+  const { token, rerender_chat_panel } = useSelector((state) => state.authToken);
   const [message, setMessage] = useState("");
   const [file, setFile] = useState(null);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const handleFileSelect = (event) => {
     const selectedFile = event.target.files[0];
@@ -37,31 +28,34 @@ const MessageBar = ({isDisabled}) => {
 
   const handleRemoveFile = () => {
     setFile(null);
-    const fileInput = document.getElementById("file-upload");
-    fileInput.value = null;
+    document.getElementById("file-upload").value = null;
   };
+
   const handleSendMessage = async () => {
     // if (!disabled) {
     if(!message)
     {
         setMessage(" ")
     }
-    console.log('hello')
-      dispatch(setTemporaryMessage(message));
-      if (message.trim() || file) {
+    const local_message = message
+    const local_file = file
+      dispatch(setTemporaryMessage({message,file}));
+        setMessage("")
+        setFile(null)
+      if (local_message.trim() || local_file) {
         setShowSpinner(true);
 
         const formData = new FormData();
-        if (file) {
-          formData.append("file_group", file);
+        if (local_file) {
+          formData.append("file_group", local_file);
         }
-        formData.append("message", message);
+        formData.append("message", local_message);
 
         try {
-          setdisabled(true);
+        //   setdisabled(true);
           await API_GET_RESPONSE(
             token,
-            message || " ",
+            local_message || " ",
             formData,
             setShowSpinner
           );
@@ -70,7 +64,7 @@ const MessageBar = ({isDisabled}) => {
           console.error("Error sending message/file:", error);
         } finally {
           setMessage("");
-          setdisabled(false);
+        //   setdisabled(false);
           handleRemoveFile();
           dispatch(setTemporaryMessage(null));
           setShowSpinner(false);
@@ -79,17 +73,17 @@ const MessageBar = ({isDisabled}) => {
     }
   };
 
+
   return (
     <Row align="middle" className="message-bar">
-        <Col xs={24} style={{marginLeft:"10px"}}>
+      <Col xs={24}>
         {file && (
           <div className="file-preview-container">
-            {" "}
             <Badge
               count={
                 <CloseOutlined
                   onClick={handleRemoveFile}
-                    className="file-preview-container-badge-icon"
+                  className="file-preview-container-badge-icon"
                 />
               }
               className="file-preview-container-badge"
@@ -98,46 +92,36 @@ const MessageBar = ({isDisabled}) => {
             </Badge>
           </div>
         )}
-        </Col>
-      <Col className="file-preview-container">
-     
+      </Col>
+      <Col>
         <label htmlFor="file-upload">
-          {" "}
-          <MyIcon
-            type={"plus_black"}
-            className={`message-bar-plus ${disabled ? "disabled-icon" : ""}`}
-            size="lg"
-          />{" "}
+          <MyIcon type="plus_black" className="message-bar-plus" size="lg" />
         </label>
-        
         <input
           id="file-upload"
           type="file"
           style={{ display: "none" }}
           onChange={handleFileSelect}
-        //   disabled={disabled}
         />
       </Col>
       <Col flex="auto">
-      <input
-  type="text" 
-  placeholder="Type Message..."
-  value={message}  // Bind the input value to the `message` state
-  onChange={(e) => setMessage(e.target.value)}  // Update the state on input change
-  className="message-bar-input"
-//   disabled={disabled}
-/>
-
+        <input
+          type="text"
+          placeholder="Type Message..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="message-bar-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSendMessage();
+          }}
+        />
       </Col>
       <Col>
         <MyIcon
-          type={"arrow_up"}
-          onClick={message ? () => handleSendMessage() : null}
+          type="arrow_up"
           size="lg"
-          className={'message-arrow-up'}
-        //   className={`message-arrow-up ${
-        //     message && !disabled ? "" : "disabled-icon"
-        //   }`}
+          className="message-arrow-up"
+          onClick={handleSendMessage}
         />
       </Col>
     </Row>

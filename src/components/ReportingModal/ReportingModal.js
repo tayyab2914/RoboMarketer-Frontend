@@ -9,7 +9,6 @@ import MyScrollableList from "../SortableList";
 const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisible, onCloseModal }) => {
   const [localSelectedMetrics, setLocalSelectedMetrics] = useState([]);
 
-  console.log('selectedMetrics',selectedMetrics)
   useEffect(() => {
     setLocalSelectedMetrics(selectedMetrics);
   }, [selectedMetrics]);
@@ -67,9 +66,9 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
  <span ><MyIcon type={'close_icon'} onClick={onCloseModal} size="lg" className="close-icon"/></span>
     </div>
             
-    <div className="custom-modal-content modal-content">
-      <Row gutter={16}>
-        <Col xs={12} className="modal-scrollable">
+    <div className="reporting-modal">
+      <Row >
+        <Col xs={12} className="modal-scrollable" style={{padding:"20px 15px 20px 20px !important"}} >
           <p className="modal-title">Choose Metrics</p>
           {availableMetrics.map((item) => (
             <div key={item.key} className="checkbox-item">

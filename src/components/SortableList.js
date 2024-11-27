@@ -6,7 +6,7 @@ import { GET_METRIC_NAME_FROM_KEY } from '../utils/Methods';
 
 const MyScrollableList = ({ localSelectedMetrics, handleRemoveMetric, onDragEnd }) => {
   return (
-    <Col xs={12} className="modal-scrollable">
+    <Col xs={12} className="modal-scrollable"  style={{padding:"20px 20px 20px 15px !important"}}>
       <p className="modal-title">Selected Metrics</p>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">

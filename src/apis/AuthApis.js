@@ -238,7 +238,7 @@ export const API_DELETE_USER = async (token, id,  setShowSpinner) => {
     }
 };
 export const API_GET_ACCOUNTS = async (token, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
     try {
       const response = await axios.get(`${DOMAIN_NAME}/authentication/get_accounts/`, {
         headers: {
@@ -250,7 +250,7 @@ export const API_GET_ACCOUNTS = async (token, setShowSpinner) => {
     } catch (error) {
       message.error("Invalid or expired token");
     } finally {
-      setShowSpinner(false);
+    //   setShowSpinner(false);
     }
 };
 export const API_SWITCH_ACCOUNT = async (token,id, setShowSpinner) => {
@@ -334,7 +334,7 @@ export const API_UPDATE_ACCOUNT = async (token, account_id, name = null, account
   
 
 export const API_GET_USER_ATTRIBUTES = async ( token, setShowSpinner ) => {
-        setShowSpinner(true);
+        // setShowSpinner(true);
         try {
           const response = await axios.get(`${DOMAIN_NAME}/authentication/get_user_attributes/`, {
             headers: {
@@ -346,6 +346,6 @@ export const API_GET_USER_ATTRIBUTES = async ( token, setShowSpinner ) => {
         } catch (error) {
           message.error("Invalid or expired token");
         } finally {
-          setShowSpinner(false);
+        //   setShowSpinner(false);
         }
     };

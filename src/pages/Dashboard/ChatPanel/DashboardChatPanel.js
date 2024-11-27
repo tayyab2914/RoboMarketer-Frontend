@@ -7,10 +7,10 @@ import Chats from "./Chats";
 import { useSelector } from "react-redux";
 
 const DashboardChatPanel = () => {
-    const { isLoggedIn, token,rerender_dashboard,rerender_chat_panel,current_account } = useSelector((state) => state.authToken);
+    const { isLoggedIn, token,rerender_dashboard,facebook_state,rerender_chat_panel,current_account } = useSelector((state) => state.authToken);
   const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
   
-const [modalVisible, setModalVisible] = useState(!isAccountSetup);
+const [modalVisible, setModalVisible] = useState(false);
 useEffect(() => {
     setisAccountSetup(current_account?.is_facebook_connected);
     setModalVisible(!current_account?.is_facebook_connected);
@@ -19,10 +19,10 @@ useEffect(() => {
     <Row className="dashboard-chat-panel-main">
       <Col>
       
-      <AccountSetupComponent
+    {/* {facebook_state &&  <AccountSetupComponent
         isVisible={modalVisible}
         onClose={() => setModalVisible(false)}
-      />
+      />} */}
      <Chats isaccount_open={!isAccountSetup}/>
       </Col>
 

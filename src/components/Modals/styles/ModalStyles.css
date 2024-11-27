@@ -189,6 +189,9 @@
     display: flex;
     align-items: center;
 }
+.ant-select-selection-item{
+    font-size: 16px !important;
+}
 .ant-form {
   margin-bottom: 10px !important;
 }
@@ -253,8 +256,11 @@
   font-family: "Inter", serif !important;
 
 }
+.modal-select-item{
+    font-size: 16px !important;
+}
 .modal-scrollable{
-    padding-top: 0px !important;
+    /* padding-top: 0px !important; */
 }
 
 .modal-field-with-prefix::placeholder , .modal-field-without-prefix::placeholder{
