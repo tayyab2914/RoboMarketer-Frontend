@@ -63,7 +63,8 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
             is_facebook_connected: false,
           })));
           
-          const historicalDataResponse = await API_GET_HISTORICAL_DATA(token, setShowSpinner);
+           API_GET_HISTORICAL_DATA(token, setShowSpinner);
+          dispatch(setRerenderDashboard(!rerender_dashboard));
           onClose();
         }
       }
