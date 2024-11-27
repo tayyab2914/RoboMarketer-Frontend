@@ -64,7 +64,9 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
           })));
           
           API_GET_HISTORICAL_DATA(token, setShowSpinner);
-          dispatch(setRerenderDashboard(!rerender_dashboard));
+          setTimeout(() => {
+            dispatch(setRerenderDashboard(!rerender_dashboard));
+          }, 1000);
           if(isInIntegrationComponent)
           {
             onClose();

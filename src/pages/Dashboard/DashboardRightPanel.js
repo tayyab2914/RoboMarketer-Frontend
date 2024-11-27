@@ -65,7 +65,7 @@ const DashboardRightPanel = () => {
   const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
   const [collapseKey, setCollapseKey] = useState("0");
 
-  const { token, rerender_dashboard } = useSelector((state) => state.authToken);
+  const { isLoggedIn, token,rerender_dashboard,current_account } = useSelector((state) => state.authToken);
 
   useEffect(() => {
     const fetchSelectedMetrics = async () => {
@@ -105,6 +105,9 @@ const DashboardRightPanel = () => {
     );
   }, [dateRange]);
 
+useEffect(()=>{
+console.log("RERENDERED")
+},[current_account?.historical_data_progress])
 
   const handleCustomRangeChange = (dates) => {
     if (dates) {
