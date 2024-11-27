@@ -91,7 +91,6 @@ const AccountModal = ({ isVisible, onClose }) => {
 
   return (
     <>
-      {showSpinner && <Spin fullscreen />}
       <Modal
         className=""
         title={false}

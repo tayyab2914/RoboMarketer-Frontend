@@ -29,6 +29,7 @@ const availableMetrics = [
   { key: "cpc", label: "CPC", value: "", trend: "red" },
   { key: "optin_rate", label: "Optin Rate", value: "", trend: "green" },
   { key: "cpl", label: "CPL", value: "", trend: "red" },
+  { key: "cpa", label: "CPA", value: "", trend: "red" },
   { key: "appointment_rate", label: "Appt Rate", value: "", trend: "green" },
   {
     key: "cost_per_appointment",

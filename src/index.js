@@ -28,7 +28,8 @@ root.render(
         Button:BUTTON_COLORS,
         Checkbox:CHECKBOX_COLORS,
         Table:TABLE_COLORS,
-        Collapse:{colorBorder:"#E6EAED"}
+        Collapse:{colorBorder:"#E6EAED"},
+        Spin:{colorPrimary:"#000"}
       },
     }}
   >

@@ -60,7 +60,6 @@ const ProfileModal = ({ isVisible, onClose }) => {
   }, []);
   return (
     <>
-      {ShowSpinner && <Spin fullscreen />}
       <Modal
         title={ false }
         centered

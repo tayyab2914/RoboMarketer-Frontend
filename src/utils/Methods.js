@@ -201,6 +201,7 @@ export const AVAILABLE_METRICS = [
   { key: "cpm", label: "CPM" },
   { key: "ctr", label: "CTR" },
   { key: "cpc", label: "CPC" },
+  { key: "cpa", label: "CPA" },
   { key: "optin_rate", label: "Optin Rate" },
   { key: "cpl", label: "CPL" },
   { key: "appointment_rate", label: "Appt Rate" },
