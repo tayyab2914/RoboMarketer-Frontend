@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import "./styles/ModalStyles.css";
 import MyIcon from "../Icon/MyIcon";
 import ReportingModal from "../ReportingModal/ReportingModal";
-import { API_GET_INSIGHTS, API_GET_REPORTING, API_UPDATE_REPORTING } from "../../apis/FacebookInsightsApis";
+import { API_GET_INSIGHTS, API_GET_ORDERING, API_GET_REPORTING, API_UPDATE_ORDERING, API_UPDATE_REPORTING } from "../../apis/FacebookInsightsApis";
 import { useDispatch, useSelector } from "react-redux";
 import { getMetricsStatus } from "../../utils/Methods";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
@@ -51,15 +51,19 @@ const ReportingSettingsModal = ({ isVisible, onClose }) => {
         const fetchSelectedMetrics = async () => {
           const apiSelectedMetrics = [];
           const response = await API_GET_REPORTING(token, setShowSpinner);
-          console.log('API_GET_REPORTING',response)
-          const resultArray = Object.entries(response)
-            .filter(([key, value]) => value === true)
-            .map(([key]) => key);
-          setSelectedMetrics(resultArray);
+          const response2 = await API_GET_ORDERING(token, setShowSpinner);
+        
+          // Step 1: Filter to get metrics set to true
+          const resultArray = Object.entries(response)?.filter(([key, value]) => value === true)?.map(([key]) => key);
+        
+          // Step 2: Sort based on response2.metric_order
+          const orderedMetrics = response2?.metric_order?.filter(metric => resultArray.includes(metric));
+        
+          setSelectedMetrics(orderedMetrics);
         };
     
         fetchSelectedMetrics();
-      }, []);
+      }, [rerender_dashboard]);
       useEffect(() => {
         const getHistoricalData = async () => {
           const apiSelectedMetrics = [];
@@ -69,12 +73,12 @@ const ReportingSettingsModal = ({ isVisible, onClose }) => {
         };
     
         getHistoricalData();
-      }, []);
+      }, [rerender_dashboard]);
       const handleSaveSelectedMetrics =async (metrics) => {
         setSelectedMetrics(metrics);
         const response = await API_UPDATE_REPORTING(token,getMetricsStatus(metrics),setShowSpinner)
-        dispatch(setRerenderDashboard(!rerender_dashboard))
-        console.log("RERENDER CALLED")
+        await API_UPDATE_ORDERING(token,metrics,setShowSpinner)
+        dispatch(setRerenderDashboard(!rerender_dashboard));
       };
     return ( 
         <ReportingModal

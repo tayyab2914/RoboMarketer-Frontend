@@ -154,9 +154,9 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
                   </>
                 ) : (
                   <>
-                    <p className="account-setup-component-title">
+                  { !isInIntegrationComponent &&  <p className="account-setup-component-title">
                       <MyIcon type={"account_setup"} size="md" /> Account Setup
-                    </p>
+                    </p>}
                     <div className="account-setup-component-description">
                       <p>Let's get your account setup by integrating your accounts</p>
                       <div className="account-setup-component-account">

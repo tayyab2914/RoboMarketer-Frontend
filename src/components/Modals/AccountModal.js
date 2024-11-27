@@ -3,10 +3,11 @@ import { Modal, Input, Button, message, Upload, Spin, Form } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { IMAGES } from "../../data/ImageData";
 import MyIcon from "../Icon/MyIcon";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_UPDATE_ACCOUNT } from "../../apis/AuthApis";
 import MyButton from "../Button/Button";
 import { DOMAIN_NAME } from "../../utils/GlobalSettings";
+import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 
 // Import your validation rules
 export const NAME_RULES_REQUIRED = [
@@ -17,9 +18,10 @@ const { Dragger } = Upload;
 
 const AccountModal = ({ isVisible, onClose }) => {
   const [showSpinner, setShowSpinner] = useState(false);
-  const { isLoggedIn, token, current_account } = useSelector(
+  const { isLoggedIn, token, current_account,rerender_dashboard } = useSelector(
     (state) => state.authToken
   );
+  const dispatch = useDispatch()
   const [profilePic, setProfilePic] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [name, setName] = useState(current_account?.name);
@@ -54,6 +56,7 @@ const AccountModal = ({ isVisible, onClose }) => {
         profilePic,
         setShowSpinner
       );
+      dispatch(setRerenderDashboard(!rerender_dashboard))
       console.log(profilePic);
     } catch (error) {
       message.error("Failed to upload profile picture.");

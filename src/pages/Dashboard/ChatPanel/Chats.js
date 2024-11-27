@@ -58,7 +58,7 @@ const Chats = () => {
 
   return (
     <div className="chat-container" ref={chatContainerRef}>
-        <AccountSetupComponent/>
+        {/* <AccountSetupComponent/> */}
       {ChatData.map((item, index) => (
         <div key={index} className="chat-message-container">
           {/* User's message */}

@@ -32,6 +32,7 @@
   align-items: center !important;
   justify-content: start;
   font-size: 18px;
+  font-weight: 500 !important;
 }
 .panel-header-span img {
   margin-right: 15px !important;

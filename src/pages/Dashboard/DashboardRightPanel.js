@@ -69,20 +69,15 @@ const DashboardRightPanel = () => {
 
   useEffect(() => {
     const fetchSelectedMetrics = async () => {
+        console.log('fetchSelectedMetrics')
       const response = await API_GET_REPORTING(token, setShowSpinner);
       const response2 = await API_GET_ORDERING(token, setShowSpinner);
-    
-      // Step 1: Filter to get metrics set to true
       const resultArray = Object.entries(response)?.filter(([key, value]) => value === true)?.map(([key]) => key);
-    
-      // Step 2: Sort based on response2.metric_order
       const orderedMetrics = response2?.metric_order?.filter(metric => resultArray.includes(metric));
-    
       setSelectedMetrics(orderedMetrics);
     };
-    
     fetchSelectedMetrics();
-  }, []);
+  }, [rerender_dashboard]);
   
 
   const getInsights = async (startDate, endDate) => {
@@ -100,14 +95,11 @@ const DashboardRightPanel = () => {
 
   useEffect(() => {
     getInsights(
-      dateRange[0].format("MM-DD-YYYY"),
-      dateRange[1].format("MM-DD-YYYY")
+      dateRange[0].format("DD-MM-YYYY"),
+      dateRange[1].format("DD-MM-YYYY")
     );
-  }, [dateRange]);
+  }, [dateRange,current_account?.historical_data_progress,rerender_dashboard]);
 
-useEffect(()=>{
-console.log("RERENDERED")
-},[current_account?.historical_data_progress])
 
   const handleCustomRangeChange = (dates) => {
     if (dates) {

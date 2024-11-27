@@ -8,8 +8,8 @@ const DashboardRightPanelInfo = ({reportingData}) => {
     const { isLoggedIn, token,rerender_dashboard,current_account } = useSelector((state) => state.authToken);
   
     useEffect(()=>{
-
-    },[current_account?.historical_data_progress])
+console.log("rightpanelrerendered")
+    },[current_account?.historical_data_progress,rerender_dashboard])
     const getSuffix = (label) => {
         if (["Return on Ad Spend"].includes(label)) {
             return "X";
