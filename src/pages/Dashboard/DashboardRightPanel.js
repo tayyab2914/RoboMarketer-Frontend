@@ -95,8 +95,8 @@ const DashboardRightPanel = () => {
 
   useEffect(() => {
     getInsights(
-      dateRange[0].format("YY-MM-DD"),
-      dateRange[1].format("YY-MM-DD")
+      dateRange[0].format("YYYY-MM-DD"),
+      dateRange[1].format("YYYY-MM-DD")
     );
   }, [dateRange,current_account?.historical_data_progress,rerender_dashboard]);
 
