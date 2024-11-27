@@ -93,12 +93,13 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
   
     return (
        <>
-        <div className="custom-modal-header">
+       {!current_account?.is_facebook_connected && <>
+        {isInIntegrationComponent && <div className="custom-modal-header">
           <span className="modal-header">Account Setup</span>
           <span>
             <MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon" />
           </span>
-        </div>
+        </div>}
   
         <div className="custom-modal-content modal-content">
           <Row style={{ width: "100%" }}>
@@ -178,7 +179,7 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
               </div>
             </Col>
           </Row>
-        </div>
+        </div></>}
         </>
     );
   };

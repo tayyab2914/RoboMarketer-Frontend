@@ -8,6 +8,7 @@ import { setTemporaryMessage } from "../../../redux/AuthToken/Action";
 import renderFile from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import {CiCircleFilled } from "@ant-design/icons";  
+import AccountSetupComponent from "./AccountSetupComponent";
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
@@ -57,6 +58,7 @@ const Chats = () => {
 
   return (
     <div className="chat-container" ref={chatContainerRef}>
+        <AccountSetupComponent/>
       {ChatData.map((item, index) => (
         <div key={index} className="chat-message-container">
           {/* User's message */}
