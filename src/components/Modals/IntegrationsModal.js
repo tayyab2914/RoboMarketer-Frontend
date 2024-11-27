@@ -81,7 +81,7 @@ console.log(facebook_state,current_account?.is_facebook_connected)
               </span>
             </div>
           </div></>:
-          <AccountSetupComponent />
+          <AccountSetupComponent isInIntegrationComponent={true}/>
 
         }
         </Modal>

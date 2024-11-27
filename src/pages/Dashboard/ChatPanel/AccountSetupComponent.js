@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentAccount, setFacebookState, setRerenderDashboard } from "../../../redux/AuthToken/Action";
 import { FRONTEND_DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import MyButton from "../../../components/Button/Button";
-const AccountSetupComponent = ({ isVisible, onClose }) => {
+const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) => {
     const [showSpinner, setShowSpinner] = useState(false);
     const { isLoggedIn, token, current_account, facebook_state, rerender_dashboard } = useSelector(
       (state) => state.authToken
@@ -109,9 +109,9 @@ const AccountSetupComponent = ({ isVisible, onClose }) => {
               lg={24}
               style={{ display: "flex", width: "100%" }}
             >
-              <span className="robot-icon-wrapper">
+              {!isInIntegrationComponent &&<span className="robot-icon-wrapper">
                 <MyIcon type={"robot"} className={"response-icon"} size="md" />
-              </span>
+              </span>}
               <div className="account-setup-component-content">
                 {AccountList ? (
                   <>
