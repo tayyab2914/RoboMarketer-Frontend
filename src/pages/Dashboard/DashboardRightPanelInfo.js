@@ -30,7 +30,7 @@ const DashboardRightPanelInfo = ({reportingData}) => {
         // Convert the number to a string and use a regular expression to format it
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
-  return current_account?.historical_data_progress == "Completed" ? (
+  return current_account?.historical_data_progress == "In Progress" ? (
     <div className="right-panel-scrollable">
       {reportingData?.map((item, index) => (
         <p className="reporting-single-row" key={index}>
