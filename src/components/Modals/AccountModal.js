@@ -81,6 +81,7 @@ const AccountModal = ({ isVisible, onClose }) => {
       null,
       setShowSpinner
     );
+    dispatch(setRerenderDashboard(!rerender_dashboard))
 
     onClose();
   };

@@ -49,6 +49,7 @@ const DashboardMain = () => {
     dispatch(setRerenderChatPanel(!rerender_chat_panel));
   };
   useEffect(() => {
+    console.log("RERENDERED DASHBOARD CALLED ON NAME CHANGE")
     getAccounts();
 
   }, [rerender_dashboard]);
