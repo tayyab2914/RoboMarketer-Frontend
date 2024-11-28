@@ -248,7 +248,7 @@ export const API_GET_ACCOUNTS = async (token, setShowSpinner) => {
   
       return response.data;
     } catch (error) {
-      message.error("Invalid or expired token");
+    //   message.error("Invalid or expired token");
     } finally {
     //   setShowSpinner(false);
     }
@@ -344,7 +344,7 @@ export const API_GET_USER_ATTRIBUTES = async ( token, setShowSpinner ) => {
       
           return response.data;
         } catch (error) {
-          message.error("Invalid or expired token");
+        //   message.error("Invalid or expired token");
         } finally {
         //   setShowSpinner(false);
         }

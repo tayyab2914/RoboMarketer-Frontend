@@ -66,6 +66,7 @@ const FacebookIntegrationSelectAccount = ({ isInIntegrationComponent, onClose })
             // })));
             
             await API_GET_HISTORICAL_DATA(token, setShowSpinner);
+            dispatch(setRerenderDashboard(!rerender_dashboard));
             
             if(isInIntegrationComponent)
             {

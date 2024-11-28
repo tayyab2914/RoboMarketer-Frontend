@@ -41,7 +41,7 @@ export const API_LIST_FUNNELS = async (token, setShowSpinner) => {
       return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "";
-        message.error(errorMessage);  
+        // message.error(errorMessage);  
     } finally {
     //   setShowSpinner(false);
     }
@@ -60,7 +60,7 @@ export const API_DELETE_FUNNEL = async (token, id,  setShowSpinner) => {
         return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "";
-        message.error(errorMessage);  
+        // message.error(errorMessage);  
     } finally {
         // setShowSpinner(false);
     }
@@ -159,7 +159,7 @@ export const API_DELETE_PRODUCT = async (token, id,  setShowSpinner) => {
         return response.data;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
-        message.error(errorMessage);  
+        // message.error(errorMessage);  
     } finally {
         // setShowSpinner(false);
     }

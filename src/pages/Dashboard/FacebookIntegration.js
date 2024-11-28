@@ -28,7 +28,7 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose}) => {
           </span>
         </div>}
         <Row style={{ width: "100%" }}>
-   <Col xs={24} sm={24} md={24} lg={24} style={{ display: "flex", width: "100%" }} >
+   <Col xs={24} sm={24} md={24} lg={24} style={{ display: "flex", width: "100%",marginBottom:"10px" }} >
    {!isInIntegrationComponent &&
     
     <span className="robot-icon-wrapper">

@@ -105,9 +105,7 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
   const dispatch = useDispatch();
   const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel, current_account, facebook_state, } = useSelector((state) => state.authToken);
 
-
-  console.log('IntegrationsModal',current_account?.is_facebook_connected , facebook_state)
-  const disconnectFacebook = async () => {
+const disconnectFacebook = async () => {
     const response = await API_DISCONNECT_FACEBOOK(token, setShowSpinner);
     dispatch(setRerenderDashboard(!rerender_dashboard));
     dispatch(setFacebookState(null))
@@ -115,7 +113,6 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
   };
 
   const cancelhandler = ()=>{
-    console.log('dispatch clicked')
     dispatch(setisIntegrationsModalClosedByUser(true))
     onClose()
   }

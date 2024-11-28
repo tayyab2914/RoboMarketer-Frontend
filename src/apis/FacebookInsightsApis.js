@@ -199,9 +199,9 @@ export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
   } catch (error) {
     // Handle error properly
     if (error.response?.data?.message) {
-      message.error(error.response?.data?.message); // Display error message from response
+    //   message.error(error.response?.data?.message); 
     } else {
-      message.error("An error occurred while fetching historical data.");
+    //   message.error("An error occurred while fetching historical data.");
     }
     return false;
   } finally {
@@ -225,7 +225,7 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     } catch (error) {
       // Handle error properly
       if (error.response?.data?.message) {
-        message.error(error.response?.data?.message); // Display error message from response
+        // message.error(error.response?.data?.message);
       } else {
         // message.error("An error occurred while fetching historical data.");
       }
@@ -249,9 +249,9 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     //   message.success("Account disconnected successfully")
       return response.data;
     } catch (error) {
-      if (error.response?.data?.message) {
-        message.error(error.response.data.message);
-      }
+    //   if (error.response?.data?.message) {
+    //     message.error(error.response.data.message);
+    //   }
       return false;
     } finally {
       setShowSpinner(false);
@@ -279,7 +279,7 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     //   message.success("updated_metrics updated successfully!");
       return response.data;
     } catch (error) {
-      message.error(error.response?.data?.message);
+    //   message.error(error.response?.data?.message);
       return null;
     } finally {
     //   setShowSpinner(false);

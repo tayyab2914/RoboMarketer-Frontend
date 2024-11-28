@@ -233,15 +233,20 @@ export const getMetricsStatus = (selectedMetrics) => {
 
 
   export function formatTextToHTML(inputText) {
-    // Replace bold formatting
-    let formattedText = inputText?.replace(/\*(.*?)\*/g, "<b>$1</b>");
-    
-    // Replace italic formatting
-    formattedText = formattedText?.replace(/_(.*?)_/g, "<i>$1</i>");
-    
-    // Replace line breaks
-    formattedText = formattedText?.replace(/\n/g, "<br>");
-    
-    // Return the formatted HTML
+    if (!inputText) return "";
+  
+    // Handle bold italic (***text***)
+    let formattedText = inputText.replace(/\*\*\*(.*?)\*\*\*/g, "<b><i>$1</i></b>");
+  
+    // Handle bold (**text**)
+    formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+  
+    // Handle italic (*text*)
+    formattedText = formattedText.replace(/\*(.*?)\*/g, "<i>$1</i>");
+  
+    // Replace line breaks (\n)
+    formattedText = formattedText.replace(/\n/g, "<br>");
+  
     return formattedText;
   }
+  
