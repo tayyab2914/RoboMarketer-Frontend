@@ -11,7 +11,9 @@ import {
   TEMPORARY_MESSAGE,
   SET_FACEBOOK_STATE,
   SET_IS_FB_SETUP,
-  RERENDER_RIGHT_PANEL
+  RERENDER_RIGHT_PANEL,
+  OPEN_INTEGRATIONS_MODAL,
+  IS_INTEGRATIONS_MODAL_CLOSED_BY_USER
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -81,5 +83,17 @@ export const setIsFacebookSetup = (is_facebook_setup) => {
   return {
     type: SET_IS_FB_SETUP,
     payload: is_facebook_setup,
+  };
+};
+export const setOpenIntegrationsModal = (open_integrations_modal) => {
+  return {
+    type: OPEN_INTEGRATIONS_MODAL,
+    payload: open_integrations_modal,
+  };
+};
+export const setisIntegrationsModalClosedByUser = (is_integrations_modal_closed_by_user) => {
+  return {
+    type: IS_INTEGRATIONS_MODAL_CLOSED_BY_USER,
+    payload: is_integrations_modal_closed_by_user,
   };
 };

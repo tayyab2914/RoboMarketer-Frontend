@@ -19,6 +19,7 @@ import {
 } from "../../apis/ChatApis";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    setFacebookState,
   setRerenderChatPanel,
   setRerenderDashboard,
   setTemporaryMessage,
@@ -77,6 +78,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const handleAccountSwitch = (accountId) => {
     SwitchAccount(accountId);
     setAccountCollapseActiveKey([]);
+    dispatch(setFacebookState(null))
   };
 
   // Handle prompt deletion

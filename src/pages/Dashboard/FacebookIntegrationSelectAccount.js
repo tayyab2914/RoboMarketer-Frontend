@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MyIcon from "../../components/Icon/MyIcon";
 import {
+    API_DISCONNECT_FACEBOOK,
   API_FETCH_TOKEN,
   API_GENERATE_AUTH_URL,
   API_GET_HISTORICAL_DATA,
@@ -32,15 +33,15 @@ const FacebookIntegrationSelectAccount = ({ isInIntegrationComponent, onClose })
           const decodedRedirectResponse = decodeURIComponent(window.location.href);
           const response = await API_FETCH_TOKEN( token, decodedRedirectResponse, facebook_state, setShowSpinner );
           setAccountList(response?.account_list);
-          if(!response)
-          {
-            dispatch(setFacebookState(null))
-          }
+            // if(!response)
+            // {
+            //     const response = await API_DISCONNECT_FACEBOOK(token, setShowSpinner);
+            //     dispatch(setRerenderDashboard(!rerender_dashboard));
+            //     dispatch(setFacebookState(null))
+
+            // }
          console.log(response)
           setCodeExtracted(true);
-        }else if(!code){
-            console.log("SETTING FACEBOOK STATE TO NULL else if(!code )")
-          dispatch(setFacebookState(null))
         }else{
             console.log("SETTING FACEBOOK STATE TO NULL else")
             setAccountList(null);

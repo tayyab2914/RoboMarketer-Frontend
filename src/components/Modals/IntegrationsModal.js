@@ -94,7 +94,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { API_DISCONNECT_FACEBOOK } from "../../apis/FacebookInsightsApis";
-import { setRerenderDashboard } from "../../redux/AuthToken/Action";
+import { setFacebookState, setisIntegrationsModalClosedByUser, setRerenderDashboard } from "../../redux/AuthToken/Action";
 import { Modal } from "antd";
 import MyIcon from "../Icon/MyIcon";
 import FacebookIntegration from "../../pages/Dashboard/FacebookIntegration";
@@ -110,12 +110,18 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
   const disconnectFacebook = async () => {
     const response = await API_DISCONNECT_FACEBOOK(token, setShowSpinner);
     dispatch(setRerenderDashboard(!rerender_dashboard));
+    dispatch(setFacebookState(null))
     onClose();
   };
 
+  const cancelhandler = ()=>{
+    console.log('dispatch clicked')
+    dispatch(setisIntegrationsModalClosedByUser(true))
+    onClose()
+  }
   return (
-    <Modal title={false} centered visible={isVisible} onCancel={onClose} closable={false} footer={null} width={700} >
-      {current_account?.is_facebook_connected && !facebook_state && (
+    <Modal title={false} centered visible={isVisible} onCancel={cancelhandler} closable={false} footer={null} width={700} >
+      {current_account?.is_facebook_connected && !facebook_state  && (
        <>
          <div className="custom-modal-header">
          <span className="modal-header">
@@ -123,7 +129,7 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
            Integrations
          </span>
          <span>
-           <MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" />
+           <MyIcon type={"close_icon"} onClick={cancelhandler} size="lg" className="close-icon" />
          </span>
        </div>
         <div className="custom-modal-content modal-content">
@@ -140,8 +146,8 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
         </div></>
 
       )}
-       {current_account?.is_facebook_connected && facebook_state && <><FacebookIntegrationSelectAccount isInIntegrationComponent={true} onClose={onClose}/></>}
-       {!current_account?.is_facebook_connected && !facebook_state && <><FacebookIntegration isInIntegrationComponent={true} onClose={onClose}/></>}
+       {facebook_state && <><FacebookIntegrationSelectAccount isInIntegrationComponent={true} onClose={cancelhandler}/></>}
+       {!current_account?.is_facebook_connected && !facebook_state && <><FacebookIntegration isInIntegrationComponent={true} onClose={cancelhandler}/></>}
     </Modal>
   );
 };

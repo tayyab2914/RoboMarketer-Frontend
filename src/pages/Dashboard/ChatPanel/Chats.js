@@ -71,8 +71,8 @@ const Chats = () => {
   return (
     <div className="chat-container" ref={chatContainerRef}>
     {!isAccountSetup && <>
-       {/* {!current_account?.is_facebook_connected && facebook_state && <><FacebookIntegrationSelectAccount isInIntegrationComponent={false} /></>}
-       {!current_account?.is_facebook_connected && !facebook_state && <><FacebookIntegration isInIntegrationComponent={false} /></>} */}
+       {/* {!current_account?.is_facebook_connected && facebook_state && <><FacebookIntegrationSelectAccount isInIntegrationComponent={false} /></>} */}
+       {!current_account?.is_facebook_connected && !facebook_state && <><FacebookIntegration isInIntegrationComponent={false} /></>}
     </>}
       {ChatData.map((item, index) => (
         <div key={index} className="chat-message-container">

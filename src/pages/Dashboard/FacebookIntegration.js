@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MyIcon from "../../components/Icon/MyIcon";
 import { API_GENERATE_AUTH_URL } from "../../apis/FacebookInsightsApis";
-import { setFacebookState } from "../../redux/AuthToken/Action";
+import { setFacebookState, setisIntegrationsModalClosedByUser } from "../../redux/AuthToken/Action";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row } from "antd";
 
@@ -10,6 +10,8 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose}) => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.authToken);
   const connectFbHandler = async () => {
+    console.log('connectFbHandler')
+    dispatch(setisIntegrationsModalClosedByUser(false))
     const response = await API_GENERATE_AUTH_URL(token, setShowSpinner);
     console.log('API_GENERATE_AUTH_URL',response)
     if (response) {
@@ -18,7 +20,6 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose}) => {
     }
   };
   return (
-
    <>
    {isInIntegrationComponent && <div className="custom-modal-header">
           <span className="modal-header">Account Setup</span>

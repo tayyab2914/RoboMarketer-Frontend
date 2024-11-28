@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Popconfirm, Divider } from "antd";
 import "./styles/SettingsBtn.css";
 import "../../components/Modals/styles/ModalStyles.css";
@@ -21,7 +21,7 @@ import { ICONS } from "../../data/IconData";
 const SettingsBtn = () => {
     const logoutUser = useLogoutUser();
     const dispatch = useDispatch()
-    const { isLoggedIn, token,rerender_dashboard } = useSelector((state) => state.authToken);
+    const { isLoggedIn, token,rerender_dashboard,open_integrations_modal,is_integrations_modal_closed_by_user } = useSelector((state) => state.authToken);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
 
@@ -36,6 +36,15 @@ const SettingsBtn = () => {
     // Add other options and their components here
   ];
 
+  useEffect(() => {
+    console.log('is_integrations_modal_closed_by_user',is_integrations_modal_closed_by_user)
+    if (open_integrations_modal && !is_integrations_modal_closed_by_user==undefined || !is_integrations_modal_closed_by_user) {
+      const integrationOption = options.find((opt) => opt.name === "Integrations");
+      setActiveOption(integrationOption);
+      setIsModalVisible(false); 
+    }
+  }, [open_integrations_modal,rerender_dashboard]);
+  
   const handleOptionClick = (option) => {
     setIsModalVisible(false)
     setActiveOption(option);
