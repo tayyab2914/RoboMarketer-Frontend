@@ -1,6 +1,6 @@
 // src/redux/reducer.js
 
-import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP } from "./Types";
+import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP, RERENDER_RIGHT_PANEL } from "./Types";
 
 const initialState = {
   token: null,
@@ -49,6 +49,11 @@ export default function authReducer(state = initialState, action) {
     return {
       ...state,
       rerender_chat_panel: action.payload,
+    };
+  }  else if (action.type == RERENDER_RIGHT_PANEL) {
+    return {
+      ...state,
+      rerender_right_panel: action.payload,
     };
   }  else if (action.type == TEMPORARY_MESSAGE) {
     return {

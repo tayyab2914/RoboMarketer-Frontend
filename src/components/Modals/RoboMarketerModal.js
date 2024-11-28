@@ -120,7 +120,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
   placeholder={<p className="select-placeholder"><MyIcon type={'select_industry'}/>Select industry type</p>}
   value={FormValues.industry_type || undefined} // Shows placeholder if industry_type is undefined or empty
   onChange={(value) => handleValueChange("industry_type", value)}
-  suffixIcon={<img src={ICONS.arrow_down} height={7}/>}
+  suffixIcon={<img src={ICONS.arrow_down} height={7} style={{marginRight:"6px"}}/>}
 >
   <Option value="technology" className="modal-select-item">Technology</Option>
   <Option value="finance" className="modal-select-item">Finance</Option>

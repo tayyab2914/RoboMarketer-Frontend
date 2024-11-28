@@ -4,36 +4,46 @@ import "./styles/DashboardRightPanelInfo.css";
 import { useSelector } from "react-redux";
 import { Spin } from "antd";
 
-const DashboardRightPanelInfo = ({reportingData}) => {
-    const { isLoggedIn, token,rerender_dashboard,current_account } = useSelector((state) => state.authToken);
-  
-    useEffect(()=>{
-console.log("rightpanelrerendered")
-    },[current_account?.historical_data_progress,rerender_dashboard])
-    const getSuffix = (label) => {
-        if (["Return on Ad Spend"].includes(label)) {
-            return "X";
-        }
-        if (["CTR", "Optin Rate", "Appt Rate", "Close Rate"].includes(label)) {
-            return "%";
-        }
-        return ""; 
-    };
-    const getPrefix = (label)=>{
-        
-        if (["Ad Spend", "CPC", "CPM", "Profit","Revenue","CPL","Cost Per Appt"].includes(label)) {
-            return "$";
-        }
-        else
-        {
-            return ""
-        }
+const DashboardRightPanelInfo = ({ reportingData }) => {
+  const {
+    isLoggedIn,
+    token,
+    rerender_dashboard,
+    current_account,
+    rerender_right_panel,
+  } = useSelector((state) => state.authToken);
+
+  const getSuffix = (label) => {
+    if (["Return on Ad Spend"].includes(label)) {
+      return "X";
     }
-    function formatWithCommas(number) {
-        // Convert the number to a string and use a regular expression to format it
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
-  return current_account?.historical_data_progress != "In Progress" ? (
+    if (["CTR", "Optin Rate", "Appt Rate", "Close Rate"].includes(label)) {
+      return "%";
+    }
+    return "";
+  };
+  const getPrefix = (label) => {
+    if (
+      [
+        "Ad Spend",
+        "CPC",
+        "CPM",
+        "Profit",
+        "Revenue",
+        "CPL",
+        "Cost Per Appt",
+      ].includes(label)
+    ) {
+      return "$";
+    } else {
+      return "";
+    }
+  };
+  function formatWithCommas(number) {
+    // Convert the number to a string and use a regular expression to format it
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  return rerender_right_panel != "In Progress" ? (
     <div className="right-panel-scrollable">
       {reportingData?.map((item, index) => (
         <p className="reporting-single-row" key={index}>
@@ -50,7 +60,14 @@ console.log("rightpanelrerendered")
       <div style={{ height: "50px" }}></div>
     </div>
   ) : (
-    <div className="right-panel-scrollable" style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+    <div
+      className="right-panel-scrollable"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Spin />
     </div>
   );

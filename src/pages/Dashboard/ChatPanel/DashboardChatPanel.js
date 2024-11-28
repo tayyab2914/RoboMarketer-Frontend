@@ -19,10 +19,6 @@ useEffect(() => {
     <Row className="dashboard-chat-panel-main">
       <Col>
       
-    {/* {facebook_state &&  <AccountSetupComponent
-        isVisible={modalVisible}
-        onClose={() => setModalVisible(false)}
-      />} */}
      <Chats isaccount_open={!isAccountSetup}/>
       </Col>
 

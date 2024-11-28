@@ -7,19 +7,30 @@ import MyIcon from "../../../components/Icon/MyIcon";
 import { setTemporaryMessage } from "../../../redux/AuthToken/Action";
 import renderFile from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
-import {CiCircleFilled } from "@ant-design/icons";  
+import { CiCircleFilled } from "@ant-design/icons";
 import AccountSetupComponent from "./AccountSetupComponent";
+import FacebookIntegration from "../FacebookIntegration";
+import FacebookIntegrationSelectAccount from "../FacebookIntegrationSelectAccount";
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
-  const { token, current_account, rerender_chat_panel, temporary_message } = useSelector((state) => state.authToken);
+  const { token, current_account, rerender_chat_panel, temporary_message,facebook_state } =
+    useSelector((state) => state.authToken);
+    const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
+  
   const [ChatData, setChatData] = useState([]);
   const chatContainerRef = useRef(null);
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    setisAccountSetup(current_account?.is_facebook_connected);
+  }, [current_account?.is_facebook_connected]);
   // Fetch chat history
   const get_history = async () => {
-    const response = await API_GET_HISTORY(token, current_account?.id, setShowSpinner);
+    const response = await API_GET_HISTORY(
+      token,
+      current_account?.id,
+      setShowSpinner
+    );
     setChatData(response?.reverse() || []);
     dispatch(setTemporaryMessage({})); // Clear temporary message after fetching
   };
@@ -47,7 +58,8 @@ const Chats = () => {
   // Auto-scroll to the bottom
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [ChatData]);
 
@@ -58,44 +70,30 @@ const Chats = () => {
 
   return (
     <div className="chat-container" ref={chatContainerRef}>
-        {/* <AccountSetupComponent/> */}
+    {!isAccountSetup && <>
+       {/* {!current_account?.is_facebook_connected && facebook_state && <><FacebookIntegrationSelectAccount isInIntegrationComponent={false} /></>}
+       {!current_account?.is_facebook_connected && !facebook_state && <><FacebookIntegration isInIntegrationComponent={false} /></>} */}
+    </>}
       {ChatData.map((item, index) => (
         <div key={index} className="chat-message-container">
-          {/* User's message */}
           <div className="user-message">
-  <div style={{ display: "block" }}>
-    {item?.uploads &&
-      item?.uploads.map((upload, idx) => (
-        <div key={idx}>{renderFile(`${DOMAIN_NAME}${upload.file}`, upload.file)}</div>
-      ))}
-  </div>
-  <div>
-    <span className="message">{item?.message}</span>
-  </div>
-</div>
+            <div style={{ display: "block" }}>
+              {item?.uploads && item?.uploads.map((upload, idx) => ( <div key={idx}> {renderFile(`${DOMAIN_NAME}${upload.file}`, upload.file)} </div> ))}
+            </div>
+            <div>
+              <span className="message">{item?.message}</span>
+            </div>
+          </div>
 
-
-          {/* Bot response */}
           <div className="bot-response">
             <span className="robot-icon-wrapper">
-              <MyIcon
-                type="robot"
-                className="response-icon"
-                size="md"
-                style={item.isLoading ? { opacity: 0.5 } : { opacity: 1 }}
-              />
+              <MyIcon type="robot" className="response-icon" size="md" style={item.isLoading ? { opacity: 0.5 } : { opacity: 1 }} />
             </span>
             <div className="bot-response-content">
               {item.isLoading ? (
                 <span className="response-text"></span>
               ) : (
-                <span
-  className="response-text"
-  dangerouslySetInnerHTML={{
-    __html: item?.response ? DOMPurify.sanitize(item?.response) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/></svg>',
-  }}
-></span>
-              )}
+                <span className="response-text" dangerouslySetInnerHTML={{ __html: item?.response ? DOMPurify.sanitize(item?.response) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/></svg>', }} ></span> )}
             </div>
           </div>
         </div>

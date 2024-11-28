@@ -32,7 +32,6 @@ const DashboardMain = () => {
 
   const getAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token, setShowSpinner);
-    console.log("API_GET_ACCOUNTS", response);
     dispatch(
       setCurrentAccount(
         response?.find((account) => account?.is_current_account)

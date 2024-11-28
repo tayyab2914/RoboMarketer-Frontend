@@ -38,7 +38,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);  // State to control visibility of EditPromptModal
   const [selectedPrompt, setselectedPrompt] = useState(null);  // State to store the selected prompt ID for editing
-console.log(current_account)
+
   // Effect to set the current account
   useEffect(() => {
     if (Accounts && Accounts.length) {
@@ -51,7 +51,7 @@ console.log(current_account)
   const getPrompts = async () => {
     const response = await API_GET_PROMPTS(token, setShowSpinner);
     setFetchedPrompts(response);
-    console.log(response);
+   
   };
 
   // Handle prompt click

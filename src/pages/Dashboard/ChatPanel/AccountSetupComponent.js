@@ -10,12 +10,13 @@ import {
   API_SELECT_ACCOUNT,
 } from "../../../apis/FacebookInsightsApis";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentAccount, setFacebookState, setRerenderDashboard } from "../../../redux/AuthToken/Action";
+import { setCurrentAccount, setFacebookState, setRerenderDashboard, setRerenderRightPanel } from "../../../redux/AuthToken/Action";
 import { FRONTEND_DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import MyButton from "../../../components/Button/Button";
+import FacebookIntegration from "../FacebookIntegration";
 const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) => {
     const [showSpinner, setShowSpinner] = useState(false);
-    const { isLoggedIn, token, current_account, facebook_state, rerender_dashboard } = useSelector(
+    const { isLoggedIn, token, current_account,rerender_right_panel, facebook_state, rerender_dashboard } = useSelector(
       (state) => state.authToken
     );
     const [CodeExtracted, setCodeExtracted] = useState(false);
@@ -24,13 +25,6 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
     const [AccountList, setAccountList] = useState(null);
     const dispatch = useDispatch();
     
-    const connectFbHandler = async () => {
-      const response = await API_GENERATE_AUTH_URL(token, setShowSpinner);
-      if (response) {
-        dispatch(setFacebookState(response?.state));
-        window.location.href = response?.authorization_url;
-      }
-    };
   
     useEffect(() => {
       const fetchToken = async () => {
@@ -54,17 +48,18 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
     const handleAccountClick = async () => {
       if (selectedAccount) {
         const response = await API_SELECT_ACCOUNT(token, selectedAccount.account_id,selectedAccount.name, setShowSpinner);
-  
+        
         if (response) {
+            console.log("handleAccountClicresponsek")
             dispatch(setFacebookState(null))
           dispatch(setRerenderDashboard(!rerender_dashboard));
+          dispatch(setRerenderRightPanel(!rerender_right_panel));
           dispatch(setCurrentAccount((prevState) => ({
             ...prevState,
             is_facebook_connected: false,
           })));
           
           await API_GET_HISTORICAL_DATA(token, setShowSpinner);
-            dispatch(setRerenderDashboard(!rerender_dashboard));
           
           if(isInIntegrationComponent)
           {
@@ -88,11 +83,11 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
     ];
   
     const rowSelection = {
-      type: "radio", // Change type to 'radio' for single selection
+      type: "radio", 
       selectedRowKeys,
       onChange: (selectedKeys, selectedRows) => {
-        setSelectedRowKeys(selectedKeys); // Update selected row
-        setSelectedAccount(selectedRows[0]); // Store selected account info (both ID and Name)
+        setSelectedRowKeys(selectedKeys); 
+        setSelectedAccount(selectedRows[0]); 
       },
     };
   
@@ -157,28 +152,7 @@ const AccountSetupComponent = ({ isVisible, onClose,isInIntegrationComponent }) 
                   { !isInIntegrationComponent &&  <p className="account-setup-component-title">
                       <MyIcon type={"account_setup"} size="md" /> Account Setup
                     </p>}
-                    <div className="account-setup-component-description">
-                      <p>Let's get your account setup by integrating your accounts</p>
-                      <div className="account-setup-component-account">
-                        <span className="account-setup-component-account-name">
-                          <MyIcon
-                            className="account-setup-component-account-icon"
-                            type={"facebook"}
-                            size="md"
-                          />
-                          Facebook Ad Account
-                        </span>
-                        <button
-                          className="account-setup-component-connect-button"
-                          onClick={connectFbHandler}
-                        >
-                          Connect Facebook
-                        </button>
-                      </div>
-                      <p className="account-setup-component-help">
-                        If you have any questions or need help, please just type a question below. Thanks!
-                      </p>
-                    </div>
+                   <FacebookIntegration />
                   </>
                 )}
               </div>

@@ -11,6 +11,7 @@ import {
   TEMPORARY_MESSAGE,
   SET_FACEBOOK_STATE,
   SET_IS_FB_SETUP,
+  RERENDER_RIGHT_PANEL
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -56,6 +57,12 @@ export const setRerenderChatPanel = (rerender_chat_panel) => {
   return {
     type: RERENDER_CHAT_PANEL,
     payload: rerender_chat_panel,
+  };
+};
+export const setRerenderRightPanel = (rerender_right_panel) => {
+  return {
+    type: RERENDER_RIGHT_PANEL,
+    payload: rerender_right_panel,
   };
 };
 export const setTemporaryMessage = (temp_message) => {

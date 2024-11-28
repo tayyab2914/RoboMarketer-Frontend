@@ -65,7 +65,7 @@ const DashboardRightPanel = () => {
   const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
   const [collapseKey, setCollapseKey] = useState("0");
 
-  const { isLoggedIn, token,rerender_dashboard,current_account } = useSelector((state) => state.authToken);
+  const { isLoggedIn, token,rerender_dashboard,current_account,rerender_right_panel } = useSelector((state) => state.authToken);
 
   useEffect(() => {
     const fetchSelectedMetrics = async () => {
@@ -103,14 +103,12 @@ const DashboardRightPanel = () => {
 
   const handleCustomRangeChange = (dates) => {
     if (dates) {
-      // Format the start and end date as 'DD/MM/YY'
-      const startDate = dates[0].format('MM/DD/YY'); // Formats to e.g., "27/11/24"
-      const endDate = dates[1].format('MM/DD/YY');   // Formats to e.g., "03/12/24"
+      const startDate = dates[0].format('MM/DD/YY');
+      const endDate = dates[1].format('MM/DD/YY');  
       
-      // Set the custom range as the current range name
       setCurrentMetricRangeName(`From ${startDate} to ${endDate}`);
       setCollapseKey(null);
-      setDateRange(dates); // Update the date range state
+      setDateRange(dates); 
     }
   };
   
@@ -130,43 +128,45 @@ const DashboardRightPanel = () => {
   const rangePresets = [
     {
       label: 'Today',
-      value: [dayjs().startOf('day'), dayjs().endOf('day')], // Starts from midnight to the end of the day
+      value: [dayjs().startOf('day'), dayjs().endOf('day')],
     },
     {
       label: 'Yesterday',
-      value: [dayjs().subtract(1, 'day').startOf('day'), dayjs().subtract(1, 'day').endOf('day')], // Previous day range
+      value: [dayjs().subtract(1, 'day').startOf('day'), dayjs().subtract(1, 'day').endOf('day')], 
     },
     {
       label: 'Last 7 Days',
-      value: [dayjs().subtract(7, 'days'), dayjs()], // Last 7 days range
+      value: [dayjs().subtract(7, 'days'), dayjs()], 
     },
     {
       label: 'Last 14 Days',
-      value: [dayjs().subtract(14, 'days'), dayjs()], // Last 14 days range
+      value: [dayjs().subtract(14, 'days'), dayjs()], 
     },
     {
       label: 'Last 30 Days',
-      value: [dayjs().subtract(30, 'days'), dayjs()], // Last 30 days range
+      value: [dayjs().subtract(30, 'days'), dayjs()], 
     },
     {
       label: 'Last 90 Days',
-      value: [dayjs().subtract(90, 'days'), dayjs()], // Last 90 days range
+      value: [dayjs().subtract(90, 'days'), dayjs()], 
     },
     {
       label: 'Last 6 Months',
-      value: [dayjs().subtract(6, 'months'), dayjs()], // Last 6 months range
+      value: [dayjs().subtract(6, 'months'), dayjs()],
     },
     {
       label: 'Last Year',
-      value: [dayjs().subtract(1, 'year'), dayjs()], // Last year range
+      value: [dayjs().subtract(1, 'year'), dayjs()], 
     },
     {
       label: 'Lifetime',
-      value: [dayjs('1970-01-01'), dayjs()], // Lifetime range, from the Unix epoch to now
+      value: [dayjs('1970-01-01'), dayjs()],
     },
   ];
   
-  
+  useEffect(()=>{
+
+  },[rerender_right_panel])
 
   return (
     <div className="right-panel-container">
