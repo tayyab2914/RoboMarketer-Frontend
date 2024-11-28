@@ -91,9 +91,10 @@ const INNER_CONTENT = ()=><>  {isInIntegrationComponent && (
         </span>
       )}
       <div className="account-setup-component-content">
-      <p className="account-setup-component-title"> <MyIcon type={"account_setup"} size="md" /> Select Facebook Ad Account </p>
+      
         {AccountList? (
           <>
+          <p className="account-setup-component-title"> <MyIcon type={"account_setup"} size="md" /> Select Facebook Ad Account </p>
             <span>
               <Table
                 rowSelection={rowSelection}
