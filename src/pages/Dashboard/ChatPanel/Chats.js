@@ -5,7 +5,7 @@ import "./styles/Chats.css";
 import DOMPurify from "dompurify";
 import MyIcon from "../../../components/Icon/MyIcon";
 import { setTemporaryMessage } from "../../../redux/AuthToken/Action";
-import renderFile from "../../../utils/Methods";
+import renderFile, { formatTextToHTML } from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import { CiCircleFilled } from "@ant-design/icons";
 import AccountSetupComponent from "./AccountSetupComponent";
@@ -93,7 +93,7 @@ const Chats = () => {
               {item.isLoading ? (
                 <span className="response-text"></span>
               ) : (
-                <span className="response-text" dangerouslySetInnerHTML={{ __html: item?.response ? DOMPurify.sanitize(item?.response) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/></svg>', }} ></span> )}
+                <span className="response-text" dangerouslySetInnerHTML={{ __html: item?.response ? DOMPurify.sanitize(formatTextToHTML(item?.response)) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/></svg>', }} ></span> )}
             </div>
           </div>
         </div>
