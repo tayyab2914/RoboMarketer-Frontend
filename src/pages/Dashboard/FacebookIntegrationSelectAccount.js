@@ -9,7 +9,7 @@ import {
 } from "../../apis/FacebookInsightsApis";
 import { setFacebookState, setRerenderDashboard } from "../../redux/AuthToken/Action";
 import { useDispatch, useSelector } from "react-redux";
-import { Col, Modal, Row, Table } from "antd";
+import { Col, Modal, Row, Spin, Table } from "antd";
 import MyButton from "../../components/Button/Button";
 
 const FacebookIntegrationSelectAccount = ({ isInIntegrationComponent, onClose }) => {
@@ -29,7 +29,7 @@ const FacebookIntegrationSelectAccount = ({ isInIntegrationComponent, onClose })
         const urlObj = new URL(window.location.href);
         const code = urlObj.searchParams.get("code");
         if (code) {
-            console.log("SETTING FACEBOOK STATE TO NULL else if (code && !CodeExtracted)")
+            setShowSpinner(true)
           const decodedRedirectResponse = decodeURIComponent(window.location.href);
           const response = await API_FETCH_TOKEN( token, decodedRedirectResponse, facebook_state, setShowSpinner );
           setAccountList(response?.account_list);
@@ -40,7 +40,7 @@ const FacebookIntegrationSelectAccount = ({ isInIntegrationComponent, onClose })
             //     dispatch(setFacebookState(null))
 
             // }
-         console.log(response)
+            setShowSpinner(false)
           setCodeExtracted(true);
         }else{
             console.log("SETTING FACEBOOK STATE TO NULL else")
@@ -91,9 +91,9 @@ const INNER_CONTENT = ()=><>  {isInIntegrationComponent && (
         </span>
       )}
       <div className="account-setup-component-content">
-        {AccountList && (
+      <p className="account-setup-component-title"> <MyIcon type={"account_setup"} size="md" /> Select Facebook Ad Account </p>
+        {AccountList? (
           <>
-            <p className="account-setup-component-title"> <MyIcon type={"account_setup"} size="md" /> Select Facebook Ad Account </p>
             <span>
               <Table
                 rowSelection={rowSelection}
@@ -112,7 +112,7 @@ const INNER_CONTENT = ()=><>  {isInIntegrationComponent && (
               <MyButton type="outlined" className={"account-selection-cancel-btn"} onClick={onClose} text={"Cancel"} />
             </span>
           </>
-        )}
+        ):<div style={{height:"200px", display:"flex",justifyContent:"center",alignItems:"center"}}><Spin/></div>}
       </div>
     </Col>
   </Row>
