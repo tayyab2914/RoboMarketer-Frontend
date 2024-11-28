@@ -17,7 +17,7 @@ import {
 const DashboardMain = () => {
   const windowWidth = useWindowWidth();
   const dispatch = useDispatch();
-  const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel } =
+  const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel,current_account } =
     useSelector((state) => state.authToken);
   const [ShowSpinner, setShowSpinner] = useState(false);
   const [Accounts, setAccounts] = useState([]);
@@ -50,8 +50,21 @@ const DashboardMain = () => {
   };
   useEffect(() => {
     getAccounts();
-    console.log("DASHBOARD RERENDERED");
+
   }, [rerender_dashboard]);
+
+  useEffect(() => {
+    let intervalId;
+
+    if (current_account?.historical_data_progress === "In Progress") {
+      intervalId = setInterval(() => {
+        getAccounts();
+      }, 5000);
+    } else {
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
+  }, [current_account, getAccounts]);
 
   return (
     <div>
