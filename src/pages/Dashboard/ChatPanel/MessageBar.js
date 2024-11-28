@@ -102,6 +102,7 @@ const MessageBar = ({ isDisabled }) => {
           type="file"
           style={{ display: "none" }}
           onChange={handleFileSelect}
+          accept=".docs, .docx"
         />
       </Col>
       <Col flex="auto">
