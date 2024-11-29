@@ -150,7 +150,7 @@ export const API_TEST_TOKEN = async (token) => {
         Authorization: `${token}`,
       },
     });
-    return response.data;
+    return response.status==200;
   } catch (error) {
     message.error("Invalid or expired token");
   } finally {

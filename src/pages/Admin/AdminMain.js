@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import AdminLeftPanel from "./AdminLeftPanel";
 import AdminMainPanel from "./AdminMainPanel";
 import useWindowWidth from "../../hooks/useWindowWidth";
@@ -21,6 +21,7 @@ const AdminMain = () => {
   const logoutUser = useLogoutUser();
   const testToken = async () => {
     const response = await API_TEST_TOKEN(token);
+    console.log('API_TEST_TOKEN',response)
     if (!response) {
       logoutUser();
     }

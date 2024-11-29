@@ -7,6 +7,7 @@ export const useLogoutUser = () => {
   const navigate = useNavigate();
 
   const logoutUser = () => {
+    console.log("LOGOUTUSERCALLED")
     dispatch(setLoggedIn(false));
     dispatch(setAuthToken(null));
     dispatch(setIsAdmin(false));

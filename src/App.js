@@ -8,7 +8,6 @@ import { API_TEST_TOKEN } from './apis/AuthApis';
 import { useLogoutUser } from './hooks/useLogoutUser';
 const App = () => {
     const dispatch = useDispatch()
-    const logoutUser = useLogoutUser();
     const { isLoggedIn, isAdmin, token, current_account,facebook_state,is_integrations_modal_closed_by_user} = useSelector((state) => state.authToken);
 
 
