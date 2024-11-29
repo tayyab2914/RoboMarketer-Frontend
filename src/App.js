@@ -21,8 +21,8 @@ const App = () => {
     },[]);
 
     const updateInsights = async()=>{
-        const response = await API_UPDATE_INSIGHTS(token,null)
-        console.log(response)
+        if(isLoggedIn)
+            await API_UPDATE_INSIGHTS(token,null)
     }
     useEffect(()=>{
         updateInsights()

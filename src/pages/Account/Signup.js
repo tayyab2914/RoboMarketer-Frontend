@@ -17,18 +17,28 @@ const SignUp = ({ toggleCurrentMode }) => {
   const [ShowSpinner, setShowSpinner] = useState(false);
 
 
-  const checkIfLinkExists = async()=>{
-    console.log(link_token)
-    const response = await API_DOES_LINK_EXIST(link_token,setShowSpinner)
-    console.log('response',response)
-    setShowSignUpComponent(response?.message == "Link exists" ? true:false)
-    if(response?.message != "Link exists"){
-        navigate('/notfound')
+  const checkIfLinkExists = async () => {
+    try {
+      console.log(link_token);
+      const response = await API_DOES_LINK_EXIST(link_token, setShowSpinner);
+      console.log("response", response);
+      setShowSignUpComponent(response?.message === "Link exists");
+      if (response?.message !== "Link exists") {
+        navigate("/notfound");
+      }
+    } catch (error) {
+      console.error("Error validating link:", error);
+      navigate("/notfound");
     }
-}
-  useEffect(()=>{
-    checkIfLinkExists()
-  },[])
+  };
+  
+
+useEffect(() => {
+    if (link_token) {
+      checkIfLinkExists();
+    } 
+  }, [link_token]);
+  
 
   const handleSignUp = async (email, password, name,phoneNumber) => {
     const response = await API_SIGN_UP( email, password, name,phoneNumber, link_token, dispatch, setShowSpinner);
