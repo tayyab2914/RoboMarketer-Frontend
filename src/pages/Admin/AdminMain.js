@@ -7,15 +7,17 @@ import "./styles/AdminMainPanel.css";
 import { API_TEST_TOKEN } from "../../apis/AuthApis";
 import { useLogoutUser } from "../../hooks/useLogoutUser";
 import { useSelector } from "react-redux";
-const {
-  isLoggedIn,
-  token,
-  rerender_dashboard,
-  rerender_chat_panel,
-  current_account,
-} = useSelector((state) => state.authToken);
+
+
 const AdminMain = () => {
   const windowWidth = useWindowWidth();
+  const {
+    isLoggedIn,
+    token,
+    rerender_dashboard,
+    rerender_chat_panel,
+    current_account,
+  } = useSelector((state) => state.authToken);
   const logoutUser = useLogoutUser();
   const testToken = async () => {
     const response = await API_TEST_TOKEN(token);
