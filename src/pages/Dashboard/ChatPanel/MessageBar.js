@@ -17,62 +17,63 @@ const MessageBar = ({ isDisabled }) => {
   const [message, setMessage] = useState("");
   const [file, setFile] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [isFileUploading, setIsFileUploading] = useState(false);
 
   const handleFileSelect = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
+      setIsFileUploading(true); // Start file upload process
       setFile(selectedFile);
       console.log("File selected:", selectedFile.name);
+
+      // Simulate file upload completion after 2 seconds (or replace with actual upload logic)
+      setTimeout(() => {
+        setIsFileUploading(false); // Mark upload as complete
+        console.log("File upload complete");
+      }, 2000);
     }
   };
 
   const handleRemoveFile = () => {
     setFile(null);
+    setIsFileUploading(false); // Reset upload state when file is removed
     document.getElementById("file-upload").value = null;
   };
 
   const handleSendMessage = async () => {
-    // if (!disabled) {
-    if(!message)
-    {
-        setMessage(" ")
-    }
-    const local_message = message
-    const local_file = file
-      dispatch(setTemporaryMessage({message,file}));
-        setMessage("")
-        setFile(null)
-      if (local_message.trim() || local_file) {
-        setShowSpinner(true);
+    if (!message && !file) return;
 
-        const formData = new FormData();
-        if (local_file) {
-          formData.append("file_group", local_file);
-        }
-        formData.append("message", local_message);
+    const localMessage = message || " ";
+    const localFile = file;
+    dispatch(setTemporaryMessage({ message, file }));
+    setMessage("");
+    setFile(null);
 
-        try {
-        //   setdisabled(true);
-          await API_GET_RESPONSE(
-            token,
-            local_message || " ",
-            formData,
-            setShowSpinner
-          );
-          dispatch(setRerenderChatPanel(!rerender_chat_panel));
-        } catch (error) {
-          console.error("Error sending message/file:", error);
-        } finally {
-          setMessage("");
-        //   setdisabled(false);
-          handleRemoveFile();
-          dispatch(setTemporaryMessage(null));
-          setShowSpinner(false);
-        }
-    //   }
+    if (localMessage.trim() || localFile) {
+      setShowSpinner(true);
+
+      const formData = new FormData();
+      if (localFile) {
+        formData.append("file_group", localFile);
+      }
+      formData.append("message", localMessage);
+
+      try {
+        await API_GET_RESPONSE(
+          token,
+          localMessage,
+          formData,
+          setShowSpinner
+        );
+        dispatch(setRerenderChatPanel(!rerender_chat_panel));
+      } catch (error) {
+        console.error("Error sending message/file:", error);
+      } finally {
+        dispatch(setTemporaryMessage(null));
+        setShowSpinner(false);
+      }
     }
   };
-
 
   return (
     <Row align="middle" className="message-bar">
@@ -95,7 +96,12 @@ const MessageBar = ({ isDisabled }) => {
       </Col>
       <Col>
         <label htmlFor="file-upload">
-          <MyIcon type="plus_black" className="message-bar-plus" size="lg" />
+          <MyIcon
+            type="plus_black"
+            className={`message-bar-plus ${isFileUploading ? "disabled" : ""}`}
+            size="lg"
+            style={{ cursor: isFileUploading ? "not-allowed" : "pointer" }}
+          />
         </label>
         <input
           id="file-upload"
@@ -103,6 +109,7 @@ const MessageBar = ({ isDisabled }) => {
           style={{ display: "none" }}
           onChange={handleFileSelect}
           accept=".docs, .docx"
+          disabled={isFileUploading}
         />
       </Col>
       <Col flex="auto">
@@ -113,16 +120,18 @@ const MessageBar = ({ isDisabled }) => {
           onChange={(e) => setMessage(e.target.value)}
           className="message-bar-input"
           onKeyDown={(e) => {
-            if (e.key === "Enter") handleSendMessage();
+            if (e.key === "Enter" && !isFileUploading) handleSendMessage();
           }}
+          disabled={isFileUploading}
         />
       </Col>
       <Col>
         <MyIcon
           type="arrow_up"
           size="lg"
-          className="message-arrow-up"
-          onClick={handleSendMessage}
+          className={`message-arrow-up ${isFileUploading ? "disabled-icon" : ""}`}
+          onClick={!isFileUploading ? handleSendMessage : undefined}
+        //   style={{ cursor: isFileUploading ? "not-allowed" : "pointer" }}
         />
       </Col>
     </Row>
