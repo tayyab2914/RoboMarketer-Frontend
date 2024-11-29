@@ -16,14 +16,14 @@ const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const { token, current_account, rerender_chat_panel, temporary_message,facebook_state } =
     useSelector((state) => state.authToken);
-    const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
+    // const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
   
   const [ChatData, setChatData] = useState([]);
   const chatContainerRef = useRef(null);
   const dispatch = useDispatch();
-  useEffect(() => {
-    setisAccountSetup(current_account?.is_facebook_connected);
-  }, [current_account?.is_facebook_connected]);
+//   useEffect(() => {
+//     setisAccountSetup(current_account?.is_facebook_connected);
+//   }, [current_account?.is_facebook_connected]);
   // Fetch chat history
   const get_history = async () => {
     const response = await API_GET_HISTORY(
@@ -70,11 +70,8 @@ const Chats = () => {
 
   return (
     <div className="chat-container" ref={chatContainerRef}>
-    {!isAccountSetup && <>
-       {/* {!current_account?.is_facebook_connected && facebook_state && <><FacebookIntegrationSelectAccount isInIntegrationComponent={false} /></>} */}
-       {!current_account?.is_facebook_connected && !facebook_state && <><FacebookIntegration isInIntegrationComponent={false} /></>}
-    </>}
-      {ChatData.map((item, index) => (
+  {!current_account?.is_facebook_connected && <><FacebookIntegration isInIntegrationComponent={false}  /></>}
+  {ChatData.map((item, index) => (
         <div key={index} className="chat-message-container">
           <div className="user-message">
             <div style={{ display: "block" }}>

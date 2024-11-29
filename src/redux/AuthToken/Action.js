@@ -91,6 +91,12 @@ export const setOpenIntegrationsModal = (open_integrations_modal) => {
     payload: open_integrations_modal,
   };
 };
+export const setFacebookCode = (facebook_code) => {
+  return {
+    type: OPEN_INTEGRATIONS_MODAL,
+    payload: facebook_code,
+  };
+};
 export const setisIntegrationsModalClosedByUser = (is_integrations_modal_closed_by_user) => {
   return {
     type: IS_INTEGRATIONS_MODAL_CLOSED_BY_USER,

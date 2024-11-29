@@ -3,21 +3,22 @@ import MyIcon from "../../components/Icon/MyIcon";
 import { API_GENERATE_AUTH_URL } from "../../apis/FacebookInsightsApis";
 import { setFacebookState, setisIntegrationsModalClosedByUser } from "../../redux/AuthToken/Action";
 import { useDispatch, useSelector } from "react-redux";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 
-const FacebookIntegration = ({isInIntegrationComponent,onClose}) => {
-  const [showSpinner, setShowSpinner] = useState(false);
+const FacebookIntegration = ({isInIntegrationComponent,onClose,showSpinner}) => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.authToken);
+
+
   const connectFbHandler = async () => {
-    console.log('connectFbHandler')
     dispatch(setisIntegrationsModalClosedByUser(false))
-    const response = await API_GENERATE_AUTH_URL(token, setShowSpinner);
-    console.log('API_GENERATE_AUTH_URL',response)
+    
+    const response = await API_GENERATE_AUTH_URL(token, null);
     if (response) {
       dispatch(setFacebookState(response?.state));
       window.location.href = response?.authorization_url;
     }
+
   };
   return (
    <>
@@ -35,7 +36,7 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose}) => {
       <MyIcon type={"robot"} className={"response-icon"} size="md" />
   </span>}
   
-  <div className="account-setup-component-content">
+  {showSpinner ? <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100px",width:"100%"}}><Spin/></div>:<div className="account-setup-component-content">
     <div className="account-setup-component-description">
       <p>Let's get your account setup by integrating your accounts</p>
       <div className="account-setup-component-account">
@@ -46,7 +47,7 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose}) => {
         <button className="account-setup-component-connect-button" onClick={connectFbHandler} > Connect Facebook </button>
       </div>
       <p className="account-setup-component-help"> If you have any questions or need help, please just type a question below. Thanks! </p>
-    </div></div>
+    </div></div>}
     </Col>
     </Row>
     </>

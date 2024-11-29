@@ -1,6 +1,6 @@
 // src/redux/reducer.js
 
-import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP, RERENDER_RIGHT_PANEL, OPEN_INTEGRATIONS_MODAL, IS_INTEGRATIONS_MODAL_CLOSED_BY_USER } from "./Types";
+import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP, RERENDER_RIGHT_PANEL, OPEN_INTEGRATIONS_MODAL, IS_INTEGRATIONS_MODAL_CLOSED_BY_USER, SET_FB_CODE } from "./Types";
 
 const initialState = {
   token: null,
@@ -13,7 +13,8 @@ const initialState = {
   facebook_state:null,
   is_facebook_setup:false,
   open_integrations_modal:false,
-  is_integrations_modal_closed_by_user:false
+  is_integrations_modal_closed_by_user:false,
+  facebook_code:null
 };
 
 export default function authReducer(state = initialState, action) {
@@ -76,6 +77,11 @@ export default function authReducer(state = initialState, action) {
     return {
       ...state,
       open_integrations_modal: action.payload,
+    };
+  }  else if (action.type == SET_FB_CODE) {
+    return {
+      ...state,
+      facebook_code: action.payload,
     };
   }  else if (action.type == IS_INTEGRATIONS_MODAL_CLOSED_BY_USER) {
     return {

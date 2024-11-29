@@ -152,7 +152,6 @@ export const API_TEST_TOKEN = async (token) => {
     });
     return response.status==200;
   } catch (error) {
-    message.error("Invalid or expired token");
   } finally {
   }
 };
@@ -326,8 +325,6 @@ export const API_UPDATE_ACCOUNT = async (token, account_id, name = null, account
       setShowSpinner(false);
     }
 };
-  
-
 export const API_GET_USER_ATTRIBUTES = async ( token, setShowSpinner ) => {
         // setShowSpinner(true);
         try {
