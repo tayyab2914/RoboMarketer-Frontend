@@ -122,7 +122,6 @@ const MessageBar = ({ isDisabled }) => {
           onKeyDown={(e) => {
             if (e.key === "Enter" && !isFileUploading) handleSendMessage();
           }}
-          disabled={isFileUploading}
         />
       </Col>
       <Col>
