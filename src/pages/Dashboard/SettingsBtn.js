@@ -87,11 +87,11 @@ const SettingsBtn = () => {
 
           ))}
         </div>
-        <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser}  okText="Yes" cancelText="No" >
         <div className=" custom-modal-option modal-option">
-                <button type="text" className="modal-option-btn"><MyIcon type={'logout'} /> <span>Logout</span> </button>
-            
-        </div></Popconfirm>
+            <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser}  okText="Yes" cancelText="No" placement="topLeft">
+                <button type="text" className="modal-option-btn" style={{width:"100%"}}><MyIcon type={'logout'} /> <span>Logout</span> </button>
+            </Popconfirm>
+        </div>
     </div>
       </Modal>
 
