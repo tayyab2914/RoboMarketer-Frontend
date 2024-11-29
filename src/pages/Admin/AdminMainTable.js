@@ -81,7 +81,25 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                 <Pagination current={currentPage} pageSize={pageSize} total={formattedData.length} onChange={handlePageChange} showSizeChanger={false} />
             </div>
 
-            <Modal title="Edit User" visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null}>
+            <Modal
+        className=""
+        title={false}
+        centered
+        visible={isModalVisible}
+        onCancel={() => setIsModalVisible(false)}
+        closable={false}
+        footer={null}
+      >
+        <div className="custom-modal-header">
+          <span className="modal-header">
+            <MyIcon type="account" style={{ marginRight: "5px" }} size="md" /> 
+            Account (Client) Settings
+          </span>
+          <span>
+            <MyIcon type={"close_icon"} onClick={() => setIsModalVisible(false)} size="lg" className="close-icon" />
+          </span>
+        </div>
+        <div className="modal-content">
                 <Form form={form} layout="vertical" onFinish={handleSave} className="admin-main-table-form" >
                     <Form.Item label="First Name" name="first_name" rules={NAME_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
                         <Input   prefix={<MyIcon type={'signin_user'}/>}/>
@@ -96,7 +114,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                         <Input   prefix={<MyIcon type={'signin_password'}/>}/>
                     </Form.Item>
                     <Button type="primary" htmlType="submit" className="admin-main-table-edit-submit-btn"> Save Changes </Button>
-                </Form>
+                </Form></div>
             </Modal>
         </div>
     );
