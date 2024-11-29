@@ -6,7 +6,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/DashboardMain.css";
 import DashboardChatPanel from "./ChatPanel/DashboardChatPanel";
-import { API_GET_ACCOUNTS, API_SWITCH_ACCOUNT } from "../../apis/AuthApis";
+import { API_GET_ACCOUNTS, API_SWITCH_ACCOUNT, API_TEST_TOKEN } from "../../apis/AuthApis";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAuthToken,
@@ -14,6 +14,7 @@ import {
   setRerenderChatPanel,
   setRerenderDashboard,
 } from "../../redux/AuthToken/Action";
+import { useLogoutUser } from "../../hooks/useLogoutUser";
 const DashboardMain = () => {
   const windowWidth = useWindowWidth();
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const DashboardMain = () => {
     useSelector((state) => state.authToken);
   const [ShowSpinner, setShowSpinner] = useState(false);
   const [Accounts, setAccounts] = useState([]);
+  const logoutUser = useLogoutUser();
   const [DashboardRerenderer, setDashboardRerenderer] = useState("");
   const [isLeftDrawerVisible, setIsLeftDrawerVisible] = useState(false);
   const [isRightDrawerVisible, setIsRightDrawerVisible] = useState(false);
@@ -48,9 +50,16 @@ const DashboardMain = () => {
     dispatch(setRerenderDashboard(!rerender_dashboard));
     dispatch(setRerenderChatPanel(!rerender_chat_panel));
   };
+  const testToken = async()=>{
+    const response = await API_TEST_TOKEN(token)
+    if(!response)
+    {
+        logoutUser()
+    }
+}
   useEffect(() => {
-    console.log("RERENDERED DASHBOARD CALLED ON NAME CHANGE")
     getAccounts();
+    testToken()
 
   }, [rerender_dashboard]);
 

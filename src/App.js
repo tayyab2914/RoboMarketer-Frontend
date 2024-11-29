@@ -4,11 +4,13 @@ import './App.css'
 import { API_UPDATE_INSIGHTS } from './apis/FacebookInsightsApis';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenIntegrationsModal } from './redux/AuthToken/Action';
+import { API_TEST_TOKEN } from './apis/AuthApis';
+import { useLogoutUser } from './hooks/useLogoutUser';
 const App = () => {
     const dispatch = useDispatch()
+    const logoutUser = useLogoutUser();
     const { isLoggedIn, isAdmin, token, current_account,facebook_state,is_integrations_modal_closed_by_user} = useSelector((state) => state.authToken);
-//   console.log(current_account)
-  
+
 
     useEffect(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -24,6 +26,7 @@ const App = () => {
         if(isLoggedIn)
             await API_UPDATE_INSIGHTS(token,null)
     }
+ 
     useEffect(()=>{
         updateInsights()
     },[])
