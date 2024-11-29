@@ -49,7 +49,7 @@ export const API_SIGN_IN = async ( email, password, dispatch, navigate, setShowS
   }
 };
 export const API_DOES_LINK_EXIST = async ( link_token, setShowSpinner ) => {
-    setShowSpinner(true);
+    console.log('API_DOES_LINK_EXIST',link_token)
     try {
       const response = await axios.get(`${DOMAIN_NAME}/authentication/is_link_exist/`, {
         params: { link_token: link_token },
@@ -59,7 +59,6 @@ export const API_DOES_LINK_EXIST = async ( link_token, setShowSpinner ) => {
     //   message.error(error.response?.data?.message || "Wrong credentials");
       return false;
     } finally {
-      setShowSpinner(false);
     }
 };
 export const API_SEND_VERIFICATION_EMAIL = async ( email, forgotPassword = false, setShowSpinner ) => {

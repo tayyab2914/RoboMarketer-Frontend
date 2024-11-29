@@ -20,7 +20,11 @@ const SignUp = ({ toggleCurrentMode }) => {
   const checkIfLinkExists = async()=>{
     console.log(link_token)
     const response = await API_DOES_LINK_EXIST(link_token,setShowSpinner)
+    console.log('response',response)
     setShowSignUpComponent(response?.message == "Link exists" ? true:false)
+    if(response?.message != "Link exists"){
+        navigate('/notfound')
+    }
 }
   useEffect(()=>{
     checkIfLinkExists()
