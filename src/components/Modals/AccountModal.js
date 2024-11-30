@@ -66,7 +66,6 @@ useEffect(()=>{
       setShowSpinner(false);
       setIsUploading(false);
       setProfilePic(null);
-      message.success("Profile picture updated successfully")
       setIsEditingPhoto(false); // Reset editing state after upload
       onClose();
     }

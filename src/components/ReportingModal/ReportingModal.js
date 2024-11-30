@@ -68,7 +68,7 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
             
     <div className="reporting-modal">
       <Row >
-        <Col xs={12} className="modal-scrollable" style={{padding:"20px 15px 20px 20px !important"}} >
+        <Col xs={10} sm={12} className="reporting-btn-modal-scrollable" style={{padding:"20px 15px 20px 20px !important"}} >
           <p className="modal-title">Choose Metrics</p>
           {availableMetrics.map((item) => (
             <div key={item.key} className="checkbox-item">

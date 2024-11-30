@@ -12,6 +12,7 @@ import AccountSetupComponent from "./AccountSetupComponent";
 import FacebookIntegration from "../FacebookIntegration";
 import FacebookIntegrationSelectAccount from "../FacebookIntegrationSelectAccount";
 import Markdown from 'react-markdown'
+import remarkGfm from "remark-gfm";
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
@@ -84,9 +85,13 @@ const Chats = () => {
             {item.isLoading ? (
                 <span className="response-text"></span> 
                 ) : item?.response ? (
-                <span
+                <div className="response-text-wrapper">
+                    <span
                     className="response-text"
-                ><Markdown>{item?.response}</Markdown></span> 
+                ><Markdown remarkPlugins={[remarkGfm]}>
+                    {item?.response}
+                </Markdown></span> 
+                </div>
                 ) : (
                 <span className="chat-loader"></span> 
                 )}

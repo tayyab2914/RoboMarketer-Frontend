@@ -9,8 +9,10 @@
     background-color: #ffffff; /* Dark background */
     border-radius: 10px;
     overflow-y: auto;
+    overflow-x: hidden;
     height: calc(100vh - 90px);
     scrollbar-width: none;
+    width: 100%;
   }
   
   /* Chat message container for individual messages */
@@ -41,7 +43,9 @@
     word-wrap: break-word;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
   }
-  
+  .user-message .user-message-div p{
+    margin-bottom: 0px ;
+  }
   /* Bot's response styling */
   .bot-response {
     display: flex;
@@ -70,7 +74,7 @@
     font-size: 16px;
     padding: 10px;
     border-radius: 8px;
-    max-width: 75%;
+    max-width: 90%;
     word-wrap: break-word;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
   }
@@ -131,6 +135,16 @@
       height: 30px;
       width: 30px;
     }
+    .response-content {
+        font-size: 12px;
+      }
+        
+      .bot-response-content {
+        font-size: 12px;
+      }
+      .user-message .user-message-div {
+        font-size: 12px;
+      }
   }
 
   
@@ -165,4 +179,27 @@
   color: #434343;
   box-sizing: border-box;
   animation: animloader 1s linear infinite;
+}
+.response-text-wrapper{
+    overflow-x: auto;
+    width: 100% !important;
+}
+.bot-response-content{
+    width: 100%;
+}
+.response-text table {
+  border-collapse: collapse;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.response-text th,.response-text td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.response-text th {
+  background-color: #f4f4f4;
+  font-weight: bold;
 }

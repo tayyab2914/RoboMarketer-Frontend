@@ -1,169 +1,184 @@
 /* Container for each checkbox item */
 .checkbox-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 500;
-    padding-bottom: 25px;
-  }
-  .modal-scrollable {
-    flex-grow: 1; /* Allows the panel to take up remaining space */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    padding: 20px;
-    height: 60vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding-bottom: 25px;
+}
+.reporting-btn-modal-scrollable {
+  flex-grow: 1; /* Allows the panel to take up remaining space */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  padding: 20px;
+  height: 60vh;
 
-    border-right: 1px solid #e6eaed;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer and Edge */
+  border-right: 1px solid #e6eaed;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+.reporting-btn-modal-scrollable::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
 }
 
-.modal-scrollable::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
+/* Custom checkbox container */
+.custom-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-  
-  /* Custom checkbox container */
-  .custom-checkbox {
-    width: 24px;
-    height: 24px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Custom checkmark inside the checkbox */
-  .custom-checkbox .checkmark {
-    visibility: hidden;
-  }
-  
-  /* Checked state of the checkbox */
-  .custom-checkbox.checked {
-    background-color: black;  /* Black background when checked */
-    border-color: black;      /* Border color turns black */
-  }
-  
-  .custom-checkbox.checked .checkmark {
-    visibility: visible;
-    color: white;             /* White cross icon */
-    font-size: 17px;          /* Set the size of the cross icon */
-    height: 35px;
-    width: 35px;
-    padding: 3px;
-  }
-  
-  /* Hover effect on checkbox */
-  .custom-checkbox:hover {
-    border-color: #1b1b1b;
-  }
-  
-  /* Modal and button styles */
-  .settings-btn {
-    border: none;
-    background-color: white;
-    padding: 20px 0;
-    height: 67.8px;
-    color: #575a7b;
-    font-size: 18px;
-    font-weight: 500;
-    border-top: 1px solid #e6eaed;
-    border-left: 1px solid #e6eaed;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .report-modal-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .ant-modal-title{
-    border-bottom: 1px solid #e6eaed !important;
-    padding-bottom: 10px;
-  }
-  .modal-title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 10px;
+/* Custom checkmark inside the checkbox */
+.custom-checkbox .checkmark {
+  visibility: hidden;
+}
+
+/* Checked state of the checkbox */
+.custom-checkbox.checked {
+  background-color: black; /* Black background when checked */
+  border-color: black; /* Border color turns black */
+}
+
+.custom-checkbox.checked .checkmark {
+  visibility: visible;
+  color: white; /* White cross icon */
+  font-size: 17px; /* Set the size of the cross icon */
+  height: 35px;
+  width: 35px;
+  padding: 3px;
+}
+
+/* Hover effect on checkbox */
+.custom-checkbox:hover {
+  border-color: #1b1b1b;
+}
+
+/* Modal and button styles */
+.settings-btn {
+  border: none;
+  background-color: white;
+  padding: 20px 0;
+  height: 67.8px;
+  color: #575a7b;
+  font-size: 18px;
+  font-weight: 500;
+  border-top: 1px solid #e6eaed;
+  border-left: 1px solid #e6eaed;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.report-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.ant-modal-title {
+  border-bottom: 1px solid #e6eaed !important;
+  padding-bottom: 10px;
+}
+.modal-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 .selected-metric-main {
-    display: flex;
-    align-items: center;
-    border: 1px solid #e6eaed;
-    background-color: white;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e6eaed;
+  background-color: white;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-weight: 500;
 }
 
 .selected-metric-elipsis {
-    margin-right: 8px;
-    color: #575a7b;
-    padding: 8px;
-    border-radius: 10px 0px 0px 10px;
+  margin-right: 0px;
+  color: #575a7b;
+  padding: 8px;
+  border-radius: 10px 0px 0px 10px;
 }
 
 .selected-metric-name {
-    flex-grow: 1; /* Allows the metric name to take up available space */
-    font-size: 14px;
-    color: #333;
-    padding: 8px;
-    border-right: 1px solid #e6eaed;
-    border-left: 1px solid #e6eaed;
+  flex-grow: 1; /* Allows the metric name to take up available space */
+  font-size: 14px;
+  color: #333;
+  padding: 8px;
+  border-right: 1px solid #e6eaed;
+  border-left: 1px solid #e6eaed;
 }
 
 .selected-metric-cross {
-    cursor: pointer;
-    color: #ff4d4f; /* Red color for delete icon */
-    padding: 8px 16px;
-    transition: color 0.3s ease;
-    border-radius: 0px 10px 10px 0px;
-    
+  cursor: pointer;
+  color: #ff4d4f; /* Red color for delete icon */
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .selected-metric-cross:hover {
-    color: #d9534f; /* Slightly darker red on hover */
+  color: #d9534f; /* Slightly darker red on hover */
 }
-.modal-actions{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .modal-actions button {
-    width: 100%;
-    padding: 0px 10px;
-    height: 52px;
-    border: none;
+  width: 100%;
+  padding: 0px 10px;
+  height: 52px;
+  border: none;
+}
+.modal-actions .btn-1 {
+  width: 49% !important;
+  height: 52px !important;
+}
+.modal-actions .btn-2 {
+  width: 49% !important;
+  height: 52px !important;
+}
+.modal-actions .btn-2 button:hover {
+  background-color: rgb(39, 39, 39) !important;
+}
+
+.modal-actions .btn-1 button:hover {
+  background-color: rgb(255, 222, 222) !important;
+}
+
+.cancel-btn {
+  background-color: rgba(250, 52, 52, 0.1);
+  color: #fa3434;
+}
+@media screen and (max-width: 576px) {
+  .reporting-btn-modal-scrollable {
+    padding: 10px;
   }
-  .modal-actions .btn-1 {
-      width: 49% !important;
-      height: 52px !important;
+
+  .selected-metric-name {
+    font-size: 12px;
   }
-  .modal-actions .btn-2 {
-      width: 49% !important;
-      height: 52px !important;
-  
+  .checkbox-item {
+    font-size: 12px;
+    padding-bottom: 15px;
   }
-  .modal-actions .btn-2 button:hover{
-      background-color: rgb(39, 39, 39) !important;
+  .custom-checkbox.checked .checkmark {
+    font-size: 14px; /* Set the size of the cross icon */
+    height: 25px;
+    width: 25px;
+    padding: 2.5px 3.5px;
   }
-  
-  .modal-actions .btn-1 button:hover{
-      background-color: rgb(255, 222, 222) !important;
-  }
-  
-.cancel-btn{
-    background-color: rgba(250, 52, 52, 0.1);
-    color: #FA3434;
 }
