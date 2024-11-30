@@ -23,7 +23,7 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose,showSpinner}) => 
   return (
    <>
    {isInIntegrationComponent && <div className="custom-modal-header">
-          <span className="modal-header">Account Setup</span>
+          <span className="modal-header"><MyIcon type={"account_setup"} size="md" />Account Setup</span>
           <span>
             <MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon" />
           </span>
@@ -36,18 +36,30 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose,showSpinner}) => 
       <MyIcon type={"robot"} className={"response-icon"} size="md" />
   </span>}
   
-  {showSpinner ? <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100px",width:"100%"}}><Spin/></div>:<div className="account-setup-component-content">
+  {showSpinner ? <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100px",width:"100%"}}><Spin/></div>
+  :
+  <div className="account-setup-component-content">
     <div className="account-setup-component-description">
-      <p>Let's get your account setup by integrating your accounts</p>
-      <div className="account-setup-component-account">
+    {!isInIntegrationComponent &&<p className="account-setup-component-title" >
+                  {" "}
+                  <MyIcon type={"account_setup"} size="md" /><span>Account Setup</span>{" "}
+                </p>}
+      <div className="account-setup-component-inner-contents">
+      {!isInIntegrationComponent && <p>Let's get your account setup by integrating your accounts</p>}
+     
+      {isInIntegrationComponent && <p className="fb-integration-modal-description">Facebook Integration</p>}
+       <div className="account-setup-component-account">
         <span className="account-setup-component-account-name">
+        
           <MyIcon className="account-setup-component-account-icon" type={"facebook"} size="md" />
           Facebook Ad Account
         </span>
         <button className="account-setup-component-connect-button" onClick={connectFbHandler} > Connect Facebook </button>
       </div>
-      <p className="account-setup-component-help"> If you have any questions or need help, please just type a question below. Thanks! </p>
-    </div></div>}
+      {!isInIntegrationComponent && <p className="account-setup-component-help"> If you have any questions or need help, please just type a question below. Thanks! </p>}
+      </div>
+    </div>
+    </div>}
     </Col>
     </Row>
     </>

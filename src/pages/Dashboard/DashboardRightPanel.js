@@ -69,7 +69,6 @@ const DashboardRightPanel = () => {
 
   useEffect(() => {
     const fetchSelectedMetrics = async () => {
-        console.log('fetchSelectedMetrics')
       const response = await API_GET_REPORTING(token, setShowSpinner);
       const response2 = await API_GET_ORDERING(token, setShowSpinner);
       const resultArray = Object.entries(response)?.filter(([key, value]) => value === true)?.map(([key]) => key);
@@ -81,7 +80,6 @@ const DashboardRightPanel = () => {
   
 
   const getInsights = async (startDate, endDate) => {
-    console.log(startDate,endDate)
     const response = await API_GET_INSIGHTS(
       token,
       startDate,
@@ -89,7 +87,6 @@ const DashboardRightPanel = () => {
       setShowSpinner
     );
     const updatedMetrics = updateMetrics(availableMetrics, response);
-    console.log('getInsights',response)
     setMetrics(updatedMetrics);
   };
 

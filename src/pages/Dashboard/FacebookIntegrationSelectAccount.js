@@ -95,12 +95,14 @@ const FacebookIntegrationSelectAccount = ({
         //   is_facebook_connected: false,
         // })));
 
+        if (isInIntegrationComponent) {
+            console.log("isInIntegrationComponent")
+            onClose();
+          }
+          console.log("API_GET_HISTORICAL_DATA")
         await API_GET_HISTORICAL_DATA(token, setShowSpinner);
         dispatch(setRerenderDashboard(!rerender_dashboard));
 
-        if (isInIntegrationComponent) {
-          onClose();
-        }
       }
     }
   };
@@ -108,7 +110,7 @@ const FacebookIntegrationSelectAccount = ({
   const INNER_CONTENT = () => (
     <>
       {" "}
-      {isInIntegrationComponent && (
+      {/* {isInIntegrationComponent && (
         <div className="custom-modal-header">
           <span className="modal-header">Account Setup</span>
           <span>
@@ -120,7 +122,7 @@ const FacebookIntegrationSelectAccount = ({
             />
           </span>
         </div>
-      )}
+      )} */}
       <Row style={{ width: "100%" }}>
         <Col
           xs={24}
@@ -137,10 +139,19 @@ const FacebookIntegrationSelectAccount = ({
           <div className="account-setup-component-content">
             {AccountList ? (
               <>
-                <p className="account-setup-component-title">
+                <p className="account-setup-component-title" style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                   {" "}
-                  <MyIcon type={"account_setup"} size="md" /> Select Facebook Ad
-                  Account{" "}
+                 <span style={{display:"flex",alignItems:"center"}}>
+                 <MyIcon type={"account_setup"} size="md" /> Select Facebook Ad
+                 Account{" "}
+                 </span>
+
+                  <MyIcon
+              type={"close_icon"}
+              onClick={onClose}
+              size="lg"
+              className="close-icon"
+            />
                 </p>
                 <span>
                   <Table

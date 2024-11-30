@@ -39,7 +39,9 @@ const AccountModal = ({ isVisible, onClose }) => {
       return false; // Prevent automatic upload
     },
   };
-
+useEffect(()=>{
+    handleUploadClick()
+},[profilePic])
   const handleUploadClick = async () => {
     if (!profilePic || isUploading) return;
 
@@ -64,6 +66,7 @@ const AccountModal = ({ isVisible, onClose }) => {
       setShowSpinner(false);
       setIsUploading(false);
       setProfilePic(null);
+      message.success("Profile picture updated successfully")
       setIsEditingPhoto(false); // Reset editing state after upload
       onClose();
     }
@@ -163,14 +166,14 @@ const AccountModal = ({ isVisible, onClose }) => {
               </>
             )}
           </div>
-          {profilePic && (
+          {/* {profilePic && (
             <MyButton
               text={"Upload Photo"}
               variant="filled"
               onClick={handleUploadClick}
               className={"form-item"}
             />
-          )}
+          )} */}
           <p className="input-group-label">Account Name</p>
           <div className="input-group form-item">
             <span className="input-group-input">

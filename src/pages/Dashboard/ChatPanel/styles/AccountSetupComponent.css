@@ -50,7 +50,7 @@
   }
 .account-setup-component-title {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 !important;
   padding: 15px 20px;
   border-bottom: 1px solid #e6eaed;
@@ -63,9 +63,12 @@
 .account-setup-component-description {
   font-size: 14px;
   margin: 0;
-  padding: 15px 20px;
+  /* padding: 15px 20px; */
 }
-.account-setup-component-content p {
+.account-setup-component-inner-contents{
+    padding: 15px 20px;
+}
+.account-setup-component-inner-contents p {
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -88,7 +91,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin: 20px 0px;
+  margin: 10px 0px 10px 0px;
   border: 1px solid #e6eaed;
   padding: 10px 12px;
   border-radius: 8px;
@@ -125,7 +128,7 @@
 }
 @media screen and (max-width: 550px) {
   .account-setup-component-description {
-    padding: 15px 10px;
+    /* padding: 15px 10px; */
   }
     .account-setup-component-main {
     top: 60px;
