@@ -5,7 +5,7 @@ import "./styles/Chats.css";
 import DOMPurify from "dompurify";
 import MyIcon from "../../../components/Icon/MyIcon";
 import { setTemporaryMessage } from "../../../redux/AuthToken/Action";
-import renderFile, {  PARSED_TEXT } from "../../../utils/Methods";
+import renderFile, {  formatTextToHTML, PARSED_TEXT } from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import { CiCircleFilled } from "@ant-design/icons";
 import AccountSetupComponent from "./AccountSetupComponent";
@@ -73,7 +73,11 @@ const Chats = () => {
               {item?.uploads && item?.uploads.map((upload, idx) => ( <div key={idx}> {renderFile(`${DOMAIN_NAME}${upload.file}`, upload.file)} </div> ))}
             </div>
             <div className="user-message-div">
-              <span className="message" ><span ><Markdown>{item?.message}</Markdown></span></span>
+              
+            <span 
+  className="message" 
+  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(formatTextToHTML(item?.message)) }}
+></span>
             </div>
           </div>
 

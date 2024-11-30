@@ -282,7 +282,7 @@ export function PARSED_TEXT(inputText) {
     return htmlContent
   }
 
-const formatTextToHTML = (inputText)=>{
+export const formatTextToHTML = (inputText)=>{
     let formattedText = inputText.replace(/\*\*\*(.*?)\*\*\*/g, "<b><i>$1</i></b>")
     formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
     formattedText = formattedText.replace(/\*(.*?)\*/g, "<i>$1</i>");
