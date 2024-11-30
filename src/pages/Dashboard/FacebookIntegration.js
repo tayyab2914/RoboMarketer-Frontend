@@ -29,8 +29,8 @@ const windowWidth =  useWindowWidth()
             <MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon" />
           </span>
         </div>}
-        <Row style={{ width: "100%",marginTop:`${windowWidth < 1200 ? "50px":'0px'}` }} >
-   <Col xs={24} sm={24} md={24} lg={24} style={{ display: "flex", width: "100%",marginBottom:"10px" }} >
+        <Row style={{ width: "100%",marginTop:`${windowWidth < 500 ? "60px":windowWidth < 1200 ?"50px":'0px'}` }} >
+   <Col xs={24} sm={24} md={24} lg={24} style={{ display: "flex", width: "100%",marginBottom:"10px",padding:`${windowWidth < 500 ? "0px 10px" :'0px'}` }} >
    {!isInIntegrationComponent &&
     
     <span className="robot-icon-wrapper">

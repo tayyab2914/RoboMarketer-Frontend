@@ -14,22 +14,22 @@
   justify-content: center;
   margin-right: 16px;
 }
-.account-selection-table .ant-table-cell{
-    text-align: start !important;
+.account-selection-table .ant-table-cell {
+  text-align: start !important;
 }
-.account-selection-submit-btn{
-    margin-right: 10px !important;
+.account-selection-submit-btn {
+  margin-right: 10px !important;
 }
-.account-selection-cancel-btn{
-    border-color: red !important;
-    background-color: rgba(250, 52, 52, 0.1) !important;
-    color: red !important;
+.account-selection-cancel-btn {
+  border-color: red !important;
+  background-color: rgba(250, 52, 52, 0.1) !important;
+  color: red !important;
 }
-.account-selection-cancel-btn:hover{
-    background-color: rgb(227, 0, 0) !important;
-    color: white !important;
-    border: none !important;
-    font-weight: 500 !;
+.account-selection-cancel-btn:hover {
+  background-color: rgb(227, 0, 0) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 500 !;
 }
 .account-setup-component-content {
   display: flex;
@@ -39,15 +39,15 @@
 }
 
 .response-icon {
-    color: #00bcd4; /* Blue color for the bot icon */
-    height: 26px;
-    margin-right: 0px;
-  }
-  .account-selection-submit-btn-wrapper{
-    padding: 10px;
-    display: flex;
-    align-items: center;
-  }
+  color: #00bcd4; /* Blue color for the bot icon */
+  height: 26px;
+  margin-right: 0px;
+}
+.account-selection-submit-btn-wrapper {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
 .account-setup-component-title {
   font-size: 22px;
   font-weight: 600;
@@ -57,23 +57,23 @@
   display: flex;
   align-items: center;
 }
-.account-setup-component-title img{
-    margin-right: 10px;
-  }
+.account-setup-component-title img {
+  margin-right: 10px;
+}
 .account-setup-component-description {
   font-size: 14px;
   margin: 0;
   /* padding: 15px 20px; */
 }
-.account-setup-component-inner-contents{
-    padding: 15px 20px;
+.account-setup-component-inner-contents {
+  padding: 15px 20px;
 }
 .account-setup-component-inner-contents p {
   font-weight: 500;
   margin-bottom: 5px;
 }
-.account-list-wrapper{
-    padding: 10px;
+.account-list-wrapper {
+  padding: 10px;
 }
 .account-setup-component-account-list-name {
   font-weight: 500;
@@ -83,8 +83,8 @@
   cursor: pointer;
   border-radius: 8px;
 }
-.account-setup-component-account-list-name:hover{
-    background-color: #f0f0f0;
+.account-setup-component-account-list-name:hover {
+  background-color: #f0f0f0;
 }
 .account-setup-component-account {
   display: flex;
@@ -130,7 +130,7 @@
   .account-setup-component-description {
     /* padding: 15px 10px; */
   }
-    .account-setup-component-main {
+  .account-setup-component-main {
     top: 60px;
     /* align-items: center; */
     padding: 30px 20px 30px 10px;
@@ -155,18 +155,17 @@
     height: 18px !important ;
     margin-right: 0px;
   }
-  
 }
 
 @media screen and (max-width: 550px) {
-.fb-integration-modal-info{
+  .fb-integration-modal-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-}
-.fb-integration-modal-name{
-text-align: center !important;
-}
+  }
+  .fb-integration-modal-name {
+    text-align: center !important;
+  }
 }
