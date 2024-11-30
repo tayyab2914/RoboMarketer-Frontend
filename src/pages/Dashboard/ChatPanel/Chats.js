@@ -77,8 +77,8 @@ const Chats = () => {
             <div style={{ display: "block" }}>
               {item?.uploads && item?.uploads.map((upload, idx) => ( <div key={idx}> {renderFile(`${DOMAIN_NAME}${upload.file}`, upload.file)} </div> ))}
             </div>
-            <div>
-              <span className="message">{item?.message}</span>
+            <div className="user-message-div">
+              <span className="message" ><span dangerouslySetInnerHTML={{ __html: item?.message && DOMPurify.sanitize(formatTextToHTML(item?.message))}}></span></span>
             </div>
           </div>
 
@@ -87,10 +87,19 @@ const Chats = () => {
               <MyIcon type="robot" className="response-icon" size="md" style={item.isLoading ? { opacity: 0.5 } : { opacity: 1 }} />
             </span>
             <div className="bot-response-content">
-              {item.isLoading ? (
-                <span className="response-text"></span>
-              ) : (
-                <span className="response-text" dangerouslySetInnerHTML={{ __html: item?.response ? DOMPurify.sanitize(formatTextToHTML(item?.response)) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/></svg>', }} ></span> )}
+            {item.isLoading ? (
+                <span className="response-text"></span> 
+                ) : item?.response ? (
+                <span
+                    className="response-text"
+                    dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(formatTextToHTML(item?.response)),
+                    }}
+                ></span> 
+                ) : (
+                <span className="chat-loader"></span> 
+                )}
+
             </div>
           </div>
         </div>

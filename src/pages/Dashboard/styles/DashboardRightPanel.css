@@ -50,7 +50,7 @@
 .right-panel-collapse .ant-collapse-header{
     height: 40.96px !important;
     margin-bottom: 0px !important;
-    padding-top: 10px !important;
+    padding-top: 7px !important;
 }
 .right-panel-collapse{
     padding-bottom: 10px;
@@ -104,7 +104,7 @@
   margin-right: 5px;
 }
 .right-panel-container-inner .ant-collapse-header {
-  padding: 10px 12px !important;
+  padding: 7px 12px 10px 12px !important;
   font-weight: 500 !important;
   background-color: white !important;
   border: 1px solid #e6eaed;

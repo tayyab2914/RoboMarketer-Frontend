@@ -31,6 +31,7 @@ const DashboardRightPanelInfo = ({ reportingData }) => {
         "Profit",
         "Revenue",
         "CPL",
+        "CPA",
         "Cost Per Appt",
       ].includes(label)
     ) {

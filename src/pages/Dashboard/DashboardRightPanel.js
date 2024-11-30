@@ -157,7 +157,7 @@ const DashboardRightPanel = () => {
     },
     {
       label: 'Lifetime',
-      value: [dayjs('1970-01-01'), dayjs()],
+      value: [dayjs('2010-01-01'), dayjs()],
     },
   ];
   

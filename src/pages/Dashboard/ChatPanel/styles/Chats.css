@@ -31,7 +31,7 @@
     margin-top: 10px; /* Space between file and message */
   }
   
-  .user-message .message {
+  .user-message .user-message-div {
     background-color: #f8f8f8; /* Dark grey */
     color: black;
     padding: 10px;
@@ -132,3 +132,37 @@
       width: 30px;
     }
   }
+
+  
+
+
+  @keyframes animloader {
+    0% {
+      box-shadow: 4px -2px, 12px 2px, 20px 0px; /* Slightly increased horizontal distances */
+    }
+    25% {
+      box-shadow: 4px 0px, 12px 0px, 20px 2px; /* Slightly increased horizontal distances */
+    }
+    50% {
+      box-shadow: 4px 2px, 12px -2px, 20px 0px; /* Slightly increased horizontal distances */
+    }
+    75% {
+      box-shadow: 4px 0px, 12px 0px, 20px -2px; /* Slightly increased horizontal distances */
+    }
+    100% {
+      box-shadow: 4px -2px, 12px 2px, 20px 0px; /* Slightly increased horizontal distances */
+    }
+  }
+  
+  
+      
+  .chat-loader{
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  position: relative;
+  border-radius: 4px;
+  color: #434343;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite;
+}

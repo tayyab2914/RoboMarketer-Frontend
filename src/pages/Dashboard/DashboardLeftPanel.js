@@ -11,6 +11,7 @@ import SettingsBtn from "./SettingsBtn";
 import {
   FILTER_PROMPTS_BY_CATEGORY,
   GET_PROMPT_CATEGORIES,
+  TRUNCATE_STRING,
 } from "../../utils/Methods";
 import {
   API_DELETE_PROMPT,
@@ -173,7 +174,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                     ) : (
                       <MyIcon type={"user"} />
                     )}
-                    {CurrentAccount?.name}
+                    {TRUNCATE_STRING(CurrentAccount?.name,17)}
                   </span>
                 </>
               }
@@ -203,7 +204,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                       ) : (
                         <MyIcon type={"user"} />
                       )}
-                      {account.name}
+                      {TRUNCATE_STRING(account?.name,20)}
                     </Button>
                   </div>
                 )
@@ -249,7 +250,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                           onClick={() => handlePromptClick(item?.prompt, item?.id)}
                         >
                           {" "}
-                          {item?.prompt_name}
+                          {TRUNCATE_STRING(item?.prompt_name)}
                         </span>
                         <Dropdown
                           overlay={renderDropdownMenu(item)}
