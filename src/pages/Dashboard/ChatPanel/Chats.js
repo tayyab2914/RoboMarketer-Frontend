@@ -5,7 +5,7 @@ import "./styles/Chats.css";
 import DOMPurify from "dompurify";
 import MyIcon from "../../../components/Icon/MyIcon";
 import { setTemporaryMessage } from "../../../redux/AuthToken/Action";
-import renderFile, { formatTextToHTML } from "../../../utils/Methods";
+import renderFile, {  PARSED_TEXT } from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import { CiCircleFilled } from "@ant-design/icons";
 import AccountSetupComponent from "./AccountSetupComponent";
@@ -71,7 +71,7 @@ const Chats = () => {
               {item?.uploads && item?.uploads.map((upload, idx) => ( <div key={idx}> {renderFile(`${DOMAIN_NAME}${upload.file}`, upload.file)} </div> ))}
             </div>
             <div className="user-message-div">
-              <span className="message" ><span dangerouslySetInnerHTML={{ __html: item?.message && DOMPurify.sanitize(formatTextToHTML(item?.message))}}></span></span>
+              <span className="message" ><span dangerouslySetInnerHTML={{ __html: item?.message && DOMPurify.sanitize(PARSED_TEXT(item?.message))}}></span></span>
             </div>
           </div>
 
@@ -86,7 +86,7 @@ const Chats = () => {
                 <span
                     className="response-text"
                     dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(formatTextToHTML(item?.response)),
+                    __html: DOMPurify.sanitize(PARSED_TEXT(item?.response)),
                     }}
                 ></span> 
                 ) : (

@@ -229,26 +229,6 @@ export const getMetricsStatus = (selectedMetrics) => {
       return acc;
     }, {});
   };
-  
-
-
-  export function formatTextToHTML(inputText) {
-    if (!inputText) return "";
-  
-    // Handle bold italic (***text***)
-    let formattedText = inputText.replace(/\*\*\*(.*?)\*\*\*/g, "<b><i>$1</i></b>");
-  
-    // Handle bold (**text**)
-    formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
-  
-    // Handle italic (*text*)
-    formattedText = formattedText.replace(/\*(.*?)\*/g, "<i>$1</i>");
-  
-    // Replace line breaks (\n)
-    formattedText = formattedText.replace(/\n/g, "<br>");
-  
-    return formattedText;
-  }
   export function TRUNCATE_STRING(str,length=30) {
     if (str?.length <= length) {
       return str;
@@ -257,3 +237,92 @@ export const getMetricsStatus = (selectedMetrics) => {
     }
   }
   
+
+
+
+export function PARSED_TEXT(inputText) {
+    if (!inputText) return "";
+    
+   const {textBefore, table, textAfter} = extractTextAndTable(inputText)
+     
+    const formattedTextBefore = formatTextToHTML(textBefore)
+    const formattedTextAfter = formatTextToHTML(textAfter)
+
+    let formattedTable = ''
+    if(isValidMarkdownTable(table))
+    {
+        formattedTable = formatMarkdownTableToHTML(table)
+    }
+
+    return formattedTextBefore + formattedTable + formattedTextAfter
+  }
+
+const formatTextToHTML = (inputText)=>{
+    let formattedText = inputText.replace(/\*\*\*(.*?)\*\*\*/g, "<b><i>$1</i></b>")
+    formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+    formattedText = formattedText.replace(/\*(.*?)\*/g, "<i>$1</i>");
+    formattedText = formattedText.replace(/\n/g, "<br>");
+  
+    return formattedText;
+}
+  export function isValidMarkdownTable(markdownTable) {
+    const rows = markdownTable.trim().split('\n');
+    if (rows.length < 3) {
+        return false;
+    }
+    
+    const headerRow = rows[0].trim();
+    const separatorRow = rows[1].trim();
+    if (!headerRow.includes('|') || !separatorRow.includes('|')) {
+        return false;
+    }
+    
+    return true;
+}
+export function formatMarkdownTableToHTML(markdownTable) {
+    const rows = markdownTable.trim().split('\n');
+    const headers = rows[0].split('|').map(cell => cell.trim()).filter(Boolean);
+    const dataRows = rows.slice(2).map(row => 
+        row.split('|').map(cell => cell.trim()).filter(Boolean)
+    );
+
+    let html = '<table>';
+    html += '<thead><tr>';
+    headers.forEach(header => {
+        html += `<th>${header.replace(/\*\*/g, '')}</th>`;
+    });
+    html += '</tr></thead>';
+
+    html += '<tbody>';
+    dataRows.forEach(row => {
+        html += '<tr>';
+        row.forEach(cell => {
+            html += `<td>${cell}</td>`;
+        });
+        html += '</tr>';
+    });
+    html += '</tbody></table>';
+
+    return html;
+}
+export function extractTextAndTable(content) {
+    // Extract markdown table from content
+    const tableMatch = content.match(/(\|.*\|(\n\|.*\|)+)/s);
+    let table = '';
+    let textBefore = '';
+    let textAfter = '';
+
+    if (tableMatch) {
+        // Extract table part
+        table = tableMatch[0];
+        // Extract text before table
+        textBefore = content.substring(0, tableMatch.index).trim();
+        // Extract text after table
+        textAfter = content.substring(tableMatch.index + table.length).trim();
+    } else {
+        // No table found, just return the entire content as text
+        textBefore = content;
+    }
+
+    return { textBefore, table, textAfter };
+}
