@@ -11,6 +11,7 @@ import { CiCircleFilled } from "@ant-design/icons";
 import AccountSetupComponent from "./AccountSetupComponent";
 import FacebookIntegration from "../FacebookIntegration";
 import FacebookIntegrationSelectAccount from "../FacebookIntegrationSelectAccount";
+import Markdown from 'react-markdown'
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
@@ -71,7 +72,7 @@ const Chats = () => {
               {item?.uploads && item?.uploads.map((upload, idx) => ( <div key={idx}> {renderFile(`${DOMAIN_NAME}${upload.file}`, upload.file)} </div> ))}
             </div>
             <div className="user-message-div">
-              <span className="message" ><span dangerouslySetInnerHTML={{ __html: item?.message && DOMPurify.sanitize(PARSED_TEXT(item?.message))}}></span></span>
+              <span className="message" ><span ><Markdown>{item?.message}</Markdown></span></span>
             </div>
           </div>
 
@@ -85,10 +86,7 @@ const Chats = () => {
                 ) : item?.response ? (
                 <span
                     className="response-text"
-                    dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(PARSED_TEXT(item?.response)),
-                    }}
-                ></span> 
+                ><Markdown>{item?.response}</Markdown></span> 
                 ) : (
                 <span className="chat-loader"></span> 
                 )}

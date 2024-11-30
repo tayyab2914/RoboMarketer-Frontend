@@ -242,19 +242,44 @@ export const getMetricsStatus = (selectedMetrics) => {
 
 export function PARSED_TEXT(inputText) {
     if (!inputText) return "";
-    
-   const {textBefore, table, textAfter} = extractTextAndTable(inputText)
-     
-    const formattedTextBefore = formatTextToHTML(textBefore)
-    const formattedTextAfter = formatTextToHTML(textAfter)
 
-    let formattedTable = ''
-    if(isValidMarkdownTable(table))
-    {
-        formattedTable = formatMarkdownTableToHTML(table)
+    const markdownWithText = `
+    Here’s a 5x5 table with random values:
+    
+    |   **A**   |   **B**   |   **C**   |   **D**   |   **E**   |
+    |:---------:|:---------:|:---------:|:---------:|:---------:|
+    |    12     |    54     |    88     |    32     |    19     |
+    |    76     |    45     |    21     |    98     |    67     |
+    |    34     |    89     |    56     |    73     |    90     |
+    |    81     |    42     |    65     |    23     |    31     |
+    |    27     |    39     |    50     |    68     |    11     |
+    
+    
+    `;
+    const { textBefore, table, textAfter } = extractTextAndTable(markdownWithText);
+    console.log("TEXT",textBefore)
+    console.log("TABLE\n", table)
+    console.log("TEXT",textAfter)
+
+    let htmlContent = '';
+
+    if (textBefore) {
+        htmlContent += `<p>${textBefore}</p>`;
     }
 
-    return formattedTextBefore + formattedTable + formattedTextAfter
+    if (isValidMarkdownTable(table)) {
+        console.log("HEY")
+        const tableHTML = formatMarkdownTableToHTML(table);
+        htmlContent += tableHTML;
+    } else {
+        htmlContent += `<pre>${table}</pre>`;
+    }
+
+    if (textAfter) {
+        htmlContent += `<p>${textAfter}</p>`;
+    }
+
+    return htmlContent
   }
 
 const formatTextToHTML = (inputText)=>{
