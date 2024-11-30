@@ -14,14 +14,14 @@
   height: 5px; /* Sets the width of the horizontal scrollbar */
 }
 .table-wrapper th {
-  text-align: start !important;
+  text-align: center !important;
   padding: 15px 25px !important;
   color: #575a7b !important ;
   font-family: "Inter", sans-serif;
 }
 
 .table-wrapper td {
-  text-align: start !important;
+  text-align: center !important;
   padding: 15px 10px !important;
   color: #101136 !important ;
   font-weight: 500;

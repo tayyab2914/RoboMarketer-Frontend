@@ -103,7 +103,7 @@ export const API_AUTHENTICATE_CODE = async ( verificationCode, codeToken, setSho
   }
 };
 export const API_SET_NEW_PASSWORD = async ( email, newPassword, verificationCode, codeToken, setShowSpinner, setShowForgotPassword ) => {
-  setShowSpinner(true);
+//   setShowSpinner(true);
 
   try {
     const response = await axios.post(`${DOMAIN_NAME}/authentication/set_new_password/`, {
@@ -119,7 +119,7 @@ export const API_SET_NEW_PASSWORD = async ( email, newPassword, verificationCode
   } catch (error) {
     message.error(error.response?.data?.message || "Failed to reset password");
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 export const API_GOOGLE_SIGN_IN = async (authCode,dispatch,navigate, setShowSpinner,redirect_uri) => {
@@ -156,7 +156,7 @@ export const API_TEST_TOKEN = async (token) => {
   }
 };
 export const API_GENERATE_LINK = async (token, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
     try {
         const response = await axios.post(`${DOMAIN_NAME}/authentication/generate_link/`, {}, {
             headers: {
@@ -169,11 +169,11 @@ export const API_GENERATE_LINK = async (token, setShowSpinner) => {
     } catch (error) {
         message.error('Failed to generate signup link.');
     } finally {
-      setShowSpinner(false);
+    //   setShowSpinner(false);
     }
 };
 export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
     try {
       const response = await axios.get(`${DOMAIN_NAME}/authentication/get_users_list/`, {
         headers: {
@@ -185,11 +185,11 @@ export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
     } catch (error) {
       message.error(error?.response?.data?.message);
     } finally {
-      setShowSpinner(false);
+    //   setShowSpinner(false);
     }
 };
 export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
 
     try {
         const response = await axios.put(`${DOMAIN_NAME}/authentication/edit_user/${id}/`, {
@@ -210,11 +210,11 @@ export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) =>
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
         message.error(errorMessage);  
     } finally {
-        setShowSpinner(false);
+        // setShowSpinner(false);
     }
 };
 export const API_DELETE_USER = async (token, id,  setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
     try {
           const response = await axios.delete(`${DOMAIN_NAME}/authentication/delete_user/${id}/`, {
             headers: {
@@ -228,7 +228,7 @@ export const API_DELETE_USER = async (token, id,  setShowSpinner) => {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
         message.error(errorMessage);  
     } finally {
-        setShowSpinner(false);
+        // setShowSpinner(false);
     }
 };
 export const API_GET_ACCOUNTS = async (token, setShowSpinner) => {

@@ -4,11 +4,12 @@ import { API_GENERATE_AUTH_URL } from "../../apis/FacebookInsightsApis";
 import { setFacebookState, setisIntegrationsModalClosedByUser } from "../../redux/AuthToken/Action";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Spin } from "antd";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 const FacebookIntegration = ({isInIntegrationComponent,onClose,showSpinner}) => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.authToken);
-
+const windowWidth =  useWindowWidth()
 
   const connectFbHandler = async () => {
     dispatch(setisIntegrationsModalClosedByUser(false))
@@ -28,7 +29,7 @@ const FacebookIntegration = ({isInIntegrationComponent,onClose,showSpinner}) => 
             <MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon" />
           </span>
         </div>}
-        <Row style={{ width: "100%" }}>
+        <Row style={{ width: "100%",marginTop:`${windowWidth < 1200 ? "50px":'0px'}` }} >
    <Col xs={24} sm={24} md={24} lg={24} style={{ display: "flex", width: "100%",marginBottom:"10px" }} >
    {!isInIntegrationComponent &&
     

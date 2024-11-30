@@ -18,7 +18,7 @@ import { useLogoutUser } from "../../hooks/useLogoutUser";
 const DashboardMain = () => {
   const windowWidth = useWindowWidth();
   const dispatch = useDispatch();
-  const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel,current_account } =
+  const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel,current_account,open_integrations_modal,is_integrations_modal_closed_by_user } =
     useSelector((state) => state.authToken);
   const [ShowSpinner, setShowSpinner] = useState(false);
   const [Accounts, setAccounts] = useState([]);
@@ -43,6 +43,12 @@ const DashboardMain = () => {
     setAccounts(response);
     // dispatch(setRerenderDashboard(!rerender_dashboard));
   };
+  useEffect(() => {
+    if (open_integrations_modal && !is_integrations_modal_closed_by_user==undefined || !is_integrations_modal_closed_by_user) {
+      setIsLeftDrawerVisible(true) 
+    }
+  }, [open_integrations_modal,rerender_dashboard]);
+  
   const SwitchAccount = async (id) => {
     const response = await API_SWITCH_ACCOUNT(token, id, setShowSpinner);
 

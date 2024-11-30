@@ -16,15 +16,10 @@ const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const { token, current_account, rerender_chat_panel, temporary_message,facebook_state } =
     useSelector((state) => state.authToken);
-    // const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
   
   const [ChatData, setChatData] = useState([]);
   const chatContainerRef = useRef(null);
   const dispatch = useDispatch();
-//   useEffect(() => {
-//     setisAccountSetup(current_account?.is_facebook_connected);
-//   }, [current_account?.is_facebook_connected]);
-  // Fetch chat history
   const get_history = async () => {
     const response = await API_GET_HISTORY(
       token,
@@ -32,14 +27,13 @@ const Chats = () => {
       setShowSpinner
     );
     setChatData(response?.reverse() || []);
-    dispatch(setTemporaryMessage({})); // Clear temporary message after fetching
+    dispatch(setTemporaryMessage({})); 
   };
 
   useEffect(() => {
     get_history();
   }, [rerender_chat_panel]);
 
-  // Add temporary message to ChatData
   useEffect(() => {
     if (temporary_message?.message || temporary_message?.file) {
       setChatData((prev) => [
@@ -55,7 +49,6 @@ const Chats = () => {
     }
   }, [temporary_message]);
 
-  // Auto-scroll to the bottom
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =

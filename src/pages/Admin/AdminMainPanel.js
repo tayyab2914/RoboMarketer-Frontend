@@ -23,11 +23,9 @@ const AdminMainPanel = () => {
   const closeDrawer = () => setIsDrawerVisible(false);
 
   const getUsersList = async () => {
-    setShowSpinner(true);
     const response = await API_GET_USERS_LIST(token,setShowSpinner);
     setUsersList(response);
     setFilteredUsersList(response);
-    setShowSpinner(false);
   };
 
   const handleSearch = (query) => {
