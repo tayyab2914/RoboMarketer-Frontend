@@ -24,7 +24,8 @@ const windowWidth =  useWindowWidth()
   return (
    <>
    {isInIntegrationComponent && <div className="custom-modal-header">
-          <span className="modal-header"><MyIcon type={"account_setup"} size="md" />Account Setup</span>
+          <span className="modal-header"><MyIcon type="integrations_inner" style={{ marginRight: "5px" }} size="md" /> 
+          Integrations</span>
           <span>
             <MyIcon type={'close_icon'} onClick={onClose} size="lg" className="close-icon" />
           </span>

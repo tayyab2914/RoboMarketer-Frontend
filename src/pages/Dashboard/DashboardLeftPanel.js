@@ -250,7 +250,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
                           onClick={() => handlePromptClick(item?.prompt, item?.id)}
                         >
                           {" "}
-                          {TRUNCATE_STRING(item?.prompt_name)}
+                          {TRUNCATE_STRING(item?.prompt_name,25)}
                         </span>
                         <Dropdown
                           overlay={renderDropdownMenu(item)}

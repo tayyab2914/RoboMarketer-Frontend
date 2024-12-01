@@ -72,8 +72,10 @@ import arrow_down from "../assets/icons/arrow_down.svg";
 import close_icon from "../assets/icons/close_icon.svg";
 import arrow_right from "../assets/icons/arrow_right.svg";
 import upload from "../assets/icons/upload.svg";
+import integrations_inner from "../assets/icons/integrations_inner.svg";
 
 export const ICONS = {
+  integrations_inner: integrations_inner,
   arrow_right: arrow_right,
   upload: upload,
   close_icon: close_icon,

@@ -13,7 +13,7 @@ const initialState = {
   facebook_state:null,
   is_facebook_setup:false,
   open_integrations_modal:false,
-  is_integrations_modal_closed_by_user:false,
+  is_integrations_modal_closed_by_user:true,
   facebook_code:null
 };
 

@@ -66,12 +66,12 @@ const disconnectFacebook = async () => {
     }, []);
 
   return (
-    <Modal title={false} centered visible={isVisible} onCancel={cancelhandler} closable={false} footer={null} width={700} >
+    <Modal title={false} centered visible={isVisible} onCancel={cancelhandler} closable={false} footer={null} width={550} >
       {(current_account?.is_facebook_connected && current_account?.facebook_account_id)  && (
        <>
          <div className="custom-modal-header">
          <span className="modal-header">
-           <MyIcon type="integrations" style={{ marginRight: "5px" }} size="md" /> 
+           <MyIcon type="integrations_inner" style={{ marginRight: "5px" }} size="md" /> 
            Integrations
          </span>
          <span>
