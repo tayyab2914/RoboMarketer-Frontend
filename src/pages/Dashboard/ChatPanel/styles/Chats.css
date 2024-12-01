@@ -149,19 +149,19 @@
 
 @keyframes animloader {
   0% {
-    box-shadow: 4px -2px, 12px 2px, 20px 0px; /* Slightly increased horizontal distances */
+    box-shadow: 6px -2px, 14px 2px, 22px 0px; /* Slightly increased horizontal distances */
   }
   25% {
-    box-shadow: 4px 0px, 12px 0px, 20px 2px; /* Slightly increased horizontal distances */
+    box-shadow: 6px 0px, 14px 0px, 22px 2px; /* Slightly increased horizontal distances */
   }
   50% {
-    box-shadow: 4px 2px, 12px -2px, 20px 0px; /* Slightly increased horizontal distances */
+    box-shadow: 6px 2px, 14px -2px, 22px 0px; /* Slightly increased horizontal distances */
   }
   75% {
-    box-shadow: 4px 0px, 12px 0px, 20px -2px; /* Slightly increased horizontal distances */
+    box-shadow: 6px 0px, 14px 0px, 22px -2px; /* Slightly increased horizontal distances */
   }
   100% {
-    box-shadow: 4px -2px, 12px 2px, 20px 0px; /* Slightly increased horizontal distances */
+    box-shadow: 6px -2px, 14px 2px, 22px 0px; /* Slightly increased horizontal distances */
   }
 }
 
