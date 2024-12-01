@@ -86,7 +86,7 @@ const Chats = () => {
               <MyIcon type="robot" className="response-icon" size="md" style={item.isLoading ? { opacity: 0.5 } : { opacity: 1 }} />
             </span>
             <div className="bot-response-content">
-            {!item.isLoading ? (<span style={{display:"flex"}}>
+            {item.isLoading ? (<span style={{display:"flex"}}>
                 <span className="response-text"></span> 
                 <span className="chat-loader"></span> </span>
                 ) : item?.response ? (
