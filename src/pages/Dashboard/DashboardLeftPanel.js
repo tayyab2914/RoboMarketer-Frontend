@@ -60,7 +60,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const handlePromptClick = async (message, id) => {
     
 
-    dispatch(setTemporaryMessage({ message }));
+    dispatch(setTemporaryMessage({ message,wait:true }));
     const formData = new FormData();
     formData.append("prompt", id);
     await API_GET_RESPONSE(token, id, formData, setShowSpinner);

@@ -49,7 +49,10 @@ const Chats = () => {
           uploads: temporary_message?.file ? [temporary_message.file] : [],
         },
       ]);
-      get_history();
+      if(!temporary_message?.wait)
+        {
+            get_history()
+        } 
     }
   }, [temporary_message]);
 
