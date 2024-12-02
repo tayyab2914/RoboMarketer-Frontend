@@ -37,6 +37,7 @@ const Chats = () => {
   }, [rerender_chat_panel]);
 
   useEffect(() => {
+    console.log('temporary_message')
     if (temporary_message?.message || temporary_message?.file) {
       setChatData((prev) => [
         ...prev,
@@ -65,8 +66,8 @@ const Chats = () => {
 
   return (
     <div className="chat-container" ref={chatContainerRef}>
-  {!current_account?.is_facebook_connected && <><FacebookIntegration isInIntegrationComponent={false}  /></>}
-  {ChatData.map((item, index) => (
+  {<><FacebookIntegration isInIntegrationComponent={false}  /></>}
+  {ChatData?.map((item, index) => (
         <div key={index} className="chat-message-container">
           <div className="user-message">
             <div style={{ display: "block" }}>

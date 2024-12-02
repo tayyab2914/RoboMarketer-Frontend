@@ -254,7 +254,7 @@ export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {
     //   }
       return false;
     } finally {
-      setShowSpinner(false);
+    //   setShowSpinner(false);
     }
   };
   
