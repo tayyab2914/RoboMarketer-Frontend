@@ -85,6 +85,9 @@ const FacebookIntegrationSelectAccount = ({
         setShowSpinner
       );
       dispatch(setRerenderDashboard(!rerender_dashboard));
+      setTimeout(() => {
+        dispatch(setRerenderDashboard(!rerender_dashboard));
+      }, 2000);
       if (response) {
         setAccountList(null);
         dispatch(setFacebookState(null));

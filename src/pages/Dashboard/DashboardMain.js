@@ -63,6 +63,7 @@ const DashboardMain = () => {
     }
 }
   useEffect(() => {
+    console.log("GET ACCOUNTS CALLED")
     getAccounts();
     testToken()
 
