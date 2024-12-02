@@ -28,8 +28,9 @@ const Chats = () => {
       current_account?.id,
       setShowSpinner
     );
-    setChatData(response?.reverse() || []);
+    
     dispatch(setTemporaryMessage({})); 
+    setChatData(response?.reverse() || []);
   };
 
   useEffect(() => {

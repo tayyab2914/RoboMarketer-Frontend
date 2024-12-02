@@ -46,6 +46,7 @@ const MessageBar = ({ isDisabled }) => {
     const localMessage = message || " ";
     const localFile = file;
     dispatch(setTemporaryMessage({ message, file }));
+    dispatch(setRerenderChatPanel(!rerender_chat_panel));
     setMessage("");
     setFile(null);
 

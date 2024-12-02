@@ -39,7 +39,6 @@ const DashboardMain = () => {
         response?.find((account) => account?.is_current_account)
       )
     );
-    console.log('API_GET_ACCOUNTS',response)
     setAccounts(response);
     // dispatch(setRerenderDashboard(!rerender_dashboard));
   };
