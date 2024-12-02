@@ -58,12 +58,15 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
 
   // Handle prompt click
   const handlePromptClick = async (message, id) => {
+    
+
+    dispatch(setTemporaryMessage({ message }));
     const formData = new FormData();
     formData.append("prompt", id);
-    dispatch(setTemporaryMessage({ message }));
     await API_GET_RESPONSE(token, id, formData, setShowSpinner);
-    dispatch(setRerenderChatPanel(!rerender_chat_panel));
     dispatch(setTemporaryMessage({}));
+    dispatch(setRerenderChatPanel(!rerender_chat_panel));
+    dispatch(setRerenderDashboard(!rerender_dashboard));
   };
 
   // UseEffect to fetch prompts on initial render and when rerender_dashboard changes

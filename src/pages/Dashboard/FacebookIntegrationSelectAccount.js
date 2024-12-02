@@ -84,17 +84,11 @@ const FacebookIntegrationSelectAccount = ({
         selectedAccount.name,
         setShowSpinner
       );
-
+      dispatch(setRerenderDashboard(!rerender_dashboard));
       if (response) {
         setAccountList(null);
         dispatch(setFacebookState(null));
         dispatch(setRerenderDashboard(!rerender_dashboard));
-        // dispatch(setRerenderRightPanel(!rerender_right_panel));
-        // dispatch(setCurrentAccount((prevState) => ({
-        //   ...prevState,
-        //   is_facebook_connected: false,
-        // })));
-
         if (isInIntegrationComponent) {
             console.log("isInIntegrationComponent")
             onClose();
