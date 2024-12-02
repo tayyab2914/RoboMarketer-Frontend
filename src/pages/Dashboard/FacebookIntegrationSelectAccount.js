@@ -50,31 +50,6 @@ const FacebookIntegrationSelectAccount = ({
     },
   };
 
-  // useEffect(() => {
-  //   const fetchToken = async () => {
-  //     const urlObj = new URL(window.location.href);
-  //     const code = urlObj.searchParams.get("code");
-  //     console.log("FacebookIntegrationSelectAccount",code)
-  //     if (code) {
-  //         setShowSpinner(true)
-  //       const decodedRedirectResponse = decodeURIComponent(window.location.href);
-  //       const response = await API_FETCH_TOKEN( token, decodedRedirectResponse, facebook_state, setShowSpinner );
-  //       setAccountList(response?.account_list);
-  //         if(!response)
-  //         {
-  //             const response = await API_DISCONNECT_FACEBOOK(token, setShowSpinner);
-  //             dispatch(setRerenderDashboard(!rerender_dashboard));
-  //             dispatch(setFacebookState(null))
-  //         }
-  //         setShowSpinner(false)
-  //     }else{
-  //         console.log("SETTING FACEBOOK STATE TO NULL else")
-  //         setAccountList(null);
-  //     }
-  //   };
-  //   console.log("ACCOUNT CALLEDF")
-  //   fetchToken();
-  // }, []);
 
   const handleAccountClick = async () => {
     if (selectedAccount) {
@@ -93,10 +68,8 @@ const FacebookIntegrationSelectAccount = ({
         dispatch(setFacebookState(null));
         dispatch(setRerenderDashboard(!rerender_dashboard));
         if (isInIntegrationComponent) {
-            console.log("isInIntegrationComponent")
             onClose();
           }
-          console.log("API_GET_HISTORICAL_DATA")
         await API_GET_HISTORICAL_DATA(token, setShowSpinner);
         dispatch(setRerenderDashboard(!rerender_dashboard));
 
@@ -106,20 +79,6 @@ const FacebookIntegrationSelectAccount = ({
 
   const INNER_CONTENT = () => (
     <>
-      {" "}
-      {/* {isInIntegrationComponent && (
-        <div className="custom-modal-header">
-          <span className="modal-header">Account Setup</span>
-          <span>
-            <MyIcon
-              type={"close_icon"}
-              onClick={onClose}
-              size="lg"
-              className="close-icon"
-            />
-          </span>
-        </div>
-      )} */}
       <Row style={{ width: "100%" }}>
         <Col
           xs={24}
@@ -198,12 +157,6 @@ const FacebookIntegrationSelectAccount = ({
 
   return (
     <>
-      {/* {!isInIntegrationComponent ? 
-     <Modal title={false} centered visible={showSetAccountModal} onCancel={()=>setshowSetAccountModal(false)} closable={false} footer={null} width={700} >
-        <INNER_CONTENT/>
-        </Modal>
-        : <INNER_CONTENT/>
-     } */}
       {<INNER_CONTENT />}
     </>
   );

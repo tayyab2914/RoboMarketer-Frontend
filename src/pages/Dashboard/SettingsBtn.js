@@ -37,7 +37,6 @@ const SettingsBtn = () => {
   ];
 
   useEffect(() => {
-    console.log('is_integrations_modal_closed_by_user',is_integrations_modal_closed_by_user)
     if (open_integrations_modal && !is_integrations_modal_closed_by_user==undefined || !is_integrations_modal_closed_by_user) {
       const integrationOption = options.find((opt) => opt.name === "Integrations");
       setActiveOption(integrationOption);

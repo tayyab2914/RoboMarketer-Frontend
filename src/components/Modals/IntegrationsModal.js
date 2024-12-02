@@ -16,7 +16,7 @@ const IntegrationsModal = ({ isVisible, onClose }) => {
   const navigate = useNavigate()
   const [AccountList, setAccountList] = useState(null);
   const { isLoggedIn, token, rerender_dashboard,facebook_code, rerender_chat_panel, current_account, facebook_state, } = useSelector((state) => state.authToken);
-console.log('IntegrationsModal',current_account)
+
 const disconnectFacebook = async () => {
     const response = await API_DISCONNECT_FACEBOOK(token, setShowSpinner);
     dispatch(setRerenderDashboard(!rerender_dashboard));
@@ -82,7 +82,7 @@ const disconnectFacebook = async () => {
           <p className="fb-integration-modal-description"> Facebook Integration </p>
           <div className="fb-integration-modal-info">
             <span className="fb-integration-modal-name">
-               <MyIcon type={"facebook"} size="md" /> {current_account?.name}{" "}
+               <MyIcon type={"facebook"} size="md" /> {current_account?.facebook_account_name}{" "}
             </span>
             <span className="fb-integration-modal-btn">
               <button onClick={disconnectFacebook}>

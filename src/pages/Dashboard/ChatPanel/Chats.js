@@ -38,7 +38,6 @@ const Chats = () => {
   }, [rerender_chat_panel]);
 
   useEffect(() => {
-    console.log('temporary_message',temporary_message)
     if (temporary_message?.message || temporary_message?.file) {
       setChatData((prev) => [
         ...prev,
