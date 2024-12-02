@@ -88,6 +88,7 @@ const disconnectFacebook = async () => {
               <button onClick={disconnectFacebook}>
                  <MyIcon type={"cross_red"} /> Disconnect </button>
             </span>
+            
           </div>
         </div></>
       )}
