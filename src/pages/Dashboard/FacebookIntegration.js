@@ -143,7 +143,7 @@ const FacebookIntegration = ({
                    {current_account?.is_facebook_connected &&<> <p className="fb-integration-modal-description"> Facebook Integration </p>
           <div className="fb-integration-modal-info">
             <span className="fb-integration-modal-name">
-               <MyIcon type={"facebook"} size="md" /> {current_account?.name}{" "}
+               <MyIcon type={"facebook"} size="md" /> {current_account?.facebook_account_name}{" "}
             </span>
             <span className="fb-integration-modal-btn">
               <button onClick={disconnectFacebook}>
