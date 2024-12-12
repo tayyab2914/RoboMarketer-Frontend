@@ -1,6 +1,6 @@
 export const DEFAULT_BUTTON_HEIGHT = '45px'
 
-export const PRODUCTION = true;
+export const PRODUCTION = false;
 export const TESTING = true
 
 let DOMAIN_NAME
