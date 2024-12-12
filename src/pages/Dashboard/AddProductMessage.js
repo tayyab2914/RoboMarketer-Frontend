@@ -12,6 +12,7 @@ import { Col, Row, Spin } from "antd";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import RoboMarketerModal from "../../components/Modals/RoboMarketerModal";
 import AddProductModal from "../../components/Modals/AddProductModal";
+import ProductsModal from "../../components/Modals/ProductsModal";
 
 const AddProductMessage = ({
   isInIntegrationComponent,
@@ -28,6 +29,10 @@ const AddProductMessage = ({
     setopenModal(true)
   };
 
+  const handleCloseModal = async () => {
+    setopenModal(false)
+    dispatch(setRerenderDashboard(!rerender_dashboard))
+  };
   return (
     <>
     
@@ -120,7 +125,7 @@ const AddProductMessage = ({
         </Col>
       </Row>
 
-      <AddProductModal isVisible={openModal} onClose={()=>setopenModal(false)}/>
+      <ProductsModal isVisible={openModal} onClose={handleCloseModal}/>
     </>
   );
 };

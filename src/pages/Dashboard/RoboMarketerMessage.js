@@ -27,6 +27,10 @@ const RoboMarketerMessage = ({
     setopenModal(true)
   };
 
+  const handleCloseModal = async () => {
+    setopenModal(false)
+    dispatch(setRerenderDashboard(!rerender_dashboard))
+  };
   return (
     <>
     
@@ -119,7 +123,7 @@ const RoboMarketerMessage = ({
         </Col>
       </Row>
 
-      <RoboMarketerModal isVisible={openModal} onClose={()=>setopenModal(false)}/>
+      <RoboMarketerModal isVisible={openModal} onClose={handleCloseModal}/>
     </>
   );
 };

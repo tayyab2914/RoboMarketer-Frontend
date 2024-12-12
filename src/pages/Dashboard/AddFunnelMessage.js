@@ -13,6 +13,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import RoboMarketerModal from "../../components/Modals/RoboMarketerModal";
 import AddProductModal from "../../components/Modals/AddProductModal";
 import AddFunnelModal from "../../components/Modals/AddFunnelModal";
+import MarketingFunnelsModal from "../../components/Modals/MarketingFunnelsModal";
 
 const AddFunnelMessage = ({
   isInIntegrationComponent,
@@ -29,6 +30,10 @@ const AddFunnelMessage = ({
     setopenModal(true)
   };
 
+  const handleCloseModal = async () => {
+    setopenModal(false)
+    dispatch(setRerenderDashboard(!rerender_dashboard))
+  };
   return (
     <>
     
@@ -121,7 +126,7 @@ const AddFunnelMessage = ({
         </Col>
       </Row>
 
-      <AddFunnelModal isVisible={openModal} onClose={()=>setopenModal(false)}/>
+      <MarketingFunnelsModal isVisible={openModal} onClose={handleCloseModal}/>
     </>
   );
 };
