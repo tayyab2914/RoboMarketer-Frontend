@@ -33,13 +33,13 @@ const DashboardMain = () => {
   const closeRightDrawer = () => setIsRightDrawerVisible(false);
 
   const getAccounts = async () => {
-    console.log("GET ACCOUNTS CALLED")
     const response = await API_GET_ACCOUNTS(token, setShowSpinner);
     dispatch(
       setCurrentAccount(
         response?.find((account) => account?.is_current_account)
       )
     );
+    console.log(response)
     setAccounts(response);
     // dispatch(setRerenderDashboard(!rerender_dashboard));
   };
@@ -64,14 +64,12 @@ const DashboardMain = () => {
     }
 }
   useEffect(() => {
-    console.log("GET ACCOUNTS CALLED")
     getAccounts();
     testToken()
 
   }, [rerender_dashboard]);
 
   useEffect(()=>{
-    console.log('current_account?.is_facebook_connected')
     getAccounts()
   },[current_account?.is_facebook_connected])
   useEffect(() => {

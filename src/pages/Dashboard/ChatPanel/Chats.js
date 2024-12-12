@@ -13,6 +13,9 @@ import FacebookIntegration from "../FacebookIntegration";
 import FacebookIntegrationSelectAccount from "../FacebookIntegrationSelectAccount";
 import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
+import RoboMarketerMessage from "../RoboMarketerMessage";
+import AddProductMessage from "../AddProductMessage";
+import AddFunnelMessage from "../AddFunnelMessage";
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
@@ -70,6 +73,10 @@ const Chats = () => {
   return (
     <div className="chat-container" ref={chatContainerRef}>
   {<><FacebookIntegration isInIntegrationComponent={false}  /></>}
+  {current_account?.is_facebook_connected && <RoboMarketerMessage/>}
+  {current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup && <AddProductMessage/>}
+  {current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup &&  current_account?.is_product_setup && <AddFunnelMessage/>}
+
   {ChatData?.map((item, index) => (
         <div key={index} className="chat-message-container">
           <div className="user-message">

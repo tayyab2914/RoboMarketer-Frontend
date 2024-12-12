@@ -19,7 +19,7 @@ import moment from "moment";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 
 const { Panel } = Collapse;
-const { RangePicker } = DatePicker; // Use RangePicker instead of DatePicker
+const { RangePicker } = DatePicker; 
 const availableMetrics = [
   { key: "spend", label: "Ad Spend", value: "", trend: "green" },
   { key: "impressions", label: "Impressions", value: "", trend: "red" },
