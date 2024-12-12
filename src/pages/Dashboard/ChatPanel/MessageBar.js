@@ -66,6 +66,8 @@ const MessageBar = ({ isDisabled }) => {
           formData,
           setShowSpinner
         );
+        console.log("GET REPOSNE")
+        dispatch(setTemporaryMessage(null));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
       } catch (error) {
         console.error("Error sending message/file:", error);

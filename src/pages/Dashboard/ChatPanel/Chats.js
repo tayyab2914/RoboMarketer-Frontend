@@ -59,6 +59,10 @@ const Chats = () => {
             get_history()
         } 
     }
+    else
+    {
+        get_history()
+    }
   }, [temporary_message]);
 
   useEffect(() => {
