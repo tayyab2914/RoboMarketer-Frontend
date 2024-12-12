@@ -141,7 +141,7 @@ const ProductsModal = ({ isVisible, onClose }) => {
       {/* Modals for adding and editing products */}
       <AddProductModal
         isVisible={isAddProductModalVisible}
-        onClose={() => setIsAddProductModalVisible(false)}
+        onClose={onClose}
         onAddProduct={handleAddNewProduct}
         ListProducts={ListProducts}
       />

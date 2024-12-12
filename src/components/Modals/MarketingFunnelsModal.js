@@ -131,7 +131,7 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
       />
       <AddFunnelModal
         isVisible={isAddFunnelModalVisible}
-        onClose={() => setIsAddFunnelModalVisible(false)}
+        onClose={onClose}
         onAddFunnel={handleAddNewFunnel}
         ListFunnels={ListFunnels}
       />
