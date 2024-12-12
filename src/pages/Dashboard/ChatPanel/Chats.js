@@ -59,12 +59,14 @@ const Chats = () => {
             get_history()
         } 
     }
-    else
+  }, [temporary_message]);
+
+  useEffect(()=>{
+    if(!temporary_message)
     {
         get_history()
     }
-  }, [temporary_message]);
-
+  },[temporary_message])
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
