@@ -11,11 +11,11 @@ import {
 import { useSelector } from "react-redux";
 import EditFunnelModal from "./EditFunnelModal";
 
-const MarketingFunnelsModal = ({ isVisible, onClose }) => {
+const MarketingFunnelsModal = ({ isVisible, onClose,showFunnelModal}) => {
   const { token } = useSelector((state) => state.authToken);
   const [showSpinner, setShowSpinner] = useState(false);
   const [Funnels, setFunnels] = useState([]);
-  const [isAddFunnelModalVisible, setIsAddFunnelModalVisible] = useState(false);
+  const [isAddFunnelModalVisible, setIsAddFunnelModalVisible] = useState(showFunnelModal);
   const [isEditFunnelModalVisible, setIsEditFunnelModalVisible] =useState(false);
   const [selectedFunnelId, setSelectedFunnelId] = useState(null); // Add this state to store selected funnel ID
 
@@ -23,6 +23,10 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
     setFunnels([...Funnels, newFunnel]);
     console.log(newFunnel);
   };
+
+  useEffect(()=>{
+    setIsAddFunnelModalVisible(showFunnelModal)
+  },[showFunnelModal])
 
   const openAddFunnelModal = () => {
     setIsAddFunnelModalVisible(true);
@@ -64,7 +68,9 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
 
   return (
     <>
-       <Modal
+    
+//! showProductModal means that it will only show if it is not in the message component else it will directly go to add prodyct
+     {!showFunnelModal &&   <Modal
           title={ false }
           centered
           visible={isVisible}
@@ -121,7 +127,7 @@ const MarketingFunnelsModal = ({ isVisible, onClose }) => {
     )}
   </div>
 </div>
-      </Modal>
+      </Modal>}
       <EditFunnelModal
         isVisible={isEditFunnelModalVisible}
         onClose={() => setIsEditFunnelModalVisible(false)}

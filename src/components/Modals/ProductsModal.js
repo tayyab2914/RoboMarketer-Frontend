@@ -13,15 +13,18 @@ import { useSelector } from "react-redux";
 import EditProductModal from "./EditProductModal";
 // import EditProductModal from "./EditProductModal";
 
-const ProductsModal = ({ isVisible, onClose }) => {
+const ProductsModal = ({ isVisible, onClose,showProductModal  }) => {
   const { token } = useSelector((state) => state.authToken);
   const [showSpinner, setShowSpinner] = useState(false);
   const [products, setProducts] = useState([]);
-  const [isAddProductModalVisible, setIsAddProductModalVisible] =
-    useState(false);
-  const [isEditProductModalVisible, setIsEditProductModalVisible] =
-    useState(false);
+  const [isEditProductModalVisible, setIsEditProductModalVisible] =useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  
+  const [isAddProductModalVisible, setIsAddProductModalVisible] = useState(showProductModal);
+
+  useEffect(()=>{
+    setIsAddProductModalVisible(showProductModal)
+  },[showProductModal])
 
   const handleAddNewProduct = (newProduct) => {
     setProducts([...products, newProduct]);
@@ -71,7 +74,9 @@ const ProductsModal = ({ isVisible, onClose }) => {
     <>
       {showSpinner && <Spin fullscreen />}
 
-      <Modal
+
+//! showProductModal means that it will only show if it is not in the message component else it will directly go to add prodyct
+     {!showProductModal &&  <Modal 
         title={false}
         centered
         visible={isVisible}
@@ -136,7 +141,7 @@ const ProductsModal = ({ isVisible, onClose }) => {
                 No Products to show</div>}
           </div>
         </div>
-      </Modal>
+      </Modal>}
 
       {/* Modals for adding and editing products */}
       <AddProductModal

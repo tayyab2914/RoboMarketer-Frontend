@@ -126,7 +126,7 @@ const AddFunnelMessage = ({
         </Col>
       </Row>
 
-      <MarketingFunnelsModal isVisible={openModal} onClose={handleCloseModal}/>
+      <MarketingFunnelsModal isVisible={openModal} onClose={handleCloseModal} showFunnelModal={openModal}/>
     </>
   );
 };

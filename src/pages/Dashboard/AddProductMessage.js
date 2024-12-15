@@ -125,7 +125,7 @@ const AddProductMessage = ({
         </Col>
       </Row>
 
-      <ProductsModal isVisible={openModal} onClose={handleCloseModal}/>
+      <ProductsModal isVisible={openModal} onClose={handleCloseModal} showProductModal={openModal}/>
     </>
   );
 };
