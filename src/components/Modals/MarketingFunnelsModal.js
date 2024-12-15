@@ -69,7 +69,7 @@ const MarketingFunnelsModal = ({ isVisible, onClose,showFunnelModal}) => {
   return (
     <>
     
-//! showProductModal means that it will only show if it is not in the message component else it will directly go to add prodyct
+{/* showProductModal means that it will only show if it is not in the message component else it will directly go to add prodyct */}
      {!showFunnelModal &&   <Modal
           title={ false }
           centered

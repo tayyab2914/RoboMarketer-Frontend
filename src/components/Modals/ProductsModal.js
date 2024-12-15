@@ -75,7 +75,7 @@ const ProductsModal = ({ isVisible, onClose,showProductModal  }) => {
       {showSpinner && <Spin fullscreen />}
 
 
-//! showProductModal means that it will only show if it is not in the message component else it will directly go to add prodyct
+ {/* showProductModal means that it will only show if it is not in the message component else it will directly go to add prodyct */}
      {!showProductModal &&  <Modal 
         title={false}
         centered
