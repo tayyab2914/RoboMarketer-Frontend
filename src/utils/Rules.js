@@ -5,6 +5,12 @@ export const EMAIL_RULES_REQUIRED = [
   export const NAME_RULES_REQUIRED = [
     { required: true, message: "Please input your name!" },
   ];
+  export const COMPANY_NAME_RULES_REQUIRED = [
+    { required: true, message: "Please input company name!" },
+  ];
+  export const API_KEY_RULES_REQUIRED = [
+    { required: true, message: "Please input API key!" },
+  ];
   export const PHONE_NUMBER_RULES_REQUIRED = [
     { required: true, message: "Please input your name!" },
   ];

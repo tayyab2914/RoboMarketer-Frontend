@@ -117,88 +117,38 @@ useEffect(()=>{
         </div>
 
         <div className="modal-content">
-          <div
-            style={{ marginTop: "20px", textAlign: "center" }}
-          >
-            {/* {current_account?.account_image && (
-              
-            )} */}
+          <div style={{ marginTop: "20px", textAlign: "center" }} >
             {isEditingPhoto || !current_account?.account_image ? (
-              <Dragger
-                {...props}
-                itemRender={() => <></>}
-                disabled={profilePic}
-                accept=".png, .jpg, .svg"
-                className="account-modal-dragger"
-              >
+              <Dragger {...props} itemRender={() => <></>} disabled={profilePic} accept=".png, .jpg, .svg" className="account-modal-dragger" >
                 <div className="ant-upload-text">
                   {profilePic ? (
-                    <p style={{ color: "#00c514", marginTop: "20px" }}>
-                      Profile Picture Selected: {profilePic.name}
-                    </p>
+                    <p style={{ color: "#00c514", marginTop: "20px" }}> Profile Picture Selected: {profilePic.name} </p>
                   ) : (
-                    <>
-                      <div>
-                        <img src={IMAGES.user} alt="" />
-                      </div>
-                      {current_account?.account_image ? "Change" : "Upload"} Photo
-                    </>
+                    <> <div> <img src={IMAGES.user} alt="" /> </div>
+                      {current_account?.account_image ? "Change" : "Upload"} Photo </>
                   )}
                 </div>
               </Dragger>
             ) : (
                 <>
                 <div style={{textAlign:"center"}}> 
-                <img
-                src={`${DOMAIN_NAME}${current_account?.account_image}`}
-                alt=""
-                style={{height:"auto",maxWidth:"300px",maxHeight:"200px"}}
-                // className="account-modal-img"
-              />
+                    <img src={`${DOMAIN_NAME}${current_account?.account_image}`} alt="" style={{height:"auto",maxWidth:"300px",maxHeight:"200px"}}/>
                 </div>
-              <MyButton
-                text={"Edit Profile Photo"}
-                variant="filled"
-                onClick={() => setIsEditingPhoto(true)}
-                className={"form-item"}
-              />
+              <MyButton text={"Edit Profile Photo"} variant="filled" onClick={() => setIsEditingPhoto(true)} className={"form-item"} />
               </>
             )}
           </div>
-          {/* {profilePic && (
-            <MyButton
-              text={"Upload Photo"}
-              variant="filled"
-              onClick={handleUploadClick}
-              className={"form-item"}
-            />
-          )} */}
           <p className="input-group-label">Account Name</p>
           <div className="input-group form-item">
             <span className="input-group-input">
               <Form initialValues={{ account_name: current_account?.name }}>
-                <Form.Item
-                  name="account_name"
-                  rules={NAME_RULES_REQUIRED}
-                  style={{ marginBottom: 0 }}
-                >
-                  <Input
-                    placeholder="Type account name"
-                    value={current_account?.name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="inline-input"
-                  />
+                <Form.Item name="account_name" rules={NAME_RULES_REQUIRED} style={{ marginBottom: 0 }} >
+                  <Input placeholder="Type account name" value={current_account?.name} onChange={(e) => setName(e.target.value)} className="inline-input" />
                 </Form.Item>
               </Form>
             </span>
             <span className="input-group-btn">
-              <Button
-                type="primary"
-                className="inline-input-btn"
-                onClick={handleNameUpdate}
-              >
-                Update
-              </Button>
+              <Button type="primary" className="inline-input-btn" onClick={handleNameUpdate} > Update </Button>
             </span>
           </div>
         </div>

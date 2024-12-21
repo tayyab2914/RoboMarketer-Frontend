@@ -1,0 +1,11 @@
+.sub-account-form .ant-input{
+    height: 50px;
+    margin-bottom: 0px;
+
+}
+.sub-account-form .ant-form-item{
+    margin-bottom: 16px;
+}
+.sub-account-form .ant-btn{
+    height: 50px;
+}

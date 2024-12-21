@@ -73,8 +73,36 @@ import close_icon from "../assets/icons/close_icon.svg";
 import arrow_right from "../assets/icons/arrow_right.svg";
 import upload from "../assets/icons/upload.svg";
 import integrations_inner from "../assets/icons/integrations_inner.svg";
+import go_to_agency_view from "../assets/icons/go_to_agency_view.svg";
+import sub_accounts from "../assets/icons/sub_accounts.svg";
+import profile_agency from "../assets/icons/profile_agency.svg";
+import sa_edit from "../assets/icons/sa_edit.svg";
+import sa_delete from "../assets/icons/sa_delete.svg";
+import sa_message from "../assets/icons/sa_message.svg";
+import sa_eye from "../assets/icons/sa_eye.svg";
+import sa_phone from "../assets/icons/sa_phone.svg";
+import sa_upload from "../assets/icons/sa_upload.svg";
+import sa_create from "../assets/icons/sa_create.svg";
+import chatgpt from "../assets/icons/chatgpt.svg";
+import invite_members from "../assets/icons/invite_members.svg";
+import delete_btn_outlined from "../assets/icons/delete_btn_outlined.svg";
+import question_round from "../assets/icons/question_round.svg";
 
 export const ICONS = {
+  delete_btn_outlined: delete_btn_outlined,
+  sa_phone: sa_phone,
+  question_round: question_round,
+  chatgpt: chatgpt,
+  invite_members: invite_members,
+  sa_create: sa_create,
+  sa_upload: sa_upload,
+  sa_edit: sa_edit,
+  sa_delete: sa_delete,
+  sa_message: sa_message,
+  sa_eye: sa_eye,
+  go_to_agency_view: go_to_agency_view,
+  profile_agency: profile_agency,
+  sub_accounts: sub_accounts,
   integrations_inner: integrations_inner,
   arrow_right: arrow_right,
   upload: upload,

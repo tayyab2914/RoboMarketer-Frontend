@@ -17,7 +17,7 @@
 .input-group-label {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .input-group-input {
   width: 70%;
@@ -385,14 +385,17 @@
 }
 
 .product-modal-header {
-    color: #101136 !important;
+    color: #000000 !important;
   display: flex;
   align-items: center;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   justify-content: space-between;
 }
-
+.product-modal-header  span{
+    display: flex;
+    align-items: center;
+}
 .product-item {
   display: flex;
   justify-content: space-between;

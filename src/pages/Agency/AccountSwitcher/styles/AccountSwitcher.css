@@ -1,0 +1,72 @@
+.account-switcher-account-img{
+    height: auto;
+    max-width: 30px;
+    max-height: 25px;
+    border-radius: 50%;
+}
+.account-switcher-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid #e6eaed ;
+    border-radius: 8px;
+    padding: 10px 12px;
+    height: 40px;
+}
+.account-switcher-search-bar .ant-input{
+    margin-bottom: 0px;
+    height: 40.4px;
+}
+.account-switcher-search-bar .ant-input::placeholder{
+  color: #575A7B !important;
+}
+
+.account-switcher-search-bar .ant-input-prefix{
+    
+    border-right: 1px solid #e6eaed ;
+    padding-right: 10px;
+}
+.account-switcher-search-bar .ant-input-affix-wrapper{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+.go-to-agency-btn{
+height: 48px;
+}
+.account-switcher-agency-btn-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+}
+.account-switcher-popover{
+    width: 400px;
+}
+.account-switcher-popover .ant-popover-inner{
+    padding: 0px ;
+}
+.account-switcher-top{
+    padding: 10px;
+    border-bottom: 1px solid #e6eaed ;
+}
+.account-switcher-list .left-panel-btn{
+    height: 50px;
+}
+.account-switcher-list .account-list-wrapper{
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: 400px;
+}
+.account-switcher-agency-btn-row-icon{
+    display: flex;
+    align-items: center;
+}
+.account-switcher-agency-btn-row-icon img{
+    margin-right: 5px;
+}
+.side-bar-btn-wrapper{
+    cursor: pointer;
+    
+}

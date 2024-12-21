@@ -1,0 +1,39 @@
+import React, { useState } from "react";
+import { Modal, Input, Button,  Upload,  } from "antd";
+import MyIcon from "../Icon/MyIcon";
+import { useDispatch, useSelector } from "react-redux";
+
+// Import your validation rule
+const { Dragger } = Upload;
+
+const ChatgptAPIModal = ({ isVisible, onClose }) => {
+  const [showSpinner, setShowSpinner] = useState(false);
+  const { isLoggedIn, token, current_account,rerender_dashboard } = useSelector(
+    (state) => state.authToken
+  );
+  const dispatch = useDispatch()
+const handleHowToFindChatGPTapi = ()=>{
+    console.log('handleHowToFindChatGPTapi')
+}
+  return (
+    <>
+      <Modal className="" title={false} centered visible={isVisible} onCancel={onClose} closable={false} footer={null} >
+      <div className="custom-modal-header" style={{ display: "flex" }}>
+          <span className="product-modal-header" style={{ width: "100%" }}>
+            <span> <MyIcon type="products" style={{ marginRight: "5px" }} size="md" /> ChatGPT API</span>
+            <Button icon={<PlusOutlined />} className="add-product-btn" onClick={handleHowToFindChatGPTapi} >  How To Find ChatGPT API </Button>
+          </span>
+          <span>
+            <MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" />
+          </span>
+        </div>
+
+        <div className="modal-content">
+         
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+export default ChatgptAPIModal;

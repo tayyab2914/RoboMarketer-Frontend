@@ -1,0 +1,27 @@
+
+
+.agency-main-drawer-enabler-row{
+    /* display: flex; */
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}.agency-main-drawer-enabler-btn{
+    width: 100vw ;
+    border: none;
+    background-color: white;
+    border: 1px solid #e6eaed;
+    padding: 10px;
+}
+
+.agency-main-drawer-enabler-btn{
+    border-radius: 10px;
+    
+}
+.agency-main-drawer-enabler-row{
+    width: 100%;
+    padding: 10px 20px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+
+}

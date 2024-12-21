@@ -19,7 +19,6 @@ export const API_SIGN_UP = async ( email, password, name, PhoneNumber, link_toke
     dispatch(setAuthToken(response.data.token));
     dispatch(setLoggedIn(true));
 
-    // message.success("User signed up successfully");
     return response.data;
   } catch (error) {
     message.error(error.response?.data?.message || "Signup failed");

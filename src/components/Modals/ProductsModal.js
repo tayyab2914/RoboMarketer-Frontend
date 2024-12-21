@@ -28,14 +28,12 @@ const ProductsModal = ({ isVisible, onClose,showProductModal  }) => {
 
   const handleAddNewProduct = (newProduct) => {
     setProducts([...products, newProduct]);
-    console.log(newProduct);
   };
 
   const openAddProductModal = () => {
     setIsAddProductModalVisible(true);
   };
 
-  console.log(products)
   const openEditProductModal = (productId) => {
     setSelectedProductId(productId); // Set product ID for editing
     setIsEditProductModalVisible(true);
