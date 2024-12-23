@@ -4,16 +4,16 @@ import MyIcon from "../../../components/Icon/MyIcon";
 import { TRUNCATE_STRING } from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
 import { useDispatch, useSelector } from "react-redux";
-import {  API_SWITCH_ACCOUNT } from "../../../apis/AuthApis";
+import {  API_GET_ACCOUNTS, API_SWITCH_ACCOUNT } from "../../../apis/AuthApis";
 import { SearchOutlined } from "@ant-design/icons"; 
 import { useNavigate } from "react-router-dom";
-import { setAuthToken, setRerenderDashboard } from "../../../redux/AuthToken/Action";
-import { API_GET_ACCOUNTS } from "../../../apis/AgencyApis";
+import { setAuthToken, setRerenderChatPanel, setRerenderDashboard } from "../../../redux/AuthToken/Action";
+// import { API_GET_ACCOUNTS } from "../../../apis/AgencyApis";
 import { IMAGES } from "../../../data/ImageData";
 
 const AccountSwitcherPopup = () => {
     const dispatch=useDispatch()
-  const { token, current_account,rerender_dashboard } = useSelector((state) => state.authToken);
+  const { token, current_account,rerender_dashboard,rerender_chat_panel } = useSelector((state) => state.authToken);
   const [visible, setVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [accounts, setAccounts] = useState([]);
@@ -21,7 +21,7 @@ const AccountSwitcherPopup = () => {
 
   const fetchAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token);
-    setAccounts(response?.accounts);
+    setAccounts(response);
     console.log('API_GET_ACCOUNTS',response)
   };
 
@@ -37,6 +37,7 @@ const AccountSwitcherPopup = () => {
       const response = await API_SWITCH_ACCOUNT(token, accountId, null);
          dispatch(setAuthToken(response));
         dispatch(setRerenderDashboard(!rerender_dashboard));
+        dispatch(setRerenderChatPanel(!rerender_chat_panel));
        navigate('/')
 
   };
@@ -68,8 +69,8 @@ const AccountSwitcherPopup = () => {
             {accounts ?.filter( (account) =>  account.name.toLowerCase().includes(searchTerm.toLowerCase()) ).map((account) => (
                 <div key={account.id}>
                 <Button type="text" className="left-panel-btn" style={{ justifyContent: "left" }} onClick={() => handleAccountSwitch(account.id)} >
-                    {account?.logo ? (
-                        <img src={` ${DOMAIN_NAME}/media/${account?.logo}`} alt="" height={25} className="account-switcher-account-img" />
+                    {account?.account_image ? (
+                        <img src={` ${DOMAIN_NAME}${account?.account_image}`} alt="" height={25} className="account-switcher-account-img" />
                     ) : (
                         <MyIcon type={"user"} />
                     )}

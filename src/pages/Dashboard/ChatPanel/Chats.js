@@ -26,15 +26,12 @@ const Chats = () => {
   const chatContainerRef = useRef(null);
   const dispatch = useDispatch();
   const get_history = async () => {
-    console.log("GET HISTORY CALLED")
     const response = await API_GET_HISTORY(
       token,
       current_account?.id,
       setShowSpinner
     );
     
-    console.log(response)
-    console.log("GET HISTORY RETURNED")
     dispatch(setTemporaryMessage({})); 
     setChatData(response?.reverse() || []);
   };
@@ -74,10 +71,6 @@ const Chats = () => {
     }
   }, [ChatData]);
 
-  // Sanitize HTML
-  const parseHTML = (htmlContent) => ({
-    __html: DOMPurify.sanitize(htmlContent),
-  });
 
   return (
     <div className="chat-container" ref={chatContainerRef}>

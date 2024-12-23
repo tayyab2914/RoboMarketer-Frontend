@@ -96,7 +96,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
       {showSpinner && <Spin fullscreen />}
       <div className="left-panel-container-inner">
         <div className="left-panel-logo-wrapper">
-          <img src={IMAGES.logo_png} alt="Panel Logo" className="left-panel-logo" />
+          <img src={CurrentAccount?.logo ?`${DOMAIN_NAME}${CurrentAccount?.logo}`:IMAGES.logo_png} alt="Panel Logo" className="left-panel-logo" />
         </div>
 
         
@@ -135,12 +135,14 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
             </Panel>
           </Collapse> */}
             {current_account?.is_main_user ? <AccountSwitcher/>
-            :<span className="dashboard-account-name">
+            :
+            <div className="side-bar-btn-wrapper" style={{marginTop:"10px"}}><span className="dashboard-account-name">
                     {CurrentAccount?.account_image ? (
-                      <img src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`} alt="" height={25} style={{ height: "auto", maxWidth: "30px", maxHeight: "25px", borderRadius: "50%", }} />
+                      <img src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`} alt="" height={25} style={{ height: "auto", maxWidth: "30px", maxHeight: "25px", borderRadius: "20px", }} />
                     ) : ( <MyIcon type={"user"} /> )}
                     {TRUNCATE_STRING(CurrentAccount?.name,17)}
-            </span>}
+            </span>
+            </div>}
             <div className="side-bar-btn-wrapper" style={{marginTop:"10px"}}>
           <AddPromptBtn />
         </div>

@@ -12,7 +12,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 const AccountSwitcher = () => {
   const { current_account } = useSelector((state) => state.authToken);
 const windowWidth = useWindowWidth()
-  
+  console.log(current_account)
   const popoverPlacement = windowWidth < 700 ? "bottomLeft" : "rightTop";
   return (
     <div className="side-bar-btn-wrapper">
