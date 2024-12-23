@@ -1,32 +1,34 @@
-.sub-account-card{
-    border: 1px solid #e6eaed;
-    border-radius: 12px;
-    padding: 20px;
+.sub-account-card {
+  border: 1px solid #e6eaed;
+  border-radius: 12px;
+  padding: 20px;
 }
-.sac-contact-info{
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 500;
+.sac-contact-info {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
 }
-.sac-contact-info div{
-    margin-bottom: 20px;
+.sac-contact-info div {
+  margin-bottom: 20px;
 }
-
-.sac-contact-info div img{
-   margin-right: 10px;
+.sac-company-logo {
+  border-radius: 4px;
 }
-.sac-icons span{
-    height: 38px !important;
-    width: 38px !important;
-    border: 1px solid #e6eaed;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.sac-contact-info div img {
+  margin-right: 10px;
 }
-.sac-icons{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.sac-icons span {
+  height: 38px !important;
+  width: 38px !important;
+  border: 1px solid #e6eaed;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.sac-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

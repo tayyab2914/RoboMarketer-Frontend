@@ -3,14 +3,17 @@ import { Input, Button } from "antd";
 import MyIcon from "../../../components/Icon/MyIcon";
 import { TRUNCATE_STRING } from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
-import { useSelector } from "react-redux";
-import AccountSwitcherPopup from "./AccountSwitcherPopup";
-import { API_GET_ACCOUNTS } from "../../../apis/AuthApis";
+import { useDispatch, useSelector } from "react-redux";
+import {  API_SWITCH_ACCOUNT } from "../../../apis/AuthApis";
 import { SearchOutlined } from "@ant-design/icons"; 
 import { useNavigate } from "react-router-dom";
+import { setAuthToken, setRerenderDashboard } from "../../../redux/AuthToken/Action";
+import { API_GET_ACCOUNTS } from "../../../apis/AgencyApis";
+import { IMAGES } from "../../../data/ImageData";
 
-const AccountSwitcher = () => {
-  const { token, current_account } = useSelector((state) => state.authToken);
+const AccountSwitcherPopup = () => {
+    const dispatch=useDispatch()
+  const { token, current_account,rerender_dashboard } = useSelector((state) => state.authToken);
   const [visible, setVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [accounts, setAccounts] = useState([]);
@@ -18,7 +21,8 @@ const AccountSwitcher = () => {
 
   const fetchAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token);
-    setAccounts(response);
+    setAccounts(response?.accounts);
+    console.log('API_GET_ACCOUNTS',response)
   };
 
   useEffect(() => {
@@ -29,9 +33,22 @@ const AccountSwitcher = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleAccountSwitch = (accountId) => {
-    console.log(`Switching to account ID: ${accountId}`);
+  const handleAccountSwitch = async(accountId) => {
+      const response = await API_SWITCH_ACCOUNT(token, accountId, null);
+         dispatch(setAuthToken(response));
+        dispatch(setRerenderDashboard(!rerender_dashboard));
+       navigate('/')
+
   };
+  const goToAgencyHandler = async()=>{
+    
+    const mainAccount = accounts.find(account => account.is_main_user);
+    if (mainAccount) {
+        const response = await API_SWITCH_ACCOUNT(token, mainAccount.id, null);
+        dispatch(setAuthToken(response));
+        navigate('/agency')
+    }
+  }
 
   return (
       <>
@@ -41,20 +58,20 @@ const AccountSwitcher = () => {
         </span>
         <div className="account-switcher-agency-btn-row">
             <span className="account-switcher-agency-btn-row-icon"> <MyIcon type={'user'}/> Accounts </span>
-            <Button className="go-to-agency-btn" onClick={() => navigate("/agency")} ><MyIcon type={'go_to_agency_view'}/> Go to Agency View </Button>
+            <Button className="go-to-agency-btn" onClick={goToAgencyHandler} ><MyIcon type={'go_to_agency_view'}/> Go to Agency View </Button>
         </div>
       </div>
 
       <div className="account-switcher-list">
         
         <div className="account-list-wrapper">
-            {accounts ?.filter( (account) => !account.is_current_account && account.name.toLowerCase().includes(searchTerm.toLowerCase()) ).map((account) => (
+            {accounts ?.filter( (account) =>  account.name.toLowerCase().includes(searchTerm.toLowerCase()) ).map((account) => (
                 <div key={account.id}>
                 <Button type="text" className="left-panel-btn" style={{ justifyContent: "left" }} onClick={() => handleAccountSwitch(account.id)} >
-                    {account?.account_image ? (
-                    <img src={`${DOMAIN_NAME}${account?.account_image}`} alt="" height={25} className="account-switcher-account-img" />
+                    {account?.logo ? (
+                        <img src={` ${DOMAIN_NAME}/media/${account?.logo}`} alt="" height={25} className="account-switcher-account-img" />
                     ) : (
-                    <MyIcon type={"user"} />
+                        <MyIcon type={"user"} />
                     )}
                     {TRUNCATE_STRING(account?.name, 20)}
                 </Button>
@@ -66,4 +83,4 @@ const AccountSwitcher = () => {
   );
 };
 
-export default AccountSwitcher;
+export default AccountSwitcherPopup;

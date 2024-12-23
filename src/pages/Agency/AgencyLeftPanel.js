@@ -6,9 +6,11 @@ import "./styles/AgencyLeftPanel.css";
 import { useLogoutUser } from "../../hooks/useLogoutUser";
 import AccountSwitcher from "./AccountSwitcher/AccountSwitcher";
 import { useNavigate } from "react-router-dom";
+import ProfileModal from "../../components/Modals/ProfileModal";
 
 
 const AgencyLeftPanel = () => {
+    const [ShowProfileModal, setShowProfileModal] = useState(false);
   const logoutUser = useLogoutUser();
   const navigate= useNavigate()
 
@@ -22,7 +24,7 @@ const AgencyLeftPanel = () => {
        <div className="agency-left-panel-btn" onClick={()=>navigate('/agency')}>
            <MyIcon type={"sub_accounts"}/> Sub-Accounts
        </div>
-       <div className="agency-left-panel-btn" onClick={()=>navigate('/agency')}>
+       <div className="agency-left-panel-btn" onClick={()=>setShowProfileModal(true)}>
            <MyIcon type={"profile_agency"}/> Profile
        </div>
 
@@ -32,6 +34,7 @@ const AgencyLeftPanel = () => {
           <button className="settings-btn"> <span className="settings-btn-wrapper"> <MyIcon type="logout" /> Logout </span> </button>
         </Popconfirm>
       </span>
+      <ProfileModal isVisible={ShowProfileModal} onClose={()=>setShowProfileModal(false)}/>
     </div>
   );
 };

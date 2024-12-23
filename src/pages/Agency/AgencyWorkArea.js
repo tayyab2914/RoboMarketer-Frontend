@@ -4,9 +4,9 @@ import MyIcon from '../../components/Icon/MyIcon';
 import './styles/AgencyWorkArea.css';
 import SubAccountCard from './SubAccountCard';
 import { useSelector } from 'react-redux';
-import { API_GET_ACCOUNTS } from '../../apis/AuthApis';
 import NewSubAccountModal from './NewSubAccountModal';
 import useWindowWidth from '../../hooks/useWindowWidth';
+import { API_GET_ACCOUNTS } from '../../apis/AgencyApis';
 
 
 
@@ -18,8 +18,8 @@ const AgencyWorkArea = () => {
 
   const fetchAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token);
-    setAccounts(response);
-    console.log(response);
+    setAccounts(response?.accounts);
+    console.log(response?.accounts);
   };
 
   useEffect(() => {
@@ -48,14 +48,14 @@ const AgencyWorkArea = () => {
                 <Row gutter={[25, 25]} >
                 {accounts?.filter( (account) => !account.is_current_account && account?.name?.toLowerCase() ).map((account, index) => (
                     <Col xs={24} sm={12} md={8} xl={6} key={index}>
-                    <SubAccountCard subAccountID={account.id} companyLogo={account.account_image} companyName={account.name} email={account.email} phone={account.phone} /> 
+                    <SubAccountCard subAccountID={account.id} companyLogo={account.logo} companyName={account.name} email={account.email} phone={account.phone_no} fetchAccounts={fetchAccounts}/> 
                     </Col>
                 ))}
                 </Row>
             </Col>
 
         </Row>
-        <NewSubAccountModal isVisible={modalVisible} onClose={()=>setModalVisible(false)} />
+        <NewSubAccountModal isVisible={modalVisible} onClose={()=>setModalVisible(false)} fetchAccounts={fetchAccounts}/>
     </>
   );
 };

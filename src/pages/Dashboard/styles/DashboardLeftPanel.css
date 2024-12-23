@@ -16,6 +16,26 @@
   display: flex;
   justify-content: space-between;
 }
+.dashboard-account-name{
+    height: 45.6px;
+    width: 100%;
+    color: #020202;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #ffffff;
+    border: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid #e6eaed;
+}
+.dashboard-account-name img{
+    margin-right: 15px;
+}
 .add-prompt-btn {
   padding: 10px 12px !important;
   margin-top: 0px !important;

@@ -247,7 +247,7 @@ export const API_GET_ACCOUNTS = async (token, setShowSpinner) => {
     }
 };
 export const API_SWITCH_ACCOUNT = async (token,id, setShowSpinner) => {
-    setShowSpinner(true);
+    // setShowSpinner(true);
     try {
         const response = await axios.post(`${DOMAIN_NAME}/authentication/switch_account/`, {
             account_id:id
@@ -262,7 +262,7 @@ export const API_SWITCH_ACCOUNT = async (token,id, setShowSpinner) => {
     } catch (error) {
         message.error('Failed to switch account.');
     } finally {
-      setShowSpinner(false);
+    //   setShowSpinner(false);
     }
 };
 export const API_UPDATE_PROFILE = async (token, email = null, password = null, setShowSpinner) => {

@@ -4,29 +4,28 @@ import MyIcon from "../../components/Icon/MyIcon";
 import { UploadOutlined } from "@ant-design/icons";
 import { COMPANY_NAME_RULES_REQUIRED, EMAIL_RULES_REQUIRED, PHONE_NUMBER_RULES_REQUIRED } from "../../utils/Rules";
 import './styles/NewSubAccountModal.css'
+import { API_CREATE_ACCOUNT, API_UPDATE_ACCOUNT } from "../../apis/AgencyApis";
+import { useSelector } from "react-redux";
+import { DOMAIN_NAME } from "../../utils/GlobalSettings";
 
-const NewSubAccountModal = ({ isVisible, onClose, defaultValues }) => {
+const NewSubAccountModal = ({ isVisible, onClose, defaultValues,fetchAccounts,editMode=false }) => {
+    const { token} = useSelector((state) => state.authToken);
     const [CompanyName, setCompanyName] = useState(defaultValues?.companyName || "");
     const [Email, setEmail] = useState(defaultValues?.email || "");
     const [Phone, setPhone] = useState(defaultValues?.phone || "");
-    const [Logo, setLogo] = useState(null);
-    const [LogoPreview, setLogoPreview] = useState(null);
+    const [Logo, setLogo] = useState(defaultValues?.logo || "");
+    const [LogoPreview, setLogoPreview] = useState(defaultValues?.logo || "");
+    const [LogoChanged, setLogoChanged] = useState(false);
   
-    useEffect(() => {
-      if (defaultValues) {
-        console.log("HELLO")
-        setCompanyName(defaultValues.companyName || "");
-        setEmail(defaultValues.email || "");
-        setPhone(defaultValues.phone || "");
-      }
-    }, [defaultValues]); 
-
   const handleLogoChange = (info) => {
     if (info.fileList.length > 0) {
       const file = info.fileList[0].originFileObj;
       setLogo(file); 
       const reader = new FileReader();
-      reader.onloadend = () => {setLogoPreview(reader.result); };
+      reader.onloadend = () => {
+        setLogoPreview(reader.result); 
+        setLogoChanged(true)
+    };
       if (file) {reader.readAsDataURL(file);}
     } else {
       setLogo(null); 
@@ -34,19 +33,24 @@ const NewSubAccountModal = ({ isVisible, onClose, defaultValues }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     const formData = new FormData();
-    formData.append("companyName", CompanyName);
+    formData.append("company_name", CompanyName);
     formData.append("email", Email);
-    formData.append("phone", Phone);
+    formData.append("phone_no", Phone);
     if (Logo) {
-      formData.append("companyLogo", Logo); 
+      formData.append("company_logo", Logo); 
     }
 
-    formData.forEach((value, key) => {
-      console.log(`${key}:`, value);
-    });
-
+    if(editMode)
+    {
+        await API_UPDATE_ACCOUNT(token,formData,defaultValues?.id,null)
+    }
+    else
+    {
+        await API_CREATE_ACCOUNT(token,formData,null)
+    }
+    fetchAccounts()
     onClose(); 
   };
 
@@ -67,7 +71,7 @@ const NewSubAccountModal = ({ isVisible, onClose, defaultValues }) => {
             <Upload name="logo" listType="picture" maxCount={1} beforeUpload={() => false} onChange={handleLogoChange}  showUploadList={false}  >
                 <Button icon={<MyIcon type={'sa_upload'}/>}>Upload Logo</Button>
             </Upload>
-            {LogoPreview && ( <img src={LogoPreview} alt="Logo Preview" style={{ maxWidth: "80px", maxHeight: "80px",marginBottom:"10px" }} />)}
+            {LogoPreview && ( <img src={(editMode&&!LogoChanged)?`${DOMAIN_NAME}/media/${defaultValues?.logo}`:LogoPreview} alt="Logo Preview" style={{ maxWidth: "80px", maxHeight: "80px",marginBottom:"10px" }} />)}
           </div>
           </Form.Item>
           <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED}>

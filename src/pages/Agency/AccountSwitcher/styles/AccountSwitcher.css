@@ -57,7 +57,7 @@ height: 48px;
 .account-switcher-list .account-list-wrapper{
     overflow-y: auto;
     scrollbar-width: none;
-    height: 400px;
+    max-height: 400px;
 }
 .account-switcher-agency-btn-row-icon{
     display: flex;

@@ -48,7 +48,7 @@ useEffect(() => {
       if (next) {
         navigate(next);
       } else {
-        navigate("/");
+        navigate("/agency");
       }
     }
   };

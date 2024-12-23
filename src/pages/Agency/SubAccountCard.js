@@ -6,38 +6,52 @@ import './styles/SubAccountCard.css'
 import { Popconfirm } from "antd";
 import { DOMAIN_NAME } from "../../utils/GlobalSettings";
 import NewSubAccountModal from "./NewSubAccountModal";
+import { API_DELETE_ACCOUNT, API_SEND_INVITE_EMAIL } from "../../apis/AgencyApis";
+import { useDispatch, useSelector } from "react-redux";
+import { TRUNCATE_STRING } from "../../utils/Methods";
+import { setAuthToken, setRerenderDashboard } from "../../redux/AuthToken/Action";
+import { useNavigate } from "react-router-dom";
+import { API_SWITCH_ACCOUNT } from "../../apis/AuthApis";
 // Function definitions for each action
 
-const SubAccountCard = ({ companyLogo,subAccountID, companyName, email, phone }) => {
+const SubAccountCard = ({ companyLogo,subAccountID, companyName, email, phone,fetchAccounts }) => {
     const [ShowEditModal, setShowEditModal] = useState(false);
-    const handleView = () => {
-        console.log("View clicked",subAccountID);
+    const { token,rerender_dashboard } = useSelector((state) => state.authToken);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleView = async() => {
+              const response = await API_SWITCH_ACCOUNT(token, subAccountID, null);
+                 dispatch(setAuthToken(response));
+                dispatch(setRerenderDashboard(!rerender_dashboard));
+               navigate('/')
+        
       };
       
-      const handleDelete = () => {
-        console.log("Delete clicked",subAccountID);
+      const handleDelete = async() => {
+            await API_DELETE_ACCOUNT(token,subAccountID,null)
+            fetchAccounts()
       };
       
       const handleEdit = () => {
-        console.log("Edit clicked",subAccountID);
         setShowEditModal(true)
       };
       
-      const handleMessage = () => {
-        console.log("Message clicked",subAccountID);
+      const handleMessage = async() => {
+        await API_SEND_INVITE_EMAIL(token,subAccountID,null)
       };
       
   return (
    <>
     <div className="sub-account-card">
       <div className="sac-company-info">
-        <img src={companyLogo ? `${DOMAIN_NAME}${companyLogo}`:IMAGES.user} alt="Company Logo" height={24} className="company-logo" />
+        <img src={companyLogo ? `${DOMAIN_NAME}/media/${companyLogo}`:IMAGES.user} alt="Company Logo" height={24} className="sac-company-logo" />
         
       </div>
 
       <div className="sac-contact-info">
-            <div className="sac-company-name">{companyName}</div>
-            <div className="sac-email"><MyIcon type={'sa_message'}/>{email}</div>
+            <div className="sac-company-name">{TRUNCATE_STRING(companyName,25)}</div>
+            <div className="sac-email"><MyIcon type={'sa_message'}/>{TRUNCATE_STRING(email,17)}</div>
             <div className="sac-phone"><MyIcon type={'sa_phone'}/>{phone}</div>
       </div>    
 
@@ -52,11 +66,7 @@ const SubAccountCard = ({ companyLogo,subAccountID, companyName, email, phone })
         <span onClick={handleMessage}> <MyIcon type={'sa_message'} /> </span>
       </div>
     </div>
-    <NewSubAccountModal 
-  isVisible={ShowEditModal} 
-  onClose={() => setShowEditModal(false)} 
-  defaultValues={{ companyName: companyName, email: "MUHAMANBUTT", phone: "7723" }} 
-/>
+    <NewSubAccountModal  isVisible={ShowEditModal}  onClose={() => setShowEditModal(false)}  defaultValues={{ companyName: companyName, email: email, phone: phone,logo:companyLogo,id:subAccountID}} editMode={true}  fetchAccounts={fetchAccounts}/>
         </>
   );
 };
