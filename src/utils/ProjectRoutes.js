@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { API_FETCH_TOKEN } from '../apis/FacebookInsightsApis';
 import Error404 from '../pages/Error/Error404';
 import AgencyMain from '../pages/Agency/AgencyMain';
+import VerifyAccountMain from '../pages/VerifyAccount/VerifyAccountMain';
 
 const ProjectRoutes = () => {
   const { isLoggedIn, isAdmin, token, facebook_state,current_account} = useSelector((state) => state.authToken);
@@ -21,6 +22,7 @@ const ProjectRoutes = () => {
         <Route path="/admin" element={isAdmin ? <AdminMain /> : <Navigate to="/account" replace />} />
         <Route path="/account" element={<Account />} />
         <Route path="/account/:link_token" element={<Account />} />
+        <Route path="/verify_account/:id" element={<VerifyAccountMain />} />
         <Route path="/agency" element={(isLoggedIn && current_account?.is_main_user)? <AgencyMain />: <Navigate to="/account" replace />} />
         <Route path="/notfound" element={<Error404 />} />
         <Route path="/*" element={<Error404 />} />

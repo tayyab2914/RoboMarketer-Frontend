@@ -118,3 +118,21 @@ for (let [key, value] of updatedAccount.entries()) {
         // setShowSpinner(false);
     }
 };
+
+
+export const API_SET_CLIENT_ACCOUNT_PASSWORD = async (  password,id, setShowSpinner ) => {
+    // setShowSpinner(true);
+
+    try {
+        const response = await axios.post(`${DOMAIN_NAME}/agency/set_client_account_password/${id}/`,{password});
+        return response.data;
+    } catch (error) {
+        message.error(
+          error.response?.data?.message 
+        );
+        console.log(error)
+        return null; 
+    } finally {
+        // setShowSpinner(false);
+    }
+};

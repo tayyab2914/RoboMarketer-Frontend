@@ -3,19 +3,22 @@ import { Modal, Input, Button,  Upload, Form,  } from "antd";
 import MyIcon from "../Icon/MyIcon";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles/ModalStyles.css";
-import { NAME_RULES_REQUIRED } from "./AccountModal";
 import './styles/ChatgptModal.css'
 import { API_KEY_RULES_REQUIRED } from "../../utils/Rules";
+import { API_UPDATE_API_KEY } from "../../apis/ChatApis";
 
 const ChatgptAPIModal = ({ isVisible, onClose }) => {
   const [showSpinner, setShowSpinner] = useState(false);
-  const [APIKey, setAPIKey] = useState('736346384394');
+    const { token } = useSelector((state) => state.authToken);
+  const [APIKey, setAPIKey] = useState('');
 
     const handleHowToFindChatGPTapi = ()=>{
         console.log('handleHowToFindChatGPTapi')
     }
-    const handleSubmit = ()=>{
+    const handleSubmit = async()=>{
         console.log(APIKey)
+        await API_UPDATE_API_KEY(token ,APIKey)
+        onClose()
     }
   return (
     <div className="chatgpt-modal">

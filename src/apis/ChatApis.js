@@ -134,3 +134,26 @@ for (let [key, value] of updatedPrompt.entries()) {
         setShowSpinner(false);
     }
 };
+
+
+export const API_UPDATE_API_KEY = async ( token, updated_key, setShowSpinner ) => {
+    
+    // setShowSpinner(true);
+
+    try {
+        const response = await axios.put(`${DOMAIN_NAME}/chat/update_api_key/`, 
+            {api_key:updated_key}
+        , {
+            headers: {
+                Authorization: token,
+            },
+        });
+        message.success("API key updated successfully!")
+        return response.data;
+    } catch (error) {
+  
+        return null; 
+    } finally {
+        // setShowSpinner(false);
+    }
+};
