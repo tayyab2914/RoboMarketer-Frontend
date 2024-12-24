@@ -23,22 +23,23 @@ import InviteTeamMembersModal from "../../components/Modals/InviteTeamMembersMod
 const SettingsBtn = () => {
     const logoutUser = useLogoutUser();
     const dispatch = useDispatch()
-    const { isLoggedIn, token,rerender_dashboard,open_integrations_modal,is_integrations_modal_closed_by_user } = useSelector((state) => state.authToken);
+    const { isLoggedIn, token,rerender_dashboard,open_integrations_modal,is_integrations_modal_closed_by_user,current_account } = useSelector((state) => state.authToken);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
-
   const options = [
-    { name: "Profile (User)", icon: "profile", component: ProfileModal },
+    ...(current_account?.is_main_user
+      ? [{ name: "Profile (User)", icon: "profile", component: ProfileModal }]
+      : []),
     { name: "Account (Client)", icon: "account", component: AccountModal },
     { name: "Integrations", icon: "integrations", component: IntegrationsModal },
     { name: "RoboMarketerIQ", icon: "robomarketer", component: RoboMarketerModal },
-    { name: "Reporting", icon: "reporting" , component: ReportingSettingsModal},
-    { name: "Products / Services", icon: "products" , component:ProductsModal },
-    { name: "Marketing Funnels", icon: "marketing_funnels", component:MarketingFunnelsModal  },
-    { name: "ChatGPT API", icon: "chatgpt", component:ChatgptAPIModal  },
-    { name: "Invite Team Members", icon: "invite_members", component:InviteTeamMembersModal  },
-    // Add other options and their components here
+    { name: "Reporting", icon: "reporting", component: ReportingSettingsModal },
+    { name: "Products / Services", icon: "products", component: ProductsModal },
+    { name: "Marketing Funnels", icon: "marketing_funnels", component: MarketingFunnelsModal },
+    { name: "ChatGPT API", icon: "chatgpt", component: ChatgptAPIModal },
+    { name: "Invite Team Members", icon: "invite_members", component: InviteTeamMembersModal },
   ];
+  
 
   useEffect(() => {
     if (open_integrations_modal && !is_integrations_modal_closed_by_user==undefined || !is_integrations_modal_closed_by_user) {

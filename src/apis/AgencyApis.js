@@ -130,7 +130,6 @@ export const API_SET_CLIENT_ACCOUNT_PASSWORD = async (  password,id, setShowSpin
         message.error(
           error.response?.data?.message 
         );
-        console.log(error)
         return null; 
     } finally {
         // setShowSpinner(false);

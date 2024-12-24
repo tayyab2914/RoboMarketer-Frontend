@@ -5,10 +5,14 @@ import MyIcon from '../../components/Icon/MyIcon';
 import { IMAGES } from '../../data/ImageData';
 import { PASSWORD_RULES_REQUIRED } from '../../utils/Rules';
 import { API_SET_CLIENT_ACCOUNT_PASSWORD } from '../../apis/AgencyApis';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setAuthToken, setLoggedIn } from '../../redux/AuthToken/Action';
 const VerifyAccountMain = () => {
     const { id } = useParams();
+    const dispatch = useDispatch()
   const [form] = Form.useForm();
+  const navigate = useNavigate()
 
   const onSubmit = async () => {
       const values = await form.validateFields();
@@ -18,7 +22,15 @@ const VerifyAccountMain = () => {
         form.setFields([{ name: 'confirmPassword', errors: ['Passwords do not match!']}]);
         return;
       }
-      await API_SET_CLIENT_ACCOUNT_PASSWORD(password,id)
+      const response = await API_SET_CLIENT_ACCOUNT_PASSWORD(password,id)
+      console.log(response)
+      if(response)
+      {
+            dispatch(setAuthToken(response?.token))
+            dispatch(setLoggedIn(true));
+            navigate('/')
+      }
+
   };
 
   return (

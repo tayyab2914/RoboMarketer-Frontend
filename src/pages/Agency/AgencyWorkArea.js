@@ -12,14 +12,15 @@ import { API_GET_ACCOUNTS } from '../../apis/AgencyApis';
 
 const AgencyWorkArea = () => {
   const { token, current_account } = useSelector((state) => state.authToken);
-  const [accounts, setAccounts] = useState([]);
+  const [accounts, setAccounts] = useState([])
+  const [AccountsAvailable, setAccountsAvailable] = useState(0);
   const [modalVisible, setModalVisible] = useState(false); 
   const windowWidth=useWindowWidth()
 
   const fetchAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token);
     setAccounts(response?.accounts);
-    console.log(response?.accounts);
+    setAccountsAvailable(response?.accounts_available);
   };
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const AgencyWorkArea = () => {
                 <Col xs={24} md={5}> <span className="awa-heading"> <MyIcon type={"sub_accounts"} /> Sub-Accounts </span> </Col>
                 <Col xs={24} md={18} style={{textAlign:"end"}}>
                     <span>
-                        <button className="awa-heading-btns"> Sub-Accounts Available <span className="awa-heading-btn-count">{accounts?.length}</span> </button>
+                        <button className="awa-heading-btns"> Sub-Accounts Available <span className="awa-heading-btn-count">{AccountsAvailable}</span> </button>
                         <button className="awa-heading-btns" onClick={()=>setModalVisible(true)}> <MyIcon type={'plus_black'} /> Create New </button>
                     </span>
                 </Col>
