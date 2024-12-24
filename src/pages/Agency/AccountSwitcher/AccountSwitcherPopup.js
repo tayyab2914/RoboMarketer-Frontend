@@ -22,12 +22,14 @@ const AccountSwitcherPopup = () => {
   const fetchAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token);
     setAccounts(response);
-    console.log('API_GET_ACCOUNTS',response)
   };
 
   useEffect(() => {
     fetchAccounts();
   }, []);
+  useEffect(() => {
+    fetchAccounts();
+  }, [current_account]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
