@@ -87,8 +87,10 @@ import chatgpt from "../assets/icons/chatgpt.svg";
 import invite_members from "../assets/icons/invite_members.svg";
 import delete_btn_outlined from "../assets/icons/delete_btn_outlined.svg";
 import question_round from "../assets/icons/question_round.svg";
+import invited_member from "../assets/icons/invited_member.svg";
 
 export const ICONS = {
+  invited_member: invited_member,
   delete_btn_outlined: delete_btn_outlined,
   sa_phone: sa_phone,
   question_round: question_round,
