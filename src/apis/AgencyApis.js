@@ -110,9 +110,9 @@ for (let [key, value] of updatedAccount.entries()) {
         });
         return response.data;
     } catch (error) {
-        // message.error(
-        //   error.response?.data?.message 
-        // );
+        message.error(
+          error.response?.data?.message 
+        );
         return null; 
     } finally {
         // setShowSpinner(false);

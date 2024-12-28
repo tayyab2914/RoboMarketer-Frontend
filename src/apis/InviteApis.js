@@ -6,8 +6,7 @@ import { DOMAIN_NAME } from "../utils/GlobalSettings";
 
 
 export const API_SEND_CLIENT_INVITE = async ( token, client_email, setShowSpinner ) => {
-    // setShowSpinner(true);
-    console.log(client_email,"client_email")
+
 
     try {
         const response = await axios.post(`${DOMAIN_NAME}/invites/send_client_invite/`, 
@@ -23,7 +22,6 @@ export const API_SEND_CLIENT_INVITE = async ( token, client_email, setShowSpinne
         message.error(
           error.response?.data?.message 
         );
-        console.log(error)
         return null; 
     } finally {
         // setShowSpinner(false);
