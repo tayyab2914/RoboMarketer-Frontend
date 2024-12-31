@@ -9,6 +9,7 @@ import { useLogoutUser } from "../../hooks/useLogoutUser";
 import AgencyLeftPanel from "./AgencyLeftPanel";
 import AgencyWorkArea from "./AgencyWorkArea";
 import { API_TEST_TOKEN } from "../../apis/AuthApis";
+import AgencyProfile from "./AgencyProfile";
 
 const AgencyMain = () => {
   const windowWidth = useWindowWidth();
@@ -18,6 +19,7 @@ const AgencyMain = () => {
   const [isLeftDrawerVisible, setIsLeftDrawerVisible] = useState(false);
   const showLeftDrawer = () => setIsLeftDrawerVisible(true);
   const closeLeftDrawer = () => setIsLeftDrawerVisible(false);
+  const [CurrentMode, setCurrentMode] = useState(0);
 
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const AgencyMain = () => {
       <Row style={{ width: "100vw" }}>
         {windowWidth > 1200 && (
           <Col style={{ width: "310px", flex: "0 0 310px", zIndex: "3000 !important", }} >
-            <AgencyLeftPanel  />
+            <AgencyLeftPanel  setCurrentMode={setCurrentMode}/>
           </Col>
         )}
 
@@ -51,7 +53,8 @@ const AgencyMain = () => {
               <button onClick={showLeftDrawer} className="agency-main-drawer-enabler-btn" > <MyIcon type={"settings"} /> Settings </button>
             </div>
           )}
-          <AgencyWorkArea />
+          {CurrentMode == 0 &&<AgencyWorkArea />}
+          {CurrentMode == 1 &&<AgencyProfile />}
         </Col>
 
       </Row>

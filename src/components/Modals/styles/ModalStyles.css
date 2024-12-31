@@ -122,7 +122,18 @@
 .account-modal-dragger {
   flex: 1;
 }
-
+.inline-input-agency{
+height: 40px;
+border-radius: 4px 0px 0px 4px !important;
+}
+.inline-input-agency .ant-input{
+    margin-bottom: 0px;
+    height: 30px !important;
+}
+.inline-input-agency-btn{
+    border-radius: 0px 4px 4px 0px !important;
+    height: 40px;
+}
 .inline-input-btn {
   border-radius: 0px 8px 8px 0px;
   height: 60px !important;
