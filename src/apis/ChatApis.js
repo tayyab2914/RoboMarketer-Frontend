@@ -78,7 +78,6 @@ export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowS
                 Authorization: token,
             },
         });
-console.log("API_GET_RESPONSE END")
         return response.data;
     } catch (error) {
         // message.error(error.response?.data?.message);
