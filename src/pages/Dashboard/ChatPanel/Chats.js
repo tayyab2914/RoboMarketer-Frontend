@@ -47,7 +47,7 @@ const Chats = () => {
       setChatData((prev) => [
         ...prev,
         {
-          message: temporary_message?.message,
+          message: temporary_message?.message, 
           response: null,
           isLoading: true,
           uploads: temporary_message?.file ? [temporary_message.file] : [],
