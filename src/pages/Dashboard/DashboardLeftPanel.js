@@ -39,16 +39,36 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
     const response = await API_GET_PROMPTS(token, setShowSpinner);
     setFetchedPrompts(response);
   };
+const handlePromptClick = async (message, id) => {
+    if (!message) return;
 
-  const handlePromptClick = async (message, id) => {
-    dispatch(setTemporaryMessage({ message,wait:true }));
-    const formData = new FormData();
-    formData.append("prompt", id);
-    await API_GET_RESPONSE(token, id, formData, setShowSpinner);
-    dispatch(setTemporaryMessage({}));
-    dispatch(setRerenderChatPanel(!rerender_chat_panel));
-    dispatch(setRerenderDashboard(!rerender_dashboard));
+    const localMessage = message || " ";
+
+    console.log("1. ",{ message })
+    dispatch(setTemporaryMessage({ message }));
+
+
+    if (localMessage.trim() ) {
+    //   setShowSpinner(true);
+
+      const formData = new FormData();
+      formData.append("prompt", id);
+
+      try {
+        await API_GET_RESPONSE(token, id, formData, setShowSpinner);
+        console.log("GET REPOSNE RETURNED")
+        dispatch(setTemporaryMessage(null));
+        dispatch(setRerenderChatPanel(!rerender_chat_panel));
+      } catch (error) {
+        console.error("Error sending message/file:", error);
+      } finally {
+        dispatch(setTemporaryMessage(null));
+        console.log("Error sending mes")
+        setShowSpinner(false);
+      }
+    }
   };
+
 
   useEffect(() => {
     getPrompts();

@@ -53,7 +53,7 @@ const Chats = () => {
           uploads: temporary_message?.file ? [temporary_message.file] : [],
         },
       ]);
-    //   if(!temporary_message?.wait)
+    //   if(temporary_message?.sent_from_left_panel && !temporary_message?.wait)
     //     {
     //         get_history()
     //     } 
