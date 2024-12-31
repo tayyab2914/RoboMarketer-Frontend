@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { EyeOutlined, DeleteOutlined, EditOutlined, MessageOutlined } from "@ant-design/icons"; // Import icons from Ant Design
+import { EyeOutlined, DeleteOutlined, EditOutlined, MessageOutlined,LoadingOutlined  } from "@ant-design/icons"; // Import icons from Ant Design
 import { IMAGES } from "../../data/ImageData";
 import MyIcon from "../../components/Icon/MyIcon";
 import './styles/SubAccountCard.css'
-import { Popconfirm } from "antd";
+import { Popconfirm, Spin } from "antd";
 import { DOMAIN_NAME } from "../../utils/GlobalSettings";
 import NewSubAccountModal from "./NewSubAccountModal";
 import { API_DELETE_ACCOUNT, API_SEND_INVITE_EMAIL } from "../../apis/AgencyApis";
@@ -16,6 +16,7 @@ import { API_SWITCH_ACCOUNT } from "../../apis/AuthApis";
 
 const SubAccountCard = ({ companyLogo,subAccountID, companyName, email, phone,fetchAccounts }) => {
     const [ShowEditModal, setShowEditModal] = useState(false);
+    const [loadingMessage, setLoadingMessage] = useState(false);
     const { token,rerender_dashboard } = useSelector((state) => state.authToken);
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -38,7 +39,9 @@ const SubAccountCard = ({ companyLogo,subAccountID, companyName, email, phone,fe
       };
       
       const handleMessage = async() => {
+        setLoadingMessage(true); 
         await API_SEND_INVITE_EMAIL(token,subAccountID,null)
+        setLoadingMessage(false); 
       };
       
   return (
@@ -63,7 +66,9 @@ const SubAccountCard = ({ companyLogo,subAccountID, companyName, email, phone,fe
         </Popconfirm>
         
         <span onClick={handleEdit}> <MyIcon type={'sa_edit'} /> </span>
-        <span onClick={handleMessage}> <MyIcon type={'sa_message'} /> </span>
+        <span onClick={handleMessage}>
+            {loadingMessage ? <LoadingOutlined spin style={{border:"none"}}/> : <MyIcon type={"sa_message"} />}
+          </span>
       </div>
     </div>
     <NewSubAccountModal  isVisible={ShowEditModal}  onClose={() => setShowEditModal(false)}  defaultValues={{ companyName: companyName, email: email, phone: phone,logo:companyLogo,id:subAccountID}} editMode={true}  fetchAccounts={fetchAccounts}/>

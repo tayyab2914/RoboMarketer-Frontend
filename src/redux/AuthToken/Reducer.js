@@ -9,7 +9,7 @@ const initialState = {
   current_account:{},
   rerender_dashboard:false,
   rerender_chat_panel:true,
-  temporary_message:null,
+  temporary_message:{},
   facebook_state:null,
   is_facebook_setup:false,
   open_integrations_modal:false,
@@ -59,6 +59,7 @@ export default function authReducer(state = initialState, action) {
       rerender_right_panel: action.payload,
     };
   }  else if (action.type == TEMPORARY_MESSAGE) {
+    // console.log(action)
     return {
       ...state,
       temporary_message: action.payload,

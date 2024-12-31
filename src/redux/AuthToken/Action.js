@@ -68,6 +68,7 @@ export const setRerenderRightPanel = (rerender_right_panel) => {
   };
 };
 export const setTemporaryMessage = (temp_message) => {
+    // console.log('temp_message',temp_message)
   return {
     type: TEMPORARY_MESSAGE,
     payload: temp_message,

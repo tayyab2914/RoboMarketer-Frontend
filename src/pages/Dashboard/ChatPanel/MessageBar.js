@@ -45,8 +45,9 @@ const MessageBar = ({ isDisabled }) => {
 
     const localMessage = message || " ";
     const localFile = file;
+    console.log("1. ",{ message, file })
     dispatch(setTemporaryMessage({ message, file }));
-    dispatch(setRerenderChatPanel(!rerender_chat_panel));
+    // dispatch(setRerenderChatPanel(!rerender_chat_panel));
     setMessage("");
     setFile(null);
 
@@ -60,19 +61,15 @@ const MessageBar = ({ isDisabled }) => {
       formData.append("message", localMessage);
 
       try {
-        await API_GET_RESPONSE(
-          token,
-          localMessage,
-          formData,
-          setShowSpinner
-        );
-        console.log("GET REPOSNE")
+        await API_GET_RESPONSE( token, localMessage, formData, setShowSpinner );
+        console.log("GET REPOSNE RETURNED")
         dispatch(setTemporaryMessage(null));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
       } catch (error) {
         console.error("Error sending message/file:", error);
       } finally {
         dispatch(setTemporaryMessage(null));
+        console.log("Error sending mes")
         setShowSpinner(false);
       }
     }
@@ -83,15 +80,7 @@ const MessageBar = ({ isDisabled }) => {
       <Col xs={24}>
         {file && (
           <div className="file-preview-container">
-            <Badge
-              count={
-                <CloseOutlined
-                  onClick={handleRemoveFile}
-                  className="file-preview-container-badge-icon"
-                />
-              }
-              className="file-preview-container-badge"
-            >
+            <Badge count={ <CloseOutlined onClick={handleRemoveFile} className="file-preview-container-badge-icon" /> } className="file-preview-container-badge">
               {RENDER_FILE_PREVIEW(file, 30, false)}
             </Badge>
           </div>
@@ -99,21 +88,9 @@ const MessageBar = ({ isDisabled }) => {
       </Col>
       <Col>
         <label htmlFor="file-upload">
-          <MyIcon
-            type="plus_black"
-            className={`message-bar-plus ${isFileUploading ? "disabled" : ""}`}
-            size="lg"
-            style={{ cursor: isFileUploading ? "not-allowed" : "pointer" }}
-          />
+          <MyIcon type="plus_black" className={`message-bar-plus ${isFileUploading ? "disabled" : ""}`} size="lg" style={{ cursor: isFileUploading ? "not-allowed" : "pointer" }} />
         </label>
-        <input
-          id="file-upload"
-          type="file"
-          style={{ display: "none" }}
-          onChange={handleFileSelect}
-          accept=".docs, .docx"
-          disabled={isFileUploading}
-        />
+        <input id="file-upload" type="file" style={{ display: "none" }} onChange={handleFileSelect} accept=".docs, .docx" disabled={isFileUploading} />
       </Col>
       <Col flex="auto">
         <input
@@ -128,13 +105,7 @@ const MessageBar = ({ isDisabled }) => {
         />
       </Col>
       <Col>
-        <MyIcon
-          type="arrow_up"
-          size="lg"
-          className={`message-arrow-up ${isFileUploading ? "disabled-icon" : ""}`}
-          onClick={!isFileUploading ? handleSendMessage : undefined}
-        //   style={{ cursor: isFileUploading ? "not-allowed" : "pointer" }}
-        />
+        <MyIcon type="arrow_up" size="lg" className={`message-arrow-up ${isFileUploading ? "disabled-icon" : ""}`} onClick={!isFileUploading ? handleSendMessage : undefined}/>
       </Col>
     </Row>
   );

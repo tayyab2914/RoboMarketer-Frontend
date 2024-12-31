@@ -71,13 +71,14 @@ export const API_DELETE_PROMPT = async (token, id,  setShowSpinner) => {
 export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowSpinner) => {
     // setShowSpinner(true);
 
+    console.log("API_GET_RESPONSE START")
     try {
         const response = await axios.post(`${DOMAIN_NAME}/chat/get_response/`, file_group, {
             headers: {
                 Authorization: token,
             },
         });
-
+console.log("API_GET_RESPONSE END")
         return response.data;
     } catch (error) {
         // message.error(error.response?.data?.message);

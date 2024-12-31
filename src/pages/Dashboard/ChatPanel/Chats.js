@@ -26,21 +26,23 @@ const Chats = () => {
   const chatContainerRef = useRef(null);
   const dispatch = useDispatch();
   const get_history = async () => {
+    console.log("GET HISTORT CALLED")
     const response = await API_GET_HISTORY(
       token,
       current_account?.id,
       setShowSpinner
     );
+    console.log("GET HISTORT RETURNED",response)
     
-    dispatch(setTemporaryMessage({})); 
     setChatData(response?.reverse() || []);
   };
 
   useEffect(() => {
     get_history();
-  }, [rerender_chat_panel]);
+  }, []);
 
   useEffect(() => {
+    console.log("2. ",temporary_message)
     if (temporary_message?.message || temporary_message?.file) {
       setChatData((prev) => [
         ...prev,
@@ -51,14 +53,15 @@ const Chats = () => {
           uploads: temporary_message?.file ? [temporary_message.file] : [],
         },
       ]);
-      if(!temporary_message?.wait)
-        {
-            get_history()
-        } 
+    //   if(!temporary_message?.wait)
+    //     {
+    //         get_history()
+    //     } 
     }
   }, [temporary_message]);
 
   useEffect(()=>{
+    console.log("3. ",temporary_message)
     if(!temporary_message)
     {
         get_history()
