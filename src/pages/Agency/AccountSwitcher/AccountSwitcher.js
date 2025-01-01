@@ -28,7 +28,7 @@ const windowWidth = useWindowWidth()
                   <MyIcon type={"user"} />
                 )}
 
-                {current_account?.name ? TRUNCATE_STRING(current_account?.name, 17) : "Agency View"}
+                { "Agency View"}
               </span>
               <img src={ICONS.arrow_up_down} style={{ height: "14px", transition: "transform 0.3s ease",}} />
             </div>

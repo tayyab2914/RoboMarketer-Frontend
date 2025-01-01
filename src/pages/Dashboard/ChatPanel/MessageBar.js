@@ -62,7 +62,6 @@ const MessageBar = ({ isDisabled }) => {
 
       try {
         await API_GET_RESPONSE( token, localMessage, formData, setShowSpinner );
-        console.log("GET REPOSNE RETURNED")
         dispatch(setTemporaryMessage(null));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
       } catch (error) {
