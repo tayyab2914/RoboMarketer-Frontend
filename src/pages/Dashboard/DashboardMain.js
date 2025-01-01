@@ -10,6 +10,7 @@ import { API_GET_ACCOUNTS, API_SWITCH_ACCOUNT, API_TEST_TOKEN } from "../../apis
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthToken, setCurrentAccount, setRerenderChatPanel, setRerenderDashboard } from "../../redux/AuthToken/Action";
 import { useLogoutUser } from "../../hooks/useLogoutUser";
+import { useNavigate } from "react-router-dom";
 
 const DashboardMain = () => {
   const windowWidth = useWindowWidth();
@@ -18,6 +19,7 @@ const DashboardMain = () => {
   const [ShowSpinner, setShowSpinner] = useState(false);
   const [Accounts, setAccounts] = useState([]);
   const logoutUser = useLogoutUser();
+  const navigate = useNavigate()
   const [isLeftDrawerVisible, setIsLeftDrawerVisible] = useState(false);
   const [isRightDrawerVisible, setIsRightDrawerVisible] = useState(false);
 
@@ -30,7 +32,11 @@ const DashboardMain = () => {
     const response = await API_GET_ACCOUNTS(token, setShowSpinner);
     dispatch(setCurrentAccount( response?.find((account) => account?.is_current_account) ) );
     setAccounts(response);
-    console.log('getAccounts',response)
+    if(response.length == 0)
+    {
+        dispatch(setCurrentAccount({is_main_user:true}))
+        navigate('/agency')
+    }
   };
 
   useEffect(() => {

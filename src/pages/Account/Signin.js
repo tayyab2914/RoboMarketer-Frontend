@@ -23,15 +23,15 @@ const Signin = ({ toggleCurrentMode }) => {
     dispatch(setCurrentAccount({is_main_user:response?.is_main_user}))
     if(response){
         console.log(response?.agency)
-        if(response?.agency)
+        if(response.admin)
+        {
+            navigate('/admin')
+        }
+        else  if(response?.agency)
         {
             console.log("NAVIGATING TO AGENCY")
             navigate('/agency')
 
-        }
-        else if(response.admin)
-        {
-            navigate('/admin')
         }
         else
         {
