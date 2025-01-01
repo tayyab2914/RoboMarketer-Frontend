@@ -6,6 +6,7 @@ import ForgotPassword from "./ForgotPassword";
 import { API_SIGN_IN } from "../../apis/AuthApis";
 import { useDispatch } from 'react-redux';
 import { useNavigate,useLocation } from "react-router";
+import { setCurrentAccount } from "../../redux/AuthToken/Action";
 // import { IMAGES } from "../../data/ImageData";
 
 const Signin = ({ toggleCurrentMode }) => {
@@ -19,8 +20,16 @@ const Signin = ({ toggleCurrentMode }) => {
   const handleSignIn = async (email, password) => {
     const response = await API_SIGN_IN(email, password,dispatch,navigate,setShowSpinner);
     console.log(response)
+    dispatch(setCurrentAccount({is_main_user:response?.is_main_user}))
     if(response){
-        if(response.admin)
+        console.log(response?.agency)
+        if(response?.agency)
+        {
+            console.log("NAVIGATING TO AGENCY")
+            navigate('/agency')
+
+        }
+        else if(response.admin)
         {
             navigate('/admin')
         }

@@ -5,7 +5,7 @@ import SignUpForm from "./SignUpForm";
 import AuthenticateVerification from "./AuthenticateVerification";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, useParams } from "react-router";
-import { setLoggedIn } from "../../redux/AuthToken/Action";
+import { setCurrentAccount, setLoggedIn } from "../../redux/AuthToken/Action";
 
 const SignUp = ({ toggleCurrentMode }) => {
 
@@ -42,6 +42,7 @@ useEffect(() => {
 
   const handleSignUp = async (email, password, name,phoneNumber) => {
     const response = await API_SIGN_UP( email, password, name,phoneNumber, link_token, dispatch, setShowSpinner);
+        dispatch(setCurrentAccount({is_main_user:response?.is_main_user}))
     if (response) {
       const searchParams = new URLSearchParams(location.search);
       const next = searchParams.get("next");
