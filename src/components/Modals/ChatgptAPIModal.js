@@ -39,7 +39,7 @@ const ChatgptAPIModal = ({ isVisible, onClose }) => {
         <p className="input-group-label">Paste ChatGPT API Key</p>
           <div className=" form-item chatgpt-modal-form">
               <Form initialValues={{ api_key: APIKey}}>
-                <Form.Item name="api_key" rules={API_KEY_RULES_REQUIRED} style={{ marginBottom: 0 }} >
+                <Form.Item name="api_key"  style={{ marginBottom: 0 }} >
                   <Input placeholder="Enter ChatGPT API key" value={APIKey} onChange={(e) => setAPIKey(e.target.value)}/>
                 </Form.Item>
               </Form>
