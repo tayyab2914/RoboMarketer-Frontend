@@ -353,5 +353,5 @@ export function extractTextAndTable(content) {
 }
 
 export const SHOW_API_NOT_SETUP_ERROR = ()=>{
-    message.error("No OpenAI API key found for this account")
+    message.error("No OpenAI API key found for this account. Please add your OpenAI API key in the settings menu.")
 }
