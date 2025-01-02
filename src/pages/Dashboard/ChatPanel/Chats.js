@@ -7,7 +7,7 @@ import MyIcon from "../../../components/Icon/MyIcon";
 import { setTemporaryMessage } from "../../../redux/AuthToken/Action";
 import renderFile, {  formatTextToHTML, PARSED_TEXT } from "../../../utils/Methods";
 import { DOMAIN_NAME } from "../../../utils/GlobalSettings";
-import { CiCircleFilled } from "@ant-design/icons";
+import { CiCircleFilled, ExclamationCircleOutlined } from "@ant-design/icons";
 import AccountSetupComponent from "./AccountSetupComponent";
 import FacebookIntegration from "../FacebookIntegration";
 import FacebookIntegrationSelectAccount from "../FacebookIntegrationSelectAccount";
@@ -16,9 +16,11 @@ import remarkGfm from "remark-gfm";
 import RoboMarketerMessage from "../RoboMarketerMessage";
 import AddProductMessage from "../AddProductMessage";
 import AddFunnelMessage from "../AddFunnelMessage";
+import { Tag } from "antd";
 
 const Chats = () => {
   const [showSpinner, setShowSpinner] = useState(false);
+  const [getHistoryCalled, setgetHistoryCalled] = useState(false);
   const { token, current_account, rerender_chat_panel, temporary_message,facebook_state } =
     useSelector((state) => state.authToken);
   
@@ -32,6 +34,7 @@ const Chats = () => {
       current_account?.id,
       setShowSpinner
     );
+
     console.log("GET HISTORT RETURNED",response)
     
     setChatData(response?.reverse() || []);
@@ -90,10 +93,7 @@ const Chats = () => {
             </div>
             <div className="user-message-div">
               
-            <span 
-  className="message" 
-  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(formatTextToHTML(item?.message)) }}
-></span>
+            <span  className="message"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(formatTextToHTML(item?.message)) } }></span>
             </div>
           </div>
 

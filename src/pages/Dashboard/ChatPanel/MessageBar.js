@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Badge } from "antd";
+import { Row, Col, Badge, message } from "antd";
 import MyIcon from "../../../components/Icon/MyIcon";
 import { CloseOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,8 +13,8 @@ import "./styles/MessageBar.css";
 
 const MessageBar = ({ isDisabled }) => {
   const dispatch = useDispatch();
-  const { token, rerender_chat_panel } = useSelector((state) => state.authToken);
-  const [message, setMessage] = useState("");
+  const { token, rerender_chat_panel ,current_account} = useSelector((state) => state.authToken);
+  const [Message, setMessage] = useState("");
   const [file, setFile] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
   const [isFileUploading, setIsFileUploading] = useState(false);
@@ -41,12 +41,18 @@ const MessageBar = ({ isDisabled }) => {
   };
 
   const handleSendMessage = async () => {
-    if (!message && !file) return;
+  
+    if(!current_account?.is_openapi_setup)
+    {
+        message.error("No OpenAI API key found for this account")
+        return
+    }
+    if (!Message && !file) return;
 
-    const localMessage = message || " ";
+    const localMessage = Message || " ";
     const localFile = file;
-    console.log("1. ",{ message, file })
-    dispatch(setTemporaryMessage({ message, file }));
+    console.log("1. ",{ Message, file })
+    dispatch(setTemporaryMessage({ Message, file }));
     // dispatch(setRerenderChatPanel(!rerender_chat_panel));
     setMessage("");
     setFile(null);
@@ -95,7 +101,7 @@ const MessageBar = ({ isDisabled }) => {
         <input
           type="text"
           placeholder="Type Message..."
-          value={message}
+          value={Message}
           onChange={(e) => setMessage(e.target.value)}
           className="message-bar-input"
           onKeyDown={(e) => {
