@@ -1,4 +1,4 @@
-import { Tooltip } from "antd";
+import { message, Tooltip } from "antd";
 import { useEffect } from "react";
 import {
   UploadOutlined,
@@ -350,4 +350,8 @@ export function extractTextAndTable(content) {
     }
 
     return { textBefore, table, textAfter };
+}
+
+export const SHOW_API_NOT_SETUP_ERROR = ()=>{
+    message.error("No OpenAI API key found for this account")
 }

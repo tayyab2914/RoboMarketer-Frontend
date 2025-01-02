@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Badge, message } from "antd";
+import { Row, Col, Badge } from "antd";
 import MyIcon from "../../../components/Icon/MyIcon";
 import { CloseOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,13 +8,13 @@ import {
   setTemporaryMessage,
 } from "../../../redux/AuthToken/Action";
 import { API_GET_RESPONSE } from "../../../apis/ChatApis";
-import { RENDER_FILE_PREVIEW } from "../../../utils/Methods";
+import { RENDER_FILE_PREVIEW, SHOW_API_NOT_SETUP_ERROR } from "../../../utils/Methods";
 import "./styles/MessageBar.css";
 
 const MessageBar = ({ isDisabled }) => {
   const dispatch = useDispatch();
-  const { token, rerender_chat_panel ,current_account} = useSelector((state) => state.authToken);
-  const [Message, setMessage] = useState("");
+  const { token, rerender_chat_panel, current_account } = useSelector((state) => state.authToken);
+  const [message, setMessage] = useState("");
   const [file, setFile] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
   const [isFileUploading, setIsFileUploading] = useState(false);
@@ -44,15 +44,15 @@ const MessageBar = ({ isDisabled }) => {
   
     if(!current_account?.is_openapi_setup)
     {
-        message.error("No OpenAI API key found for this account")
+        SHOW_API_NOT_SETUP_ERROR()
         return
     }
-    if (!Message && !file) return;
+    if (!message && !file) return;
 
-    const localMessage = Message || " ";
+    const localMessage = message || " ";
     const localFile = file;
-    console.log("1. ",{ Message, file })
-    dispatch(setTemporaryMessage({ Message, file }));
+    console.log("1. ",{ message, file })
+    dispatch(setTemporaryMessage({ message, file }));
     // dispatch(setRerenderChatPanel(!rerender_chat_panel));
     setMessage("");
     setFile(null);
@@ -68,6 +68,7 @@ const MessageBar = ({ isDisabled }) => {
 
       try {
         await API_GET_RESPONSE( token, localMessage, formData, setShowSpinner );
+        console.log("GET REPOSNE RETURNED")
         dispatch(setTemporaryMessage(null));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
       } catch (error) {
@@ -101,7 +102,7 @@ const MessageBar = ({ isDisabled }) => {
         <input
           type="text"
           placeholder="Type Message..."
-          value={Message}
+          value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="message-bar-input"
           onKeyDown={(e) => {

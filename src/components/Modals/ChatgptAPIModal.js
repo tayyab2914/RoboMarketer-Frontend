@@ -6,10 +6,12 @@ import "./styles/ModalStyles.css";
 import './styles/ChatgptModal.css'
 import { API_KEY_RULES_REQUIRED } from "../../utils/Rules";
 import { API_UPDATE_API_KEY } from "../../apis/ChatApis";
+import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 
 const ChatgptAPIModal = ({ isVisible, onClose }) => {
   const [showSpinner, setShowSpinner] = useState(false);
-    const { token } = useSelector((state) => state.authToken);
+    const { token, rerender_dashboard } = useSelector((state) => state.authToken);
+    const dispatch=useDispatch()
   const [APIKey, setAPIKey] = useState('');
 
     const handleHowToFindChatGPTapi = ()=>{
@@ -18,6 +20,7 @@ const ChatgptAPIModal = ({ isVisible, onClose }) => {
     const handleSubmit = async()=>{
         console.log(APIKey)
         await API_UPDATE_API_KEY(token ,APIKey)
+        dispatch(setRerenderDashboard(!rerender_dashboard))
         onClose()
     }
   return (
