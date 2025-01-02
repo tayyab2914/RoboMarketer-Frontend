@@ -9,7 +9,7 @@ import AccountSwitcherPopup from "./AccountSwitcherPopup";
 import "./styles/AccountSwitcher.css";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 
-const AccountSwitcher = () => {
+const AccountSwitcher = ({is_in_agency}) => {
   const { current_account } = useSelector((state) => state.authToken);
 const windowWidth = useWindowWidth()
   const popoverPlacement = windowWidth < 700 ? "bottomLeft" : "rightTop";
@@ -28,7 +28,7 @@ const windowWidth = useWindowWidth()
                   <MyIcon type={"user"} />
                 )}
 
-                { "Agency View"}
+                {is_in_agency ? "Agency View" : TRUNCATE_STRING(current_account?.name)}
               </span>
               <img src={ICONS.arrow_up_down} style={{ height: "14px", transition: "transform 0.3s ease",}} />
             </div>

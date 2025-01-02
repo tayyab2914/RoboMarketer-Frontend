@@ -21,7 +21,7 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
         <div className="agency-left-panel-logo-wrapper">
           <img src={IMAGES.logo_png} alt="Panel Logo" className="agency-left-panel-logo" />
         </div>
-       <AccountSwitcher/>
+       <AccountSwitcher is_in_agency={true}/>
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(0)}>
            <MyIcon type={"sub_accounts"}/> Sub-Accounts
        </div>
