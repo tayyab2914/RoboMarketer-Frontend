@@ -19,8 +19,8 @@ margin-bottom: 10px;
   
 }
 .invite-members-submit-btn:hover{
-    background-color: #e6eaed;
-    color:black
+    background-color: #181818;
+    color:rgb(255, 255, 255)
 }
   .invited-member-row{
     
