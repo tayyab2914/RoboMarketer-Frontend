@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyButton from '../../components/Button/Button';
 import MyIcon from '../../components/Icon/MyIcon';
 import { Modal, Select, Input, Button, Upload, message } from 'antd';
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GET_PROMPT_CATEGORIES } from '../../utils/Methods';
 import { setRerenderDashboard } from '../../redux/AuthToken/Action';
 import { ICONS } from '../../data/IconData';
+import SelectCategoryPopup from './SelectCategoryPopup';
 
 const { TextArea } = Input;
 
@@ -23,6 +24,9 @@ const AddPromptBtn = () => {
   const [prompt, setPrompt] = useState('');
   const [file_group, setFileGroup] = useState([]);
 
+  useEffect(()=>{
+console.log('useEffect',category)
+  },[category])
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -46,7 +50,7 @@ const AddPromptBtn = () => {
     }
 
     const formData = new FormData();
-    formData.append("category", category || "");
+    formData.append("category", category?.category_id || "");
     formData.append("prompt_name", prompt_name || "");
     formData.append("prompt", prompt || "");
 
@@ -65,16 +69,7 @@ const AddPromptBtn = () => {
   return (
     <div>
       <MyButton variant="filled" text={<span className="add-prompt-span"><MyIcon type={'plus'} /> Add Prompt</span>} className="add-prompt-btn" onClick={showModal} />
-      <Modal
-    title={ false }
-    centered
-    visible={isModalVisible}
-    onCancel={handleCancel}
-    closable={false}
-    footer={false}
-    width={500}
-  >
-        
+      <Modal title={ false } centered visible={isModalVisible} onCancel={handleCancel} closable={false} footer={false} width={500} >
         <div className="custom-modal-header">
     <span className="modal-header"> <MyIcon type="note" style={{ marginRight: "5px" }} /> Create Prompt
  </span>
@@ -83,17 +78,11 @@ const AddPromptBtn = () => {
             
     <div className="custom-modal-content modal-content">
           <div className="">
-            <p className="modal-field-label-block">Select Category</p>
-            <Select 
-              value={category} 
-              onChange={setCategory} 
-              style={{ width: '100%', height: "40px" }} 
-              placeholder="Category" 
-              className='add-prompt-btn-select'
-              suffixIcon={<img src={ICONS.arrow_down} height={7}/>}
-            >
+            <SelectCategoryPopup setCategory={setCategory} category={category}/>
+            {/* <p className="modal-field-label-block">Select Category</p>
+            <Select value={category} onChange={setCategory} style={{ width: '100%', height: "40px" }} placeholder="Category" className='add-prompt-btn-select'suffixIcon={<img src={ICONS.arrow_down} height={7}/>}>
               {GET_PROMPT_CATEGORIES?.map((item) => <Select.Option key={item.header} value={item.header}>{item.header}</Select.Option>)}
-            </Select>
+            </Select> */}
           </div>
 
           <div className="">

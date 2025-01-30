@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IMAGES } from "../../data/ImageData";
 import { Collapse, Popconfirm } from "antd";
 import MyIcon from "../../components/Icon/MyIcon";
@@ -8,13 +8,25 @@ import AccountSwitcher from "./AccountSwitcher/AccountSwitcher";
 import { useNavigate } from "react-router-dom";
 import ProfileModal from "../../components/Modals/ProfileModal";
 import AgencyProfile from "./AgencyProfile";
+import UpdateAccessComponent from "../Dashboard/UpdateAccessComponent";
+import { API_GET_ACCOUNTS } from "../../apis/AgencyApis";
+import { useSelector } from "react-redux";
 
 
 const AgencyLeftPanel = ({setCurrentMode}) => {
+    const { token, current_account } = useSelector((state) => state.authToken);
     const [ShowProfileModal, setShowProfileModal] = useState(false);
+        const [accounts, setAccounts] = useState([])
   const logoutUser = useLogoutUser();
   const navigate= useNavigate()
+  const fetchAccounts = async () => {
+    const response = await API_GET_ACCOUNTS(token);
+    setAccounts(response);
+  };
 
+  useEffect(() => {
+    fetchAccounts();
+  }, [token]);
   return (
     <div className="agency-left-panel-container">
       <span className="agency-left-panel-container-inner">
@@ -31,6 +43,9 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
 
       </span>
       <span>
+        
+      {!accounts?.is_lifetime_access && <UpdateAccessComponent chatCount={accounts?.chat_count}/>}
+      <div style={{ height: "35px" }}></div>
         <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" >
           <button className="settings-btn"> <span className="settings-btn-wrapper"> <MyIcon type="logout" /> Logout </span> </button>
         </Popconfirm>

@@ -1,0 +1,70 @@
+.uac-container {
+  margin: 10px 10px 45px 10px;
+  border: 1px solid #e6eaed;
+  border-radius: 12px;
+  text-align: center;
+}
+.uac-title {
+  background-color: #ffe6e5;
+  border-radius: 12px 12px 0px 0px;
+  padding: 10px 10px;
+  font-weight: 700;
+  color: #ab000b;
+  text-align: center;
+  margin: 0px;
+}
+.uac-subtitle {
+  font-weight: 700;
+  color: var(--color-dark);
+  font-size: 20px;
+  line-height: 1.2;
+}
+.uac-trial-message {
+  font-weight: 500;
+  color: var(--color-dark);
+  font-size: 16px;
+  line-height: 1.2;
+}
+.uac-upgrade-btn {
+  background-color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: white;
+  width: 100%;
+}
+.uac-upgrade-text {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0px;
+}
+.uac-lifetime-text {
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0px;
+}
+.uac-contact-info {
+    font-weight: 500;
+    color: var(--color-dark);
+    font-size: 16px;
+    line-height: 1.4;
+    margin-top: 15px;
+}
+
+.uac-container-modal{
+    border-radius: 12px;
+    text-align: center;
+}
+.uac-title-modal{
+    background-color: #ffe6e5;
+    border-radius: 12px 12px 0px 0px;
+    padding: 10px 10px;
+    font-weight: 700;
+    color: #ab000b;
+    text-align: center;
+    font-size: 18px;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

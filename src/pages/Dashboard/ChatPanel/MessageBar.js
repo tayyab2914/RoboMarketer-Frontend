@@ -18,18 +18,17 @@ const MessageBar = ({ isDisabled }) => {
   const [file, setFile] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
   const [isFileUploading, setIsFileUploading] = useState(false);
+  const [LimitEnded, setLimitEnded] = useState(false);
 
   const handleFileSelect = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       setIsFileUploading(true); // Start file upload process
       setFile(selectedFile);
-      console.log("File selected:", selectedFile.name);
 
       // Simulate file upload completion after 2 seconds (or replace with actual upload logic)
       setTimeout(() => {
         setIsFileUploading(false); // Mark upload as complete
-        console.log("File upload complete");
       }, 2000);
     }
   };
@@ -67,8 +66,11 @@ const MessageBar = ({ isDisabled }) => {
       formData.append("message", localMessage);
 
       try {
-        await API_GET_RESPONSE( token, localMessage, formData, setShowSpinner );
-        console.log("GET REPOSNE RETURNED")
+        const response = await API_GET_RESPONSE( token, localMessage, formData, setShowSpinner );
+        if(response?.limit_end)
+        {
+            setLimitEnded(true)
+        }
         dispatch(setTemporaryMessage(null));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
       } catch (error) {

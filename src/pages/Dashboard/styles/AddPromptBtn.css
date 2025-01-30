@@ -139,3 +139,69 @@
 .modal-actions .btn-1 button:hover{
     background-color: rgb(255, 222, 222) !important;
 }
+
+
+.add-prompt-category-select-btn{
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid #e6eaed;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.select-category-popup p{
+    font-weight: 600;
+    border-bottom: 1px solid #e6eaed;
+    padding-bottom: 10px;
+color: var(--color-dark);
+}
+
+.select-category-popup-btn{
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #e6eaed;
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-align: left;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+.select-category-popup{
+    width: 300px;
+}
+.category-btn{
+    width: 300px !important;
+    background-color: transparent;
+    border: 1px solid #e6eaed;
+    border-radius: 8px;
+    padding: 10px 10px;
+    text-align: left;
+    font-weight: 700;
+    color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.category-btn-icons img{
+    padding: 4px ;
+    border: 1px solid #e6eaed;
+    border-radius: 4px;
+    margin-left: 4px;
+    width: 20px;
+}   
+.category-name-input{
+    height: 40px;
+    margin-bottom: 0px !important;
+}
+.category-name{
+    width: 200px;
+    cursor: pointer;
+}

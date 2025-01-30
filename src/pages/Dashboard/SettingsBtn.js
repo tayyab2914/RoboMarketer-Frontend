@@ -59,6 +59,7 @@ const SettingsBtn = () => {
     dispatch(setRerenderDashboard(!rerender_dashboard))
   };
   return (
+    
     <div className="setting-modals">
       <button className="settings-btn" onClick={() => setIsModalVisible(true)}>
         <span className="settings-btn-wrapper"><MyIcon type="settings" /> Settings</span>

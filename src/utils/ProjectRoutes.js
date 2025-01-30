@@ -20,6 +20,7 @@ const ProjectRoutes = () => {
       <Routes>
         <Route path="/" element={isLoggedIn ? <DashboardMain /> : <Navigate to="/account" replace />}  />
         <Route path="/admin" element={isAdmin ? <AdminMain /> : <Navigate to="/account" replace />} />
+
         <Route path="/account" element={<Account />} />
         <Route path="/account/:link_token" element={<Account />} />
         <Route path="/verify_account/:id" element={<VerifyAccountMain />} />

@@ -21,6 +21,30 @@ export const API_CREATE_PROMPT = async ( token, newPrompt, setShowSpinner ) => {
         // message.success("Prompt created successfully!")
         return response.data;
     } catch (error) {
+        console.log(error)
+        message.error(
+          error.response?.data?.message 
+        );
+        return null; 
+    } finally {
+        // setShowSpinner(false);
+    }
+};
+export const API_CREATE_CATEGORY = async ( token, newCategory, setShowSpinner ) => {
+    // setShowSpinner(true);
+    console.log(newCategory)
+
+    try {
+        const response = await axios.post(`${DOMAIN_NAME}/chat/create_category/`, 
+            {name:newCategory}
+        , {
+            headers: {
+                Authorization: token,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error)
         message.error(
           error.response?.data?.message 
         );
@@ -38,12 +62,32 @@ export const API_GET_PROMPTS = async (token, setShowSpinner) => {
             Authorization: token, 
         },
       });
+  console.log(response)
+      return response.data;
+    } catch (error) {
+        // message.error(
+        //   error.response?.data?.message 
+        // );
+    } finally {
+    //   setShowSpinner(false);
+    }
+};
+
+export const API_GET_CATEGORY_ORDERING = async (token, setShowSpinner) => {
+    // setShowSpinner(true);
+    try {
+      const response = await axios.get(`${DOMAIN_NAME}/chat/get_category_ordering/`, {
+        headers: {
+            Authorization: token, 
+        },
+      });
   
       return response.data;
     } catch (error) {
         // message.error(
         //   error.response?.data?.message 
         // );
+        console.log(error)
     } finally {
     //   setShowSpinner(false);
     }
@@ -68,6 +112,25 @@ export const API_DELETE_PROMPT = async (token, id,  setShowSpinner) => {
         // setShowSpinner(false);
     }
 };
+
+export const API_DELETE_CATEGORY = async (token, id,  setShowSpinner) => {
+    // setShowSpinner(true);
+    try {
+          const response = await axios.delete(`${DOMAIN_NAME}/chat/delete_category/${id}/`, {
+            headers: {
+                Authorization: token, 
+            },
+          });
+      
+        // message.success("Prompt Deleted Successfully")
+        return response.data;
+    } catch (error) {
+        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        // message.error(errorMessage);  
+    } finally {
+        // setShowSpinner(false);
+    }
+};
 export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowSpinner) => {
     // setShowSpinner(true);
 
@@ -78,6 +141,7 @@ export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowS
                 Authorization: token,
             },
         });
+        console.log(response.data)
         return response.data;
     } catch (error) {
         message.error(error.response?.data?.message);
@@ -126,12 +190,59 @@ for (let [key, value] of updatedPrompt.entries()) {
         });
         return response.data;
     } catch (error) {
+        console.log(error)
         message.error(
           error.response?.data?.message 
         );
         return null; 
     } finally {
         setShowSpinner(false);
+    }
+};
+export const API_UPDATE_CATEGORY_ORDERING = async (token, updatedordering, setShowSpinner) => {
+    try {
+      // Prepare the payload with the category_order array
+      const payload = {
+        category_order: updatedordering,  // updatedordering should be the array ["Hello", "Helloyy", "Updated Name", "New Category", "Hello"]
+      };
+  
+      const response = await axios.put(`${DOMAIN_NAME}/chat/update_category_ordering/`, payload, {
+        headers: {
+          Authorization: token,
+        },
+      });
+  
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      message.error(error.response?.data?.message);
+      return null;
+    } finally {
+      // setShowSpinner(false);
+    }
+  };
+  
+export const API_UPDATE_CATEGORY = async ( token, updatedCategory,categoryID, setShowSpinner ) => {
+    
+    // setShowSpinner(true);
+
+    try {
+        const response = await axios.put(`${DOMAIN_NAME}/chat/update_category/${categoryID}/`, 
+            {name:updatedCategory}
+        , {
+            headers: {
+                Authorization: token,
+            },
+        });
+        return response.data;
+
+    } catch (error) {
+        message.error(
+          error.response?.data?.message 
+        );
+        return null; 
+    } finally {
+        // setShowSpinner(false);
     }
 };
 

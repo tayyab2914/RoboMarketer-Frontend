@@ -27,7 +27,9 @@ export const GET_PROMPT_CATEGORIES = [
 
 export const FILTER_PROMPTS_BY_CATEGORY = (dataArray, category) => {
   // console.log(dataArray)
-  return dataArray?.filter((item) => item.category === category);
+  console.log('dataArray',dataArray)
+  console.log('category',category)
+  return dataArray?.filter((item) => item.category_name === category);
 };
 
 export const RENDER_FILE_PREVIEW = (file, size, showName) => {

@@ -7,6 +7,7 @@ import { ICONS } from "../../data/IconData";
 import { API_UPDATE_PROMPT } from "../../apis/ChatApis";
 import { GET_PROMPT_CATEGORIES } from "../../utils/Methods";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
+import SelectCategoryPopup from "../../pages/Dashboard/SelectCategoryPopup";
 
 const { TextArea } = Input;
 
@@ -64,6 +65,11 @@ console.log(current_account)
     onClose(); // Close the modal after saving
   };
 
+  const setCategoryHandler = (value)=>{
+
+    console.log('SelectCategoryPopup',value?.category_id)
+    setPromptData({ ...promptData, category: value?.category_id })
+  }
   return (
     <Modal
       title={false}
@@ -95,7 +101,9 @@ console.log(current_account)
         ) : (
           <>
           <div className="">
-            <p className="modal-field-label-block">Select Category</p>
+            
+          <SelectCategoryPopup setCategory={(value) => {setCategoryHandler(value)}} category={promptData?.category}/>
+            {/* <p className="modal-field-label-block">Select Category</p>
             <Select 
               value={promptData?.category} 
               onChange={(value) => setPromptData({ ...promptData, category: value })} 
@@ -105,7 +113,7 @@ console.log(current_account)
               suffixIcon={<img src={ICONS.arrow_down} height={7}/>}
             >
               {GET_PROMPT_CATEGORIES?.map((cat) => <Select.Option key={cat.header} value={cat.header}>{cat.header}</Select.Option>)}
-            </Select>
+            </Select> */}
           </div>
 
             <div>
