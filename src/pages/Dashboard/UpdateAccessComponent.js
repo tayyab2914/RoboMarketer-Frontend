@@ -27,19 +27,24 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
             <MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" />
         
             </p>
-            <div style={{ padding: "10px" }}>
+            <div style={{ padding: "10px 50px" }}>
               <p className="uac-subtitle">
                 Upgrade To Lifetime Unlimited Access RoboMarketer Account
               </p>
               <p className="uac-trial-message">
                 Your Free Trial Has Ended Upgrade To Lifetime Access RoboMarketer For A Limited Time
-              </p>
-              <button className="uac-upgrade-btn">
+              </p></div>
+              <div style={{ padding: "0px 10px" }}>
+              <button className="uac-upgrade-btn" onClick={() => window.open("https://robomarketer.io/lifetime", "_blank")}>
+
                 <p className="uac-upgrade-text">Upgrade Now</p>
                 <p className="uac-lifetime-text">
                   Limited Lifetime Access Available
                 </p>
               </button>
+              </div>
+              
+            <div style={{ padding: "0px 30px" }}>
               <p className="uac-contact-info">
                 Questions? Contact Us At info@RoboMarketer.bot
               </p>
@@ -58,8 +63,9 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
             <p className="uac-trial-message">
               {100 - chatCount} Free Messages Left Before Free Trial Ends
             </p>
-            <button className="uac-upgrade-btn" >
-            {/* <button className="uac-upgrade-btn" onClick={robomarketer.io/lifetime}> */}
+            {/* <button className="uac-upgrade-btn" > */}
+            <button className="uac-upgrade-btn" onClick={() => window.open("https://robomarketer.io/lifetime", "_blank")}>
+
               <p className="uac-upgrade-text">Upgrade Now</p>
               <p className="uac-lifetime-text">
                 Limited Lifetime Access Available

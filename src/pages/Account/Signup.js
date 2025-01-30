@@ -16,6 +16,9 @@ const SignUp = ({ toggleCurrentMode }) => {
   const [ShowSignUpComponent, setShowSignUpComponent] = useState(false);
   const [ShowSpinner, setShowSpinner] = useState(false);
 
+  const queryString = location.search.slice(1); // Removes the '?' at the start
+  console.log(queryString);
+  
 
   const checkIfLinkExists = async () => {
     try {
@@ -41,7 +44,8 @@ useEffect(() => {
   
 
   const handleSignUp = async (email, password, name,phoneNumber) => {
-    const response = await API_SIGN_UP( email, password, name,phoneNumber, link_token, dispatch, setShowSpinner);
+    const response = await API_SIGN_UP( email, password, name,phoneNumber, link_token, dispatch, queryString,setShowSpinner);
+    console.log(response)
         dispatch(setCurrentAccount({is_main_user:response?.is_main_user}))
     if (response) {
       const searchParams = new URLSearchParams(location.search);

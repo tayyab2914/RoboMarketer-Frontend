@@ -10,6 +10,7 @@ import {
 import { API_GET_RESPONSE } from "../../../apis/ChatApis";
 import { RENDER_FILE_PREVIEW, SHOW_API_NOT_SETUP_ERROR } from "../../../utils/Methods";
 import "./styles/MessageBar.css";
+import UpdateAccessComponent from "../UpdateAccessComponent";
 
 const MessageBar = ({ isDisabled }) => {
   const dispatch = useDispatch();
@@ -112,6 +113,7 @@ const MessageBar = ({ isDisabled }) => {
           }}
         />
       </Col>
+      {LimitEnded && <UpdateAccessComponent visible={LimitEnded} onClose={()=>setLimitEnded(false)} modal={true}/>}
       <Col>
         <MyIcon type="arrow_up" size="lg" className={`message-arrow-up ${isFileUploading ? "disabled-icon" : ""}`} onClick={!isFileUploading ? handleSendMessage : undefined}/>
       </Col>

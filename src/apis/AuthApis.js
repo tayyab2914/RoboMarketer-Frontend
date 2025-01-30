@@ -5,10 +5,10 @@ import { setAuthToken, setIsAdmin, setLoggedIn } from "../redux/AuthToken/Action
 
 import { DOMAIN_NAME } from "../utils/GlobalSettings";
 
-export const API_SIGN_UP = async ( email, password, name, PhoneNumber, link_token, dispatch, setShowSpinner ) => {
-  setShowSpinner(true);
+export const API_SIGN_UP = async ( email, password, name, PhoneNumber, link_token, dispatch,queryString, setShowSpinner ) => {
+//   setShowSpinner(true);
   try {
-    const response = await axios.post(`${DOMAIN_NAME}/authentication/signup/`, {
+    const response = await axios.post(`${DOMAIN_NAME}/authentication/signup/?${queryString}`, {
       email: email,
       password: password,
       name: name,
@@ -23,7 +23,7 @@ export const API_SIGN_UP = async ( email, password, name, PhoneNumber, link_toke
   } catch (error) {
     message.error(error.response?.data?.message || "Signup failed");
   } finally {
-    setShowSpinner(false);
+    // setShowSpinner(false);
   }
 };
 export const API_SIGN_IN = async ( email, password, dispatch, navigate, setShowSpinner ) => {
@@ -46,6 +46,23 @@ export const API_SIGN_IN = async ( email, password, dispatch, navigate, setShowS
   } finally {
     setShowSpinner(false);
   }
+};
+export const API_UPDATE_ACCESS = async (token, id, is_lifetime_access) => {
+    try {
+        const response = await axios.post(
+            `${DOMAIN_NAME}/authentication/update_access/${id}/`,
+            { is_lifetime_access }, // Request body
+            {
+                headers: {
+                    Authorization: `${token}`, // Added 'Bearer' for proper authorization
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        message.error(error.response?.data?.message || "Wrong credentials");
+        return false;
+    }
 };
 export const API_DOES_LINK_EXIST = async ( link_token, setShowSpinner ) => {
     console.log('API_DOES_LINK_EXIST',link_token)

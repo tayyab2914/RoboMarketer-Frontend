@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Table, Pagination, Modal, Input, Button, Form, Popconfirm } from "antd";
+import { Table, Pagination, Modal, Input, Button, Form, Popconfirm, Switch } from "antd";
 import './styles/AdminMainTable.css';
 import MyIcon from "../../components/Icon/MyIcon";
 import moment from "moment"; // Import moment.js for date formatting
 import { ACCOUNT_RULES_REQUIRED, EMAIL_RULES_REQUIRED, NAME_RULES_REQUIRED, PHONE_NUMBER_RULES_REQUIRED } from "../../utils/Rules";
+import { API_UPDATE_ACCESS } from "../../apis/AuthApis";
+import { useSelector } from "react-redux";
 
 const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
+    
+  const {
+    isLoggedIn,
+    token,
+    rerender_dashboard,
+    rerender_chat_panel,
+    current_account,
+  } = useSelector((state) => state.authToken);
     const formattedData = UsersList.map((user, index) => ({
         key: user.id || index + 1,
         first_name: user.first_name || 'N/A', 
@@ -19,6 +29,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                 <Popconfirm title="Are you sure you want to delete this user?" onConfirm={() => onDeleteUserData(user.id)} okText="Yes" cancelText="No" >
                     <MyIcon  type="delete_btn"  size="xl"  style={{ cursor: 'pointer', marginLeft: 10 }}  />
                 </Popconfirm>
+                <Switch style={{ marginLeft: 10 }} defaultChecked={false} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/>
             </>
         ),
     }));
@@ -37,6 +48,10 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const [form] = Form.useForm(); // Create form instance
+
+    const handleUpgradeAccessClick = async(id,checked)=>{
+        await API_UPDATE_ACCESS(token,id,checked)
+    } 
 
     const handleEditClick = (user) => {
         setSelectedUser(user);
