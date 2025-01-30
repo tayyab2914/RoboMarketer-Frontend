@@ -37,9 +37,10 @@ const SignUp = ({ toggleCurrentMode }) => {
   
 
 useEffect(() => {
-    if (link_token) {
-      checkIfLinkExists();
-    } 
+    // if (link_token) {
+    //   checkIfLinkExists();
+    // } 
+    setShowSignUpComponent(true);
   }, [link_token]);
   
 
