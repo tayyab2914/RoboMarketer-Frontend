@@ -62,7 +62,7 @@ useEffect(() => {
 
 
   const handleSignInToggle = () => {
-    toggleCurrentMode("signin");
+    navigate("/account");
   };
 
   return (
