@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 const AgencyLeftPanel = ({setCurrentMode}) => {
     const { token, current_account } = useSelector((state) => state.authToken);
     const [ShowProfileModal, setShowProfileModal] = useState(false);
-        const [accounts, setAccounts] = useState([])
+        const [accounts, setAccounts] = useState()
   const logoutUser = useLogoutUser();
   const navigate= useNavigate()
   const fetchAccounts = async () => {
@@ -27,6 +27,10 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
   useEffect(() => {
     fetchAccounts();
   }, [token]);
+
+  if (!accounts) {
+    return null;
+  }
   return (
     <div className="agency-left-panel-container">
       <span className="agency-left-panel-container-inner">

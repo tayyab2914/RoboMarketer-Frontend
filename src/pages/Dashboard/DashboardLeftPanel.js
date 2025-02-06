@@ -23,7 +23,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const dispatch = useDispatch();
   const [showSpinner, setShowSpinner] = useState(false);
   const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel ,current_account} =useSelector((state) => state.authToken);
-  const [CurrentAccount, setCurrentAccount] = useState({});
+  const [CurrentAccount, setCurrentAccount] = useState(null);
   const [FetchedPrompts, setFetchedPrompts] = useState([]);
   const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);  
@@ -113,6 +113,11 @@ const handlePromptClick = async (message, id) => {
       fetchCategoryOrdering();
     }, []);
 
+    if (!CurrentAccount) {
+      // Wait for CurrentAccount to load before rendering
+      return null;
+    }
+
   return (
     <div className="left-panel-container">
       {showSpinner && <Spin fullscreen />}
@@ -159,6 +164,7 @@ const handlePromptClick = async (message, id) => {
           </Collapse>
         </div>
       </div>
+          {!CurrentAccount?.is_lifetime_access && <UpdateAccessComponent chatCount={CurrentAccount?.chat_count}/>}
       <span>
       <SettingsBtn />
       </span>
