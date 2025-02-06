@@ -29,7 +29,8 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                 <Popconfirm title="Are you sure you want to delete this user?" onConfirm={() => onDeleteUserData(user.id)} okText="Yes" cancelText="No" >
                     <MyIcon  type="delete_btn"  size="xl"  style={{ cursor: 'pointer', marginLeft: 10 }}  />
                 </Popconfirm>
-                <Switch style={{ marginLeft: 10 }} checked={user.is_lifetime_access} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/>
+                {/* <Switch style={{ marginLeft: 10 }} checked={user.is_lifetime_access} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/> */}
+                <Switch style={{ marginLeft: 10 }} defaultValue={user.is_lifetime_access} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/>
             </>
         ),
     }));
