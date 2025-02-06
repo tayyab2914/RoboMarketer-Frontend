@@ -29,7 +29,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                 <Popconfirm title="Are you sure you want to delete this user?" onConfirm={() => onDeleteUserData(user.id)} okText="Yes" cancelText="No" >
                     <MyIcon  type="delete_btn"  size="xl"  style={{ cursor: 'pointer', marginLeft: 10 }}  />
                 </Popconfirm>
-                <Switch style={{ marginLeft: 10 }} defaultChecked={false} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/>
+                <Switch style={{ marginLeft: 10 }} checked={user.is_lifetime_access} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/>
             </>
         ),
     }));
@@ -49,9 +49,24 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [form] = Form.useForm(); // Create form instance
 
-    const handleUpgradeAccessClick = async(id,checked)=>{
-        await API_UPDATE_ACCESS(token,id,checked)
-    } 
+    const handleUpgradeAccessClick = async (id, checked) => {
+        const isLifetimeAccess = Boolean(checked);
+    
+        // Immediately update the state to reflect the change locally
+        onSaveUserData({ id, is_lifetime_access: isLifetimeAccess });
+    
+        try {
+            // Send the updated is_lifetime_access as a boolean value
+            await API_UPDATE_ACCESS(token, id, isLifetimeAccess );
+        } catch (error) {
+            // In case of failure, revert the local change
+            console.error('Failed to update lifetime access:', error);
+            // Optionally, you can revert the change if the API request fails
+            // onSaveUserData({ id, is_lifetime_access: !isLifetimeAccess });
+        }
+    };
+    
+    
 
     const handleEditClick = (user) => {
         setSelectedUser(user);

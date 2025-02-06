@@ -100,7 +100,7 @@ useEffect(()=>{
       <Modal
         className=""
         title={false}
-        centered
+        centereda
         visible={isVisible}
         onCancel={onClose}
         closable={false}

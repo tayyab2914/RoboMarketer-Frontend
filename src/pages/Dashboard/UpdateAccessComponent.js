@@ -31,6 +31,16 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
               <p className="uac-subtitle">
                 Upgrade To Lifetime Unlimited Access RoboMarketer Account
               </p>
+              <iframe 
+                style={{ width: "100%", height: "315px", borderRadius: "12px" }} 
+                src="https://www.youtube.com/embed/gMhKb3Qcl6c?si=9oRWvTbsDn_Fdr0A" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen
+              ></iframe>
+
               <p className="uac-trial-message">
                 Your Free Trial Has Ended Upgrade To Lifetime Access RoboMarketer For A Limited Time
               </p></div>
@@ -61,7 +71,9 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
               Upgrade To Lifetime Unlimited Access RoboMarketer Account
             </p>
             <p className="uac-trial-message">
-              {100 - chatCount} Free Messages Left Before Free Trial Ends
+              {Math.max(100 - chatCount, 0)} Free Messages Left Before
+              <br />
+              Free Trial Ends
             </p>
             {/* <button className="uac-upgrade-btn" > */}
             <button className="uac-upgrade-btn" onClick={() => window.open("https://robomarketer.io/lifetime", "_blank")}>

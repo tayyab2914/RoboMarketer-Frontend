@@ -5,7 +5,7 @@ import MyIcon from '../../components/Icon/MyIcon';
 
 const ScrollableCategories = ({ localSelectedMetrics,handleDelete,handleEditCategoryClick, onDragEnd,onClose,setCategory }) => {
   return (
-    <Col xs={14} sm={12}>
+    <Col>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (

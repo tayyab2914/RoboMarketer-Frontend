@@ -1,77 +1,77 @@
 
 .awa-heading-main{
-padding: 25px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-border-bottom: 1px solid #e6eaed;
-}
-.awa-heading{
-    display: flex;
-    align-items: center; 
-    font-weight: 600;
-    font-size: 18px;
-}
-.awa-heading img{
-    margin-right: 10px;
-}
-.awa-heading-btns{
-    border: 1px solid #e6eaed;
-    background-color: rgb(0, 0, 0);
-    height: 48px;
-    color: white;
-    padding: 9px 20px ;
-    border-radius: 8px;
-    margin-left: 10px;
-    font-size: 18px;
-    display: flex;
-    align-items: center; 
-    font-weight: 500;
-}
-.awa-heading-btns-count 
-{
-    display:flex;
-    align-items: center;
-    justify-content: end;
-}
-.awa-heading-btns-wrapper{
+    padding: 25px;
     display: flex;
     align-items: center;
-    justify-content: end;
-}
-.awa-heading-btns-count .text{
-    border: 1px solid #e6eaed;
-    background-color: white;
-    height: 48px;
-    padding: 10px ;
-    padding-left: 10px;
-    border-radius: 8px 0px 0px 8px;
-    margin-left: 10px;
-    font-size: 18px;
-    font-weight: 500;
-}
-.awa-heading-btn-count {
-    border: 1px solid #e6eaed;
-    border-left: none;
-    border-radius: 0px 8px 8px 0px;
-    padding: 13px 5px;
-    width: 40px;
-    height: 48px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-}
-.awa-sub-accounts-main{
-    padding:25px;
-    height: calc(100vh - 98.8px);
-    overflow-y: auto;
-    scrollbar-width: none;
-}
-
-@media screen and (max-width: 768px){
+    justify-content: space-between;
+    border-bottom: 1px solid #e6eaed;
+    }
+    .awa-heading{
+        display: flex;
+        align-items: center; 
+        font-weight: 600;
+        font-size: 18px;
+    }
+    .awa-heading img{
+        margin-right: 10px;
+    }
     .awa-heading-btns{
-        margin-top: 10px;
-        width: 100%;
+        border: 1px solid #e6eaed;
+        background-color: rgb(0, 0, 0);
+        height: 48px;
+        color: white;
+        padding: 9px 20px ;
+        border-radius: 8px;
+        margin-left: 10px;
+        font-size: 18px;
+        display: flex;
+        align-items: center; 
+        font-weight: 500;
+    }
+    .awa-heading-btns-count 
+    {
+        display:flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .awa-heading-btns-wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .awa-heading-btns-count .text{
+        border: 1px solid #e6eaed;
+        background-color: white;
+        height: 48px;
+        padding: 10px ;
+        padding-left: 10px;
+        border-radius: 8px 0px 0px 8px;
+        margin-left: 10px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .awa-heading-btn-count {
+        border: 1px solid #e6eaed;
+        border-left: none;
+        border-radius: 0px 8px 8px 0px;
+        padding: 13px 5px;
+        width: 40px;
+        height: 48px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .awa-sub-accounts-main{
+        padding:25px;
+        height: calc(100vh - 98.8px);
+        overflow-y: auto;
+        scrollbar-width: none;
     }
     
-}
+    @media screen and (max-width: 768px){
+        .awa-heading-btns{
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+    }

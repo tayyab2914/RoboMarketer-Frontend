@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import HomeMain from '../pages/Home/HomeMain';
 import Account from '../pages/Account/AccountMain';
+import SignUp from '../pages/Account/Signup';
 import AdminMain from '../pages/Admin/AdminMain';
 import DashboardMain from '../pages/Dashboard/DashboardMain';
 import { useSelector } from 'react-redux';
@@ -22,7 +23,8 @@ const ProjectRoutes = () => {
         <Route path="/admin" element={isAdmin ? <AdminMain /> : <Navigate to="/account" replace />} />
 
         <Route path="/account" element={<Account />} />
-        <Route path="/account/:link_token" element={<Account />} />
+        {/* <Route path="/account/:link_token" element={<Account />} /> */}
+        <Route path="/account/signup" element={<SignUp/>} />
         <Route path="/verify_account/:id" element={<VerifyAccountMain />} />
         <Route path="/agency" element={(isLoggedIn && current_account?.is_main_user)? <AgencyMain />: <Navigate to="/account" replace />} />
         <Route path="/notfound" element={<Error404 />} />

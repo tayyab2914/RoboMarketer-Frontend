@@ -169,15 +169,15 @@ color: var(--color-dark);
     border: 1px solid #e6eaed;
     border-radius: 8px;
     padding: 10px 20px;
-    text-align: left;
+    text-align: center;
+
     font-weight: 700;
     color: var(--color-dark);
 }
 .select-category-popup{
-    width: 300px;
+    /* width: 300px; */
 }
 .category-btn{
-    width: 300px !important;
     background-color: transparent;
     border: 1px solid #e6eaed;
     border-radius: 8px;

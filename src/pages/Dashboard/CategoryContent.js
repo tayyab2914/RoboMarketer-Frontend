@@ -104,11 +104,11 @@ const CategoryContent = ({  setCategory,onClose}) => {
   
   return (
     <div className="select-category-popup">
-      <p>Category</p>
       <button className="select-category-popup-btn" onClick={handleAddCategoryClick}>
         + Add New Category
       </button>
-
+<div style={{maxHeight:"300px",overflowY:'auto',scrollbarWidth:'none'}}>
+    
 <ScrollableCategories onDragEnd={onDragEnd} localSelectedMetrics={fetchedCategories} handleDelete={handleDelete} onClose={onClose} handleEditCategoryClick={handleEditCategoryClick} setCategory={setCategory}/>
       {/* {fetchedCategories?.category_order?.map((item, index ) => (
         <div key={index}>
@@ -182,6 +182,7 @@ const CategoryContent = ({  setCategory,onClose}) => {
           <MyButton variant="filled" text={'Update Category'} onClick={handleUpdateCategory} />
         </div>
       </Modal>
+      </div>
     </div>
   );
 };
