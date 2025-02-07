@@ -29,6 +29,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);  
   const [selectedPrompt, setselectedPrompt] = useState(null);  
   const [FetchedCategories, setFetchedCategories] = useState([]);
+  const [LimitEnded, setLimitEnded] = useState(false);
 
   useEffect(() => {
     if (Accounts && Accounts.length) {
@@ -50,7 +51,12 @@ const handlePromptClick = async (message, id) => {
       const formData = new FormData();
       formData.append("prompt", id);
       try {
-        await API_GET_RESPONSE(token, id, formData, setShowSpinner);
+        const response = await API_GET_RESPONSE(token, id, formData, setShowSpinner);
+        if(response?.limit_end)
+        {
+          setLimitEnded(true)
+        }
+        dispatch(setRerenderDashboard(!rerender_dashboard));
         dispatch(setTemporaryMessage(null));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
       } catch (error) {
@@ -101,6 +107,7 @@ const handlePromptClick = async (message, id) => {
                 <span style={{ display: "flex", alignItems: "center" }}> <DeleteOutlined style={{ marginRight: '10px' }} /> Delete </span>
             </Popconfirm>
         </Menu.Item>
+        
   </Menu>
   );
 
@@ -164,6 +171,8 @@ const handlePromptClick = async (message, id) => {
           </Collapse>
         </div>
       </div>
+          {/* <UpdateAccessComponent visible={true} modal={true}/> */}
+          {LimitEnded && <UpdateAccessComponent visible={LimitEnded} onClose={()=>setLimitEnded(false)} modal={true}/>}
           {!CurrentAccount?.is_lifetime_access && <UpdateAccessComponent chatCount={CurrentAccount?.chat_count}/>}
       <span>
       <SettingsBtn />

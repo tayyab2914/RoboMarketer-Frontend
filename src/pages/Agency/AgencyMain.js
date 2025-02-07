@@ -10,6 +10,7 @@ import AgencyLeftPanel from "./AgencyLeftPanel";
 import AgencyWorkArea from "./AgencyWorkArea";
 import { API_TEST_TOKEN } from "../../apis/AuthApis";
 import AgencyProfile from "./AgencyProfile";
+import AgencyWhitelabel from "./AgencyWhitelabel";
 
 const AgencyMain = () => {
   const windowWidth = useWindowWidth();
@@ -55,6 +56,7 @@ const AgencyMain = () => {
           )}
           {CurrentMode == 0 &&<AgencyWorkArea />}
           {CurrentMode == 1 &&<AgencyProfile />}
+          {CurrentMode == 2 &&<AgencyWhitelabel />}
         </Col>
 
       </Row>

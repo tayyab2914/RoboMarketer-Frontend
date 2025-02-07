@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setRerenderChatPanel,
   setTemporaryMessage,
+  setRerenderDashboard,
 } from "../../../redux/AuthToken/Action";
 import { API_GET_RESPONSE } from "../../../apis/ChatApis";
 import { RENDER_FILE_PREVIEW, SHOW_API_NOT_SETUP_ERROR } from "../../../utils/Methods";
@@ -14,7 +15,7 @@ import UpdateAccessComponent from "../UpdateAccessComponent";
 
 const MessageBar = ({ isDisabled }) => {
   const dispatch = useDispatch();
-  const { token, rerender_chat_panel, current_account } = useSelector((state) => state.authToken);
+  const { token, rerender_chat_panel, rerender_dashboard, current_account } = useSelector((state) => state.authToken);
   const [message, setMessage] = useState("");
   const [file, setFile] = useState(null);
   const [showSpinner, setShowSpinner] = useState(false);
@@ -68,9 +69,10 @@ const MessageBar = ({ isDisabled }) => {
 
       try {
         const response = await API_GET_RESPONSE( token, localMessage, formData, setShowSpinner );
+        dispatch(setRerenderDashboard(!rerender_dashboard));
         if(response?.limit_end)
         {
-            setLimitEnded(true)
+          setLimitEnded(true)
         }
         dispatch(setTemporaryMessage(null));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
