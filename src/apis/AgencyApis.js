@@ -135,3 +135,46 @@ export const API_SET_CLIENT_ACCOUNT_PASSWORD = async (  password,id, setShowSpin
         // setShowSpinner(false);
     }
 };
+
+export const API_GET_WHITELABEL_DOMAIN = async (  token, setShowSpinner ) => {
+    // setShowSpinner(true);
+
+    try {
+        const response = await axios.get(`${DOMAIN_NAME}/agency/get_whitelabel_domain/`, {
+          headers: {
+              Authorization: token, 
+          },
+        });
+        console.log("HELLO G", response.data)
+        return response.data;
+      } catch (error) {
+      //   message.error("Invalid or expired token");
+      } finally {
+      //   setShowSpinner(false);
+      }
+};
+
+
+export const API_UPDATE_WHITELABEL_DOMAIN = async (token, whitelabel_domain, setShowSpinner) => {
+    // setShowSpinner(true);
+    try {
+        const response = await axios.put(
+            `${DOMAIN_NAME}/agency/update_whitelabel_domain/`,
+            {
+                whitelabel_domain
+            },
+            {
+                headers: {
+                    Authorization: `${token}`,
+                },
+            }
+        );
+         message.success("Whitelabel domain updated successfully!");
+        return response.data;
+    } catch (error) {
+        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        message.error(errorMessage);  
+    } finally {
+        // setShowSpinner(false);
+    }
+};

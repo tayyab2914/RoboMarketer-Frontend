@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Modal, Input, Button, Form, message, Spin, Row, Col } from "antd";
 import "../../components/Modals/styles/ModalStyles.css";
 import MyIcon from "../../components/Icon/MyIcon";
-import {
-  API_GET_USER_ATTRIBUTES,
-  API_UPDATE_PROFILE,
-} from "../../apis/AuthApis";
+import { API_GET_WHITELABEL_DOMAIN, API_UPDATE_WHITELABEL_DOMAIN } from "../../apis/AgencyApis";
 import { useSelector } from "react-redux";
 import {
-  EMAIL_RULES_REQUIRED,
-  PASSWORD_RULES_REQUIRED,
+  WHITELABEL_DOMAIN_RULES_REQUIRED,
 } from "../../utils/Rules";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
@@ -17,21 +13,19 @@ const AgencyWhitelabel = ({ isVisible, onClose }) => {
     const windowWidth = useWindowWidth()
   const { isLoggedIn, token } = useSelector((state) => state.authToken);
   const [ShowSpinner, setShowSpinner] = useState(false);
-  const [email, setEmail] = useState("");
+  const [whitelabel_domain, setWhitelabelDomain] = useState("");
 
 
   const [form] = Form.useForm();
 
-  const handleEmailUpdate = async () => {
+  const handleWhitelabelDomainUpdate = async () => {
     try {
-      const values = await form.validateFields(["email"]);
-      const email = values.email;
+      const values = await form.validateFields(["whitelabel_domain"]);
+      const whitelabel_domain = values.whitelabel_domain;
 
-      await API_UPDATE_PROFILE(token, email, null, setShowSpinner);
-      message.success("Email updated successfully!");
-      onClose();
+      const response = await API_UPDATE_WHITELABEL_DOMAIN(token, whitelabel_domain, setShowSpinner);
     } catch (errorInfo) {
-      console.log("Email validation failed:", errorInfo);
+        console.log("Whitelabel domain validation failed or API error occurred:", errorInfo);
     }
   };
 
@@ -42,8 +36,8 @@ const AgencyWhitelabel = ({ isVisible, onClose }) => {
   };
 
   const getUserEmail = async () => {
-    const response = await API_GET_USER_ATTRIBUTES(token, setShowSpinner);
-    setEmail(response.email);
+    const response = await API_GET_WHITELABEL_DOMAIN(token, setShowSpinner);
+    setWhitelabelDomain(response.whitelabel_domain);
   };
 
   useEffect(() => {
@@ -70,14 +64,14 @@ const AgencyWhitelabel = ({ isVisible, onClose }) => {
             <Col xs={24} sm={12} xl={9} className="">
 
             <Form form={form} onFinish={onFinish} layout="vertical" className="modal-content" >
-          <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED} required={false} className="form-item" >
+          <Form.Item label="Whitelabel Domain" name="whitelabel_domain" rules={WHITELABEL_DOMAIN_RULES_REQUIRED} required={false} className="form-item" >
             <div className="input-group">
               <span className="input-group-input">
-                <Input placeholder="Email" className="inline-input-agency" value={email} onChange={(e) => setEmail(e.target.value)} required={false} />
+                <Input placeholder="app.yourdomain.com" className="inline-input-agency" value={whitelabel_domain} onChange={(e) => setWhitelabelDomain(e.target.value)} required={false} />
               </span>
               <span className="input-group-btn">
-                <Button type="primary" className="inline-input-agency-btn" onClick={handleEmailUpdate}a >
-                 Update </Button>
+                <Button type="primary" className="inline-input-agency-btn" onClick={handleWhitelabelDomainUpdate}a >
+                 Add domain </Button>
               </span>
             </div>
           </Form.Item>

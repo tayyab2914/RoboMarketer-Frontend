@@ -53,3 +53,12 @@ export const EMAIL_RULES_REQUIRED = [
     return urlRegex.test(value);
   };
   
+
+  export const WHITELABEL_DOMAIN_RULES_REQUIRED = [
+    { required: true, message: "Please input your whitelabel domain!" },
+    {
+      pattern: /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}$/i,
+      message: "Please enter a valid domain (e.g., example.com).",
+    },
+  ];
+  
