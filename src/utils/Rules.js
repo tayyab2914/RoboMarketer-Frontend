@@ -57,8 +57,8 @@ export const EMAIL_RULES_REQUIRED = [
   export const WHITELABEL_DOMAIN_RULES_REQUIRED = [
     { required: true, message: "Please input your whitelabel domain!" },
     {
-      pattern: /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}$/i,
-      message: "Please enter a valid domain (e.g., example.com).",
+      pattern: /^(?!:\/\/)([a-zA-Z0-9-_]+\.)+[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,}$/i,
+      message: "Please enter a valid domain with a subdomain (e.g., sub.example.com).",
     },
   ];
   

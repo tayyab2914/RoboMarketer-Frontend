@@ -178,3 +178,24 @@ export const API_UPDATE_WHITELABEL_DOMAIN = async (token, whitelabel_domain, set
         // setShowSpinner(false);
     }
 };
+
+export const API_TEST_RECORDS = async (token, setShowSpinner) => {
+    // setShowSpinner(true);
+    try {
+        const response = await axios.get(
+            `${DOMAIN_NAME}/agency/test_records/`,
+            {
+                headers: {
+                    Authorization: `${token}`,
+                },
+            }
+        );
+         message.success(response.data.message);
+        return response;
+    } catch (error) {
+        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        message.error(errorMessage);  
+    } finally {
+        // setShowSpinner(false);
+    }
+};

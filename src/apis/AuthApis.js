@@ -299,8 +299,8 @@ export const API_UPDATE_PROFILE = async (token, email = null, password = null, s
         );
         return response.data;
     } catch (error) {
-        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
-        message.error(errorMessage);  
+        // const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
+        // message.error(errorMessage);  
     } finally {
         setShowSpinner(false);
     }

@@ -88,6 +88,7 @@ import invite_members from "../assets/icons/invite_members.svg";
 import delete_btn_outlined from "../assets/icons/delete_btn_outlined.svg";
 import question_round from "../assets/icons/question_round.svg";
 import invited_member from "../assets/icons/invited_member.svg";
+import whitelabel from  "../assets/icons/whitelabel.svg";
 
 export const ICONS = {
   invited_member: invited_member,
@@ -184,4 +185,5 @@ export const ICONS = {
   delete_btn: delete_btn,
   edit_btn: edit_btn,
   hamburger: hamburger,
+  whitelabel: whitelabel
 };
