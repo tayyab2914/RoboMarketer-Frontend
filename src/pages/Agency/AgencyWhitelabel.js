@@ -23,8 +23,8 @@ const AgencyWhitelabel = ({ isVisible, onClose }) => {
       const whitelabel_domain = values.whitelabel_domain;
 
       const response = await API_UPDATE_WHITELABEL_DOMAIN(token, whitelabel_domain, setShowSpinner);
-      if (response.success) {
-        message.success("Whitelabel domain updated successfully!");
+      if (response.status === 200) {
+        message.success(response.data.message);
         setWhitelabelDomain(whitelabel_domain);
         setIsPopupVisible(true);
       }
@@ -47,8 +47,7 @@ const AgencyWhitelabel = ({ isVisible, onClose }) => {
   const getWhitelabelDomain = async () => {
     const response = await API_GET_WHITELABEL_DOMAIN(token, setShowSpinner);
     setWhitelabelDomain(response.whitelabel_domain);
-    return response.whitelabelDomain;
-    console.log("HELLO G");
+    return response.whitelabel_domain;
   };
 
   const handleCopy = (text) => {
@@ -68,7 +67,6 @@ const AgencyWhitelabel = ({ isVisible, onClose }) => {
 
   const handleAddConfiguration = async  () => {
     const white_label = await getWhitelabelDomain();
-    console.log("whitelabelDomain", white_label);
     if (!white_label) {
       message.error("Please add a whitelabel domain first.");
       return;

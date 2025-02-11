@@ -145,7 +145,6 @@ export const API_GET_WHITELABEL_DOMAIN = async (  token, setShowSpinner ) => {
               Authorization: token, 
           },
         });
-        console.log("HELLO G", response.data)
         return response.data;
       } catch (error) {
       //   message.error("Invalid or expired token");
@@ -169,8 +168,7 @@ export const API_UPDATE_WHITELABEL_DOMAIN = async (token, whitelabel_domain, set
                 },
             }
         );
-         message.success("Whitelabel domain updated successfully!");
-        return response.data;
+        return response;
     } catch (error) {
         const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
         message.error(errorMessage);  
