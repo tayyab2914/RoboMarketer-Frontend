@@ -8,6 +8,7 @@ import {
   FileOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
+import dayjs from 'dayjs';
 
 export const GET_PROMPT_CATEGORIES = [
   { header: "Campaign", key: "2", icon: "note" },
@@ -357,3 +358,43 @@ export function extractTextAndTable(content) {
 export const SHOW_API_NOT_SETUP_ERROR = ()=>{
     message.error("No OpenAI API key found for this account. Please add your OpenAI API key in the settings menu.")
 }
+
+
+ export const rangePresets = [
+    {
+      label: 'Today',
+      value: [dayjs().startOf('day'), dayjs().endOf('day')],
+    },
+    {
+      label: 'Yesterday',
+      value: [dayjs().subtract(1, 'day').startOf('day'), dayjs().subtract(1, 'day').endOf('day')], 
+    },
+    {
+      label: 'Last 7 Days',
+      value: [dayjs().subtract(7, 'days'), dayjs()], 
+    },
+    {
+      label: 'Last 14 Days',
+      value: [dayjs().subtract(14, 'days'), dayjs()], 
+    },
+    {
+      label: 'Last 30 Days',
+      value: [dayjs().subtract(30, 'days'), dayjs()], 
+    },
+    {
+      label: 'Last 90 Days',
+      value: [dayjs().subtract(90, 'days'), dayjs()], 
+    },
+    {
+      label: 'Last 6 Months',
+      value: [dayjs().subtract(6, 'months'), dayjs()],
+    },
+    {
+      label: 'Last Year',
+      value: [dayjs().subtract(1, 'year'), dayjs()], 
+    },
+    {
+      label: 'Lifetime',
+      value: [dayjs('2010-01-01'), dayjs()],
+    },
+  ];

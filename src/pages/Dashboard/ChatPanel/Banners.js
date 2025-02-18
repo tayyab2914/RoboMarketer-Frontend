@@ -31,18 +31,18 @@ const Banners = () => {
 
   return (
     <div id="banners">
-      <Row>
+      {!current_account?.is_facebook_connected && <Row>
         <Col xs={24} className="banner-inner">
           <p className="text"> <MyIcon type={"facebook"} size="md" /> Connect Your Facebook Ad Account With One Click </p>
           <button className="facebook_btn" onClick={connectFbHandler}> Connect Facebook </button>
         </Col>
-      </Row>
-      <Row>
+      </Row>}
+      {!current_account?.is_openapi_setup && <Row>
         <Col xs={24} className="banner-inner">
           <p className="text"> <MyIcon type={"banner_ai_model"} size="sm" /> Input Any AI Model API To Get Started With RoboMarketer </p>
           <button className="integrate_btn" onClick={integrateAPIhandler}> Integrate API </button>
         </Col>
-      </Row>
+      </Row>}
       <AIModelAPIModal
         isVisible={isIntegrateModalVisible}
         onClose={() => setisIntegrateModalVisible(false)}
