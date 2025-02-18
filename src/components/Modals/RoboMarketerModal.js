@@ -163,14 +163,14 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
           </div>
         </Panel>
         </Collapse>
-        <Collapse className="modal-collapse" defaultActiveKey={[0]} expandIconPosition={"end"}  expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
+        {/* <Collapse className="modal-collapse" defaultActiveKey={[0]} expandIconPosition={"end"}  expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )}>
         <Panel header={<p className="modal-panel-header"><MyIcon type={'preferences'}/> Standard Operating Procedures (SOP)</p>} key="1">
           <div className="">
             <p className="modal-field-label-block">Upload SOP Docs</p>
             <FileUploader fileList={FormValues?.file_group} onFileChange={({ fileList }) => handleValueChange("file_group", fileList)} multiple={true} beforeUpload={() => true} showRemoveIcon={true} accept={".docs, .docx"}/>
         </div>
         </Panel>
-      </Collapse>
+      </Collapse> */}
       </div>
       <div className="modal-actions" key="footer">
               <span className="btn-2"> <Button type="primary" onClick={handleSave} className="create-btn"> <MyIcon type={"tick"} /> Save </Button></span>

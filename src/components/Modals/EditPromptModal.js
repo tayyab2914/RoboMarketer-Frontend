@@ -137,7 +137,7 @@ console.log(current_account)
               />
             </div>
 
-            <div className="add-prompt-upload-sop-docs">
+            {/* <div className="add-prompt-upload-sop-docs">
               <p className="modal-field-label-block">Upload SOP Docs</p>
               <FileUploader
                 fileList={fileGroup}
@@ -147,7 +147,7 @@ console.log(current_account)
                 showRemoveIcon={true}
                 accept={".docs, .docx"}
               />
-            </div>
+            </div> */}
           </>
         )}
       </div>

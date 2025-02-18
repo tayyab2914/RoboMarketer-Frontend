@@ -108,7 +108,7 @@ console.log('useEffect',category)
             />
           </div>
 
-          <div className="add-prompt-upload-sop-docs">
+          {/* <div className="add-prompt-upload-sop-docs">
             <p className="modal-field-label-block">Upload SOP Docs</p>
             <FileUploader
               fileList={file_group}
@@ -118,7 +118,7 @@ console.log('useEffect',category)
               showRemoveIcon={true}
               accept={".docs, .docx"}
             />
-          </div>
+          </div> */}
           </div>
           <div className="modal-actions">
             <span className='btn-2'><Button type="primary" onClick={handleCreatePrompt} className="create-btn"><MyIcon type={'tick'} />Create Prompt</Button></span>

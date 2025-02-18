@@ -47,6 +47,9 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(2)}>
            <MyIcon type={"whitelabel"}/> Whitelabel Domain
        </div>
+       <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(3)}>
+           <MyIcon type={"support"}/> Support
+       </div>
 
       </span>
       <span>

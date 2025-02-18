@@ -4,3 +4,10 @@ margin-bottom: 0px !important;
 .chatgpt-modal-form{
     margin-bottom: 0px !important;
 }
+.ant-select{
+    height: 40px !important;
+}
+
+ .ant-select-selector{
+    height: 40px !important;
+}

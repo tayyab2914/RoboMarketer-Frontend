@@ -10,7 +10,7 @@
   border-radius: 10px;
   overflow-y: auto;
   overflow-x: hidden;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 160px);
   scrollbar-width: none;
   width: 100%;
 }

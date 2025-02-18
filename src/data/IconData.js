@@ -89,8 +89,22 @@ import delete_btn_outlined from "../assets/icons/delete_btn_outlined.svg";
 import question_round from "../assets/icons/question_round.svg";
 import invited_member from "../assets/icons/invited_member.svg";
 import whitelabel from  "../assets/icons/whitelabel.svg";
+import ai_model_api from  "../assets/icons/ai_model_api.svg";
+import support_general_questions from  "../assets/icons/support_general_questions.svg";
+import support_feature_request from  "../assets/icons/support_feature_request.svg";
+import support_bugs from  "../assets/icons/support_bugs.svg";
+import support from  "../assets/icons/support.svg";
+import support_email from  "../assets/icons/support_email.svg";
+import banner_ai_model from  "../assets/icons/banner_ai_model.svg";
 
 export const ICONS = {
+  banner_ai_model: banner_ai_model,
+  support: support,
+  support_email: support_email,
+  support_bugs: support_bugs,
+  support_feature_request: support_feature_request,
+  support_general_questions: support_general_questions,
+  ai_model_api: ai_model_api,
   invited_member: invited_member,
   delete_btn_outlined: delete_btn_outlined,
   sa_phone: sa_phone,

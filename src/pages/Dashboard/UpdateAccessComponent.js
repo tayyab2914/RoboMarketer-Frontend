@@ -32,7 +32,7 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
                 Upgrade To Lifetime Unlimited Access RoboMarketer Account
               </p>
               <iframe 
-                style={{ width: "100%", height: "315px", borderRadius: "12px" }} 
+                style={{ width: "100%", height: "280px", borderRadius: "12px" }} 
                 src="https://www.youtube.com/embed/gMhKb3Qcl6c?si=9oRWvTbsDn_Fdr0A" 
                 title="YouTube video player" 
                 frameborder="0" 

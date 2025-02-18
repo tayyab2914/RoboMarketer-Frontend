@@ -247,13 +247,13 @@ export const API_UPDATE_CATEGORY = async ( token, updatedCategory,categoryID, se
 };
 
 
-export const API_UPDATE_API_KEY = async ( token, updated_key, setShowSpinner ) => {
+export const API_UPDATE_API_KEY = async ( token, updated_key, aiModelType ) => {
     
     // setShowSpinner(true);
 
     try {
         const response = await axios.put(`${DOMAIN_NAME}/chat/update_api_key/`, 
-            {api_key:updated_key}
+            {api_key:updated_key,model_type:aiModelType}
         , {
             headers: {
                 Authorization: token,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, Input, Form, Row, Col, Popconfirm, Tag, Spin } from "antd";
 import MyIcon from "../Icon/MyIcon";
 import "./styles/ModalStyles.css";
-import "./styles/ChatgptModal.css";
+import "./styles/AIModelAPIModal.css";
 import { EMAIL_RULES_REQUIRED } from "../../utils/Rules";
 import "./styles/InviteMembersModal.css";
 import { ICONS } from "../../data/IconData";

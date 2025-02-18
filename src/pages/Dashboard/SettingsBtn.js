@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 import { IMAGES } from "../../data/ImageData";
 import { ICONS } from "../../data/IconData";
-import ChatgptAPIModal from "../../components/Modals/ChatgptAPIModal";
+import AIModelAPIModal from "../../components/Modals/AIModelAPIModal";
 import InviteTeamMembersModal from "../../components/Modals/InviteTeamMembersModal";
 
 
@@ -36,7 +36,7 @@ const SettingsBtn = () => {
     { name: "Reporting", icon: "reporting", component: ReportingSettingsModal },
     { name: "Products / Services", icon: "products", component: ProductsModal },
     { name: "Marketing Funnels", icon: "marketing_funnels", component: MarketingFunnelsModal },
-    { name: "ChatGPT API", icon: "chatgpt", component: ChatgptAPIModal },
+    { name: "AI Model API", icon: "ai_model_api", component: AIModelAPIModal },
     { name: "Invite Team Members", icon: "invite_members", component: InviteTeamMembersModal },
   ];
   

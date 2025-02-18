@@ -18,10 +18,8 @@ useEffect(() => {
   return (
     <Row className="dashboard-chat-panel-main">
       <Col>
-      
-     <Chats isaccount_open={!isAccountSetup}/>
+        <Chats isaccount_open={!isAccountSetup}/>
       </Col>
-
       <Col className="dashboard-chat-panel-main-message-bar" >
         <MessageBar isDisabled={!isAccountSetup} />
       </Col>

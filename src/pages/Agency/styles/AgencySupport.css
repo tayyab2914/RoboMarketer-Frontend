@@ -1,0 +1,43 @@
+#support-container {
+  border: 1px solid #e6eaed;
+  border-radius: 12px;
+  margin: 15px 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#support-container .title {
+  padding: 0px 20px 15px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e6eaed;
+  font-size: 18px;
+}
+#support-container .title img {
+  margin-right: 5px;
+}
+
+#support-container .inner-container {
+  padding: 15px 15px 0px 15px;
+}
+#support-container .description {
+  font-size: 14px;
+  color: #575a7b;
+}
+#support-container .email-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: transparent;
+    width: 220px;
+    padding: 15px;
+}
+#support-container .email-btn img{
+    margin-right: 5px;
+}
+@media screen and (min-width: 1200px) {
+  #support-container {
+    margin: 15px 30px;
+  }
+}

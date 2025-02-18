@@ -1,0 +1,38 @@
+#banners .banner-inner {
+  height: 46px;
+  border-radius: 50px;
+  border: 1px solid #e6eaed;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 20px;
+  margin-bottom: 10px;
+}
+#banners .text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+  font-size: 12px;
+}
+#banners .text  img{
+    margin-right: 10px;
+  }
+#banners .facebook_btn {
+  background-color: #1877f2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+#banners .integrate_btn {
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}

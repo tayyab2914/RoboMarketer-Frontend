@@ -36,7 +36,7 @@ const AgencyWorkArea = () => {
                 <Col xs={24} md={5}> <span className="awa-heading"> <MyIcon type={"sub_accounts"} /> Sub-Accounts </span> </Col>
                 <Col xs={24} md={18} style={{textAlign:"end"}}>
                     <span className='awa-heading-btns-wrapper'>
-                        <span className="awa-heading-btns-count"> <span className='text' >Sub-Accounts Available</span> <span className="awa-heading-btn-count">{AccountsAvailable}</span> </span>
+                        {/* <span className="awa-heading-btns-count"> <span className='text' >Sub-Accounts Available</span> <span className="awa-heading-btn-count">{AccountsAvailable}</span> </span> */}
                         <button className="awa-heading-btns" onClick={()=>setModalVisible(true)}>  + Create New </button>
                     </span>
                 </Col>
