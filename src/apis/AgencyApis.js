@@ -4,6 +4,7 @@ import { message } from "antd";
 import { setAuthToken, setIsAdmin, setLoggedIn } from "../redux/AuthToken/Action";
 
 import { DOMAIN_NAME } from "../utils/GlobalSettings";
+import moment from "moment";
 
 
 
@@ -30,6 +31,32 @@ export const API_CREATE_ACCOUNT = async ( token, newAccount, setShowSpinner ) =>
         // setShowSpinner(false);
     }
 };
+
+export const API_AGENCY_GET_INSIGHTS = async ( token, date_start, date_stop ) => {
+
+    console.log(date_start,date_stop)
+    const formatted_date_start = moment(date_start, "MM/DD/YY").format("YYYY-MM-DD");
+    const formatted_date_stop = moment(date_stop, "MM/DD/YY").format("YYYY-MM-DD");
+    try {
+      const response = await axios.get(
+        `${DOMAIN_NAME}/agency/get_insights_data/`,
+        {
+          params: { 
+            date_start:formatted_date_start,
+            date_stop:formatted_date_stop
+          },
+          headers: {
+            Authorization: `${token}`, 
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+        console.log(error)
+      return null;
+    } 
+  };
+  
 export const API_SEND_INVITE_EMAIL = async ( token, id, setShowSpinner ) => {
     // setShowSpinner(true);
 

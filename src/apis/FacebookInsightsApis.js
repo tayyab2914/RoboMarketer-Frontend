@@ -156,17 +156,16 @@ export const API_GET_INSIGHTS = async (
   token,
   date_start,
   date_stop,
-  setShowSpinner
 ) => {
 //   setShowSpinner(true);
-
+console.log(date_start,date_stop)
   try {
     const response = await axios.get(
       `${DOMAIN_NAME}/facebookinsights/get_insights_data/`,
       {
-        params: { // Use the params option to pass query parameters
+        params: { 
           date_start,
-          date_stop
+          date_stop,
         },
         headers: {
           Authorization: `${token}`, // Prefix token with 'Bearer' if required

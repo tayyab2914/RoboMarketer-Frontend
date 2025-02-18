@@ -112,7 +112,22 @@ export const RENDER_FILE_PREVIEW = (file, size, showName) => {
     </span>
   );
 };
-
+export const getSuffix = (label) => {
+    if (["Return on Ad Spend"].includes(label)) {
+      return "X";
+    }
+    if (["CTR", "Optin Rate", "Appt Rate", "Close Rate"].includes(label)) {
+      return "%";
+    }
+    return "";
+  };
+  export const getPrefix = (label) => {
+    if ( [ "Ad Spend", "CPC", "CPM", "Profit", "Revenue", "CPL", "CPA", "Cost Per Appt", ].includes(label)) {
+      return "$";
+    } else {
+      return "";
+    }
+  };
 function renderFile(url, fileName, size = 40, showName = false) {
   const getFileTypeFromURL = (url) => {
     const extension = url?.split('.')?.pop()?.toLowerCase();
