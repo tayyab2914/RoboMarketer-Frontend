@@ -67,7 +67,10 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
     await API_SEND_INVITE_EMAIL(token, subAccountID, null);
     setLoadingMessage(false);
   };
-
+  function formatWithCommas(number) {
+    // Convert the number to a string and use a regular expression to format it
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   return (
     <>
       <Row className="sub-account-card-wrapper">
