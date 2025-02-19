@@ -253,7 +253,7 @@ export const API_UPDATE_API_KEY = async ( token, updated_key, aiModelType ) => {
 
     try {
         const response = await axios.put(`${DOMAIN_NAME}/chat/update_api_key/`, 
-            {api_key:updated_key,model_type:aiModelType}
+            {api_key:updated_key,ai_model_name:aiModelType}
         , {
             headers: {
                 Authorization: token,

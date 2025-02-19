@@ -1,20 +1,27 @@
 import React, { useState } from "react";
-import { Modal, Input, Button, Select, Form } from "antd";
+import { Modal, Input, Button, Form, Collapse, Radio } from "antd";
 import MyIcon from "../Icon/MyIcon";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles/ModalStyles.css";
 import "./styles/AIModelAPIModal.css";
 import { API_UPDATE_API_KEY } from "../../apis/ChatApis";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
+import { AI_MODELS } from "../../utils/GlobalSettings";
 
-const { Option } = Select;
+const { Panel } = Collapse;
 
 const AIModelAPIModal = ({ isVisible, onClose }) => {
   const [showSpinner, setShowSpinner] = useState(false);
   const { token, rerender_dashboard } = useSelector((state) => state.authToken);
   const dispatch = useDispatch();
   const [APIKey, setAPIKey] = useState("");
-  const [aiModelType, setAiModelType] = useState("gpt-3.5");
+  const [aiModelType, setAiModelType] = useState("gpt-4o");
+  const [selectedModelName, setSelectedModelName] = useState("GPT-4o"); // Display name for header
+
+  const handleModelChange = (value, name) => {
+    setAiModelType(value);
+    setSelectedModelName(name);
+  };
 
   const handleSubmit = async () => {
     console.log(APIKey, aiModelType);
@@ -25,7 +32,7 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
 
   return (
     <div className="chatgpt-modal">
-      <Modal title={false} centered visible={isVisible} onCancel={onClose} closable={false} footer={null}>
+      <Modal title={false} centered open={isVisible} onCancel={onClose} closable={false} footer={null}>
         <div className="custom-modal-header" style={{ display: "flex" }}>
           <span className="product-modal-header" style={{ width: "100%" }}>
             <span>
@@ -39,20 +46,45 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
         </div>
         <div style={{ padding: "5px 15px 0px 15px" }}>
           <p className="input-group-label">Add Your AI Model API To RoboMarketer</p>
-          <Form initialValues={{ api_key: APIKey, ai_model: "gpt-3.5" }}>
-          <Form.Item name="ai_model" style={{ marginBottom: 10 }}>
-              <Select size="middle" value={aiModelType} onChange={(value) => setAiModelType(value)} className="ai-model-select">
-                <Option value="GPT-3.5">GPT-3.5</Option>
-                <Option value="GPT-4">GPT-4</Option>
-                <Option value="DeepSeek">DeepSeek</Option>
-              </Select>
+          <Form initialValues={{ api_key: APIKey }}>
+            <Form.Item name="ai_model">
+              {/* Parent Collapse - Shows Selected Model */}
+              <Collapse accordion>
+                <Panel header={`Selected Model: ${selectedModelName}`} key="selectedModel">
+                  <Collapse accordion>
+                    {Object.keys(AI_MODELS).map((company) => (
+                      <Panel header={company} key={company}>
+                        <Radio.Group
+                          value={aiModelType}
+                          onChange={(e) =>
+                            handleModelChange(e.target.value, AI_MODELS[company].find((m) => m.value === e.target.value).name)
+                          }
+                          style={{ display: "flex", flexDirection: "column", alignItems: "start" }}
+                        >
+                          {AI_MODELS[company].map((model) => (
+                            <Radio key={model.value} value={model.value}>
+                              {model.name}
+                            </Radio>
+                          ))}
+                        </Radio.Group>
+                      </Panel>
+                    ))}
+                  </Collapse>
+                </Panel>
+              </Collapse>
             </Form.Item>
-            <Form.Item name="api_key" >
-              <Input placeholder="Enter ChatGPT API key" style={{height:"40px",margin:"0px"}} value={APIKey} onChange={(e) => setAPIKey(e.target.value)} />
+
+            <Form.Item name="api_key">
+              <Input
+                placeholder="Enter API key"
+                style={{ height: "40px", margin: "0px" }}
+                value={APIKey}
+                onChange={(e) => setAPIKey(e.target.value)}
+              />
             </Form.Item>
-            
           </Form>
         </div>
+
         <div className="modal-actions">
           <span className="btn-2" onClick={handleSubmit}>
             <Button type="primary" htmlType="submit" className="create-btn">

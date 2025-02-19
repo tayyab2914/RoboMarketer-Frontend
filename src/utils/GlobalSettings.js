@@ -16,5 +16,42 @@ const GOOGLE_AUTH_CLIENT_ID = "337525075460-6ltsjfmn3f0nl66q2jg3am4qr292981h.app
 const GOOGLE_AUTH_SCOPE = [ "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile",  ].join(" ");
 
 
+export const AI_MODELS = {
+    OpenAI: [
+      { name: "GPT-4o", value: "gpt-4o" },
+      { name: "GPT-4o Mini", value: "gpt-4o-mini" },
+      { name: "o1", value: "o1" },
+      { name: "o1 Mini", value: "o1-mini" },
+      { name: "o3", value: "o3" },
+      { name: "o3 Mini", value: "o3-mini" },
+      { name: "o1 Pro", value: "o1-pro" },
+    ],
+    DeepSeek: [
+      { name: "R1", value: "deepseek-reasoner" },
+      { name: "DeepSeek V3", value: "deepseek-chat" },
+    ],
+    Google: [
+      { name: "Gemini 2.0 Pro", value: "gemini-2.0-pro-exp" },
+      { name: "Gemini 2.0 Flash", value: "gemini-2.0-flash" },
+      { name: "Gemini 2.0 Flash Lite", value: "gemini-2.0-flash-lite-preview" },
+    ],
+    Anthropic: [
+      { name: "Claude 3.5 Sonnet", value: "claude-3-5-sonnet-20241022" },
+      { name: "Claude 3 Opus", value: "claude-3-opus-20240229" },
+      { name: "Claude 3.5 Haiku", value: "claude-3-5-haiku-20241022" },
+    ],
+    Alibaba: [
+      { name: "Qwen-2.5-1M", value: "qwen2.5-7b-instruct-1m" },
+      { name: "Qwen2", value: "qwen2-7b-instruct" },
+      { name: "Qwen2.5", value: "qwen2.5-7b-instruct" },
+    ],
+    Meta: [
+      { name: "Llama 3.1", value: "llama3.1-70b" },
+      { name: "Llama 3", value: "llama3-70b" },
+    ],
+    xAI: [
+      { name: "Grok-2", value: "grok-2-latest" },
+    ],
+  };
 export {  DOMAIN_NAME, GOOGLE_AUTH_URL,GOOGLE_AUTH_CLIENT_ID ,GOOGLE_AUTH_SCOPE,REDIRECT_URI,FRONTEND_DOMAIN_NAME};
 
