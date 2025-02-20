@@ -13,7 +13,7 @@ import moment from "moment";
 const { RangePicker } = DatePicker;
 
 const AgencyWorkArea = () => {
-  const { token } = useSelector((state) => state.authToken);
+  const { token,rerender_dashboard } = useSelector((state) => state.authToken);
   const windowWidth = useWindowWidth();
   const [accounts, setAccounts] = useState([]);
   const [Metrics, setMetrics] = useState([]);
@@ -71,7 +71,7 @@ const AgencyWorkArea = () => {
     };
 
     getInsights();
-  }, [dateRange]); // ✅ Runs whenever `dateRange` changes
+  }, [dateRange,rerender_dashboard]); // ✅ Runs whenever `dateRange` changes
 
   return (
     <>
@@ -95,12 +95,11 @@ const AgencyWorkArea = () => {
                   open={isPopoverVisible}
                   onOpenChange={setIsPopoverVisible}
                 >
-                  <Button 
-                    type="default"
-                    style={{ marginLeft: "10px" }}
+                  <button 
+                  className="awa-heading-btn-white"
                   >
-                    <MyIcon type={'calendar'}/>{CurrentMetricRangeName}
-                  </Button>
+                    <MyIcon type={'calendar'}/>{CurrentMetricRangeName}<MyIcon type={"arrow_down"} style={{height:"5px"}}/>
+                  </button>
                 </Popover>
               </span>
             </Col>

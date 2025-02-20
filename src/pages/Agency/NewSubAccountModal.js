@@ -5,11 +5,13 @@ import { UploadOutlined } from "@ant-design/icons";
 import { COMPANY_NAME_RULES_REQUIRED, EMAIL_RULES_REQUIRED, PHONE_NUMBER_RULES_REQUIRED } from "../../utils/Rules";
 import './styles/NewSubAccountModal.css'
 import { API_CREATE_ACCOUNT, API_UPDATE_ACCOUNT } from "../../apis/AgencyApis";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DOMAIN_NAME } from "../../utils/GlobalSettings";
+import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 
 const NewSubAccountModal = ({ isVisible, onClose, defaultValues,fetchAccounts,editMode=false }) => {
-    const { token} = useSelector((state) => state.authToken);
+    const { token,rerender_dashboard} = useSelector((state) => state.authToken);
+    const dispatch = useDispatch()
     const [CompanyName, setCompanyName] = useState(defaultValues?.companyName || "");
     const [Email, setEmail] = useState(defaultValues?.email || "");
     const [Phone, setPhone] = useState(defaultValues?.phone || "");
@@ -49,6 +51,7 @@ const NewSubAccountModal = ({ isVisible, onClose, defaultValues,fetchAccounts,ed
     else
     {
         await API_CREATE_ACCOUNT(token,formData,null)
+        dispatch(setRerenderDashboard(!rerender_dashboard))
     }
     fetchAccounts()
     onClose(); 
