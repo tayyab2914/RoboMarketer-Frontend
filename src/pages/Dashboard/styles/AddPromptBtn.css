@@ -169,7 +169,7 @@ color: var(--color-dark);
     border: 1px solid #e6eaed;
     border-radius: 8px;
     padding: 10px 20px;
-    text-align: center;
+    text-align: start;
 
     font-weight: 700;
     color: var(--color-dark);

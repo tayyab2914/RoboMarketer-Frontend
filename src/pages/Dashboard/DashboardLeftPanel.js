@@ -178,7 +178,7 @@ const handlePromptClick = async (message, id) => {
       <SettingsBtn />
       </span>
 
-      <div style={{ height: "70px" }}></div>
+      <div style={{ height: "130px" }}></div>
       {isEditModalVisible && ( <EditPromptModal visible={isEditModalVisible} onClose={closeEditModal} prompt={selectedPrompt} />  )}
     </div>
   );

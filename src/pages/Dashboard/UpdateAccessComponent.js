@@ -71,7 +71,7 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
               Upgrade To Lifetime Unlimited Access RoboMarketer Account
             </p>
             <p className="uac-trial-message">
-              {Math.max(100 - chatCount, 0)} Free Messages Left Before
+              {Math.max(25 - chatCount, 0)} Free Messages Left Before
               <br />
               Free Trial Ends
             </p>

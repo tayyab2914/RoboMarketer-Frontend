@@ -1,108 +1,146 @@
-import { Col, Row, Modal, Button, DatePicker, Collapse, Space } from 'antd';
-import React, { useEffect, useState } from 'react';
-import MyIcon from '../../components/Icon/MyIcon';
-import './styles/AgencyWorkArea.css';
-import SubAccountCard from './SubAccountCard';
-import { useSelector } from 'react-redux';
-import NewSubAccountModal from './NewSubAccountModal';
-import useWindowWidth from '../../hooks/useWindowWidth';
-import { API_AGENCY_GET_INSIGHTS, API_GET_ACCOUNTS } from '../../apis/AgencyApis';
-import { rangePresets } from '../../utils/Methods';
-import { DownOutlined } from "@ant-design/icons";
+import { Col, Row, Button, DatePicker, Popover } from "antd";
+import React, { useEffect, useState } from "react";
+import MyIcon from "../../components/Icon/MyIcon";
+import "./styles/AgencyWorkArea.css";
+import SubAccountCard from "./SubAccountCard";
+import { useSelector } from "react-redux";
+import NewSubAccountModal from "./NewSubAccountModal";
+import useWindowWidth from "../../hooks/useWindowWidth";
+import { API_AGENCY_GET_INSIGHTS, API_GET_ACCOUNTS } from "../../apis/AgencyApis";
+import { rangePresets } from "../../utils/Methods";
 import moment from "moment";
-const { Panel } = Collapse;
-const { RangePicker } = DatePicker; 
 
+const { RangePicker } = DatePicker;
 
 const AgencyWorkArea = () => {
-  const { token, current_account } = useSelector((state) => state.authToken);
-    const [collapseKey, setCollapseKey] = useState("0");
-  const [accounts, setAccounts] = useState([])
-        const [Metrics, setMetrics] = useState([]);
+  const { token } = useSelector((state) => state.authToken);
+  const windowWidth = useWindowWidth();
+  const [accounts, setAccounts] = useState([]);
+  const [Metrics, setMetrics] = useState([]);
   const [AccountsAvailable, setAccountsAvailable] = useState(0);
-  const [modalVisible, setModalVisible] = useState(false); 
-  const [CurrentMetricRangeName, setCurrentMetricRangeName] = useState('Today');
-  const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
-  const windowWidth=useWindowWidth()
-  const [StartingDate, setStartingDate] = useState(moment().format("MM/DD/YY"));
-  const [EndingDate, setEndingDate] = useState(moment().format("MM/DD/YY"));
-  const [RerenderWorkarea, setRerenderWorkarea] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  
+  // ✅ State for Date Range Picker
+  const [dateRange, setDateRange] = useState([
+    moment().startOf("day"), 
+    moment().endOf("day")
+  ]);
+  const [CurrentMetricRangeName, setCurrentMetricRangeName] = useState("Today");
+  
+  // ✅ State for Popover visibility
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false);
+
   const fetchAccounts = async () => {
-    const response = await API_GET_ACCOUNTS(token);
-    setAccounts(response?.accounts);
-    setAccountsAvailable(response?.accounts_available);
+    try {
+      const response = await API_GET_ACCOUNTS(token);
+      setAccounts(response?.accounts || []);
+      setAccountsAvailable(response?.accounts_available || 0);
+    } catch (error) {
+      console.error("Error fetching accounts:", error);
+    }
   };
 
   useEffect(() => {
     fetchAccounts();
   }, [token]);
 
-
+  // ✅ Handle Date Selection and Update Button Text
   const handleCustomRangeChange = (dates) => {
-    if (dates) {
-      const startDate = dates[0].format('MM/DD/YY');
-      const endDate = dates[1].format('MM/DD/YY');  
-      setStartingDate(startDate)
-      setEndingDate(endDate)
-      setCurrentMetricRangeName(`From ${startDate} to ${endDate}`);
-      setCollapseKey(null);
+    if (dates && dates.length === 2) {
       setDateRange(dates); 
+      setCurrentMetricRangeName(`From ${dates[0].format("MM/DD/YY")} to ${dates[1].format("MM/DD/YY")}`);
+      setIsPopoverVisible(false); // ✅ Close popover after selection
     }
   };
 
-  const getInsights = async () => {
-    const response = await API_AGENCY_GET_INSIGHTS(token, StartingDate, EndingDate);
+  // ✅ Get Insights using `dateRange`
+  useEffect(() => {
+    if (!dateRange || dateRange.length < 2) return;
 
-    setMetrics(response);
-    // ure Metrics is set first
-};
+    const getInsights = async () => {
+      try {
+        const startDate = dateRange[0].format("MM/DD/YY");
+        const endDate = dateRange[1].format("MM/DD/YY");
 
-  useEffect(()=>{
-    getInsights()
+        console.log("Fetching insights for dateRange:", startDate, "-", endDate);
+        const response = await API_AGENCY_GET_INSIGHTS(token, startDate, endDate);
+        setMetrics(response || []);
+      } catch (error) {
+        console.error("Error fetching insights:", error);
+      }
+    };
 
-  },[StartingDate,EndingDate])
+    getInsights();
+  }, [dateRange]); // ✅ Runs whenever `dateRange` changes
+
   return (
     <>
-        <Row>
-            <Col xs={24}>
-                <div style={{height:windowWidth<1200 ? "40.8px":'0px'}}></div>
-                <Row className="awa-heading-main">
-                <Col xs={24} md={12}> <span className="awa-heading"> 
-                    <MyIcon type={"sub_accounts"} /> Sub-Accounts 
-                    {/* <Collapse style={{marginLeft:"10px"}} className="awa-heading-collapse" expandIconPosition={"end"} activeKey={collapseKey} onChange={(key) => setCollapseKey(key)} expandIcon={({ isActive }) => ( <DownOutlined style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)", }} /> )} >
-                        <Panel header={ <span className="panel-header-span"> <MyIcon type={"calendar"} /> {CurrentMetricRangeName} </span> } key="1" >
-                            <Space direction="vertical" size={12} style={{ marginTop: "10px" }}>
-                                </Space>
-                        </Panel>
-                    </Collapse> */}
-                    <RangePicker  onChange={handleCustomRangeChange}  presets={rangePresets} />
-                            
-                </span> 
-                </Col>
-                
-                <Col xs={24} md={12} style={{textAlign:"end"}}>
-                    <span className='awa-heading-btns-wrapper'>
-                        {/* <span className="awa-heading-btns-count"> <span className='text' >Sub-Accounts Available</span> <span className="awa-heading-btn-count">{AccountsAvailable}</span> </span> */}
-                        <button className="awa-heading-btns" onClick={()=>setModalVisible(true)}>  + Create New </button>
-                    </span>
-                </Col>
-                
-                </Row>
+      <Row>
+        <Col xs={24}>
+          <div style={{ height: windowWidth < 1200 ? "40.8px" : "0px" }}></div>
+          <Row className="awa-heading-main">
+            <Col xs={24} md={12}>
+              <span className="awa-heading">
+                <MyIcon type={"sub_accounts"} /> Sub-Accounts 
+                {/* ✅ Popover with RangePicker */}
+                <Popover
+                  content={
+                    <RangePicker 
+                      onChange={handleCustomRangeChange} 
+                      presets={rangePresets} 
+                      format="MM/DD/YY"
+                    />
+                  }
+                  trigger="click"
+                  open={isPopoverVisible}
+                  onOpenChange={setIsPopoverVisible}
+                >
+                  <Button 
+                    type="default"
+                    style={{ marginLeft: "10px" }}
+                  >
+                    <MyIcon type={'calendar'}/>{CurrentMetricRangeName}
+                  </Button>
+                </Popover>
+              </span>
             </Col>
 
-            <Col xs={24} className="awa-sub-accounts-main">
-
-                <Row gutter={[25, 25]} >
-                {accounts?.filter( (account) => !account.is_current_account && account?.name?.toLowerCase() ).map((account, index) => (
-                    <Col xs={24}  key={index}>
-                    <SubAccountCard subAccountID={account.id} companyLogo={account.logo} companyName={account.name} email={account.email} phone={account.phone_no} fetchAccounts={fetchAccounts} Metrics={Metrics}/> 
-                    </Col>
-                ))}
-                </Row>
+            <Col xs={24} md={12} style={{ textAlign: "end" }}>
+              <span className="awa-heading-btns-wrapper">
+                <button className="awa-heading-btns" onClick={() => setModalVisible(true)}>  
+                  + Create New 
+                </button>
+              </span>
             </Col>
+          </Row>
+        </Col>
 
-        </Row>
-        <NewSubAccountModal isVisible={modalVisible} onClose={()=>setModalVisible(false)} fetchAccounts={fetchAccounts}/>
+        <Col xs={24} className="awa-sub-accounts-main">
+          <Row gutter={[25, 25]}>
+            {accounts
+              ?.filter((account) => !account.is_current_account && account?.name?.toLowerCase())
+              .map((account, index) => (
+                <Col xs={24} key={index}>
+                  <SubAccountCard
+                    subAccountID={account.id}
+                    companyLogo={account.logo}
+                    companyName={account.name}
+                    email={account.email}
+                    phone={account.phone_no}
+                    fetchAccounts={fetchAccounts}
+                    Metrics={Metrics}
+                  />
+                </Col>
+              ))}
+          </Row>
+        </Col>
+      </Row>
+
+      <NewSubAccountModal 
+        isVisible={modalVisible} 
+        onClose={() => setModalVisible(false)} 
+        fetchAccounts={fetchAccounts} 
+      />
     </>
   );
 };

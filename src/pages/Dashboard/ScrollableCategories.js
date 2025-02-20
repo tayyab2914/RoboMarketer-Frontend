@@ -27,7 +27,7 @@ const ScrollableCategories = ({ localSelectedMetrics,handleDelete,handleEditCate
                         className="category-btn"
                     >
                         <span onClick={() => {setCategory(metric); onClose();}} className='category-name'>
-                        {metric?.category_name}
+                        <MyIcon type={"category"} style={{marginRight:"5px",height:"14px"}} />{metric?.category_name}
                         </span>
                         <span className="category-btn-icons">
                         <MyIcon type={"arrow_up_down"} style={{ height: "20px", cursor: 'move' }} />

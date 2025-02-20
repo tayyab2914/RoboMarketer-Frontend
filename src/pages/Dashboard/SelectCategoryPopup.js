@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "antd";
+import { Modal, Popover } from "antd";
 import MyIcon from "../../components/Icon/MyIcon";
 import CategoryContent from "./CategoryContent";
 
@@ -16,32 +16,26 @@ const SelectCategoryPopup = ({ setCategory, category }) => {
 
   return (
     <span id="SelectCategoryModal">
-      <button className="add-prompt-category-select-btn" onClick={handleOpen}>
+     <Popover
+      content={
+        <CategoryContent 
+          setCategory={setCategory} 
+          onClose={() => setVisible(false)} 
+        />
+      }
+      overlayStyle={{ width: "400px" }}
+      trigger="click"
+      open={visible}
+      onOpenChange={setVisible} // ✅ Properly handles open/close state
+      placement="bottomRight"
+    >
+      <button className="add-prompt-category-select-btn">
         <span>{category?.category_name || "Select Category"}</span>
         <span>
           <MyIcon type={"arrow_down"} size="xs" />
         </span>
       </button>
-
-      <Modal
-        className=""
-        title={false}
-        centered
-        visible={visible}
-        onCancel={handleClose}
-        closable={false}
-        footer={null}
-        width={500}
-      >
-        <div className="custom-modal-header">
-          <span className="modal-header">Select Category</span>
-        </div>
-        <div className="modal-content">
-        <CategoryContent
-          setCategory={setCategory}
-          onClose={handleClose} // Ensure this is passed correctly to close the modal
-        /></div>
-      </Modal>
+    </Popover>
     </span>
   );
 };
