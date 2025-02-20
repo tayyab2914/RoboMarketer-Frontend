@@ -23,7 +23,8 @@ const SelectCategoryPopup = ({ setCategory, category }) => {
           onClose={() => setVisible(false)} 
         />
       }
-      overlayStyle={{ width: "400px" }}
+      arrow={false}
+      overlayStyle={{ width: "460px" }}
       trigger="click"
       open={visible}
       onOpenChange={setVisible} // ✅ Properly handles open/close state
