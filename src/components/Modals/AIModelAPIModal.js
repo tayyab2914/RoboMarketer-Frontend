@@ -16,7 +16,7 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
   const dispatch = useDispatch();
   const [APIKey, setAPIKey] = useState("");
   const [aiModelType, setAiModelType] = useState("gpt-4o");
-  const [selectedModelName, setSelectedModelName] = useState("GPT-4o"); // Display name for header
+  const [selectedModelName, setSelectedModelName] = useState("GPT-4o");
 
   const handleModelChange = (value, name) => {
     setAiModelType(value);
@@ -51,17 +51,29 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
               {/* Parent Collapse - Shows Selected Model */}
               <Collapse accordion>
                 <Panel header={`Selected Model: ${selectedModelName}`} key="selectedModel">
-                  <Collapse accordion>
+                  <Collapse accordion expandIconPosition="end">
                     {Object.keys(AI_MODELS).map((company) => (
-                      <Panel header={company} key={company}>
+                      <Panel
+                        header={
+                          <span>
+                            <MyIcon type={AI_MODELS[company].icon} style={{ marginRight: "5px" }} />
+                            {company}
+                          </span>
+                        }
+                        
+                        key={company}
+                      >
                         <Radio.Group
                           value={aiModelType}
                           onChange={(e) =>
-                            handleModelChange(e.target.value, AI_MODELS[company].find((m) => m.value === e.target.value).name)
+                            handleModelChange(
+                              e.target.value,
+                              AI_MODELS[company].models.find((m) => m.value === e.target.value).name
+                            )
                           }
                           style={{ display: "flex", flexDirection: "column", alignItems: "start" }}
                         >
-                          {AI_MODELS[company].map((model) => (
+                          {AI_MODELS[company].models.map((model) => (
                             <Radio key={model.value} value={model.value}>
                               {model.name}
                             </Radio>

@@ -26,7 +26,7 @@ const AgencyWorkArea = () => {
   const windowWidth=useWindowWidth()
   const [StartingDate, setStartingDate] = useState(moment().format("MM/DD/YY"));
   const [EndingDate, setEndingDate] = useState(moment().format("MM/DD/YY"));
-  
+  const [RerenderWorkarea, setRerenderWorkarea] = useState(false);
   const fetchAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token);
     setAccounts(response?.accounts);
@@ -50,22 +50,17 @@ const AgencyWorkArea = () => {
     }
   };
 
-  
-const getInsights = async () => {
-    
-    const response = await API_AGENCY_GET_INSIGHTS(
-      token,
-      StartingDate,
-      EndingDate
-    );
-    console.log(response)
+  const getInsights = async () => {
+    const response = await API_AGENCY_GET_INSIGHTS(token, StartingDate, EndingDate);
+
     setMetrics(response);
-  };
+    // ure Metrics is set first
+};
+
   useEffect(()=>{
     getInsights()
 
   },[StartingDate,EndingDate])
-
   return (
     <>
         <Row>

@@ -25,6 +25,7 @@ const AdminMainPanel = () => {
   const getUsersList = async () => {
     const response = await API_GET_USERS_LIST(token,setShowSpinner);
     setUsersList(response);
+    console.log(response)
     setFilteredUsersList(response);
   };
 

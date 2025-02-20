@@ -96,11 +96,25 @@ import support_bugs from  "../assets/icons/support_bugs.svg";
 import support from  "../assets/icons/support.svg";
 import support_email from  "../assets/icons/support_email.svg";
 import banner_ai_model from  "../assets/icons/banner_ai_model.svg";
+import ai_model_ali_baba from  "../assets/icons/ai_model_ali_baba.svg";
+import ai_model_anthropic from  "../assets/icons/ai_model_anthropic.svg";
+import ai_model_deep_seek from  "../assets/icons/ai_model_deep_seek.svg";
+import ai_model_google from  "../assets/icons/ai_model_google.svg";
+import ai_model_meta from  "../assets/icons/ai_model_meta.svg";
+import ai_model_open_ai from  "../assets/icons/ai_model_open_ai.svg";
+import ai_model_x from  "../assets/icons/ai_model_x.svg";
 
 export const ICONS = {
-  banner_ai_model: banner_ai_model,
-  support: support,
-  support_email: support_email,
+    ai_model_ali_baba: ai_model_ali_baba,
+    ai_model_anthropic: ai_model_anthropic,
+    ai_model_deep_seek: ai_model_deep_seek,
+    ai_model_google: ai_model_google,
+    ai_model_meta: ai_model_meta,
+    ai_model_x: ai_model_x,
+    ai_model_open_ai: ai_model_open_ai,
+    banner_ai_model: banner_ai_model,
+    support: support,
+    support_email: support_email,
   support_bugs: support_bugs,
   support_feature_request: support_feature_request,
   support_general_questions: support_general_questions,

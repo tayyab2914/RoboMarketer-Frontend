@@ -24,8 +24,6 @@ import {
 } from "../../redux/AuthToken/Action";
 import { useNavigate } from "react-router-dom";
 import { API_SWITCH_ACCOUNT } from "../../apis/AuthApis";
-import { API_GET_INSIGHTS } from "../../apis/FacebookInsightsApis";
-// Function definitions for each action
 
 const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, fetchAccounts, Metrics }) => {
   const [ShowEditModal, setShowEditModal] = useState(false);
@@ -36,7 +34,6 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
   const [Insights, setInsights] = useState({});
 
   const getInsightsByAccountId = () => {
-    console.log(Metrics, subAccountID);
     const account = Metrics.find((acc) => acc.account_id === subAccountID);
     setInsights(account?.insights);
     console.log(account);
@@ -44,7 +41,7 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
       
   useEffect(() => {
     getInsightsByAccountId();
-  }, []);
+  }, [Metrics]);
 
   const handleView = async () => {
     const response = await API_SWITCH_ACCOUNT(token, subAccountID, null);
@@ -113,7 +110,7 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
       <Col xs={24} sm={12} md={16} xl={18} id="sub-account-card-reporting">
       <p className="title"><MyIcon type={"reporting"}/>Reporting</p>
       <div className="metrics">
-      {Object.entries(Insights).map(([key, value]) => (
+      {Insights && Object.entries(Insights).map(([key, value]) => (
             <div key={key} className="checkbox-item">
                         <MyIcon type={key}/>
                         {GET_METRIC_NAME_FROM_KEY(key)}

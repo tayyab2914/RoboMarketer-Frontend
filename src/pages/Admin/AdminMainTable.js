@@ -53,22 +53,12 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
     const handleUpgradeAccessClick = async (id, checked) => {
         const isLifetimeAccess = Boolean(checked);
     
-        // Immediately update the state to reflect the change locally
-        onSaveUserData({ id, is_lifetime_access: isLifetimeAccess });
-    
-        try {
-            // Send the updated is_lifetime_access as a boolean value
-            await API_UPDATE_ACCESS(token, id, isLifetimeAccess );
-        } catch (error) {
-            // In case of failure, revert the local change
-            console.error('Failed to update lifetime access:', error);
-            // Optionally, you can revert the change if the API request fails
-            // onSaveUserData({ id, is_lifetime_access: !isLifetimeAccess });
-        }
+            await API_UPDATE_ACCESS(token, id, isLifetimeAccess); // Ensure API call succeeds first
+            onSaveUserData({ id, is_lifetime_access: isLifetimeAccess }); // Then update UI
+        
     };
     
     
-
     const handleEditClick = (user) => {
         setSelectedUser(user);
         setIsModalVisible(true);
@@ -112,42 +102,34 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                 <Pagination current={currentPage} pageSize={pageSize} total={formattedData.length} onChange={handlePageChange} showSizeChanger={false} />
             </div>
 
-            <Modal
-        className=""
-        title={false}
-        centered
-        visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        closable={false}
-        footer={null}
-      >
-        <div className="custom-modal-header">
-          <span className="modal-header">
-            <MyIcon type="account" style={{ marginRight: "5px" }} size="md" /> 
-            Account (Client) Settings
-          </span>
-          <span>
-            <MyIcon type={"close_icon"} onClick={() => setIsModalVisible(false)} size="lg" className="close-icon" />
-          </span>
-        </div>
-        <div className="modal-content">
-                <Form form={form} layout="vertical" onFinish={handleSave} className="admin-main-table-form" >
-                    <Form.Item label="First Name" name="first_name" rules={NAME_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
-                        <Input   prefix={<MyIcon type={'signin_user'}/>}/>
-                    </Form.Item>
-                    <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
-                        <Input   prefix={<MyIcon type={'signin_email'}/>}/>
-                    </Form.Item>
-                    <Form.Item label="Number of Accounts" name="total_accounts" rules={ACCOUNT_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
-                        <Input type="number"  prefix={<MyIcon type={'users'}/>}/>
-                    </Form.Item>
-                    <Form.Item label="Phone Number" name="phone_number" rules={PHONE_NUMBER_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
-                        <Input   prefix={<MyIcon type={'signin_password'}/>}/>
-                    </Form.Item>
-                    <Button type="primary" htmlType="submit" className="admin-main-table-edit-submit-btn"> Save Changes </Button>
-                </Form></div>
-            </Modal>
-        </div>
+            <Modal className="" title={false} centered visible={isModalVisible} onCancel={() => setIsModalVisible(false)} closable={false} footer={null} >
+            <div className="custom-modal-header">
+            <span className="modal-header">
+                <MyIcon type="account" style={{ marginRight: "5px" }} size="md" /> 
+                Account (Client) Settings
+            </span>
+            <span>
+                <MyIcon type={"close_icon"} onClick={() => setIsModalVisible(false)} size="lg" className="close-icon" />
+            </span>
+            </div>
+            <div className="modal-content">
+                    <Form form={form} layout="vertical" onFinish={handleSave} className="admin-main-table-form" >
+                        <Form.Item label="First Name" name="first_name" rules={NAME_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                            <Input   prefix={<MyIcon type={'signin_user'}/>}/>
+                        </Form.Item>
+                        <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                            <Input   prefix={<MyIcon type={'signin_email'}/>}/>
+                        </Form.Item>
+                        <Form.Item label="Number of Accounts" name="total_accounts" rules={ACCOUNT_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                            <Input type="number"  prefix={<MyIcon type={'users'}/>}/>
+                        </Form.Item>
+                        <Form.Item label="Phone Number" name="phone_number" rules={PHONE_NUMBER_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                            <Input   prefix={<MyIcon type={'signin_password'}/>}/>
+                        </Form.Item>
+                        <Button type="primary" htmlType="submit" className="admin-main-table-edit-submit-btn"> Save Changes </Button>
+                    </Form></div>
+                </Modal>
+            </div>
     );
 };
 
