@@ -65,6 +65,7 @@ const AgencyWorkArea = () => {
         console.log("Fetching insights for dateRange:", startDate, "-", endDate);
         const response = await API_AGENCY_GET_INSIGHTS(token, startDate, endDate);
         setMetrics(response || []);
+        console.log(response)
       } catch (error) {
         console.error("Error fetching insights:", error);
       }

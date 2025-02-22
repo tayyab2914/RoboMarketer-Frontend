@@ -25,6 +25,33 @@ export const GET_PROMPT_CATEGORIES = [
   { header: "Competitors", key: "13", icon: "competitor" },
   { header: "Charts", key: "14", icon: "chart" },
 ];
+export const INDUSTRIES = [
+    { key: "agriculture_forestry", label: "Agriculture & Forestry" },
+    { key: "arts_entertainment_recreation", label: "Arts, Entertainment & Recreation" },
+    { key: "automotive", label: "Automotive" },
+    { key: "biotech_life_sciences", label: "Biotech & Life Sciences" },
+    { key: "construction_real_estate", label: "Construction & Real Estate" },
+    { key: "consumer_goods", label: "Consumer Goods" },
+    { key: "education_training", label: "Education & Training" },
+    { key: "energy_utilities", label: "Energy & Utilities" },
+    { key: "finance_insurance", label: "Finance & Insurance" },
+    { key: "food_beverage", label: "Food & Beverage" },
+    { key: "government_public_administration", label: "Government & Public Administration" },
+    { key: "healthcare_pharmaceuticals", label: "Healthcare & Pharmaceuticals" },
+    { key: "hospitality_travel", label: "Hospitality & Travel" },
+    { key: "it_software", label: "IT & Software" },
+    { key: "manufacturing_industrial", label: "Manufacturing & Industrial" },
+    { key: "marketing_advertising", label: "Marketing & Advertising" },
+    { key: "media_publishing_broadcasting", label: "Media, Publishing & Broadcasting" },
+    { key: "mining_oil_gas", label: "Mining, Oil & Gas" },
+    { key: "nonprofit_ngo", label: "Nonprofit & NGO" },
+    { key: "professional_business_services", label: "Professional & Business Services" },
+    { key: "retail_ecommerce", label: "Retail & E-commerce" },
+    { key: "telecommunications", label: "Telecommunications" },
+    { key: "transportation_logistics", label: "Transportation & Logistics" },
+    { key: "wholesale_distribution", label: "Wholesale & Distribution" }
+  ];
+  
 
 export const FILTER_PROMPTS_BY_CATEGORY = (dataArray, category) => {
   // console.log(dataArray)

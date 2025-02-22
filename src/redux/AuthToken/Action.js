@@ -13,7 +13,8 @@ import {
   SET_IS_FB_SETUP,
   RERENDER_RIGHT_PANEL,
   OPEN_INTEGRATIONS_MODAL,
-  IS_INTEGRATIONS_MODAL_CLOSED_BY_USER
+  IS_INTEGRATIONS_MODAL_CLOSED_BY_USER,
+  SELECT_PRODUCT_SERVICE_MODE
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -104,3 +105,9 @@ export const setisIntegrationsModalClosedByUser = (is_integrations_modal_closed_
     payload: is_integrations_modal_closed_by_user,
   };
 };
+export const setSelectProductServiceMode = (product_service_mode) => {
+    return {
+      type: SELECT_PRODUCT_SERVICE_MODE,
+      payload: product_service_mode,
+    };
+  };

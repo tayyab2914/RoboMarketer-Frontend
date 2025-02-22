@@ -4,7 +4,7 @@ import MyIcon from "../Icon/MyIcon";
 import "./styles/ModalStyles.css";
 import { DownOutlined } from '@ant-design/icons';
 import FileUploader from "../FileUploader/FileUploader";
-import { UTILS_COMBINE_DATA } from "../../utils/Methods";
+import { INDUSTRIES, UTILS_COMBINE_DATA } from "../../utils/Methods";
 import { API_GET_ROBOMARKETER_IQ, API_UPDATE_ROBOMARKETER_IQ } from "../../apis/MarketingToolsApis";
 import { useSelector } from "react-redux";
 import { ICONS } from "../../data/IconData";
@@ -35,8 +35,9 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
   const [FormValues, setFormValues] = useState({ max_daily_budget: "", clickthrough_rate_percentage: "", cost_per_click_cpc: "", cost_per_lead_cpl: "", cost_per_appointment: "", cost_per_sale_cpa: "",return_on_ad_spend_roas:"", leads: "", appointments: "", sales: "", revenue: "", industry_type: "", preferences: "", file_group: [] });
 
   const handleValueChange = (field, value) => {
+    console.log(value.label)
     if(field == 'industry_type'){
-        setFormValues((prev) => ({ ...prev, industry_type: value }));  
+        setFormValues((prev) => ({ ...prev, industry_type: value.label }));  
     } else if (field === "file_group") {
         setFormValues((prev) => ({ ...prev, file_group:value }));  
     } else if (field === "preferences") {
@@ -115,17 +116,22 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
       <div>
         {/* <p className="modal-field-label-block">Select Industry Type</p> */}
         <Select 
-  style={{ width: "100%" }}
-  className="modal-select"
-  placeholder={<p className="select-placeholder"><MyIcon type={'select_industry'}/>Select industry type</p>}
-  value={FormValues.industry_type || undefined} // Shows placeholder if industry_type is undefined or empty
-  onChange={(value) => handleValueChange("industry_type", value)}
-  suffixIcon={<img src={ICONS.arrow_down} height={7} style={{marginRight:"6px"}}/>}
->
-  <Option value="technology" className="modal-select-item">Technology</Option>
-  <Option value="finance" className="modal-select-item">Finance</Option>
-  <Option value="healthcare" className="modal-select-item">Healthcare</Option>
-</Select>
+        style={{ width: "100%" }}
+        className="modal-select"
+        placeholder={<p className="select-placeholder"><MyIcon type={'select_industry'}/>Select industry type</p>}
+        value={FormValues.industry_type || undefined} // Shows placeholder if industry_type is undefined or empty
+        onChange={(value) => {
+            const selectedIndustry = INDUSTRIES.find((industry) => industry.key === value);
+            handleValueChange("industry_type", { value, label: selectedIndustry?.label });
+          }}
+        suffixIcon={<img src={ICONS.arrow_down} height={7} style={{marginRight:"6px"}}/>}
+        >
+        {INDUSTRIES.map((industry) => (
+            <Option key={industry.key} value={industry.key} className="modal-select-item">
+            {industry.label}
+            </Option>
+        ))}
+        </Select>
 
       </div>
 

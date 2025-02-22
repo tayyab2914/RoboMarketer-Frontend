@@ -1,11 +1,13 @@
 // ProductForm.js
 import { Collapse, Form, Input, Radio, Button } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyIcon from "../Icon/MyIcon";
 import { DownOutlined } from "@ant-design/icons";
 import "../Modals/styles/ModalStyles.css";
 import { NAME_RULES_REQUIRED } from "../../utils/Rules";
 import { ICONS } from "../../data/IconData";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectProductServiceMode } from "../../redux/AuthToken/Action";
 
 const { Panel } = Collapse;
 
@@ -23,18 +25,27 @@ const InputSection = ({ label, name, placeholder, isTextArea = false, isNumber =
 
 const ProductForm = ({ form, onFinish, onCancel }) => {
       const [selectedType, setSelectedType] = useState("product"); // Set initial state
+      const { product_service_mode } = useSelector((state) => state.authToken);
+    const dispatch = useDispatch()
 
+      
+      useEffect(() => {
+        form.setFieldsValue({ type: product_service_mode }); // Dynamically set form value
+        setSelectedType(product_service_mode); // Ensure radio reflects the correct state
+      }, [product_service_mode, form]);
+      
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
+    dispatch(setSelectProductServiceMode(e.target.value))
   };
   return(
     
    <>
   <Form form={form} onFinish={onFinish} layout="vertical">
   <div className="custom-modal-content modal-content">
-    <Form.Item name="type" initialValue="product">
-    <Radio.Group onChange={handleTypeChange}>
-          <Radio.Button value="product">
+    <Form.Item name="type" initialValue={selectedType}>
+    <Radio.Group onChange={handleTypeChange} value={selectedType}>
+          <Radio.Button value={"product"}>
             <span className="modal-radio-selector">
               <MyIcon type={selectedType === "product" ? "products_white" : "products"} />
             Product

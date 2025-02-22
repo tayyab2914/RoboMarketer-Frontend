@@ -327,6 +327,13 @@ border-radius: 4px 0px 0px 4px !important;
   margin-bottom: 10px;
   font-weight: 500;
 }
+.modal-select .ant-select-dropdown {
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .modal-select .ant-select-dropdown::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
 .modal-actions {
   display: flex;
   justify-content: space-between;

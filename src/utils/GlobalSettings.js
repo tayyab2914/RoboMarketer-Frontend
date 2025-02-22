@@ -1,9 +1,9 @@
 export const DEFAULT_BUTTON_HEIGHT = '45px'
 
-export const PRODUCTION = true;
+export const PRODUCTION = process.env.PRODUCTION
 export const TESTING = true
 
-let DOMAIN_NAME
+let DOMAIN_NAME 
 let FRONTEND_DOMAIN_NAME
 let REDIRECT_URI
 

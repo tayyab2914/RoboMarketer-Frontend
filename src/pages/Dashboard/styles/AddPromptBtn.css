@@ -23,6 +23,7 @@
     border: 1px solid #e6eaed;
     padding: 11px 20px;
 }
+
 .add-prompt-btn-select .ant-select-selection-placeholder{
     font-weight: 500 !important;
     color: #000000 !important;
@@ -144,6 +145,7 @@
 .add-prompt-category-select-btn{
     padding: 10px 20px;
     border-radius: 8px;
+    color: black !important;
     text-align: center;
     background-color: transparent;
     border: 1px solid #e6eaed;
@@ -171,8 +173,8 @@ color: var(--color-dark);
     padding: 10px 20px;
     text-align: start;
 
-    font-weight: 700;
-    color: var(--color-dark);
+    font-weight:600;
+    color: black !important;
 }
 .select-category-popup{
     /* width: 300px; */
@@ -183,8 +185,8 @@ color: var(--color-dark);
     border-radius: 8px;
     padding: 10px 10px;
     text-align: left;
-    font-weight: 700;
-    color: var(--color-dark);
+    font-weight: 600;
+    color: black !important;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -22,11 +22,11 @@ const windowWidth = useWindowWidth()
         <div className="left-panel-collapse-account" >
            <div className="account-switcher-btn">
                 <span className="panel-header-span">
-                {/* {current_account?.account_image ? (
+                {!is_in_agency && current_account?.account_image ? (
                   <img src={`${DOMAIN_NAME}${current_account?.account_image}`} alt="" height={25} className="account-switcher-account-img" />
-                ) : ( */}
+                ) : (
                   <MyIcon type={"user"} />
-                {/* )} */}
+                  )} 
 
                 {is_in_agency ? "Agency View" : TRUNCATE_STRING(current_account?.name)}
               </span>

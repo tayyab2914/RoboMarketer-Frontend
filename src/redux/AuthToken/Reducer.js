@@ -1,6 +1,6 @@
 // src/redux/reducer.js
 
-import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP, RERENDER_RIGHT_PANEL, OPEN_INTEGRATIONS_MODAL, IS_INTEGRATIONS_MODAL_CLOSED_BY_USER, SET_FB_CODE } from "./Types";
+import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP, RERENDER_RIGHT_PANEL, OPEN_INTEGRATIONS_MODAL, IS_INTEGRATIONS_MODAL_CLOSED_BY_USER, SET_FB_CODE, SELECT_PRODUCT_SERVICE_MODE } from "./Types";
 
 const initialState = {
   token: null,
@@ -14,7 +14,8 @@ const initialState = {
   is_facebook_setup:false,
   open_integrations_modal:false,
   is_integrations_modal_closed_by_user:true,
-  facebook_code:null
+  facebook_code:null,
+  product_service_mode:"product"
 };
 
 export default function authReducer(state = initialState, action) {
@@ -83,6 +84,11 @@ export default function authReducer(state = initialState, action) {
     return {
       ...state,
       facebook_code: action.payload,
+    };
+  }else if (action.type == SELECT_PRODUCT_SERVICE_MODE) {
+    return {
+      ...state,
+      product_service_mode: action.payload,
     };
   }  else if (action.type == IS_INTEGRATIONS_MODAL_CLOSED_BY_USER) {
     return {
