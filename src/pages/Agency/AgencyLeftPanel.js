@@ -22,6 +22,7 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
   const fetchAccounts = async () => {
     const response = await API_GET_ACCOUNTS(token);
     setAccounts(response);
+    console.log(response)
   };
 
   useEffect(() => {
@@ -44,9 +45,9 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(1)}>
            <MyIcon type={"profile_agency"}/> Profile
        </div>
-       <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(2)}>
+       {accounts?.is_unlimted_accounts && <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(2)}>
            <MyIcon type={"whitelabel"}/> Whitelabel Domain
-       </div>
+       </div>}
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(3)}>
            <MyIcon type={"support"}/> Support
        </div>
