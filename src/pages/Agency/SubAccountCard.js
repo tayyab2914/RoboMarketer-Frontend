@@ -78,8 +78,8 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
         </div>
 
         <div className="sac-contact-info">
-          <div className="sac-company-name"> {TRUNCATE_STRING(companyName, 25)} </div>
-          <div className="sac-email"> <MyIcon type={"sa_message"} /> {TRUNCATE_STRING(email, 17)} </div>
+          <div className="sac-company-name"> <MyIcon type={"sub_accounts"} />{TRUNCATE_STRING(companyName, 25)} </div>
+          <div className="sac-email"> <MyIcon type={"sa_message"} /> {TRUNCATE_STRING(email, 24)} </div>
           <div className="sac-phone"> <MyIcon type={"sa_phone"} /> {phone} </div>
         </div>
 

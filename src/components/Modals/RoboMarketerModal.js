@@ -113,7 +113,7 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
             
     <div className="custom-modal-content modal-content">
       <p className="modal-description">Customize your RoboMarketer AI Agent With Your Target KPIs, Monthly Goals, And Preferences</p>
-      <div>
+
         {/* <p className="modal-field-label-block">Select Industry Type</p> */}
         <Select 
         style={{ width: "100%" }}
@@ -133,7 +133,6 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
         ))}
         </Select>
 
-      </div>
 
       {/* Target KPIs Collapse */}
       <Collapse className="modal-collapse" defaultActiveKey={[0]} expandIconPosition={"end"} expandIcon={({ isActive }) => ( <img src={ICONS.arrow_down} height={7} style={{ transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)" }} /> )} 

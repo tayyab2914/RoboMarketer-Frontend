@@ -10,10 +10,7 @@ export const EMAIL_RULES_REQUIRED = [
   ];
   export const API_KEY_RULES_REQUIRED = [
     { required: true, message: "Please input API key!" },
-    {
-      pattern: /^sk-[A-Za-z0-9_-]{32,}$/,
-      message: "The API key format should start with 'sk-' .",
-    },
+
   ];
   
   export const PHONE_NUMBER_RULES_REQUIRED = [

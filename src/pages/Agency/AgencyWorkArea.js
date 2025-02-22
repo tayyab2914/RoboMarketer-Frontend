@@ -75,11 +75,11 @@ const AgencyWorkArea = () => {
   }, [dateRange,rerender_dashboard]); // ✅ Runs whenever `dateRange` changes
 
   return (
-    <>
+    <div>
       <Row>
         <Col xs={24}>
           <div style={{ height: windowWidth < 1200 ? "40.8px" : "0px" }}></div>
-          <Row className="awa-heading-main">
+          <Row className="awa-heading-main-sub-accounts">
             <Col xs={24} md={12}>
               <span className="awa-heading">
                 <MyIcon type={"sub_accounts"} /> Sub-Accounts 
@@ -141,7 +141,7 @@ const AgencyWorkArea = () => {
         onClose={() => setModalVisible(false)} 
         fetchAccounts={fetchAccounts} 
       />
-    </>
+    </div>
   );
 };
 

@@ -92,7 +92,19 @@ export const API_GET_CATEGORY_ORDERING = async (token, setShowSpinner) => {
     //   setShowSpinner(false);
     }
 };
-
+export const API_GET_API_MODEL = async (token, setShowSpinner) => {
+    try {
+      const response = await axios.get(`${DOMAIN_NAME}/chat/get_ai_model/`, {
+        headers: {
+            Authorization: token, 
+        },
+      });
+  
+      return response.data;
+    } catch (error) {
+        console.log(error)
+    } 
+}
 
 export const API_DELETE_PROMPT = async (token, id,  setShowSpinner) => {
     // setShowSpinner(true);

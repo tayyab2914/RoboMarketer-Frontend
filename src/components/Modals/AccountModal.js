@@ -109,7 +109,7 @@ useEffect(()=>{
         <div className="custom-modal-header">
           <span className="modal-header">
             <MyIcon type="account" style={{ marginRight: "5px" }} size="md" /> 
-            Account (Client) Settings
+            Account Settings
           </span>
           <span>
             <MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" />

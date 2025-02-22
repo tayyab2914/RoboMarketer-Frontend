@@ -20,6 +20,10 @@
 .sac-contact-info div img {
   margin-right: 10px;
 }
+.sac-company-name{
+    display: flex;
+    align-items: center;
+}
 .sac-icons span {
   height: 38px !important;
   width: 38px !important;

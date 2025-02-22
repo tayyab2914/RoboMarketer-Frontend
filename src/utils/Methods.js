@@ -9,6 +9,7 @@ import {
   CloseCircleOutlined,
 } from "@ant-design/icons";
 import dayjs from 'dayjs';
+import { AI_MODELS } from "./GlobalSettings";
 
 export const GET_PROMPT_CATEGORIES = [
   { header: "Campaign", key: "2", icon: "note" },
@@ -51,8 +52,13 @@ export const INDUSTRIES = [
     { key: "transportation_logistics", label: "Transportation & Logistics" },
     { key: "wholesale_distribution", label: "Wholesale & Distribution" }
   ];
-  
-
+  export const convertAIModelTypeToName = (type) => {
+    for (const provider in AI_MODELS) {
+      const model = AI_MODELS[provider].models.find((model) => model.value === type);
+      if (model) return model.name;
+    }
+    return null; // if not found
+  };
 export const FILTER_PROMPTS_BY_CATEGORY = (dataArray, category) => {
   // console.log(dataArray)
   console.log('dataArray',dataArray)

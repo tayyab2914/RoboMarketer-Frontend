@@ -27,10 +27,8 @@ const SettingsBtn = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
   const options = [
-    ...(current_account?.is_main_user
-      ? [{ name: "Profile (User)", icon: "profile", component: ProfileModal }]
-      : []),
-    { name: "Account (Client)", icon: "account", component: AccountModal },
+    // ...(current_account?.is_main_user? [{ name: "Profile (User)", icon: "profile", component: ProfileModal }]: []),
+    { name: "Account ", icon: "account", component: AccountModal },
     { name: "Integrations", icon: "integrations", component: IntegrationsModal },
     { name: "RoboMarketerIQ", icon: "robomarketer", component: RoboMarketerModal },
     { name: "Reporting", icon: "reporting", component: ReportingSettingsModal },

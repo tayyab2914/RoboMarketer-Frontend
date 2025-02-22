@@ -299,6 +299,12 @@ border-radius: 4px 0px 0px 4px !important;
   border-radius: 8px !important;
 }
 .ant-select-selector{
+    height: 60px !important;
+}
+.ant-select{
+    height: 60px !important;
+}
+.ant-select-selector{
     
   padding: 0px 20px !important;
 }

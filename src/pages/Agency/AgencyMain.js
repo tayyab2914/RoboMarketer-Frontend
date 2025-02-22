@@ -25,6 +25,7 @@ const AgencyMain = () => {
 
 
   useEffect(() => {
+    console.log(current_account)
     if (open_integrations_modal && !is_integrations_modal_closed_by_user==undefined || !is_integrations_modal_closed_by_user) { setIsLeftDrawerVisible(true)  }
   }, [open_integrations_modal,rerender_dashboard]);
   
