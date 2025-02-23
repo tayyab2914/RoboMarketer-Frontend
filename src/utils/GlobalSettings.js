@@ -1,6 +1,6 @@
 export const DEFAULT_BUTTON_HEIGHT = '45px'
 
-export const PRODUCTION = false
+export const PRODUCTION = process.env.REACT_APP_PRODUCTION
 
 export const TESTING = true
 
