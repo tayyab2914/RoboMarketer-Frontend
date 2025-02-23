@@ -3,9 +3,14 @@ import React from "react";
 import MyIcon from "../../../components/Icon/MyIcon";
 
 const SupportContainers = ({ title, icon, description }) => {
-  const handleEmailClick = () => {
-    window.location.href = `mailto:info@robomarketer.bot?subject=${encodeURIComponent(title)}`;
-  };
+    const handleEmailClick = () => {
+        const subject = encodeURIComponent(title);
+        const body = encodeURIComponent("Hello, how can we assist you?");
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@robomarketer.bot&su=${subject}`;
+        
+        window.open(gmailUrl, "_blank");
+      };
+      
 
   return (
     <Row>
