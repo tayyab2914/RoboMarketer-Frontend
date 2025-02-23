@@ -29,10 +29,12 @@ const ProductForm = ({ form, onFinish, onCancel }) => {
     const dispatch = useDispatch()
 
       
-      useEffect(() => {
-        form.setFieldsValue({ type: product_service_mode }); // Dynamically set form value
-        setSelectedType(product_service_mode); // Ensure radio reflects the correct state
+    useEffect(() => {
+        const mode = product_service_mode || "product"; // Ensure fallback to "product"
+        form.setFieldsValue({ type: mode });
+        setSelectedType(mode);
       }, [product_service_mode, form]);
+      
       
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);

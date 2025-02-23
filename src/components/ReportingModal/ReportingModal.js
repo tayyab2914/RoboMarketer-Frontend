@@ -10,7 +10,6 @@ const ReportingModal = ({ availableMetrics, selectedMetrics, onSave, isModalVisi
   const [localSelectedMetrics, setLocalSelectedMetrics] = useState([]);
 
   useEffect(() => {
-    console.log('availableMetrics',availableMetrics)
     setLocalSelectedMetrics(selectedMetrics);
   }, [selectedMetrics]);
 

@@ -78,7 +78,7 @@ console.log('useEffect',category)
             
     <div className="custom-modal-content modal-content">
           <div className="">
-            <SelectCategoryPopup setCategory={setCategory} category={category}/>
+            <SelectCategoryPopup setCategory={setCategory} category={category?.category_id} category_name={category?.category_name}/>
             {/* <p className="modal-field-label-block">Select Category</p>
             <Select value={category} onChange={setCategory} style={{ width: '100%', height: "40px" }} placeholder="Category" className='add-prompt-btn-select'suffixIcon={<img src={ICONS.arrow_down} height={7}/>}>
               {GET_PROMPT_CATEGORIES?.map((item) => <Select.Option key={item.header} value={item.header}>{item.header}</Select.Option>)}

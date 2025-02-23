@@ -30,6 +30,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const [selectedPrompt, setselectedPrompt] = useState(null);  
   const [FetchedCategories, setFetchedCategories] = useState([]);
   const [LimitEnded, setLimitEnded] = useState(false);
+  const [selectedCategory, setselectedCategory] = useState('');
 
   useEffect(() => {
     if (Accounts && Accounts.length) {
@@ -41,6 +42,7 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const getPrompts = async () => {
     const response = await API_GET_PROMPTS(token, setShowSpinner);
     setFetchedPrompts(response);
+    console.log('setFetchedPrompts',response)
   };
 const handlePromptClick = async (message, id) => {
     if (!message) return;
@@ -88,9 +90,10 @@ const handlePromptClick = async (message, id) => {
     dispatch(setRerenderDashboard(!rerender_dashboard));
   };
 
-  const handleEditPrompt = (item) => {
-    console.log("item",item)
+  const handleEditPrompt = (item,category_name,category_id) => {
+    console.log("item",item,category_name)
     setselectedPrompt(item); 
+    setselectedCategory({category_name:category_name,category_id:category_id})
     setIsEditModalVisible(true); 
   };
 
@@ -99,9 +102,9 @@ const handlePromptClick = async (message, id) => {
     setselectedPrompt(null);
   };
 
-  const renderDropdownMenu = (item) => (
+  const renderDropdownMenu = (item,category_name,category_id) => (
     <Menu>
-        <Menu.Item key="edit" onClick={() => handleEditPrompt(item)}> <span style={{ display: "flex", alignItems: "center" }}> <EditOutlined style={{ marginRight: '10px' }} /> Edit </span></Menu.Item>
+        <Menu.Item key="edit" onClick={() => handleEditPrompt(item,category_name,category_id)}> <span style={{ display: "flex", alignItems: "center" }}> <EditOutlined style={{ marginRight: '10px' }} /> Edit </span></Menu.Item>
         <Menu.Item key="delete">
             <Popconfirm title="Are you sure you want to delete this prompt?" onConfirm={() => handleDeletePrompt(item?.id)} okText="Yes" cancelText="No" >
                 <span style={{ display: "flex", alignItems: "center" }}> <DeleteOutlined style={{ marginRight: '10px' }} /> Delete </span>
@@ -114,6 +117,7 @@ const handlePromptClick = async (message, id) => {
     const fetchCategoryOrdering = async () => {
       const response = await API_GET_CATEGORY_ORDERING(token, null);
       setFetchedCategories(response);
+      console.log('setFetchedCategories',response)
     };
   
     useEffect(() => {
@@ -159,7 +163,7 @@ const handlePromptClick = async (message, id) => {
                     <div key={item.category_id}>
                       <Button type="text" className="left-panel-btn">
                         <span style={{ width: "100%", textAlign: "start" }} onClick={() => handlePromptClick(item?.prompt, item?.id)} > {" "} {TRUNCATE_STRING(item?.prompt_name,25)} </span>
-                        <Dropdown overlay={renderDropdownMenu(item)} trigger={["click"]} >
+                        <Dropdown overlay={renderDropdownMenu(item,panel?.category_name,panel?.category_id)} trigger={["click"]} >
                             <MyIcon type="elipsis" style={{ cursor: "pointer", marginLeft: 10, marginRight: "0px", }} />
                         </Dropdown>
                       </Button>
@@ -179,7 +183,7 @@ const handlePromptClick = async (message, id) => {
       </span>
 
       <div style={{ height: "130px" }}></div>
-      {isEditModalVisible && ( <EditPromptModal visible={isEditModalVisible} onClose={closeEditModal} prompt={selectedPrompt} />  )}
+      {isEditModalVisible && ( <EditPromptModal visible={isEditModalVisible} onClose={closeEditModal} prompt={selectedPrompt} CATEGORY={selectedCategory}/>  )}
     </div>
   );
 };

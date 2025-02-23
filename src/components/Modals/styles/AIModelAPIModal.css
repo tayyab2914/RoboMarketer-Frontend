@@ -16,3 +16,12 @@ margin-bottom: 0px !important;
     overflow-y: auto;
     scrollbar-width: none;
 }
+.aimodel-modal-header
+{
+    color: #000000 !important;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+
+}

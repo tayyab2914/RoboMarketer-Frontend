@@ -35,20 +35,22 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
 
   const fetchDefaultAIModel = async () => {
     const response = await API_GET_API_MODEL(token);
-    setSelectedModelName(convertAIModelTypeToName(response?.ai_model_name));
-    form.setFieldsValue({ api_key: response?.api_key });
-    console.log(response)
+    const defaultModel = response?.ai_model_name || "gpt-4o"; // Fallback to "gpt-4o"
+    setAiModelType(defaultModel);
+    setSelectedModelName(convertAIModelTypeToName(defaultModel));
+    form.setFieldsValue({ ai_model: defaultModel, api_key: response?.api_key });
   };
-
+  
   useEffect(() => {
     fetchDefaultAIModel();
   }, []);
+  
 
   return (
     <div className="chatgpt-modal">
       <Modal title={false} centered open={isVisible} onCancel={onClose} closable={false} footer={null}>
         <div className="custom-modal-header" style={{ display: "flex" }}>
-          <span className="product-modal-header" style={{ width: "100%" }}>
+          <span className="aimodel-modal-header" style={{ width: "100%" }}>
             <MyIcon type="ai_model_api" style={{ marginRight: "5px" }} size="md" /> AI Model API
             <MyIcon type={"question_round"} style={{ marginLeft: "5px" }} />
           </span>
@@ -77,6 +79,7 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
                       >
                         <Radio.Group
                           value={aiModelType}
+                          defaultValue={aiModelType}
                           onChange={(e) =>
                             handleModelChange(
                               e.target.value,

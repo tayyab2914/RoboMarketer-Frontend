@@ -32,8 +32,6 @@ export const API_CREATE_PROMPT = async ( token, newPrompt, setShowSpinner ) => {
 };
 export const API_CREATE_CATEGORY = async ( token, newCategory, setShowSpinner ) => {
     // setShowSpinner(true);
-    console.log(newCategory)
-
     try {
         const response = await axios.post(`${DOMAIN_NAME}/chat/create_category/`, 
             {name:newCategory}
@@ -146,14 +144,12 @@ export const API_DELETE_CATEGORY = async (token, id,  setShowSpinner) => {
 export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowSpinner) => {
     // setShowSpinner(true);
 
-    console.log("API_GET_RESPONSE START")
     try {
         const response = await axios.post(`${DOMAIN_NAME}/chat/get_response/`, file_group, {
             headers: {
                 Authorization: token,
             },
         });
-        console.log(response.data)
         return response.data;
     } catch (error) {
         message.error(error.response?.data?.message);

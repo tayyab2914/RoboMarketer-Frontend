@@ -16,6 +16,10 @@
 .admin-left-panel-btn-inner img{
     margin-right: 10px;
 }
+.left-panel-scrollable{
+    height: calc(100vh - 325px) !important;
+    overflow: auto;
+}
 .admin-left-panel-dropdown {
   width: 100% !important;
   display: flex;

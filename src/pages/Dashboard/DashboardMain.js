@@ -32,8 +32,6 @@ const DashboardMain = () => {
     const response = await API_GET_ACCOUNTS(token, setShowSpinner);
     dispatch(setCurrentAccount( response?.find((account) => account?.is_current_account) ) );
     setAccounts(response);
-    console.log(response)
-    console.log("CURRENT ACOUNT UPDATED",current_account)
     if(response?.length == 0)
     {
         dispatch(setCurrentAccount({is_main_user:true}))

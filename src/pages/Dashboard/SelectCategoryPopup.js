@@ -3,9 +3,8 @@ import { Modal, Popover } from "antd";
 import MyIcon from "../../components/Icon/MyIcon";
 import CategoryContent from "./CategoryContent";
 
-const SelectCategoryPopup = ({ setCategory, category }) => {
+const SelectCategoryPopup = ({ setCategory, category,category_name }) => {
   const [visible, setVisible] = useState(false);
-
   const handleOpen = () => {
     setVisible(true);
   };
@@ -19,7 +18,7 @@ const SelectCategoryPopup = ({ setCategory, category }) => {
      <Popover
       content={
         <CategoryContent 
-          setCategory={setCategory} 
+          setCategory={(metric)=>{setCategory(metric);console.log(metric)}} 
           onClose={() => setVisible(false)} 
         />
       }
@@ -31,7 +30,7 @@ const SelectCategoryPopup = ({ setCategory, category }) => {
       placement="bottomRight"
     >
       <button className="add-prompt-category-select-btn">
-        <span>{category?.category_name || "Select Category"}</span>
+        <span>{category_name || "Select Category"}</span>
         <span>
           <MyIcon type={"arrow_down"} size="xs" />
         </span>

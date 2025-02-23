@@ -11,10 +11,10 @@ import SelectCategoryPopup from "../../pages/Dashboard/SelectCategoryPopup";
 
 const { TextArea } = Input;
 
-const EditPromptModal = ({ visible, onClose, prompt }) => {
+const EditPromptModal = ({ visible, onClose, prompt,CATEGORY }) => {
     const { isLoggedIn, isAdmin, current_account,rerender_dashboard } = useSelector((state) => state.authToken);
 
-console.log(current_account)
+console.log(CATEGORY)
   const [loading, setLoading] = useState(false);
   const [promptData, setPromptData] = useState(prompt); // Initializing promptData state
   const [fileGroup, setFileGroup] = useState([]); // Handling file uploads
@@ -22,15 +22,14 @@ console.log(current_account)
   const [ShowSpinner, setShowSpinner] = useState(false);
   const dispatch = useDispatch()
 
-  console.log('promptData',promptData)
   useEffect(() => {
     if (visible && prompt) {
-      // When the modal is visible, initialize promptData with the prompt passed as prop
-      setPromptData(prompt);
-      // If there are any files associated with the prompt, you can also set them here
+        console.log('prompt',prompt,'CATEGORY',CATEGORY)
+        setPromptData({ ...prompt, category:CATEGORY?.category_id,category_name:CATEGORY?.category_name})
+        console.log({ ...prompt, category:CATEGORY?.category_id,category_name:CATEGORY?.category_name })
       setFileGroup(prompt.files || []); // Assuming prompt has a `files` field
     }
-  }, [visible, prompt]); // Re-run when the prompt prop or visibility changes
+  }, [visible, prompt,CATEGORY]); // Re-run when the prompt prop or visibility changes
 
   // Handle file upload
   const handleFileChange = (info) => {
@@ -68,7 +67,7 @@ console.log(current_account)
   const setCategoryHandler = (value)=>{
 
     console.log('SelectCategoryPopup',value?.category_id)
-    setPromptData({ ...promptData, category: value?.category_id })
+    setPromptData({ ...promptData, category: value?.category_id,category_name:value?.category_name })
   }
   return (
     <Modal
@@ -102,7 +101,7 @@ console.log(current_account)
           <>
           <div className="">
             
-          <SelectCategoryPopup setCategory={(value) => {setCategoryHandler(value)}} category={promptData?.category}/>
+          <SelectCategoryPopup setCategory={(value) => {setCategoryHandler(value)}} category={promptData?.category} category_name={promptData?.category_name}/>
             {/* <p className="modal-field-label-block">Select Category</p>
             <Select 
               value={promptData?.category} 

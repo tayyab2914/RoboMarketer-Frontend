@@ -13,7 +13,6 @@ import AIModelAPIModal from "../../../components/Modals/AIModelAPIModal";
 const Banners = () => {
   const dispatch = useDispatch();
   const { token, current_account } = useSelector((state) => state.authToken);
-  console.log(current_account);
   const [isIntegrateModalVisible, setisIntegrateModalVisible] = useState(false);
   const connectFbHandler = async () => {
     dispatch(setisIntegrationsModalClosedByUser(false));
