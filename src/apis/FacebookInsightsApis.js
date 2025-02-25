@@ -182,7 +182,7 @@ console.log(date_start,date_stop)
   }
 };
 
-export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
+export const API_GET_HISTORICAL_DATA = async (token) => {
 //   setShowSpinner(true);
   try {
     const response = await axios.post(
@@ -203,9 +203,7 @@ export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
     //   message.error("An error occurred while fetching historical data.");
     }
     return false;
-  } finally {
-    setShowSpinner(false);
-  }
+  } 
 };
 
 export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {

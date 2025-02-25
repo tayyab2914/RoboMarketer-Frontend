@@ -172,9 +172,9 @@ export const API_GET_HISTORY = async (token, account_id, setShowSpinner) => {
 
         return response.data;
     } catch (error) {
-        message.error(
-            error.response?.data?.message || "An error occurred while fetching history."
-        );
+        // message.error(
+        //     error.response?.data?.message || "An error occurred while fetching history."
+        // );
     } finally {
         // setShowSpinner(false);
     }

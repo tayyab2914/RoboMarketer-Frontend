@@ -130,14 +130,15 @@ const handlePromptClick = async (message, id) => {
     }
 
   return (
-    <div className="left-panel-container">
+    <>
+    <div className="left-panel-container"> 
       {showSpinner && <Spin fullscreen />}
       <div className="left-panel-container-inner">
         <div className="left-panel-logo-wrapper">
           <img src={CurrentAccount?.logo ?`${DOMAIN_NAME}${CurrentAccount?.logo}`:IMAGES.logo_png} alt="Panel Logo" className="left-panel-logo" />
         </div>
 
-      
+       
             {current_account?.is_main_user ? <AccountSwitcher/>
             :
             <div className="side-bar-btn-wrapper" style={{marginTop:"10px"}}><span className="dashboard-account-name">
@@ -184,7 +185,7 @@ const handlePromptClick = async (message, id) => {
 
       <div style={{ height: "130px" }}></div>
       {isEditModalVisible && ( <EditPromptModal visible={isEditModalVisible} onClose={closeEditModal} prompt={selectedPrompt} CATEGORY={selectedCategory}/>  )}
-    </div>
+    </div></>
   );
 };
 
