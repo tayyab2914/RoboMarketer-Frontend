@@ -10,6 +10,8 @@ import { API_FETCH_TOKEN } from '../apis/FacebookInsightsApis';
 import Error404 from '../pages/Error/Error404';
 import AgencyMain from '../pages/Agency/AgencyMain';
 import VerifyAccountMain from '../pages/VerifyAccount/VerifyAccountMain';
+import AuthenticateVerification from '../pages/Account/AuthenticateVerification';
+import GetNewPassword from '../pages/Account/GetNewPassword';
 
 const ProjectRoutes = () => {
   const { isLoggedIn, isAdmin, token, facebook_state,current_account} = useSelector((state) => state.authToken);
@@ -23,6 +25,7 @@ const ProjectRoutes = () => {
         <Route path="/admin" element={isAdmin ? <AdminMain /> : <Navigate to="/account" replace />} />
 
         <Route path="/account" element={<Account />} />
+        <Route path="/forgot_password" element={<GetNewPassword />} />
         {/* <Route path="/account/:link_token" element={<Account />} /> */}
         <Route path="/account/signup" element={<SignUp/>} />
         <Route path="/verify_account/:id" element={<VerifyAccountMain />} />

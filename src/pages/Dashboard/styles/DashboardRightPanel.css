@@ -26,6 +26,7 @@
   width: 70%; /* Reduced width for logo */
   margin: 10px auto 30px auto; /* Space adjustments for logo */
 }
+
 .right-panel-btn {
   padding: 10px 12px;
   height: 40px;
@@ -62,6 +63,7 @@
 }
 .right-panel-collapse .ant-picker{
     height: 40px !important;
+    width: 200px !important;
 }
 .right-panel-collapse .ant-collapse-content{
     padding: 0px 10px 10px 10px !important;
@@ -84,12 +86,17 @@
 }
 
 .panel-header-span {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
   justify-content: start;
-  font-size: 16px;
+  padding-top: 2px;
 }
-
+.panel-header-span-16{
+    font-size: 16px !important;
+}
+.panel-header-span-11{
+    font-size: 11px !important; 
+}
 .panel-header-span img {
   margin-right: 10px;
 }
@@ -117,8 +124,11 @@
   height: 40.8px;
   font-family: "Inter", serif;
   border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-.ant-collapse-header{
+.right-panel-refresh-bar .ant-collapse-header{
     
   width: 230px !important;
 }

@@ -13,7 +13,7 @@ const Signin = ({ toggleCurrentMode }) => {
     const location = useLocation();
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [ShowForgotPassword, setShowForgotPaassword] = useState(false);
+    const [ShowForgotPassword, setShowForgotPassword] = useState(false);
     const [ShowSpinner, setShowSpinner] = useState(false);
 
   
@@ -52,15 +52,15 @@ const Signin = ({ toggleCurrentMode }) => {
     <div data-aos="fade-up">
       <Row gutter={24} justify={"center"} align={"center"} className="account-main-row">
         <Col xs={24} lg={12} className="form-container" data-aos="fade-right">
-          {/* {!ShowForgotPassword ? ( */}
+          {!ShowForgotPassword ? (
             <SigninForm
               handleSignIn={handleSignIn}
-            //   handleForgotPassword={() => setShowForgotPassword("true")}
+              handleForgotPassword={() => setShowForgotPassword("true")}
               handleSignUpToggle={() => toggleCurrentMode("signup")}
             />
-          {/* ) : (
+          ) : (
             <ForgotPassword setShowForgotPassword={setShowForgotPassword}/>
-          )} */}
+          )}
         </Col>
       </Row>
     </div>

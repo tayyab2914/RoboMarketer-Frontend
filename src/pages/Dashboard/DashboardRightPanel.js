@@ -65,6 +65,7 @@ const DashboardRightPanel = () => {
   const [CurrentMetricRangeName, setCurrentMetricRangeName] = useState('Today');
   const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
   const [collapseKey, setCollapseKey] = useState("0");
+  const [DecreaseFontSize, setDecreaseFontSize] = useState(false);
 
   const { isLoggedIn, token,rerender_dashboard,current_account,rerender_right_panel } = useSelector((state) => state.authToken);
 
@@ -105,6 +106,7 @@ const DashboardRightPanel = () => {
       const endDate = dates[1].format('MM/DD/YY');  
       
       setCurrentMetricRangeName(`From ${startDate} to ${endDate}`);
+      setDecreaseFontSize(true)
       setCollapseKey(null);
       setDateRange(dates); 
     }
@@ -190,7 +192,7 @@ const handleFetchHistoricalData = async()=>{
         >
           <Panel
             header={
-              <span className="panel-header-span">
+              <span className={`panel-header-span ${DecreaseFontSize ? 'panel-header-span-11':'panel-header-span-16'}`}>
                 <MyIcon type={"calendar"} /> {CurrentMetricRangeName}
               </span>
             }

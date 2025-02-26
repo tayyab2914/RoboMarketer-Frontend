@@ -15,3 +15,25 @@ code {
     
     font-family: "Inter", serif !important;
 }
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Background of the scrollbar (track) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* Draggable part of the scrollbar (thumb) */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* On hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

@@ -12,6 +12,7 @@ import { API_TEST_TOKEN } from "../../apis/AuthApis";
 import AgencyProfile from "./AgencyProfile";
 import AgencyWhitelabel from "./AgencyWhitelabel";
 import AgencySupport from "./Support/AgencySupport";
+import AgencyTrainingOS from "./TrainingOS/AgencyTrainingOS";
 
 const AgencyMain = () => {
   const windowWidth = useWindowWidth();
@@ -21,7 +22,7 @@ const AgencyMain = () => {
   const [isLeftDrawerVisible, setIsLeftDrawerVisible] = useState(false);
   const showLeftDrawer = () => setIsLeftDrawerVisible(true);
   const closeLeftDrawer = () => setIsLeftDrawerVisible(false);
-  const [CurrentMode, setCurrentMode] = useState(0);
+  const [CurrentMode, setCurrentMode] = useState(4);
 
 
   useEffect(() => {
@@ -59,6 +60,7 @@ const AgencyMain = () => {
           {CurrentMode == 1 &&<AgencyProfile />}
           {CurrentMode == 2 &&<AgencyWhitelabel />}
           {CurrentMode == 3 &&<AgencySupport />}
+          {CurrentMode == 4 &&<AgencyTrainingOS />}
         </Col>
 
       </Row>
