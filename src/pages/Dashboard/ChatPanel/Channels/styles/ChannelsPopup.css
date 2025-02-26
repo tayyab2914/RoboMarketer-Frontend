@@ -1,0 +1,45 @@
+.channels-popup {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 21px;
+}
+
+.channels-popup .channel-name-btn {
+  width: 100%;
+  max-width: 450px;
+  height: 40px;
+  text-align: left;
+  display: flex;
+  border: 1px solid #e6eaed;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  position: relative;
+}
+.channels-popup .channel-list {
+  max-height: "300px" !important;
+  scrollbar-width: none;
+}
+.channel-item-wrapper {
+  border-top: 1px solid #e6eaed;
+}
+.channel-item{
+    cursor: pointer;
+  display: flex;
+  height: 40px !important;
+  align-items: center;
+  padding: 0px 10px;
+  justify-content: space-between;
+}
+
+body > div:nth-child(9) > div > div > div
+
+{
+    padding: 0px !important;
+}
+.channel-btn-wrapper{
+    padding: 10px;
+}

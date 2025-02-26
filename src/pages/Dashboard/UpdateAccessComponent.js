@@ -49,7 +49,7 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
 
                 <p className="uac-upgrade-text">Upgrade Now</p>
                 <p className="uac-lifetime-text">
-                  Limited Lifetime Access Available
+                  Limited Lifetime Accounts Available
                 </p>
               </button>
               </div>
@@ -80,7 +80,7 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
 
               <p className="uac-upgrade-text">Upgrade Now</p>
               <p className="uac-lifetime-text">
-                Limited Lifetime Access Available
+                Limited Lifetime Accounts Available
               </p>
             </button>
             <p className="uac-contact-info">

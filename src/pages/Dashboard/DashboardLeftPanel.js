@@ -42,7 +42,6 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const getPrompts = async () => {
     const response = await API_GET_PROMPTS(token, setShowSpinner);
     setFetchedPrompts(response);
-    console.log('setFetchedPrompts',response)
   };
 const handlePromptClick = async (message, id) => {
     if (!message) return;
@@ -130,14 +129,15 @@ const handlePromptClick = async (message, id) => {
     }
 
   return (
-    <div className="left-panel-container">
+    <>
+    <div className="left-panel-container"> 
       {showSpinner && <Spin fullscreen />}
       <div className="left-panel-container-inner">
         <div className="left-panel-logo-wrapper">
           <img src={CurrentAccount?.logo ?`${DOMAIN_NAME}${CurrentAccount?.logo}`:IMAGES.logo_png} alt="Panel Logo" className="left-panel-logo" />
         </div>
 
-      
+       
             {current_account?.is_main_user ? <AccountSwitcher/>
             :
             <div className="side-bar-btn-wrapper" style={{marginTop:"10px"}}><span className="dashboard-account-name">
@@ -177,14 +177,14 @@ const handlePromptClick = async (message, id) => {
       </div>
           {/* <UpdateAccessComponent visible={true} modal={true}/> */}
           {LimitEnded && <UpdateAccessComponent visible={LimitEnded} onClose={()=>setLimitEnded(false)} modal={true}/>}
-          {!CurrentAccount?.is_lifetime_access && <UpdateAccessComponent chatCount={CurrentAccount?.chat_count}/>}
+          {CurrentAccount?.access_type == 0 && <UpdateAccessComponent chatCount={CurrentAccount?.chat_count}/>}
       <span>
       <SettingsBtn />
       </span>
 
       <div style={{ height: "130px" }}></div>
       {isEditModalVisible && ( <EditPromptModal visible={isEditModalVisible} onClose={closeEditModal} prompt={selectedPrompt} CATEGORY={selectedCategory}/>  )}
-    </div>
+    </div></>
   );
 };
 

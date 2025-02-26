@@ -7,6 +7,7 @@ import "./styles/DashboardRightPanel.css";
 import { DownOutlined } from "@ant-design/icons";
 import dayjs from 'dayjs';
 import {
+    API_GET_HISTORICAL_DATA,
   API_GET_INSIGHTS,
   API_GET_ORDERING,
   API_GET_REPORTING,
@@ -64,6 +65,7 @@ const DashboardRightPanel = () => {
   const [CurrentMetricRangeName, setCurrentMetricRangeName] = useState('Today');
   const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
   const [collapseKey, setCollapseKey] = useState("0");
+  const [DecreaseFontSize, setDecreaseFontSize] = useState(false);
 
   const { isLoggedIn, token,rerender_dashboard,current_account,rerender_right_panel } = useSelector((state) => state.authToken);
 
@@ -104,12 +106,17 @@ const DashboardRightPanel = () => {
       const endDate = dates[1].format('MM/DD/YY');  
       
       setCurrentMetricRangeName(`From ${startDate} to ${endDate}`);
+      setDecreaseFontSize(true)
       setCollapseKey(null);
       setDateRange(dates); 
     }
   };
   
-
+const handleFetchHistoricalData = async()=>{
+    console.log("CALLING API_GET_HISTORICAL_DATA")
+    await API_GET_HISTORICAL_DATA(token);
+    dispatch(setRerenderDashboard(!rerender_dashboard));
+}
   const handleSaveSelectedMetrics = async (metrics) => {
     setSelectedMetrics(metrics);
     await API_UPDATE_REPORTING(
@@ -168,6 +175,7 @@ const DashboardRightPanel = () => {
   return (
     <div className="right-panel-container">
       <div className="right-panel-container-inner">
+        <span className="right-panel-refresh-bar">
         <Collapse
           className="right-panel-collapse"
           expandIconPosition={"end"}
@@ -184,7 +192,7 @@ const DashboardRightPanel = () => {
         >
           <Panel
             header={
-              <span className="panel-header-span">
+              <span className={`panel-header-span ${DecreaseFontSize ? 'panel-header-span-11':'panel-header-span-16'}`}>
                 <MyIcon type={"calendar"} /> {CurrentMetricRangeName}
               </span>
             }
@@ -198,6 +206,11 @@ const DashboardRightPanel = () => {
             </Space>
           </Panel>
         </Collapse>
+        <span className="refresh-btn">
+            
+            <MyIcon type="refresh" size="xs" onClick={handleFetchHistoricalData}/>
+        </span>
+        </span>
 
         <DashboardRightPanelInfo
   reportingData={selectedMetrics?.map((key) => 

@@ -1,5 +1,5 @@
 // ForgotPassword Component
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Form, Input, Button, Spin } from "antd";
 import { MailOutlined } from "@ant-design/icons";
@@ -21,22 +21,18 @@ const ForgotPassword = ({setShowForgotPassword}) => {
   const onSubmitEmail = async () => {
       const values = await form.validateFields();
       setEmail(values.email);
-      const response = await API_SEND_VERIFICATION_EMAIL( values.email, true, setShowSpinner );
+      const response = await API_SEND_VERIFICATION_EMAIL( values.email );
       setCodeToken(response);
       setCurrentState(response?'verification-code':'email-input');
     
   };
 
-  const handleVerification = async (code) => {
-    setVerificationCode(code);
-    setCurrentState("new-password");
-  };
   const onNewPasswordSubmit = async (newPassword) => {
     setNewPassword(newPassword);
     console.log('newPassword',newPassword)
     await API_SET_NEW_PASSWORD( email, newPassword, verificationCode, codeToken, setShowSpinner,setShowForgotPassword );
-    
   };
+
   return <>
   {ShowSpinner && <Spin fullscreen/>}
   {
@@ -53,11 +49,6 @@ const ForgotPassword = ({setShowForgotPassword}) => {
       </Form.Item>
     </Form>
 }
-  {CurrentState == 'verification-code' && 
-    <AuthenticateVerification handleVerification={handleVerification} />}
-  {CurrentState == 'new-password' &&
-    <GetNewPassword onNewPasswordSubmit={onNewPasswordSubmit}/>
-  }
 </>;
 };
 

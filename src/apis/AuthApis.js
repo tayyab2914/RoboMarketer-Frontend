@@ -77,27 +77,24 @@ export const API_DOES_LINK_EXIST = async ( link_token, setShowSpinner ) => {
     } finally {
     }
 };
-export const API_SEND_VERIFICATION_EMAIL = async ( email, forgotPassword = false, setShowSpinner ) => {
-  setShowSpinner(true);
+export const API_SEND_VERIFICATION_EMAIL = async ( email,  ) => {
+console.log(email)
   try {
     const response = await axios.post(
-      `${DOMAIN_NAME}/authentication/send_verification_email/`,
+      `${DOMAIN_NAME}/authentication/forgot_password/`,
       {
         email: email,
-        forgot_password: forgotPassword ? "true" : "false",
       }
     );
 
-    // message.success("Verification email sent");
+    message.success("Verification email sent");
     return response.data.code_token;
   } catch (error) {
     message.error(
       error.response?.data?.message || "Failed to send verification email"
     );
     return false
-  } finally {
-    setShowSpinner(false);
-  }
+  } 
 };
 export const API_AUTHENTICATE_CODE = async ( verificationCode, codeToken, setShowSpinner ) => {
   setShowSpinner(true);
@@ -118,22 +115,20 @@ export const API_AUTHENTICATE_CODE = async ( verificationCode, codeToken, setSho
     setShowSpinner(false);
   }
 };
-export const API_SET_NEW_PASSWORD = async ( email, newPassword, verificationCode, codeToken, setShowSpinner, setShowForgotPassword ) => {
+
+export const API_SET_NEW_PASSWORD = async (  newPassword, verificationCode,navigate ) => {
 //   setShowSpinner(true);
 
   try {
     const response = await axios.post(`${DOMAIN_NAME}/authentication/set_new_password/`, {
-      email: email,
       new_password: newPassword,
-      verification_code: verificationCode,
-      code_token: codeToken,
+      code: verificationCode,
     });
-
-    // message.success("Password reset successful");
-    setShowForgotPassword(false)
+    message.success("Password changed successfully!")
+    navigate('/account')
     return response.data;
   } catch (error) {
-    message.error(error.response?.data?.message || "Failed to reset password");
+    console.log(error)
   } finally {
     // setShowSpinner(false);
   }
@@ -206,7 +201,7 @@ export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
 };
 export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) => {
     // setShowSpinner(true);
-
+console.log(updatedUser)
     try {
         const response = await axios.put(`${DOMAIN_NAME}/authentication/edit_user/${id}/`, {
             username: updatedUser.username,
@@ -215,6 +210,7 @@ export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) =>
             total_accounts: updatedUser.total_accounts,
             first_name: updatedUser.first_name,
             last_name: updatedUser.last_name,
+            access_type: updatedUser.access_type,
         }, {
             headers: {
                 Authorization: `${token}`, 
@@ -223,8 +219,7 @@ export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) =>
         // message.success("User Updated Successfully")
         return response.data;
     } catch (error) {
-        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
-        message.error(errorMessage);  
+        console.log(error)
     } finally {
         // setShowSpinner(false);
     }

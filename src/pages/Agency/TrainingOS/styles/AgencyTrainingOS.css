@@ -1,0 +1,63 @@
+#trainingos-main {
+  padding: 30px 25px;
+  overflow-y: auto;
+  height: calc(100vh - 77.8px);
+  scrollbar-width: none;
+  
+}
+#trainingos-main .left-panel-main {
+  padding-right: 10px;
+}
+#trainingos-main .right-panel-main {
+  padding-left: 10px;
+}
+#trainingos-main .left-panel {
+  border: 1px solid #e6eaed;
+  padding: 25px;
+  border-radius: 10px;
+}
+#trainingos-main .right-panel {
+  border: 1px solid #e6eaed;
+  padding: 0px;
+  border-radius: 10px;
+}
+
+#trainingos-content .title {
+  font-size: 22px;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+#trainingos-content .video {
+  border-radius: 15px;
+}
+#trainingos-content .description {
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+.trainingos-module-panel {
+  cursor: pointer;
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+}
+.trainingos-module-panel img {
+    margin-right: 10px;
+  }
+  
+#trainingos-module .awa-heading {
+  padding: 25px;
+  border-bottom: 1px solid #e6eaed;
+}
+
+#trainingos-module .collapses {
+  padding: 25px;
+}
+#trainingos-module .panel-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+}
+#trainingos-module .panel-header img {
+  margin-right: 10px;
+}
