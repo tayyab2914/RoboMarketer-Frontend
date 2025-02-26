@@ -6,7 +6,7 @@ export const TRAINING_OS_CONTENT = [
         {
           lesson_id: 1,
           title: "Lesson 1: Variables and Data Types",
-          videoLink: require("../../../assets/videos/1.mp4"),
+          videoLink: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
           description: "Learn about JavaScript variables, data types, and how to use them."
         },
         {

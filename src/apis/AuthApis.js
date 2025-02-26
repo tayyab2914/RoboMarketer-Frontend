@@ -201,7 +201,7 @@ export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
 };
 export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) => {
     // setShowSpinner(true);
-
+console.log(updatedUser)
     try {
         const response = await axios.put(`${DOMAIN_NAME}/authentication/edit_user/${id}/`, {
             username: updatedUser.username,
@@ -210,6 +210,7 @@ export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) =>
             total_accounts: updatedUser.total_accounts,
             first_name: updatedUser.first_name,
             last_name: updatedUser.last_name,
+            access_type: updatedUser.access_type,
         }, {
             headers: {
                 Authorization: `${token}`, 
@@ -218,8 +219,7 @@ export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) =>
         // message.success("User Updated Successfully")
         return response.data;
     } catch (error) {
-        const errorMessage = error?.response?.data?.message || "An error occurred while updating the user.";
-        message.error(errorMessage);  
+        console.log(error)
     } finally {
         // setShowSpinner(false);
     }
