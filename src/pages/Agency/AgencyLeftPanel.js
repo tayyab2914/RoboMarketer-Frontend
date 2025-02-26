@@ -58,7 +58,7 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
       </span>
       <span>
         
-      {!accounts?.is_lifetime_access && <UpdateAccessComponent chatCount={accounts?.chat_count}/>}
+      {accounts?.access_type==0 && <UpdateAccessComponent chatCount={accounts?.chat_count}/>}
       {/* <div style={{ height: "70px" }}></div> */}
         <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" >
           <button className="settings-btn"> <span className="settings-btn-wrapper"> <MyIcon type="logout" /> Logout </span> </button>

@@ -21,12 +21,7 @@ useEffect(() => {
   }, [current_account?.is_facebook_connected]);
 
   const get_history = async () => {
-      const response = await API_GET_HISTORY(
-        token,
-        current_account?.id,
-        selectedChannel
-      );
-      
+      const response = await API_GET_HISTORY( token, current_account?.id, selectedChannel );
       setChatData(response?.reverse() || []);
     };
   

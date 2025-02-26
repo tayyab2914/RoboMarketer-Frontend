@@ -6,6 +6,7 @@ import "./styles/ChannelsPopup.css";
 import MyIcon from "../../../../components/Icon/MyIcon";
 import NewChannelModal from "./NewChannelModal";
 import ChannelList from "./ChannelList";
+import { TRUNCATE_STRING } from "../../../../utils/Methods";
 
 const ChannelsPopup = ({setSelectedChannel,selectedChannel}) => {
   const [channelsData, setChannelsData] = useState([]);
@@ -13,6 +14,7 @@ const ChannelsPopup = ({setSelectedChannel,selectedChannel}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { token,rerender_dashboard } = useSelector((state) => state.authToken);
 
+  
   // Fetch channels on component mount
   const fetchChannels = async () => {
     try {
@@ -66,7 +68,7 @@ const ChannelsPopup = ({setSelectedChannel,selectedChannel}) => {
         onOpenChange={setPopoverVisible}
       >
         <Button type="default" className="channel-name-btn">
-          <span> <b>#</b>{" "} {selectedChannel ? selectedChannel.name : "Select a Channel"} </span>
+          <span> <b>#</b>{" "} {selectedChannel ? TRUNCATE_STRING(selectedChannel.name,48) : "Select a Channel"} </span>
           <MyIcon type={"arrow_down"} style={{ width: "12px" }} />
         </Button>
       </Popover>

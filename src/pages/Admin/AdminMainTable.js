@@ -22,7 +22,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
         email: user.email,
         phone: user.phone_number || 'N/A', 
         lastLogin: user.last_login ? moment(user.last_login).format('DD/MM/YY hh:mm A') : 'N/A', 
-        accounts: user.total_accounts || 0,
+        accounts: user.created_accounts_count || 0,
         actions: (
             <>
                 <MyIcon  type="edit_btn"  size="xl"  style={{ cursor: 'pointer' }}  onClick={() => handleEditClick(user)}  />
@@ -40,7 +40,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
         { title: 'EMAIL', dataIndex: 'email', key: 'email', width: '20%' },
         { title: 'PHONE', dataIndex: 'phone', key: 'phone', width: '17.5%' },
         { title: 'LAST LOGIN', dataIndex: 'lastLogin', key: 'lastLogin', width: '22.5%' },
-        { title: 'ROBOMARKETER ACCOUNTS', dataIndex: 'accounts', key: 'accounts', width: '10%' },
+        { title: 'ACCOUNTS CREATED', dataIndex: 'accounts', key: 'accounts', width: '10%' },
         { title: 'ACTIONS', dataIndex: 'actions', key: 'actions', width: '15%' },
     ];
 

@@ -42,7 +42,6 @@ const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const getPrompts = async () => {
     const response = await API_GET_PROMPTS(token, setShowSpinner);
     setFetchedPrompts(response);
-    console.log('setFetchedPrompts',response)
   };
 const handlePromptClick = async (message, id) => {
     if (!message) return;
@@ -178,7 +177,7 @@ const handlePromptClick = async (message, id) => {
       </div>
           {/* <UpdateAccessComponent visible={true} modal={true}/> */}
           {LimitEnded && <UpdateAccessComponent visible={LimitEnded} onClose={()=>setLimitEnded(false)} modal={true}/>}
-          {!CurrentAccount?.is_lifetime_access && <UpdateAccessComponent chatCount={CurrentAccount?.chat_count}/>}
+          {CurrentAccount?.access_type == 0 && <UpdateAccessComponent chatCount={CurrentAccount?.chat_count}/>}
       <span>
       <SettingsBtn />
       </span>
