@@ -120,11 +120,17 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                         <Form.Item label="Email" name="email" rules={EMAIL_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
                             <Input   prefix={<MyIcon type={'signin_email'}/>}/>
                         </Form.Item>
-                        <Form.Item label="Number of Accounts" name="total_accounts" rules={ACCOUNT_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                        {/* <Form.Item label="Number of Accounts" name="total_accounts" rules={ACCOUNT_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
                             <Input type="number"  prefix={<MyIcon type={'users'}/>}/>
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item label="Phone Number" name="phone_number" rules={PHONE_NUMBER_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
                             <Input   prefix={<MyIcon type={'signin_password'}/>}/>
+                        </Form.Item>
+                        <Form.Item label="Access Type" name="access_type" rules={PHONE_NUMBER_RULES_REQUIRED} className="admin-main-table-edit-input-field" required={false}>
+                            <Select>
+                                4 options
+                                none
+                            </Select>
                         </Form.Item>
                         <Button type="primary" htmlType="submit" className="admin-main-table-edit-submit-btn"> Save Changes </Button>
                     </Form></div>
