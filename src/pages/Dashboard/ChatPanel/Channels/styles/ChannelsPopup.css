@@ -8,8 +8,8 @@
 }
 
 .channels-popup .channel-name-btn {
-  width: 100%;
   max-width: 450px;
+  min-width: 220px;
   height: 40px;
   text-align: left;
   display: flex;

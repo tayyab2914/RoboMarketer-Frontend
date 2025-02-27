@@ -37,7 +37,7 @@ useEffect(() => {
         <Chats isaccount_open={!isAccountSetup} chat_data={ChatData} get_history={get_history} selectedChannel={selectedChannel}/>
       </Col>
       <Col className="dashboard-chat-panel-main-message-bar" >
-        <MessageBar isDisabled={!isAccountSetup} />
+        <MessageBar isDisabled={!isAccountSetup} selectedChannel={selectedChannel}/>
       </Col>
     </Row>
   );

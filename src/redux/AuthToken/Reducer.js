@@ -1,6 +1,6 @@
 // src/redux/reducer.js
 
-import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP, RERENDER_RIGHT_PANEL, OPEN_INTEGRATIONS_MODAL, IS_INTEGRATIONS_MODAL_CLOSED_BY_USER, SET_FB_CODE, SELECT_PRODUCT_SERVICE_MODE } from "./Types";
+import { SET_AUTH_TOKEN,RERENDER_DASHBOARD, REMOVE_AUTH_TOKEN, SET_LOGGED_IN, SET_IS_ADMIN, SET_CURRENT_ACCOUNT, RERENDER_CHAT_PANEL, TEMPORARY_MESSAGE, SET_FACEBOOK_STATE, SET_IS_FB_SETUP, RERENDER_RIGHT_PANEL, OPEN_INTEGRATIONS_MODAL, IS_INTEGRATIONS_MODAL_CLOSED_BY_USER, SET_FB_CODE, SELECT_PRODUCT_SERVICE_MODE, SET_SELECTED_CHANNEL } from "./Types";
 
 const initialState = {
   token: null,
@@ -15,7 +15,8 @@ const initialState = {
   open_integrations_modal:false,
   is_integrations_modal_closed_by_user:true,
   facebook_code:null,
-  product_service_mode:"product"
+  product_service_mode:"product",
+  channel:null
 };
 
 export default function authReducer(state = initialState, action) {
@@ -90,7 +91,12 @@ export default function authReducer(state = initialState, action) {
       ...state,
       product_service_mode: action.payload,
     };
-  }  else if (action.type == IS_INTEGRATIONS_MODAL_CLOSED_BY_USER) {
+  }else if (action.type == SET_SELECTED_CHANNEL) {
+    return {
+      ...state,
+      channel: action.payload,
+    };
+  }   else if (action.type == IS_INTEGRATIONS_MODAL_CLOSED_BY_USER) {
     return {
       ...state,
       is_integrations_modal_closed_by_user: action.payload,

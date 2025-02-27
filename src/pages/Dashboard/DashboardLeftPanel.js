@@ -22,7 +22,7 @@ const { Panel } = Collapse;
 const DashboardLeftPanel = ({ Accounts, SwitchAccount }) => {
   const dispatch = useDispatch();
   const [showSpinner, setShowSpinner] = useState(false);
-  const { isLoggedIn, token, rerender_dashboard, rerender_chat_panel ,current_account} =useSelector((state) => state.authToken);
+  const { isLoggedIn,channel, token, rerender_dashboard, rerender_chat_panel ,current_account} =useSelector((state) => state.authToken);
   const [CurrentAccount, setCurrentAccount] = useState(null);
   const [FetchedPrompts, setFetchedPrompts] = useState([]);
   const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState(["0"]);
@@ -51,6 +51,7 @@ const handlePromptClick = async (message, id) => {
     if (localMessage.trim() ) {
       const formData = new FormData();
       formData.append("prompt", id);
+      formData.append("channel_id", channel?.id);
       try {
         const response = await API_GET_RESPONSE(token, id, formData, setShowSpinner);
         if(response?.limit_end)

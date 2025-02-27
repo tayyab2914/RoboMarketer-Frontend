@@ -310,7 +310,7 @@ console.log(id,name)
                 Authorization: token,
             },
         });
-        message.success("API key updated successfully!")
+        // message.success("API key updated successfully!")
         return response.data;
     } catch (error) {
   console.log(error)

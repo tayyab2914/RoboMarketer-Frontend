@@ -14,7 +14,7 @@ import "./styles/MessageBar.css";
 import UpdateAccessComponent from "../UpdateAccessComponent";
 import Banners from "./Banners";
 
-const MessageBar = ({ isDisabled }) => {
+const MessageBar = ({ isDisabled,selectedChannel }) => {
   const dispatch = useDispatch();
   const { token, rerender_chat_panel, rerender_dashboard, current_account } = useSelector((state) => state.authToken);
   const [message, setMessage] = useState("");
@@ -55,7 +55,6 @@ const MessageBar = ({ isDisabled }) => {
     const localFile = file;
     console.log("1. ",{ message, file })
     dispatch(setTemporaryMessage({ message, file }));
-    // dispatch(setRerenderChatPanel(!rerender_chat_panel));
     setMessage("");
     setFile(null);
 
@@ -67,6 +66,7 @@ const MessageBar = ({ isDisabled }) => {
         formData.append("file_group", localFile);
       }
       formData.append("message", localMessage);
+      formData.append("channel_id", selectedChannel?.id);
 
       try {
         const response = await API_GET_RESPONSE( token, localMessage, formData, setShowSpinner );

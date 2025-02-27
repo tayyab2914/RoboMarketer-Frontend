@@ -197,11 +197,8 @@ export const API_GET_HISTORICAL_DATA = async (token) => {
     return response.data;
   } catch (error) {
     // Handle error properly
-    if (error.response?.data?.message) {
-    //   message.error(error.response?.data?.message); 
-    } else {
-    //   message.error("An error occurred while fetching historical data.");
-    }
+    message.error(error?.response?.data?.detail)
+   
     return false;
   } 
 };
