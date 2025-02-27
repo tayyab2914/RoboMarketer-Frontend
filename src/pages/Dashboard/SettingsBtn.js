@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Popconfirm, Divider } from "antd";
+import { Modal, Button, Popconfirm, Divider, Popover } from "antd";
 import "./styles/SettingsBtn.css";
 import "../../components/Modals/styles/ModalStyles.css";
 import MyIcon from "../../components/Icon/MyIcon";
@@ -22,6 +22,7 @@ import InviteTeamMembersModal from "../../components/Modals/InviteTeamMembersMod
 
 const SettingsBtn = () => {
     const logoutUser = useLogoutUser();
+    const [LogoutVisible, setLogoutVisible] = useState(false);
     const dispatch = useDispatch()
     const { isLoggedIn, token,rerender_dashboard,open_integrations_modal,is_integrations_modal_closed_by_user,current_account } = useSelector((state) => state.authToken);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -91,9 +92,21 @@ const SettingsBtn = () => {
           ))}
         </div>
         <div className=" custom-modal-option modal-option">
-            <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" placement="topLeft">
-                <button type="text" className="modal-option-btn" style={{width:"100%"}}><MyIcon type={'logout'} /> <span>Logout</span> </button>
-            </Popconfirm>
+        <Popover open={LogoutVisible} trigger="click" placement="topLeft" onOpenChange={(visible) => setLogoutVisible(visible)}
+            content={
+                <div style={{ padding: "8px" }}>
+                    <p style={{ marginBottom: "0px" }}>Are you sure you want to logout?</p>
+                    <div style={{ display: "flex", justifyContent: "end", marginTop: "5px" }}> 
+                        <Button type="primary" onClick={() => { logoutUser(); setLogoutVisible(false); }} style={{ marginRight: "5px", padding: "0px 10px" }}> Yes </Button> 
+                        <Button onClick={() => setLogoutVisible(false)} style={{ padding: "0px 10px" }}>No </Button>
+                    </div>
+                </div>
+            }
+            >
+            <button type="text" className="modal-option-btn" style={{ width: "100%" }} onClick={() => setLogoutVisible(true)}>
+                <MyIcon type="logout" /> <span>Logout</span>
+            </button>
+            </Popover>
         </div>
     </div>
       </Modal>

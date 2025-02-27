@@ -45,7 +45,7 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(1)}>
            <MyIcon type={"profile_agency"}/> Profile
        </div>
-       {accounts?.is_unlimted_accounts && <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(2)}>
+       {(accounts?.access_type == 2 || accounts?.access_type == 3 )&&<div className="agency-left-panel-btn" onClick={()=>setCurrentMode(2)}>
            <MyIcon type={"whitelabel"}/> Whitelabel Domain
        </div>}
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(3)}>

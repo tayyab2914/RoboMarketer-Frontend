@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { IMAGES } from "../../data/ImageData";
-import { Popconfirm } from "antd";
+import { Button, Popconfirm, Popover } from "antd";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/AdminLeftPanel.css";
 import { useLogoutUser } from "../../hooks/useLogoutUser";
 
 const AdminLeftPanel = () => {
   const logoutUser = useLogoutUser();
+      const [LogoutVisible, setLogoutVisible] = useState(false);
 
   return (
     <div className="admin-left-panel-container">
@@ -29,9 +30,20 @@ const AdminLeftPanel = () => {
         </div>
       </span>
       <span>
-        <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" >
-              <button className="settings-btn" > <span className="settings-btn-wrapper"><MyIcon type="logout" /> Logout</span> </button>
-        </Popconfirm>
+      <Popover open={LogoutVisible} trigger="click" placement="topLeft" onOpenChange={(visible) => setLogoutVisible(visible)}
+            content={
+                <div style={{ padding: "8px" }}>
+                    <p style={{ marginBottom: "0px" }}>Are you sure you want to logout?</p>
+                    <div style={{ display: "flex", justifyContent: "end", marginTop: "5px" }}> 
+                        <Button type="primary" onClick={() => { logoutUser(); setLogoutVisible(false); }} style={{ marginRight: "5px", padding: "0px 10px" }}> Yes </Button> 
+                        <Button onClick={() => setLogoutVisible(false)} style={{ padding: "0px 10px" }}>No </Button>
+                    </div>
+                </div>
+            }
+            >
+            <button className="settings-btn"  onClick={() => setLogoutVisible(true)}> <span className="settings-btn-wrapper"><MyIcon type="logout" /> Logout</span> </button>
+            </Popover>
+        
       </span>
     </div>
   );
