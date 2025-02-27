@@ -48,7 +48,7 @@ const UpdateChannelModal = ({ channel, visible, onClose, fetchChannels }) => {
       </div>
 
       <div className="modal-content">
-        <p className="input-group-label">Channel Name</p>
+        <p className="input-group-label" style={{marginTop:"0px"}}>Channel Name</p>
         <Input
           placeholder="Enter channel name"
           value={channelName}

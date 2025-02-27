@@ -14,7 +14,7 @@ const DashboardRightPanelInfo = ({ reportingData }) => {
     rerender_right_panel,
   } = useSelector((state) => state.authToken);
 
-
+console.log("CURRENT ACCOUNT IN RIGHT PANEL :",current_account)
   function formatWithCommas(number) {
     // Convert the number to a string and use a regular expression to format it
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

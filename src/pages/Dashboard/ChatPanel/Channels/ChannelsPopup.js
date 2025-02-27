@@ -16,7 +16,6 @@ const ChannelsPopup = ({setSelectedChannel,selectedChannel}) => {
   const { token,rerender_dashboard,channel } = useSelector((state) => state.authToken);
 const dispatch = useDispatch()
   
-console.log(channel)
   // Fetch channels on component mount
   const fetchChannels = async () => {
     try {
