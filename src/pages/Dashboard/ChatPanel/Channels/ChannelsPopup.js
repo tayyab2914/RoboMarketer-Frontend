@@ -51,10 +51,10 @@ const ChannelsPopup = ({setSelectedChannel,selectedChannel}) => {
     <div className="channels-popup">
       <Popover
         content={
-          <div style={{paddingBottom:"10px"}}>
+          <div >
             <div className="channel-btn-wrapper">
               <div className="channel-btn">
-                <Button block onClick={handleNewChannel} style={{ fontWeight: 600, height: "40px" }} > + {" "} Add New Channel{" "} </Button>
+                <Button  onClick={handleNewChannel} style={{ fontWeight: 600, height: "40px",width:"100%" }} > + {" "} Add New Channel{" "} </Button>
               </div>
             </div>
             <ChannelList channelsData={channelsData} onSelectChannel={handleChannelSelect} fetchChannels={fetchChannels}/>
@@ -62,10 +62,11 @@ const ChannelsPopup = ({setSelectedChannel,selectedChannel}) => {
         }
         className="channels-popover"
         arrow={false}
-        overlayStyle={{ width: "100%", maxWidth: "450px" }}
+        overlayStyle={{  maxWidth: "450px",minWidth:"220px " }}
         trigger="click"
         open={popoverVisible}
         onOpenChange={setPopoverVisible}
+        placement={'bottomLeft'}
       >
         <Button type="default" className="channel-name-btn">
           <span> <b>#</b>{" "} {selectedChannel ? TRUNCATE_STRING(selectedChannel.name,48) : "Select a Channel"} </span>

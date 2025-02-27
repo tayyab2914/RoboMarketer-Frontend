@@ -20,11 +20,16 @@
   position: relative;
 }
 .channels-popup .channel-list {
-  max-height: "300px" !important;
+  max-height: 300px !important;
   scrollbar-width: none;
 }
 .channel-item-wrapper {
   border-top: 1px solid #e6eaed;
+}
+.channel-list-wrapper{
+    max-height: 220px ;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 .channel-item{
     cursor: pointer;

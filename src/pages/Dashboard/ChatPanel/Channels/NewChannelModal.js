@@ -24,12 +24,12 @@ const NewChannelModal = ({ visible, onClose, fetchChannels }) => {
   return (
     <Modal className="" title={false} open={visible} onCancel={onClose} closable={false} footer={null} >
       <div className="custom-modal-header">
-        <span className="modal-header"><b># </b> Add New Channel </span>
+        <span className="modal-header"><b style={{marginRight:"5px"}}># </b> Add New Channel </span>
         <span><MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" /> </span>
       </div>
 
       <div className="modal-content">
-        <p className="input-group-label">Channel Name</p>
+        <p className="input-group-label" style={{marginTop:"0px"}}>Channel Name</p>
         <Input placeholder="Enter channel name" value={channelName} onChange={(e) => setChannelName(e.target.value)} style={{ height:"40px" }}/>
         <Button type="primary" block onClick={handleCreateChannel} loading={loading} style={{height:"40px"}} >
           Create Channel

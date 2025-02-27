@@ -51,7 +51,7 @@ const ChannelItem = ({ channel, onSelectChannel, fetchChannels }) => {
     <>
       <div className="channel-item-wrapper">
         <div className="channel-item">
-          <span style={{ width: "370px" }} onClick={() => onSelectChannel(channel)}>
+          <span style={{ width: "100%" }} onClick={() => onSelectChannel(channel)}>
             {channel.name}
           </span>
           <Dropdown overlay={renderDropdownMenu(channel)} trigger={["click"]}>

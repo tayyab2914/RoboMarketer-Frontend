@@ -52,7 +52,7 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
            <MyIcon type={"support"}/> Support
        </div>
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(4)}>
-           <MyIcon type={"trainingos"}/> TrainingOS
+           <MyIcon type={"trainingos"}/> Training
        </div>
 
       </span>

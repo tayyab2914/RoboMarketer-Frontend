@@ -1,9 +1,9 @@
 import React from "react";
 import ChannelItem from "./ChannelItem";
-
+import './styles/ChannelsPopup.css'
 const ChannelList = ({ channelsData, onSelectChannel,fetchChannels }) => {
   return (
-      <>
+      <div className="channel-list-wrapper">
       {channelsData?.map((channel) => (
         <ChannelItem
           key={channel.id}
@@ -12,7 +12,7 @@ const ChannelList = ({ channelsData, onSelectChannel,fetchChannels }) => {
           onSelectChannel={onSelectChannel}
         />
       ))}
-      </>
+      </div>
       
   );
 };

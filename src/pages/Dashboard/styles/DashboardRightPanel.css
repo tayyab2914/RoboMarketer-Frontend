@@ -63,7 +63,20 @@
 }
 .right-panel-collapse .ant-picker{
     height: 40px !important;
-    width: 200px !important;
+    width: 260px !important;
+}
+.right-panel-header-span{
+    background-color: white;
+    border: 1px solid #e6eaed;
+    width: 240px;
+    border-radius: 8px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding:0px 15px ;
+}
+.right-panel-header-span img{
+    margin-right: 5px;
 }
 .right-panel-collapse .ant-collapse-content{
     padding: 0px 10px 10px 10px !important;
@@ -94,8 +107,8 @@
 .panel-header-span-16{
     font-size: 16px !important;
 }
-.panel-header-span-11{
-    font-size: 11px !important; 
+.panel-header-span-14{
+    font-size: 14px !important; 
 }
 .panel-header-span img {
   margin-right: 10px;
@@ -130,7 +143,7 @@
 }
 .right-panel-refresh-bar .ant-collapse-header{
     
-  width: 230px !important;
+  width: 240px !important;
 }
 .right-panel-refresh-bar .refresh-btn{
     height: 40px;
