@@ -35,7 +35,7 @@ const UpdateChannelModal = ({ channel, visible, onClose, fetchChannels }) => {
     >
       <div className="custom-modal-header">
         <span className="modal-header">
-          <b># </b> Edit Channel{" "}
+          <b style={{marginRight:"5px"}}># </b> Edit Channel{" "}
         </span>
         <span>
           <MyIcon

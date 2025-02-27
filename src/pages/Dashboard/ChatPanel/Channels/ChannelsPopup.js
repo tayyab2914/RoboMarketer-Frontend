@@ -74,13 +74,13 @@ console.log(channel)
         }
         className="channels-popover"
         arrow={false}
-        overlayStyle={{  maxWidth: "450px",minWidth:"450px " }}
+        overlayStyle={{  maxWidth: "450px",minWidth:"150px " }}
         trigger="click"
         open={popoverVisible}
         onOpenChange={setPopoverVisible}
         placement={'bottom'}
       >
-        <Button type="default" className="channel-name-btn">
+        <Button type="default" className="channel-name-btn" >
           <span> <b>#</b>{" "} {selectedChannel ? TRUNCATE_STRING(selectedChannel.name,48) : "Select a Channel"} </span>
           <MyIcon type={"arrow_down"} style={{ width: "12px" }} />
         </Button>

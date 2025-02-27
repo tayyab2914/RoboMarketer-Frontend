@@ -61,7 +61,7 @@ const UpdateAccessComponent = ({ modal = false, visible, onClose , chatCount }) 
             </div></div>
         </Modal>
       ) : (
-        <div className="uac-container">
+        <div className="uac-container" >
           <p className="uac-title">
             <ClockCircleOutlined style={{ marginRight: "5px" }} />
             Limited Time Launch Special

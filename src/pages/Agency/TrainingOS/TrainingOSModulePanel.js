@@ -14,7 +14,7 @@ const TrainingOSModulePanel = ({ setModuleID }) => {
   return (
     <div id="trainingos-module">
       <span className="awa-heading">
-        <MyIcon type={"trainingos"} /> Digital Fundraising OS
+        <MyIcon type={"trainingos"} /> TrainingOS
       </span>
       <div className="collapses">
         {TRAINING_OS_CONTENT.map((module) => (

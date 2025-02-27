@@ -3,7 +3,7 @@
   export const TRAINING_OS_CONTENT = [
     {
       module_id: 1,
-      module_name: "RoboMarketer WhiteLabel",
+      module_name: "How To Earn Recurring Income By Reselling AI Agents ",
       videoLink: "https://www.youtube.com/embed/sIyrlC-wvsg?si=FC07FjH-F_ilSqYi",
       description: (
         <>

@@ -154,7 +154,8 @@ const handleFetchHistoricalData = async()=>{
       <span className="right-panel-refresh-bar">
         <Popover content={<Space direction="vertical" size={12} style={{padding:"10px"}}><RangePicker onChange={handleCustomRangeChange} presets={rangePresets} style={{margin:"0px"}}/></Space>} arrow={false}>
           <button className={`right-panel-header-span ${DecreaseFontSize ? 'panel-header-span-14' : 'panel-header-span-16'}`}>
-            <MyIcon type={"calendar"} /> {CurrentMetricRangeName}
+            <span><MyIcon type={"calendar"} /> {CurrentMetricRangeName}</span>
+            <MyIcon type={"arrow_down"} style={{height:"5.5px",margin:"0px"}}/>
           </button>
         </Popover>
 
