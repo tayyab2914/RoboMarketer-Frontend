@@ -35,7 +35,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                     <MyIcon  type="delete_btn"  size="xl"  style={{ cursor: 'pointer', marginLeft: 10 }}  />
                 </Popconfirm>
                 {/* <Switch style={{ marginLeft: 10 }} checked={user.is_lifetime_access} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/> */}
-                <Switch style={{ marginLeft: 10 }} defaultValue={user.is_lifetime_access} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/>
+                {/* <Switch style={{ marginLeft: 10 }} defaultValue={user.is_lifetime_access} onChange={(checked) => handleUpgradeAccessClick(user.id,checked)}/> */}
             </>
         ),
     }));

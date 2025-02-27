@@ -1,4 +1,4 @@
-import { Col, Row, Button, DatePicker, Popover } from "antd";
+import { Col, Row, Button, DatePicker, Popover, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/AgencyWorkArea.css";
@@ -86,11 +86,11 @@ const AgencyWorkArea = () => {
                 {/* ✅ Popover with RangePicker */}
                 <Popover
                   content={
-                    <RangePicker 
+                    <Space direction="vertical" size={12} style={{padding:"10px"}}><RangePicker 
                       onChange={handleCustomRangeChange} 
                       presets={rangePresets} 
                       format="MM/DD/YY"
-                    />
+                    /></Space>
                   }
                   trigger="click"
                   open={isPopoverVisible}
