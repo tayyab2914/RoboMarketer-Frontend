@@ -159,8 +159,8 @@ const handleFetchHistoricalData = async()=>{
           </button>
         </Popover>
 
-        <span className="refresh-btn">
-          <MyIcon type="refresh" size="xs" onClick={handleFetchHistoricalData} />
+        <span className="refresh-btn" onClick={handleFetchHistoricalData}>
+          <MyIcon type="refresh" size="xs"/>
         </span>
       </span>
 

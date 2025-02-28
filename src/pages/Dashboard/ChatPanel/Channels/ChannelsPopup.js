@@ -73,7 +73,7 @@ const dispatch = useDispatch()
         }
         className="channels-popover"
         arrow={false}
-        overlayStyle={{  maxWidth: "450px",minWidth:"150px " }}
+        overlayStyle={{  maxWidth: "450px",minWidth:"450px " }}
         trigger="click"
         open={popoverVisible}
         onOpenChange={setPopoverVisible}
