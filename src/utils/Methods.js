@@ -26,6 +26,8 @@ export const GET_PROMPT_CATEGORIES = [
   { header: "Competitors", key: "13", icon: "competitor" },
   { header: "Charts", key: "14", icon: "chart" },
 ];
+
+
 export const INDUSTRIES = [
     { key: "agriculture_forestry", label: "Agriculture & Forestry" },
     { key: "arts_entertainment_recreation", label: "Arts, Entertainment & Recreation" },
@@ -145,6 +147,9 @@ export const RENDER_FILE_PREVIEW = (file, size, showName) => {
     </span>
   );
 };
+export const SHOW_ERROR = (msg)=>{
+    message.error(msg)
+}
 export const getSuffix = (label) => {
     if (["Return on Ad Spend"].includes(label)) {
       return "X";

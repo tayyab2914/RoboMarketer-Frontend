@@ -33,7 +33,7 @@ const dispatch = useDispatch()
           dispatch(setChannel(fetchedChannels[0]));
         }
       } else {
-        setSelectedChannel({ id: 0, name: "Please Select a Channel" });
+        setSelectedChannel({ id: -1, name: "Please Select a Channel" });
         dispatch(setChannel(null));
       }
     } catch (error) {

@@ -9,7 +9,7 @@ import {
   setRerenderDashboard,
 } from "../../../redux/AuthToken/Action";
 import { API_GET_RESPONSE } from "../../../apis/ChatApis";
-import { RENDER_FILE_PREVIEW, SHOW_API_NOT_SETUP_ERROR } from "../../../utils/Methods";
+import { RENDER_FILE_PREVIEW, SHOW_API_NOT_SETUP_ERROR, SHOW_ERROR } from "../../../utils/Methods";
 import "./styles/MessageBar.css";
 import UpdateAccessComponent from "../UpdateAccessComponent";
 import Banners from "./Banners";
@@ -44,6 +44,11 @@ const MessageBar = ({ isDisabled,selectedChannel }) => {
 
   const handleSendMessage = async () => {
   
+    if(selectedChannel?.id == -1)
+    {
+        SHOW_ERROR("Please select a channel")
+        return
+    }
     if(!current_account?.is_openapi_setup)
     {
         SHOW_API_NOT_SETUP_ERROR()

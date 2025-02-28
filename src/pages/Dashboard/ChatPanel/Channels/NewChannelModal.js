@@ -22,7 +22,7 @@ const NewChannelModal = ({ visible, onClose, fetchChannels }) => {
   };
 
   return (
-    <Modal className="" title={false} open={visible} onCancel={onClose} closable={false} footer={null} >
+    <Modal className="" title={false}  zIndex={1200} open={visible} onCancel={onClose} closable={false} footer={null} >
       <div className="custom-modal-header">
         <span className="modal-header"><b style={{marginRight:"5px"}}># </b> Add New Channel </span>
         <span><MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" /> </span>
