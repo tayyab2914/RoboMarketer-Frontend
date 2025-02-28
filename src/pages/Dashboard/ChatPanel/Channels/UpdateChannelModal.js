@@ -32,6 +32,7 @@ const UpdateChannelModal = ({ channel, visible, onClose, fetchChannels }) => {
       onCancel={onClose}
       closable={false}
       footer={null}
+      zIndex={1200}
     >
       <div className="custom-modal-header">
         <span className="modal-header">

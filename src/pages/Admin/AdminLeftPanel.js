@@ -30,20 +30,12 @@ const AdminLeftPanel = () => {
         </div>
       </span>
       <span>
-      <Popover open={LogoutVisible} trigger="click" placement="topLeft" onOpenChange={(visible) => setLogoutVisible(visible)}
-            content={
-                <div style={{ padding: "8px" }}>
-                    <p style={{ marginBottom: "0px" }}>Are you sure you want to logout?</p>
-                    <div style={{ display: "flex", justifyContent: "end", marginTop: "5px" }}> 
-                        <Button type="primary" onClick={() => { logoutUser(); setLogoutVisible(false); }} style={{ marginRight: "5px", padding: "0px 10px" }}> Yes </Button> 
-                        <Button onClick={() => setLogoutVisible(false)} style={{ padding: "0px 10px" }}>No </Button>
-                    </div>
-                </div>
-            }
-            >
-            <button className="settings-btn"  onClick={() => setLogoutVisible(true)}> <span className="settings-btn-wrapper"><MyIcon type="logout" /> Logout</span> </button>
-            </Popover>
-        
+      <Popconfirm placement="topLeft" title="Are you sure you want to logout?" onConfirm={() => { logoutUser(); setLogoutVisible(false); }} okText="Yes" cancelText="No" >
+                
+                <button className="settings-btn"  onClick={() => setLogoutVisible(true)}> <span className="settings-btn-wrapper"><MyIcon type="logout" /> Logout</span> </button>
+
+            </Popconfirm>
+          
       </span>
     </div>
   );

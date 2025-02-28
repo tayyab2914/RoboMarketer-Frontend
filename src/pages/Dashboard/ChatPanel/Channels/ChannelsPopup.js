@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { API_GET_CHANNELS } from "../../../../apis/ChatApis";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Popover } from "antd";
+import { Button, Dropdown, Popover } from "antd";
 import "./styles/ChannelsPopup.css";
 import MyIcon from "../../../../components/Icon/MyIcon";
 import NewChannelModal from "./NewChannelModal";
@@ -56,20 +56,22 @@ const dispatch = useDispatch()
     setPopoverVisible(false); 
     setModalVisible(true);
   };
-
+  const dropdownMenu = (
+    <div className="channel-dropdown">
+    <div className="channel-btn-wrapper">
+      <div className="channel-btn">
+        <Button  onClick={handleNewChannel} style={{ fontWeight: 600, height: "40px",width:"100%" }} > + {" "} Add New Channel{" "} </Button>
+      </div>
+    </div>
+    <ChannelList channelsData={channelsData} onSelectChannel={handleChannelSelect} fetchChannels={fetchChannels}/>
+  </div>
+  );
 
   return (
     <div className="channels-popup">
-      <Popover
+      {/* <Popover
         content={
-          <div >
-            <div className="channel-btn-wrapper">
-              <div className="channel-btn">
-                <Button  onClick={handleNewChannel} style={{ fontWeight: 600, height: "40px",width:"100%" }} > + {" "} Add New Channel{" "} </Button>
-              </div>
-            </div>
-            <ChannelList channelsData={channelsData} onSelectChannel={handleChannelSelect} fetchChannels={fetchChannels}/>
-          </div>
+         
         }
         className="channels-popover"
         arrow={false}
@@ -78,12 +80,14 @@ const dispatch = useDispatch()
         open={popoverVisible}
         onOpenChange={setPopoverVisible}
         placement={'bottom'}
-      >
+      > */}
+         <Dropdown overlay={dropdownMenu}  trigger={["click"]} placement="bottom" overlayStyle={{  maxWidth: "450px",minWidth:"450px " }}>
         <Button type="default" className="channel-name-btn" >
           <span> <b>#</b>{" "} {selectedChannel ? TRUNCATE_STRING(selectedChannel.name,48) : "Select a Channel"} </span>
           <MyIcon type={"arrow_down"} style={{ width: "12px" }} />
         </Button>
-      </Popover>
+        </Dropdown>
+      {/* </Popover> */}
 
       <NewChannelModal visible={modalVisible} onClose={() => setModalVisible(false)} fetchChannels={fetchChannels} />
     </div>
