@@ -104,8 +104,16 @@ import ai_model_meta from  "../assets/icons/ai_model_meta.svg";
 import ai_model_open_ai from  "../assets/icons/ai_model_open_ai.svg";
 import ai_model_x from  "../assets/icons/ai_model_x.svg";
 import category from  "../assets/icons/category.svg";
+import refresh from  "../assets/icons/refresh.svg";
+import trainingos from  "../assets/icons/trainingos.svg";
+import trainingos_module from  "../assets/icons/trainingos_module.svg";
+import trainingos_lesson from  "../assets/icons/trainingos_lesson.svg";
 
 export const ICONS = {
+    trainingos_lesson: trainingos_lesson,
+    trainingos_module: trainingos_module,
+    trainingos: trainingos,
+    refresh: refresh,
     category: category,
     ai_model_ali_baba: ai_model_ali_baba,
     ai_model_anthropic: ai_model_anthropic,

@@ -39,7 +39,7 @@ const SigninForm = ({ handleSignIn, handleForgotPassword, handleSignUpToggle }) 
 
       <Form.Item className="password-helper">
         <Button type="link" className="forgot-password-btn" 
-        // onClick={handleForgotPassword} 
+        onClick={handleForgotPassword} 
         >
           Forgot Password?
         </Button>

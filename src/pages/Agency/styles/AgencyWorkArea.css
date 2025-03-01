@@ -1,9 +1,10 @@
 .awa-heading-main {
-  padding: 15px;
+  padding: 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #e6eaed;
+  overflow-x: hidden;
 }
 .awa-heading-main-sub-accounts {
   padding: 15px 15px;

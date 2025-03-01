@@ -14,7 +14,8 @@ import {
   RERENDER_RIGHT_PANEL,
   OPEN_INTEGRATIONS_MODAL,
   IS_INTEGRATIONS_MODAL_CLOSED_BY_USER,
-  SELECT_PRODUCT_SERVICE_MODE
+  SELECT_PRODUCT_SERVICE_MODE,
+  SET_SELECTED_CHANNEL
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -103,6 +104,12 @@ export const setisIntegrationsModalClosedByUser = (is_integrations_modal_closed_
   return {
     type: IS_INTEGRATIONS_MODAL_CLOSED_BY_USER,
     payload: is_integrations_modal_closed_by_user,
+  };
+};
+export const setChannel = (channel_id) => {
+  return {
+    type: SET_SELECTED_CHANNEL,
+    payload: channel_id,
   };
 };
 export const setSelectProductServiceMode = (product_service_mode) => {

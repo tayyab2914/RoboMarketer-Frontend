@@ -45,18 +45,21 @@ const AgencyLeftPanel = ({setCurrentMode}) => {
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(1)}>
            <MyIcon type={"profile_agency"}/> Profile
        </div>
-       {accounts?.is_unlimted_accounts && <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(2)}>
+       {(accounts?.access_type == 2 || accounts?.access_type == 3 )&&<div className="agency-left-panel-btn" onClick={()=>setCurrentMode(2)}>
            <MyIcon type={"whitelabel"}/> Whitelabel Domain
        </div>}
        <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(3)}>
            <MyIcon type={"support"}/> Support
        </div>
+       <div className="agency-left-panel-btn" onClick={()=>setCurrentMode(4)}>
+           <MyIcon type={"trainingos"}/> Training
+       </div>
 
       </span>
       <span>
         
-      {!accounts?.is_lifetime_access && <UpdateAccessComponent chatCount={accounts?.chat_count}/>}
-      <div style={{ height: "70px" }}></div>
+      {accounts?.access_type==0 && <UpdateAccessComponent chatCount={accounts?.chat_count}/>}
+      {/* <div style={{ height: "70px" }}></div> */}
         <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" >
           <button className="settings-btn"> <span className="settings-btn-wrapper"> <MyIcon type="logout" /> Logout </span> </button>
         </Popconfirm>

@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Collapse, Button, DatePicker, Space, Modal } from "antd";
+import { Collapse, Button, DatePicker, Space, Modal, Popover } from "antd";
 import MyIcon from "../../components/Icon/MyIcon";
 import ReportingBtn from "./ReportingBtn";
 import DashboardRightPanelInfo from "./DashboardRightPanelInfo";
 import "./styles/DashboardRightPanel.css";
 import { DownOutlined } from "@ant-design/icons";
 import dayjs from 'dayjs';
-import {
-  API_GET_INSIGHTS,
-  API_GET_ORDERING,
-  API_GET_REPORTING,
-  API_UPDATE_ORDERING,
-  API_UPDATE_REPORTING,
-} from "../../apis/FacebookInsightsApis";
+import {API_GET_HISTORICAL_DATA,API_GET_INSIGHTS,API_GET_ORDERING,API_GET_REPORTING,API_UPDATE_ORDERING,API_UPDATE_REPORTING} from "../../apis/FacebookInsightsApis";
 import { useDispatch, useSelector } from "react-redux";
 import { getMetricsStatus } from "../../utils/Methods";
 import moment from "moment";
@@ -31,12 +25,7 @@ const availableMetrics = [
   { key: "cpl", label: "CPL", value: "", trend: "red" },
   { key: "cpa", label: "CPA", value: "", trend: "red" },
   { key: "appointment_rate", label: "Appt Rate", value: "", trend: "green" },
-  {
-    key: "cost_per_appointment",
-    label: "Cost Per Appt",
-    value: "",
-    trend: "red",
-  },
+  { key: "cost_per_appointment", label: "Cost Per Appt", value: "", trend: "red", },
   { key: "leads", label: "Leads", value: "", trend: "green" },
   { key: "appointments", label: "Appts", value: "", trend: "red" },
   { key: "close_rate", label: "Close Rate", value: "", trend: "red" },
@@ -64,6 +53,7 @@ const DashboardRightPanel = () => {
   const [CurrentMetricRangeName, setCurrentMetricRangeName] = useState('Today');
   const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
   const [collapseKey, setCollapseKey] = useState("0");
+  const [DecreaseFontSize, setDecreaseFontSize] = useState(false);
 
   const { isLoggedIn, token,rerender_dashboard,current_account,rerender_right_panel } = useSelector((state) => state.authToken);
 
@@ -80,21 +70,13 @@ const DashboardRightPanel = () => {
   
 
   const getInsights = async (startDate, endDate) => {
-    const response = await API_GET_INSIGHTS(
-      token,
-      startDate,
-      endDate,
-      setShowSpinner
-    );
+    const response = await API_GET_INSIGHTS( token, startDate, endDate, setShowSpinner );
     const updatedMetrics = updateMetrics(availableMetrics, response);
     setMetrics(updatedMetrics);
   };
 
   useEffect(() => {
-    getInsights(
-      dateRange[0].format("YYYY-MM-DD"),
-      dateRange[1].format("YYYY-MM-DD")
-    );
+    getInsights( dateRange[0].format("YYYY-MM-DD"), dateRange[1].format("YYYY-MM-DD") );
   }, [dateRange,current_account?.historical_data_progress,rerender_dashboard]);
 
 
@@ -104,19 +86,20 @@ const DashboardRightPanel = () => {
       const endDate = dates[1].format('MM/DD/YY');  
       
       setCurrentMetricRangeName(`From ${startDate} to ${endDate}`);
+      setDecreaseFontSize(true)
       setCollapseKey(null);
       setDateRange(dates); 
     }
   };
   
-
+const handleFetchHistoricalData = async()=>{
+    console.log("CALLING API_GET_HISTORICAL_DATA")
+    await API_GET_HISTORICAL_DATA(token);
+    dispatch(setRerenderDashboard(!rerender_dashboard));
+}
   const handleSaveSelectedMetrics = async (metrics) => {
     setSelectedMetrics(metrics);
-    await API_UPDATE_REPORTING(
-      token,
-      getMetricsStatus(metrics),
-      setShowSpinner
-    );
+    await API_UPDATE_REPORTING( token, getMetricsStatus(metrics), setShowSpinner );
     await API_UPDATE_ORDERING(token,metrics,setShowSpinner)
     dispatch(setRerenderDashboard(!rerender_dashboard));
   };
@@ -167,53 +150,30 @@ const DashboardRightPanel = () => {
 
   return (
     <div className="right-panel-container">
-      <div className="right-panel-container-inner">
-        <Collapse
-          className="right-panel-collapse"
-          expandIconPosition={"end"}
-          activeKey={collapseKey}
-          onChange={(key) => setCollapseKey(key)}
-          expandIcon={({ isActive }) => (
-            <DownOutlined
-              style={{
-                transition: "transform 0.3s ease",
-                transform: isActive ? "rotate(-180deg)" : "rotate(0deg)",
-              }}
-            />
-          )}
-        >
-          <Panel
-            header={
-              <span className="panel-header-span">
-                <MyIcon type={"calendar"} /> {CurrentMetricRangeName}
-              </span>
-            }
-            key="1"
-          >
-            <Space direction="vertical" size={12} style={{ marginTop: "10px" }}>
-              <RangePicker // Changed DatePicker to RangePicker
-                onChange={handleCustomRangeChange} 
-                presets={rangePresets}
-              />
-            </Space>
-          </Panel>
-        </Collapse>
+    <div className="right-panel-container-inner">
+      <span className="right-panel-refresh-bar">
+        <Popover content={<Space direction="vertical" size={12} style={{padding:"10px"}}><RangePicker onChange={handleCustomRangeChange} presets={rangePresets} style={{margin:"0px"}}/></Space>} arrow={false}>
+          <button className={`right-panel-header-span ${DecreaseFontSize ? 'panel-header-span-14' : 'panel-header-span-16'}`}>
+            <span><MyIcon type={"calendar"} /> {CurrentMetricRangeName}</span>
+            <MyIcon type={"arrow_down"} style={{height:"5.5px",margin:"0px"}}/>
+          </button>
+        </Popover>
 
-        <DashboardRightPanelInfo
-  reportingData={selectedMetrics?.map((key) => 
-    Metrics?.find((metric) => metric.key === key)
-  )?.filter(Boolean)}
-/>
+        <span className="refresh-btn" onClick={handleFetchHistoricalData}>
+          <MyIcon type="refresh" size="xs"/>
+        </span>
+      </span>
 
+      <DashboardRightPanelInfo reportingData={selectedMetrics?.map((key) => Metrics?.find((metric) => metric.key === key))?.filter(Boolean)} />
 
-        <ReportingBtn
-          availableMetrics={Metrics}
-          onSave={handleSaveSelectedMetrics}
-          selectedMetrics={selectedMetrics}
-          onShowModal={handleShowModal}
-        />
-      </div>
+      <ReportingBtn
+        availableMetrics={Metrics}
+        onSave={handleSaveSelectedMetrics}
+        selectedMetrics={selectedMetrics}
+        onShowModal={handleShowModal}
+      />
     </div>
+  </div>
   );
 };
 

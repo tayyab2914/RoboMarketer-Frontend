@@ -7,6 +7,11 @@
   width: 100%;
   height: 100vh; /* Make the right panel take full height of the viewport */
 }
+.right-panel-refresh-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .right-panel-container-inner {
   display: flex;
@@ -21,6 +26,7 @@
   width: 70%; /* Reduced width for logo */
   margin: 10px auto 30px auto; /* Space adjustments for logo */
 }
+
 .right-panel-btn {
   padding: 10px 12px;
   height: 40px;
@@ -53,10 +59,25 @@
     padding-top: 7px !important;
 }
 .right-panel-collapse{
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 .right-panel-collapse .ant-picker{
     height: 40px !important;
+    width: 260px !important;
+}
+.right-panel-header-span{
+    background-color: white;
+    border: 1px solid #e6eaed;
+    width: 240px;
+    border-radius: 8px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:0px 15px ;
+}
+.right-panel-header-span img{
+    margin-right: 5px;
 }
 .right-panel-collapse .ant-collapse-content{
     padding: 0px 10px 10px 10px !important;
@@ -79,12 +100,17 @@
 }
 
 .panel-header-span {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
   justify-content: start;
-  font-size: 16px;
+  padding-top: 2px;
 }
-
+.panel-header-span-16{
+    font-size: 16px !important;
+}
+.panel-header-span-14{
+    font-size: 14px !important; 
+}
 .panel-header-span img {
   margin-right: 10px;
 }
@@ -112,8 +138,29 @@
   height: 40.8px;
   font-family: "Inter", serif;
   border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-
+.right-panel-refresh-bar .ant-collapse-header{
+    
+  width: 240px !important;
+}
+.right-panel-refresh-bar .refresh-btn{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e6eaed;
+    border-radius: 8px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.right-panel-refresh-bar
+{
+    margin-bottom: 10px;
+}
 .right-panel-container-inner .ant-collapse-header:hover {
   background-color: rgb(242, 242, 242) !important;
 }

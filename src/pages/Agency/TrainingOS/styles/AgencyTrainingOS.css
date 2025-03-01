@@ -1,0 +1,81 @@
+#trainingos-main {
+  padding: 30px 25px;
+  overflow-y: auto;
+  /* height: calc(100vh - 77.8px); */
+  scrollbar-width: none;
+  overflow-x: hidden;
+}
+#trainingos-main .left-panel-main {
+  padding-right: 10px;
+}
+#trainingos-main .right-panel-main {
+  padding-left: 10px;
+}
+#trainingos-main .left-panel {
+  border: 1px solid #e6eaed;
+  padding: 25px;
+  border-radius: 10px;
+}
+#trainingos-main .right-panel {
+  border: 1px solid #e6eaed;
+  padding: 0px;
+  border-radius: 10px;
+}
+#trainingos-content
+{
+    /* min-height: 400px; */
+}
+.module-btn{
+    border: 1px solid #e6eaed;
+    border-radius: 8px;
+    min-height: 40px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#trainingos-module .module-btn img {
+    margin-right: 10px;
+  }
+  
+#trainingos-content .title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+
+}
+#trainingos-content iframe {
+    width: 100%;          /* Full width */
+    height: auto;         /* Auto height to maintain aspect ratio */
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    border: none;
+    border-radius: 15px;
+  }
+  
+#trainingos-content .description {
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+.trainingos-module-panel {
+  cursor: pointer;
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+}
+.trainingos-module-panel img {
+    margin-right: 10px;
+  }
+  
+#trainingos-module .awa-heading {
+  padding: 25px;
+  border-bottom: 1px solid #e6eaed;
+}
+
+#trainingos-module .collapses {
+  padding: 25px;
+}

@@ -17,27 +17,18 @@ import RoboMarketerMessage from "../RoboMarketerMessage";
 import AddProductMessage from "../AddProductMessage";
 import AddFunnelMessage from "../AddFunnelMessage";
 
-const Chats = () => {
+const Chats = ({chat_data,get_history}) => {
   const [showSpinner, setShowSpinner] = useState(false);
-  const { token, current_account, rerender_chat_panel, temporary_message,facebook_state } =
+  const { token, current_account, channel,rerender_chat_panel, temporary_message,facebook_state } =
     useSelector((state) => state.authToken);
   
-  const [ChatData, setChatData] = useState([]);
+  const [ChatData, setChatData] = useState(chat_data);
   const chatContainerRef = useRef(null);
   const dispatch = useDispatch();
-  const get_history = async () => {
-    const response = await API_GET_HISTORY(
-      token,
-      current_account?.id,
-      setShowSpinner
-    );
-    
-    setChatData(response?.reverse() || []);
-  };
-
-  useEffect(() => {
-    get_history();
-  }, []);
+  
+  useEffect(()=>{
+setChatData(chat_data)
+  },[chat_data])
 
   useEffect(() => {
     if (temporary_message?.message || temporary_message?.file) {
@@ -50,30 +41,26 @@ const Chats = () => {
           uploads: temporary_message?.file ? [temporary_message.file] : [],
         },
       ]);
-    //   if(temporary_message?.sent_from_left_panel && !temporary_message?.wait)
-    //     {
-    //         get_history()
-    //     } 
     }
   }, [temporary_message]);
 
   useEffect(()=>{
+    console.log('chat_data',chat_data)
     if(!temporary_message)
     {
         get_history()
     }
   },[temporary_message])
   useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+    if (chatContainerRef.current) { 
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [ChatData]);
 
 
   return (
     <div className="chat-container" ref={chatContainerRef}>
-  {<><FacebookIntegration isInIntegrationComponent={false}  /></>}
+  {channel?.name == "General" && <><FacebookIntegration isInIntegrationComponent={false}  /></>}
   {current_account?.is_facebook_connected && <RoboMarketerMessage/>}
   {current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup && <AddProductMessage/>}
   {current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup &&  current_account?.is_product_setup && <AddFunnelMessage/>}

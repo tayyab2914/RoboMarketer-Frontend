@@ -59,8 +59,6 @@ export const API_SELECT_ACCOUNT = async (
   fb_account_name,
   setShowSpinner
 ) => {
-    console.log(fb_account_id,fb_account_name)
-//   setShowSpinner(true);
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/facebookinsights/select_account/`,
@@ -158,7 +156,6 @@ export const API_GET_INSIGHTS = async (
   date_stop,
 ) => {
 //   setShowSpinner(true);
-console.log(date_start,date_stop)
   try {
     const response = await axios.get(
       `${DOMAIN_NAME}/facebookinsights/get_insights_data/`,
@@ -182,7 +179,7 @@ console.log(date_start,date_stop)
   }
 };
 
-export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
+export const API_GET_HISTORICAL_DATA = async (token) => {
 //   setShowSpinner(true);
   try {
     const response = await axios.post(
@@ -197,15 +194,10 @@ export const API_GET_HISTORICAL_DATA = async (token, setShowSpinner) => {
     return response.data;
   } catch (error) {
     // Handle error properly
-    if (error.response?.data?.message) {
-    //   message.error(error.response?.data?.message); 
-    } else {
-    //   message.error("An error occurred while fetching historical data.");
-    }
+    message.error(error?.response?.data?.detail)
+   
     return false;
-  } finally {
-    setShowSpinner(false);
-  }
+  } 
 };
 
 export const API_UPDATE_INSIGHTS = async (token, setShowSpinner) => {

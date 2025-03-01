@@ -1,8 +1,11 @@
 .uac-container {
-  margin: 0px 10px 10px 10px;
+  margin: 0px 10px 0px 10px;
   border: 1px solid #e6eaed;
   border-radius: 12px;
   text-align: center;
+  position: absolute;
+  bottom: 80px;
+  background-color: white;
 }
 .uac-title {
   background-color: #ffe6e5;

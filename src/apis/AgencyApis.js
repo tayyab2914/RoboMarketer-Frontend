@@ -69,9 +69,7 @@ export const API_SEND_INVITE_EMAIL = async ( token, id, setShowSpinner ) => {
         message.success("Email sent successfully!")
         return response.data;
     } catch (error) {
-        message.error(
-          error.response?.data?.message 
-        );
+        message.error(error?.response?.data?.detail)
         console.log(error)
         return null; 
     } finally {

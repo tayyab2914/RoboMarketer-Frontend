@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { IMAGES } from "../../data/ImageData";
-import { Popconfirm } from "antd";
+import { Button, Popconfirm, Popover } from "antd";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/AdminLeftPanel.css";
 import { useLogoutUser } from "../../hooks/useLogoutUser";
 
 const AdminLeftPanel = () => {
   const logoutUser = useLogoutUser();
+      const [LogoutVisible, setLogoutVisible] = useState(false);
 
   return (
     <div className="admin-left-panel-container">
@@ -29,9 +30,12 @@ const AdminLeftPanel = () => {
         </div>
       </span>
       <span>
-        <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" >
-              <button className="settings-btn" > <span className="settings-btn-wrapper"><MyIcon type="logout" /> Logout</span> </button>
-        </Popconfirm>
+      <Popconfirm placement="topLeft" title="Are you sure you want to logout?" onConfirm={() => { logoutUser(); setLogoutVisible(false); }} okText="Yes" cancelText="No" >
+                
+                <button className="settings-btn"  onClick={() => setLogoutVisible(true)}> <span className="settings-btn-wrapper"><MyIcon type="logout" /> Logout</span> </button>
+
+            </Popconfirm>
+          
       </span>
     </div>
   );
