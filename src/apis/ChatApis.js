@@ -182,7 +182,7 @@ export const API_GET_RESPONSE = async (token, messageInput, file_group, setShowS
 
 export const API_GET_HISTORY = async (token, account_id,selectedChannel) => {
 
-    console.log(selectedChannel)
+    console.log('selectedChannel',selectedChannel)
     // setShowSpinner(true);
     try {
         const response = await axios.get(`${DOMAIN_NAME}/chat/get_history/`,{

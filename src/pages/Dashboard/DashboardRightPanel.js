@@ -93,7 +93,6 @@ const DashboardRightPanel = () => {
   };
   
 const handleFetchHistoricalData = async()=>{
-    console.log("CALLING API_GET_HISTORICAL_DATA")
     await API_GET_HISTORICAL_DATA(token);
     dispatch(setRerenderDashboard(!rerender_dashboard));
 }

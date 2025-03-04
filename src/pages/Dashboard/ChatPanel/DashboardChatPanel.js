@@ -9,7 +9,7 @@ import { API_GET_HISTORY } from "../../../apis/ChatApis";
 import ChannelsPopup from "./Channels/ChannelsPopup";
 
 const DashboardChatPanel = () => {
-    const { isLoggedIn, token,rerender_dashboard,facebook_state,rerender_chat_panel,current_account } = useSelector((state) => state.authToken);
+    const { isLoggedIn, token,rerender_dashboard,facebook_state,rerender_chat_panel,current_account,channel } = useSelector((state) => state.authToken);
   const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
   
   const [ChatData, setChatData] = useState([]);
@@ -21,7 +21,7 @@ useEffect(() => {
   }, [current_account?.is_facebook_connected]);
 
   const get_history = async () => {
-      const response = await API_GET_HISTORY( token, current_account?.id, selectedChannel );
+      const response = await API_GET_HISTORY( token, current_account?.id, channel );
       setChatData(response?.reverse() || []);
     };
   
