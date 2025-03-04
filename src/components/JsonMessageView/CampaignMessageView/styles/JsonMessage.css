@@ -1,0 +1,88 @@
+.card-header-campaign {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  gap: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.card-campaign {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  /* padding: 24px; */
+  background: white;
+}
+
+.space-y-5 > * + * {
+  margin-top: 1.25rem;
+}
+
+.product-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+.select-mess {
+  display: flex;
+  align-items: center;
+}
+
+.justify-end {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+.cursor-poiner {
+  cursor: pointer;
+}
+.text-sm {
+  font-size: 0.9rem;
+}
+
+.break-words {
+  word-break: break-all;
+}
+
+.add-data {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.text-start {
+  text-align: left !important;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Spinner Styling */
+.spinner {
+  width: 24px; /* Adjust size */
+  height: 24px;
+  border: 3px solid rgba(128, 128, 128, 0.3); /* Light blue */
+  border-top: 3px solid gray; /* Darker blue */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+}
+
+.text-base {
+  font-size: 0.8rem;
+}

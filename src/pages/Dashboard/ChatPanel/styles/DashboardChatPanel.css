@@ -1,3 +1,16 @@
+.back-to-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  z-index: 100;
+}
+.back-icon {
+  cursor: pointer;
+  background-color: white;
+  border-radius: 100%;
+}
+
 .dashboard-chat-panel-main {
   display: flex;
   flex-direction: column;
@@ -53,3 +66,4 @@
     padding: 0px 10px;
   }
 }
+

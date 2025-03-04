@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Input, Button, Spin, message, Select } from "antd"; 
+import { Modal, Input, Button, Spin, message, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import MyIcon from "../Icon/MyIcon";
 import FileUploader from "../../components/FileUploader/FileUploader";
-import { ICONS } from "../../data/IconData"; 
+import { ICONS } from "../../data/IconData";
 import { API_UPDATE_PROMPT } from "../../apis/ChatApis";
 import { GET_PROMPT_CATEGORIES } from "../../utils/Methods";
 import { setRerenderDashboard } from "../../redux/AuthToken/Action";
@@ -11,25 +11,34 @@ import SelectCategoryPopup from "../../pages/Dashboard/SelectCategoryPopup";
 
 const { TextArea } = Input;
 
-const EditPromptModal = ({ visible, onClose, prompt,CATEGORY }) => {
-    const { isLoggedIn, isAdmin, current_account,rerender_dashboard } = useSelector((state) => state.authToken);
+const EditPromptModal = ({ visible, onClose, prompt, CATEGORY }) => {
+  const { isLoggedIn, isAdmin, current_account, rerender_dashboard } =
+    useSelector((state) => state.authToken);
 
-console.log(CATEGORY)
+  console.log(CATEGORY);
   const [loading, setLoading] = useState(false);
   const [promptData, setPromptData] = useState(prompt); // Initializing promptData state
   const [fileGroup, setFileGroup] = useState([]); // Handling file uploads
   const { token } = useSelector((state) => state.authToken);
   const [ShowSpinner, setShowSpinner] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (visible && prompt) {
-        console.log('prompt',prompt,'CATEGORY',CATEGORY)
-        setPromptData({ ...prompt, category:CATEGORY?.category_id,category_name:CATEGORY?.category_name})
-        console.log({ ...prompt, category:CATEGORY?.category_id,category_name:CATEGORY?.category_name })
+      console.log("prompt", prompt, "CATEGORY", CATEGORY);
+      setPromptData({
+        ...prompt,
+        category: CATEGORY?.category_id,
+        category_name: CATEGORY?.category_name,
+      });
+      console.log({
+        ...prompt,
+        category: CATEGORY?.category_id,
+        category_name: CATEGORY?.category_name,
+      });
       setFileGroup(prompt.files || []); // Assuming prompt has a `files` field
     }
-  }, [visible, prompt,CATEGORY]); // Re-run when the prompt prop or visibility changes
+  }, [visible, prompt, CATEGORY]); // Re-run when the prompt prop or visibility changes
 
   // Handle file upload
   const handleFileChange = (info) => {
@@ -58,17 +67,22 @@ console.log(CATEGORY)
     });
     // Replace the following with an actual API call
     // await API_UPDATE_PROMPT(token, promptData.id, updatedPrompt);
-    await API_UPDATE_PROMPT(token, formData,promptData?.id, setShowSpinner);
-    dispatch(setRerenderDashboard(!rerender_dashboard))
-    
+    await API_UPDATE_PROMPT(token, formData, promptData?.id, setShowSpinner);
+    dispatch(setRerenderDashboard(!rerender_dashboard));
+
     onClose(); // Close the modal after saving
   };
 
-  const setCategoryHandler = (value)=>{
+  const setCategoryHandler = (value) => {
+    console.log("Category");
 
-    console.log('SelectCategoryPopup',value?.category_id)
-    setPromptData({ ...promptData, category: value?.category_id,category_name:value?.category_name })
-  }
+    console.log("SelectCategoryPopup", value?.category_id);
+    setPromptData({
+      ...promptData,
+      category: value?.category_id,
+      category_name: value?.category_name,
+    });
+  };
   return (
     <Modal
       title={false}
@@ -99,10 +113,15 @@ console.log(CATEGORY)
           <Spin />
         ) : (
           <>
-          <div className="">
-            
-          <SelectCategoryPopup setCategory={(value) => {setCategoryHandler(value)}} category={promptData?.category} category_name={promptData?.category_name}/>
-            {/* <p className="modal-field-label-block">Select Category</p>
+            <div className="">
+              <SelectCategoryPopup
+                setCategory={(value) => {
+                  setCategoryHandler(value);
+                }}
+                category={promptData?.category}
+                category_name={promptData?.category_name}
+              />
+              {/* <p className="modal-field-label-block">Select Category</p>
             <Select 
               value={promptData?.category} 
               onChange={(value) => setPromptData({ ...promptData, category: value })} 
@@ -113,29 +132,45 @@ console.log(CATEGORY)
             >
               {GET_PROMPT_CATEGORIES?.map((cat) => <Select.Option key={cat.header} value={cat.header}>{cat.header}</Select.Option>)}
             </Select> */}
-          </div>
-
+            </div>
             <div>
               <p className="modal-field-label-block">Prompt Name</p>
               <Input
                 value={promptData?.prompt_name || ""}
-                onChange={(e) => setPromptData({ ...promptData, prompt_name: e.target.value })}
+                onChange={(e) =>
+                  setPromptData({ ...promptData, prompt_name: e.target.value })
+                }
                 placeholder="Enter prompt name"
                 className="add-prompt-btn-input"
               />
             </div>
-
             <div>
               <p className="modal-field-label-block">Prompt</p>
               <TextArea
                 rows={5}
                 value={promptData?.prompt || ""}
-                onChange={(e) => setPromptData({ ...promptData, prompt: e.target.value })}
+                onChange={(e) =>
+                  setPromptData({ ...promptData, prompt: e.target.value })
+                }
                 placeholder="Enter prompt details"
                 className="add-prompt-btn-text-area"
               />
             </div>
-
+            <div className="">
+              <p className="modal-field-label-block">Quick Prompt @HashTag</p>
+              <Input
+                height={70}
+                value={promptData?.prompt_hashtag || ""}
+                onChange={(e) =>
+                  setPromptData({
+                    ...promptData,
+                    prompt_hashtag: e.target.value,
+                  })
+                }
+                placeholder="Type @hashtag"
+                className="add-prompt-btn-input"
+              />
+            </div>
             {/* <div className="add-prompt-upload-sop-docs">
               <p className="modal-field-label-block">Upload SOP Docs</p>
               <FileUploader
@@ -146,7 +181,7 @@ console.log(CATEGORY)
                 showRemoveIcon={true}
                 accept={".docs, .docx"}
               />
-            </div> */}
+            </div> */}{" "}
           </>
         )}
       </div>
