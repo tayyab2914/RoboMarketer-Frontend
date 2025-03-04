@@ -1,0 +1,177 @@
+.recommendations-container {
+  max-width: 800px;
+}
+
+.recommendations-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.recommendations-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.recommendations-count {
+  background: #e3e3e3;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: bold;
+}
+
+.recommendation-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  /* padding: 24px; */
+  background: white;
+}
+
+.card-header-recommendation {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.badge {
+  background: #e3e3e3;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #747474;
+  font-weight: bold;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section:last-child {
+  margin-bottom: 24px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: #000000;
+  flex-shrink: 0;
+}
+
+.content h3 {
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #374151;
+}
+
+.content p {
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+  font-size: 14px;
+}
+
+.buttons {
+  margin: 10px 0;
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.accept-button {
+  background: #b4e3b3;
+  color: #2e6e39;
+}
+
+/* .accept-button:hover {
+  background: #94d893;
+} */
+
+.accept-button-all-recommendations {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* .accept-button-all-recommendations:hover {
+  background: #6a6a6a;
+} */
+
+.deny-button {
+  background-color: #feeaeb;
+  color: #fa3535;
+}
+
+/* .deny-button:hover {
+  background: #fecaca;
+} */
+
+.accepted,
+.declined {
+  width: fit-content;
+  border-radius: 8px;
+  padding: 6px 14px;
+  margin: 10px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.status-label-accepted {
+  /* border: 1px solid #b4e3b3; */
+  border: 1px solid #daf4da;
+  /* background: #b4e3b3; */
+  background: #daf4da;
+  color: #a5c6aa;
+  /* color: rgb(169, 166, 166); */
+  cursor: not-allowed;
+}
+
+.status-label-declined {
+  border: 1px solid #feeaeb;
+  background-color: #feeaeb;
+  /* color: #fa3535; */
+  color: #f1baba;
+  cursor: not-allowed;
+}
+
+.status-label.error {
+  /* border: 1px solid #feeaeb; */
+  /* background-color: #feeaeb; */
+  color: #fa3535;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}

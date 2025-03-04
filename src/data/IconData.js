@@ -88,43 +88,48 @@ import invite_members from "../assets/icons/invite_members.svg";
 import delete_btn_outlined from "../assets/icons/delete_btn_outlined.svg";
 import question_round from "../assets/icons/question_round.svg";
 import invited_member from "../assets/icons/invited_member.svg";
-import whitelabel from  "../assets/icons/whitelabel.svg";
-import ai_model_api from  "../assets/icons/ai_model_api.svg";
-import support_general_questions from  "../assets/icons/support_general_questions.svg";
-import support_feature_request from  "../assets/icons/support_feature_request.svg";
-import support_bugs from  "../assets/icons/support_bugs.svg";
-import support from  "../assets/icons/support.svg";
-import support_email from  "../assets/icons/support_email.svg";
-import banner_ai_model from  "../assets/icons/banner_ai_model.svg";
-import ai_model_ali_baba from  "../assets/icons/ai_model_ali_baba.svg";
-import ai_model_anthropic from  "../assets/icons/ai_model_anthropic.svg";
-import ai_model_deep_seek from  "../assets/icons/ai_model_deep_seek.svg";
-import ai_model_google from  "../assets/icons/ai_model_google.svg";
-import ai_model_meta from  "../assets/icons/ai_model_meta.svg";
-import ai_model_open_ai from  "../assets/icons/ai_model_open_ai.svg";
-import ai_model_x from  "../assets/icons/ai_model_x.svg";
-import category from  "../assets/icons/category.svg";
-import refresh from  "../assets/icons/refresh.svg";
-import trainingos from  "../assets/icons/trainingos.svg";
-import trainingos_module from  "../assets/icons/trainingos_module.svg";
-import trainingos_lesson from  "../assets/icons/trainingos_lesson.svg";
+import performance_icon from "../assets/icons/performance_icon.svg";
+import active_campaign from "../assets/icons/active_campaign.svg";
+import reasoning_icon from "../assets/icons/reasoning_icon.svg";
+import recommendation_icon from "../assets/icons/recommendation_icon.svg";
+import projection_icon from "../assets/icons/projection_icon.svg";
+import whitelabel from "../assets/icons/whitelabel.svg";
+import ai_model_api from "../assets/icons/ai_model_api.svg";
+import support_general_questions from "../assets/icons/support_general_questions.svg";
+import support_feature_request from "../assets/icons/support_feature_request.svg";
+import support_bugs from "../assets/icons/support_bugs.svg";
+import support from "../assets/icons/support.svg";
+import support_email from "../assets/icons/support_email.svg";
+import banner_ai_model from "../assets/icons/banner_ai_model.svg";
+import ai_model_ali_baba from "../assets/icons/ai_model_ali_baba.svg";
+import ai_model_anthropic from "../assets/icons/ai_model_anthropic.svg";
+import ai_model_deep_seek from "../assets/icons/ai_model_deep_seek.svg";
+import ai_model_google from "../assets/icons/ai_model_google.svg";
+import ai_model_meta from "../assets/icons/ai_model_meta.svg";
+import ai_model_open_ai from "../assets/icons/ai_model_open_ai.svg";
+import ai_model_x from "../assets/icons/ai_model_x.svg";
+import category from "../assets/icons/category.svg";
+import refresh from "../assets/icons/refresh.svg";
+import trainingos from "../assets/icons/trainingos.svg";
+import trainingos_module from "../assets/icons/trainingos_module.svg";
+import trainingos_lesson from "../assets/icons/trainingos_lesson.svg";
 
 export const ICONS = {
-    trainingos_lesson: trainingos_lesson,
-    trainingos_module: trainingos_module,
-    trainingos: trainingos,
-    refresh: refresh,
-    category: category,
-    ai_model_ali_baba: ai_model_ali_baba,
-    ai_model_anthropic: ai_model_anthropic,
-    ai_model_deep_seek: ai_model_deep_seek,
-    ai_model_google: ai_model_google,
-    ai_model_meta: ai_model_meta,
-    ai_model_x: ai_model_x,
-    ai_model_open_ai: ai_model_open_ai,
-    banner_ai_model: banner_ai_model,
-    support: support,
-    support_email: support_email,
+  trainingos_lesson: trainingos_lesson,
+  trainingos_module: trainingos_module,
+  trainingos: trainingos,
+  refresh: refresh,
+  category: category,
+  ai_model_ali_baba: ai_model_ali_baba,
+  ai_model_anthropic: ai_model_anthropic,
+  ai_model_deep_seek: ai_model_deep_seek,
+  ai_model_google: ai_model_google,
+  ai_model_meta: ai_model_meta,
+  ai_model_x: ai_model_x,
+  ai_model_open_ai: ai_model_open_ai,
+  banner_ai_model: banner_ai_model,
+  support: support,
+  support_email: support_email,
   support_bugs: support_bugs,
   support_feature_request: support_feature_request,
   support_general_questions: support_general_questions,
@@ -179,7 +184,7 @@ export const ICONS = {
   cross: cross,
   cross_red: cross_red,
   settings: settings,
-//   reporting: reporting,
+  //   reporting: reporting,
   reporting: analytics,
   cpa: cpa,
   sales: sales,
@@ -223,5 +228,10 @@ export const ICONS = {
   delete_btn: delete_btn,
   edit_btn: edit_btn,
   hamburger: hamburger,
-  whitelabel: whitelabel
+  performance_icon: performance_icon,
+  active_campaign: active_campaign,
+  reasoning_icon: reasoning_icon,
+  recommendation_icon: recommendation_icon,
+  projection_icon: projection_icon,
+  whitelabel: whitelabel,
 };

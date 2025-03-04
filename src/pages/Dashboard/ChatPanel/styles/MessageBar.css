@@ -1,68 +1,127 @@
-.message-arrow-up{
-background-color: black;
-/* padding: 7px; */
-border-radius: 50%;
-margin: 0px 15px;
-height: 35px;
-width: 35px;
-cursor: pointer;
+.message-bar-plus {
+  font-size: 20px;
+  color: #000;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 0 5px 0 10px;
+  cursor: pointer;
 }
-.message-bar-plus{
-    border-radius: 50%;
-    padding: 5px;
-    margin: 0px 5px 0px 10px;
-    cursor: pointer;
+
+.message-arrow-up {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  margin: 0 15px;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.message-bar-input{
-    height: 40px;
-    margin-bottom: 0px;
-    border: none !important;
-    width: 100%;
-    outline: none;
-    font-size: 14px;
-    font-family: "Inter", serif;
+
+.message-arrow-up .ant-spin-dot {
+  color: #fff !important;
 }
-.message-bar-input::placeholder{
-    
-    font-weight: 500;
-}
-.message-bar{
-    background-color: white;
-    padding: 9px 0px;
-    border-radius: 8px;
-    filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.262));
-    margin-bottom: 25px;
-    display: flex;
-    bottom: 0;
-}
+
+
 .disabled-icon {
-    opacity: 0.5;
-    cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.message-bar-input {
+  height: 40px;
+  margin-bottom: 0px;
+  border: none !important;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+  font-family: "Inter", serif;
+  padding: 0 8px;
+}
+
+.message-bar-input::placeholder {
+  font-weight: 500;
+}
+
+.message-bar {
+  background-color: white;
+  padding: 9px 0px;
+  border-radius: 8px;
+  filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.262));
+  margin-bottom: 25px;
+  display: flex;
+  bottom: 0;
+}
+
+.message-bar .ant-input {
+  background-color: white !important;
+}
+
+.file-preview-container {
+  display: flex;
+  align-items: center;
+}
+
+.file-preview-container-badge-icon {
+  font-size: 10px;
+  color: red;
+  cursor: pointer;
+  position: relative;
+  left: 10px;
+  top: 5px !important;
+}
+
+.file-preview-container-badge {
+  margin-left: 0px;
+  cursor: pointer;
+}
+
+@media screen and (max-width:500px) {
+  .message-bar {
+    margin-bottom: 10px;
   }
-  
-  .message-bar-input
-  .message-bar .ant-input{
-    background-color: white !important;
-    /* border: none !important; */
-  }
-  .file-preview-container{
-    display: flex;
-    align-items: center;
-  }
-  .file-preview-container-badge-icon{
-    font-size: 10px;
-    color: red;
-    cursor: pointer;
-    position: relative;
-    left: 10px;
-    top: 5px !important;
-  }
-  .file-preview-container-badge{
-    margin-left: 0px;
-    cursor: pointer;
-  }
-  @media screen and (max-width:500px){/* Container for the chat */
-    .message-bar{
-        margin-bottom: 10px;
-    }
-      }
+}
+
+/* Suggestions container */
+.suggestions-container {
+  position: relative;
+}
+
+.suggestions-panel {
+  position: absolute;
+  bottom: 100%;
+  left: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.suggestion-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: #f5f5f5;
+}
+
+.suggestion-selected {
+  background-color: #eeeff0;
+  border-left: 3px solid #000000;
+}

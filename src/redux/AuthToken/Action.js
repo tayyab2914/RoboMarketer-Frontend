@@ -9,13 +9,15 @@ import {
   RERENDER_DASHBOARD,
   RERENDER_CHAT_PANEL,
   TEMPORARY_MESSAGE,
+  TEMPORARY_LOADING,
   SET_FACEBOOK_STATE,
   SET_IS_FB_SETUP,
   RERENDER_RIGHT_PANEL,
   OPEN_INTEGRATIONS_MODAL,
   IS_INTEGRATIONS_MODAL_CLOSED_BY_USER,
   SELECT_PRODUCT_SERVICE_MODE,
-  SET_SELECTED_CHANNEL
+  TEMPORARY_RESPONSE,
+  SET_SELECTED_CHANNEL,
 } from "./Types";
 
 export const setAuthToken = (token) => {
@@ -70,12 +72,28 @@ export const setRerenderRightPanel = (rerender_right_panel) => {
   };
 };
 export const setTemporaryMessage = (temp_message) => {
-    // console.log('temp_message',temp_message)
+  // console.log('temp_message',temp_message)
   return {
     type: TEMPORARY_MESSAGE,
     payload: temp_message,
   };
 };
+export const setTemporaryLoading = (temporary_loading) => {
+  // console.log('temp_message',temp_message)
+  return {
+    type: TEMPORARY_LOADING,
+    payload: temporary_loading,
+  };
+};
+
+export const setTemporaryResponse = (temporary_response) => {
+  // console.log('temp_message',temp_message)
+  return {
+    type: TEMPORARY_RESPONSE,
+    payload: temporary_response,
+  };
+};
+
 export const setFacebookState = (facebook_state) => {
   return {
     type: SET_FACEBOOK_STATE,
@@ -100,7 +118,9 @@ export const setFacebookCode = (facebook_code) => {
     payload: facebook_code,
   };
 };
-export const setisIntegrationsModalClosedByUser = (is_integrations_modal_closed_by_user) => {
+export const setisIntegrationsModalClosedByUser = (
+  is_integrations_modal_closed_by_user
+) => {
   return {
     type: IS_INTEGRATIONS_MODAL_CLOSED_BY_USER,
     payload: is_integrations_modal_closed_by_user,
@@ -113,8 +133,8 @@ export const setChannel = (channel_id) => {
   };
 };
 export const setSelectProductServiceMode = (product_service_mode) => {
-    return {
-      type: SELECT_PRODUCT_SERVICE_MODE,
-      payload: product_service_mode,
-    };
+  return {
+    type: SELECT_PRODUCT_SERVICE_MODE,
+    payload: product_service_mode,
   };
+};

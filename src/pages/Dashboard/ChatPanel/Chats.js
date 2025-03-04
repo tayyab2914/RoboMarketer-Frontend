@@ -18,7 +18,8 @@ import AddProductMessage from "../AddProductMessage";
 import AddFunnelMessage from "../AddFunnelMessage";
 
 const Chats = ({chat_data,get_history}) => {
-  const {  current_account, channel,temporary_message } =useSelector((state) => state.authToken);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const { token, current_account, channel,rerender_chat_panel, temporary_message,facebook_state } =useSelector((state) => state.authToken);
   const [ChatData, setChatData] = useState(chat_data);
   const chatContainerRef = useRef(null);
   
@@ -56,9 +57,9 @@ const Chats = ({chat_data,get_history}) => {
   return (
     <div className="chat-container" ref={chatContainerRef}>
   {channel?.name == "General" && <><FacebookIntegration isInIntegrationComponent={false}  /></>}
-  {(channel?.name == "General" && current_account?.is_facebook_connected) && <RoboMarketerMessage/>}
-  {(channel?.name == "General" &&current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup) && <AddProductMessage/>}
-  {(channel?.name == "General" &&current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup &&  current_account?.is_product_setup) && <AddFunnelMessage/>}
+  {current_account?.is_facebook_connected && <RoboMarketerMessage/>}
+  {current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup && <AddProductMessage/>}
+  {current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup &&  current_account?.is_product_setup && <AddFunnelMessage/>}
 
   {ChatData?.map((item, index) => (
         <div key={index} className="chat-message-container">
