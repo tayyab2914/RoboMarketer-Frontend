@@ -22,7 +22,7 @@ const AgencyMain = () => {
   const [isLeftDrawerVisible, setIsLeftDrawerVisible] = useState(false);
   const showLeftDrawer = () => setIsLeftDrawerVisible(true);
   const closeLeftDrawer = () => setIsLeftDrawerVisible(false);
-  const [CurrentMode, setCurrentMode] = useState(0);
+  const [CurrentMode, setCurrentMode] = useState(3);
 
 
   useEffect(() => {

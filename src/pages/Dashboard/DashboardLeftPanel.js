@@ -76,6 +76,7 @@ const DashboardLeftPanel = ({
 
   useEffect(() => {
     if (Accounts && Accounts.length) {
+        
       const current = Accounts.find((account) => account.is_current_account);
       setCurrentAccount(current);
     }
@@ -192,10 +193,7 @@ const DashboardLeftPanel = ({
     fetchCategoryOrdering();
   }, []);
 
-  if (!CurrentAccount) {
-    // Wait for CurrentAccount to load before rendering
-    return null;
-  }
+  
 
   return (
     <>
@@ -214,7 +212,7 @@ const DashboardLeftPanel = ({
             />
           </div>
 
-          {current_account?.is_main_user ? (
+          {CurrentAccount?.is_main_user ? (
             <AccountSwitcher />
           ) : (
             <div className="side-bar-btn-wrapper" style={{ marginTop: "10px" }}>
@@ -234,7 +232,7 @@ const DashboardLeftPanel = ({
                 ) : (
                   <MyIcon type={"user"} />
                 )}
-                {TRUNCATE_STRING(CurrentAccount?.name, 17)}
+                {CurrentAccount?.name ? TRUNCATE_STRING(CurrentAccount?.name, 17):<Spin size="small" style={{marginLeft:"90px"}}/>}
               </span>
             </div>
           )}

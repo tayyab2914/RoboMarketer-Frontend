@@ -4,7 +4,14 @@
   height: 1.8rem !important;
   width: 1.7rem !important;
 }
-
+.show-more-btn{
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-top: 5px;
+}
 .slick-next {
   right: -5px !important;
   z-index: 99 !important;
@@ -26,8 +33,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
-  background-color: white;
+  padding: 1rem ;
+  background-color: transparent;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .custom-heading-container {
@@ -84,16 +92,23 @@
 
 .card {
   background-color: white;
-  padding: 1rem;
+  /* padding: 1rem; */
   border-radius: 0.5rem;
 }
-
+.card-wrapper{
+    padding: 10px;
+}
+.metrics-section{
+    padding: 10px;
+}
 .card-header {
+    padding: 1rem;
   font-size: 18px;
   font-weight: 600;
   display: flex;
   align-items: flex-start;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
+  margin-bottom: 10px;
 }
 
 .icon {
@@ -332,6 +347,7 @@
   justify-content: space-between;
   cursor: pointer;
   gap: 5px;
+  padding: 10px;
 }
 
 .campaign-container {

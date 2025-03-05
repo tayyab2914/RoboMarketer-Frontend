@@ -68,7 +68,7 @@ useEffect(() => {
   return (
     <div>
       {ShowSpinner && <Spin fullscreen />}
-      <Row gutter={24} justify={'center'} className="account-main-row">
+      <Row justify={'center'} className="account-main-row">
         <Col xs={24} md={12} className="form-container" data-aos="fade-right">
             {ShowSignUpComponent && <SignUpForm handleSignUp={handleSignUp} handleSignInToggle={handleSignInToggle} />}
 

@@ -128,9 +128,8 @@ const DashboardMain = () => {
   };
   return (
     <div>
-      {ShowSpinner && <Spin fullscreen />}
       <Row style={{ width: "100vw" }}>
-        {windowWidth > 1200 && (
+        {/* {windowWidth > 1200 && ( */}
           <Col
             style={{
               width: "310px",
@@ -146,7 +145,7 @@ const DashboardMain = () => {
               setIsAIResponseLoading={setIsAIResponseLoading}
             />
           </Col>
-        )}
+        {/* )} */}
 
         <Col
           style={{

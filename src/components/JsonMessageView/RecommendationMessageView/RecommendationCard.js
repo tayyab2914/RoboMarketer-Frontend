@@ -1,22 +1,20 @@
 import { ShieldAlert } from "lucide-react";
 import { ICONS } from "../../../data/IconData";
 import "./styles/JsonMessage.css";
+import { useState } from "react";
 
 export default function RecommendationCard({ data, onAccept, onDeny }) {
+    const [charLimit, setCharLimit] = useState(400);
+
+    const handleShowMore = () => {
+    setCharLimit((prevLimit) => prevLimit + 400);
+    };
   function capitalizeFirstCharacter(str) {
     if (!str) return str;
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  const {
-    name,
-    level,
-    recommendation,
-    reasoning,
-    projection,
-    status,
-    error_message,
-  } = data;
+  const { name, level, recommendation, reasoning, projection, status, error_message, } = data;
 
   // Decide what to display based on status
   const renderStatusLabel = () => {
@@ -56,8 +54,9 @@ export default function RecommendationCard({ data, onAccept, onDeny }) {
         </h6>
       </div>
       <div className="content">
-        <p className="mt-2">{recommendation}</p>
-      </div>
+        <p className="mt-2"> {recommendation?.slice(0, charLimit)} {charLimit < recommendation?.length && "..."} </p>
+        {charLimit < recommendation?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
+    </div>
 
       <div className="section mt-3">
         <img
@@ -71,8 +70,9 @@ export default function RecommendationCard({ data, onAccept, onDeny }) {
         </h6>
       </div>
       <div className="content">
-        <p className="mt-2">{reasoning}</p>
-      </div>
+        <p className="mt-2"> {reasoning?.slice(0, charLimit)} {charLimit < reasoning?.length && "..."} </p>
+        {charLimit < reasoning?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
+    </div>
 
       <div className="section mt-3">
         <img
@@ -86,9 +86,9 @@ export default function RecommendationCard({ data, onAccept, onDeny }) {
         </h6>
       </div>
       <div className="content">
-        <p className="mt-2">{projection}</p>
-      </div>
-
+        <p className="mt-2"> {projection?.slice(0, charLimit)} {charLimit < projection?.length && "..."} </p>
+        {charLimit < projection?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
+    </div>
       {/* Show status label if ACCEPTED/DECLINED/ERROR */}
       {renderStatusLabel()}
 
@@ -96,27 +96,13 @@ export default function RecommendationCard({ data, onAccept, onDeny }) {
       {status === "DRAFT" && (
         <div className="buttons">
           <button className="button accept-button" onClick={onAccept}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" >
               <path d="M20 6L9 17l-5-5" />
             </svg>
             Accept
           </button>
           <button className="button deny-button" onClick={onDeny}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" >
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
             Deny

@@ -52,7 +52,14 @@
   align-items: center;
   gap: 5px;
 }
-
+.show-more-btn{
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-top: 5px;
+}
 .text-start {
   text-align: left !important;
 }

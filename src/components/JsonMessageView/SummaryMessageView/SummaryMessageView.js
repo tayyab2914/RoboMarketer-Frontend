@@ -110,66 +110,70 @@ const SummaryMessage = ({ data, level, currency }) => {
           />
         ) : selectedView === "campaign" ? (
           <>
-            <div className="card">
-              <div className="card-header px-0 mb-3">
-                <img
-                  src={ICONS.performance_icon}
-                  alt="Performance Icon"
-                  className="icon"
-                  style={{ width: "26px", height: "26px" }}
-                />
-                <span className="font-medium mb-0">Account-Wide Summary</span>
-              </div>
-              <MetricsSection data={accountData} currency={currency} />
-            </div>
-            <div className="card mt-3">
-              <div
-                className="active-container"
-                onClick={toggleActiveCampionExpand}
-              >
-                <div className="font-medium custom-heading-number">
-                  <div className="card-header-active-campaign">
-                    <img
-                      src={ICONS.active_campaign}
-                      alt="active campaign Icon"
-                      className="icon"
-                      style={{ width: "30px", height: "30px" }}
-                    />
-                    <h5
-                      className="text-lg font-medium whitespace-nowrap card-header px-0"
-                      style={{ border: "none" }}
-                    >
-                      Active Campaigns
-                    </h5>
-                  </div>
-                  <span className="custom-badge-number">
-                    <span>{campaigns.length}</span>
-                  </span>
+            <div className="card-wrapper">
+              <div className="card">
+                <div className="card-header">
+                  <img
+                    src={ICONS.performance_icon}
+                    alt="Performance Icon"
+                    className="icon"
+                    style={{ width: "26px", height: "26px" }}
+                  />
+                  <span className="font-medium mb-0">Account-Wide Summary</span>
                 </div>
-                {campaigns.length > 0 && (
-                  <span className="expand-icon">
-                    {expandedAdset ? (
-                      <ChevronUp size={16} />
-                    ) : (
-                      <ChevronDown size={16} />
-                    )}
-                  </span>
+                <MetricsSection data={accountData} currency={currency} />
+              </div>
+            </div>
+            <div className="card-wrapper">
+              <div className="card mt-3">
+                <div
+                  className="active-container"
+                  onClick={toggleActiveCampionExpand}
+                >
+                  <div className="font-medium custom-heading-number">
+                    <div className="card-header-active-campaign">
+                      <img
+                        src={ICONS.active_campaign}
+                        alt="active campaign Icon"
+                        className="icon"
+                        style={{ width: "30px", height: "30px" }}
+                      />
+                      <h5
+                        className="text-lg font-medium whitespace-nowrap card-header px-0"
+                        style={{ border: "none" }}
+                      >
+                        Active Campaigns
+                      </h5>
+                    </div>
+                    <span className="custom-badge-number">
+                      <span>{campaigns.length}</span>
+                    </span>
+                  </div>
+                  {campaigns.length > 0 && (
+                    <span className="expand-icon">
+                      {expandedAdset ? (
+                        <ChevronUp size={16} />
+                      ) : (
+                        <ChevronDown size={16} />
+                      )}
+                    </span>
+                  )}
+                </div>
+                {expandedAdset && (
+                  <div className="campaign-container pt-3 px-2">
+                    {campaigns.map((campaign, index) => (
+                      <CampaignView
+                        key={campaign.campaign_id}
+                        campaign={campaign}
+                        onSelectAdSet={handleSelectAdSet}
+                        expanded={expandedAdsetIndex === index}
+                        onToggleExpand={() => toggleAdsetExpand(index)}
+                        currency={currency}
+                      />
+                    ))}
+                  </div>
                 )}
               </div>
-              {expandedAdset && (
-                <div className="campaign-container pt-3 px-2">
-                  {campaigns.map((campaign, index) => (
-                    <CampaignView
-                      key={campaign.campaign_id}
-                      campaign={campaign}
-                      onSelectAdSet={handleSelectAdSet}
-                      expanded={expandedAdsetIndex === index}
-                      onToggleExpand={() => toggleAdsetExpand(index)}
-                      currency={currency}
-                    />
-                  ))}
-                </div>
-              )}
             </div>
           </>
         ) : null}

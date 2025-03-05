@@ -32,7 +32,7 @@ const {link_token}=useParams()
   return (
     <div className="generic-container">
       {/* <NavbarMain /> */}
-      <Row gutter={24} align="middle" justify="center" style={{height:"100vh"}}>
+      <Row align="middle" justify="center" style={{height:"100vh"}}>
         <Col className="gutter-row account-main-row" span={24}>
           {currentMode === "signin" && ( <Signin toggleCurrentMode={toggleCurrentMode} /> )}
           {currentMode === "signup" && ( <Signup toggleCurrentMode={toggleCurrentMode} /> )}

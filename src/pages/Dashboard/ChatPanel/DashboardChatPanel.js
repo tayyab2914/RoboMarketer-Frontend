@@ -10,23 +10,63 @@ import { API_GET_PROMPTS } from "../../../apis/ChatApis";
 import { API_GET_HISTORY } from "../../../apis/ChatApis";
 import ChannelsPopup from "./Channels/ChannelsPopup";
 
-const DashboardChatPanel = () => {
-    const { isLoggedIn, token,rerender_dashboard,facebook_state,rerender_chat_panel,current_account } = useSelector((state) => state.authToken);
-  const [isAccountSetup, setisAccountSetup] = useState(current_account?.is_facebook_connected);
-  
+const DashboardChatPanel = ({
+  onLikeDislikeClick,
+  submittedFeedback,
+  FetchedPrompts,
+  limitEnded,
+  setLimitEnded,
+  isAIResponseLoading,
+  setIsAIResponseLoading,
+}) => {
+  const {
+    isLoggedIn,
+    token,
+    rerender_dashboard,
+    facebook_state,
+    rerender_chat_panel,
+    current_account,
+   channel
+  } = useSelector((state) => state.authToken);
+  const [isAccountSetup, setisAccountSetup] = useState(
+    current_account?.is_facebook_connected
+  );
+  const [prompts, setPrompts] = useState([]);
+
+  useEffect(() => {
+    fetchPrompts();
+  }, []);
+
+  const fetchPrompts = async () => {
+    try {
+      const data = await API_GET_PROMPTS(token);
+      const allPrompts = data.reduce((acc, category) => {
+        return [...acc, ...category.prompts];
+      }, []);
+      setPrompts(allPrompts);
+    } catch (error) {
+      console.error("Error fetching prompts:", error);
+    }
+  };
+
+  const scrollableRef = useRef(null);
+
   const [ChatData, setChatData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState(null);
 
   const get_history = async () => {
-      const response = await API_GET_HISTORY( token, current_account?.id, selectedChannel );
-      setChatData(response?.reverse() || []);
-    };
-  
-    useEffect(() => {
-      get_history();
-    }, [selectedChannel,rerender_dashboard]);
+    const response = await API_GET_HISTORY(
+      token,
+      current_account?.id,
+      channel
+    );
+    setChatData(response?.reverse() || []);
+  };
 
+  useEffect(() => {
+    get_history();
+  }, [selectedChannel, rerender_dashboard]);
 
   return (
     <Row className="dashboard-chat-panel-main">

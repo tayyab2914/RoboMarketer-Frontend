@@ -34,6 +34,11 @@ const CampaignMessage = ({ data }) => {
   const [response, setResponse] = useState(null);
   const [errorMessage, setErrorMessage] = useState([]);
   const [step, setStep] = useState(1);
+  const [charLimit, setCharLimit] = useState(400);
+
+  const handleShowMore = () => {
+    setCharLimit((prevLimit) => prevLimit + 400);
+  };
 
   useEffect(() => {
     setStep(selectedFunnel ? 3 : selectedProduct ? 2 : 1);
@@ -83,16 +88,9 @@ const CampaignMessage = ({ data }) => {
   const sendSelectionData = async () => {
     setLoading(true);
     try {
-      const response = await API_GENERATE_OUTLINE_CAMPAIGN(
-        token,
-        data.json_message,
-        data.meta_data.original_query,
-        data.id
-      );
-
+      const response = await API_GENERATE_OUTLINE_CAMPAIGN( token, data.json_message, data.meta_data.original_query, data.id );
       setReqData({ ...response?.campaign_outline[0], message_id: data?.id });
       setCampaignData(response?.campaign_outline[0]?.campaign_configuration);
-
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -128,11 +126,7 @@ const CampaignMessage = ({ data }) => {
     setExpandedAd((prev) => (prev === id ? null : id));
   };
 
-  const formatAudience = (audience) =>
-    audience
-      .split("_")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+  const formatAudience = (audience) => audience .split("_") .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) .join(" ");
 
   return (
     <div className="min-h-screen bg-gray-50 card-campaign fixed-width-container py-3">
@@ -140,19 +134,13 @@ const CampaignMessage = ({ data }) => {
         <div className="card-header-campaign pb-3 px-3">
           <span className="badge">Step {step}</span>
           <div className="">
-            {step === 1
-              ? "Select Product / Service"
-              : step === 3
-              ? "Confirm Campaign Settings"
-              : "Select Funnel / Website"}
+            {step === 1 ? "Select Product / Service" : step === 3 ? "Confirm Campaign Settings" : "Select Funnel / Website"}
           </div>
         </div>
         <div className="p-3">
           {step != 3 && (
             <p style={{ fontWeight: 600 }}>
-              {step === 1
-                ? "Choose product / service you want to promote the campaign"
-                : "Choose funnel / website you want to send people that click your ads"}
+              {step === 1 ? "Choose product / service you want to promote the campaign" : "Choose funnel / website you want to send people that click your ads"}
             </p>
           )}
           <div className="space-y-5">
@@ -162,31 +150,23 @@ const CampaignMessage = ({ data }) => {
                 <div className="p-3 card-campaign" key={index}>
                   <div className="product-section">
                     <div className="product-section">
-                      <Package
-                        className="icon"
-                        style={{ width: "23px", height: "23px" }}
+                      <Package className="icon" style={{ width: "23px", height: "23px" }}
                       />
                       <p style={{ fontWeight: 600 }} className="mb-0">
                         {item?.product_name}
                       </p>
                     </div>
                     <div className="view-ads-container">
-                      <button
-                        onClick={() => handleProductSelection(item.id)}
-                        className="view-ads-button"
-                      >
+                      <button onClick={() => handleProductSelection(item.id)} className="view-ads-button" >
                         Select
                       </button>
                     </div>
                   </div>
+                  
                   <div className="content">
-                    <p className="mt-2">{item?.product_description}</p>
-                  </div>
-                  {/* <div className="mt-3">
-                    <button onClick={() => {}} className="view-ads-button">
-                      Show more
-                    </button>
-                  </div> */}
+                        <p className="mt-2"> {item?.product_description?.slice(0, charLimit)} {charLimit < item?.product_description?.length && "..."} </p>
+                        {charLimit < item?.product_description?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
+                    </div>
                 </div>
               ))
             ) : step == 3 ? (
@@ -201,17 +181,9 @@ const CampaignMessage = ({ data }) => {
                 campaignData && (
                   <>
                     <div className="card">
-                      <div
-                        className="card-header justify-end px-0 cursor-poiner"
-                        onClick={toggleActiveCampionExpand}
-                      >
+                      <div className="card-header justify-end px-0 cursor-poiner" onClick={toggleActiveCampionExpand} >
                         <div>
-                          <img
-                            src={ICONS.active_campaign}
-                            alt="Performance Icon"
-                            className="icon"
-                            style={{ width: "26px", height: "26px" }}
-                          />
+                          <img src={ICONS.active_campaign} alt="Performance Icon" className="icon" style={{ width: "26px", height: "26px" }} />
                           <span className="font-medium mb-0">
                             Confirm Campaign Summary
                           </span>
@@ -324,7 +296,7 @@ const CampaignMessage = ({ data }) => {
                         </div>
                       )}
                     </div>
-                    {campaignData?.adset_data?.length > 0 && (
+                    {!campaignData?.adset_data?.length > 0 && (
                       <>
                         <div className="card">
                           <div
@@ -364,11 +336,7 @@ const CampaignMessage = ({ data }) => {
                                   }}
                                 >
                                   <span className="expand-icon me-0">
-                                    {expandedAd == index ? (
-                                      <ChevronUp size={16} />
-                                    ) : (
-                                      <ChevronDown size={16} />
-                                    )}
+                                    {expandedAd == index ? ( <ChevronUp size={16} /> ) : ( <ChevronDown size={16} /> )}
                                   </span>
                                   {/* <img
                                       src={ICONS.active_campaign}
@@ -619,8 +587,9 @@ const CampaignMessage = ({ data }) => {
                     </div>
                   </div>
                   <div className="content">
-                    <p className="mt-2">{item?.description}</p>
-                  </div>
+                        <p className="mt-2"> {item?.description?.slice(0, charLimit)} {charLimit < item?.description?.length && "..."} </p>
+                        {charLimit < item?.description?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
+                    </div>
                   {/* <div className="mt-3">
                     <button onClick={() => {}} className="view-ads-button">
                       Show more
