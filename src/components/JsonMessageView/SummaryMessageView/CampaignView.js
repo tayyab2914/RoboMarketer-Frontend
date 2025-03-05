@@ -15,9 +15,9 @@ const CampaignView = ({
       <div className="header-container">
         <div className="card-container-header" onClick={onToggleExpand}>
           <span className="expand-icon">
-            {expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+            {expanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
           </span>
-          <h6 className="mb-0">
+          <h6 className="mb-0 ms-2">
             {campaign?.campaign_name || "Unnamed Campaign"}
           </h6>
         </div>
@@ -36,7 +36,7 @@ const CampaignView = ({
       </div>
 
       {expanded && (
-        <div className="card-body px-0">
+        <div className="card-body p-0 m-0">
           <MetricsSection data={campaign} currency={currency} />{" "}
           <div className="view-ads-container">
             <button

@@ -125,7 +125,7 @@ const SummaryMessage = ({ data, level, currency }) => {
               </div>
             </div>
             <div className="card-wrapper">
-              <div className="card mt-3">
+              <div className="card">
                 <div
                   className="active-container"
                   onClick={toggleActiveCampionExpand}
@@ -136,11 +136,12 @@ const SummaryMessage = ({ data, level, currency }) => {
                         src={ICONS.active_campaign}
                         alt="active campaign Icon"
                         className="icon"
-                        style={{ width: "30px", height: "30px" }}
+                        style={{ width: "25px", height: "25px" }}
                       />
                       <h5
-                        className="text-lg font-medium whitespace-nowrap card-header px-0"
+                        className="text-lg active-campaign-h5 font-medium  px-0"
                         style={{ border: "none" }}
+                        
                       >
                         Active Campaigns
                       </h5>
