@@ -177,7 +177,7 @@ const Chats = ({
 
           // Check if the json_message is a string, and only parse if it is
           const jsonMessage = (typeof item.json_message === 'string') 
-          ? JSON.parse(item.json_message)  // Parse the string to an object
+          ? JSON.parse(item.json_message)  // Parse the string to an object 
           : item.json_message; 
 
           const isPositive = item?.feedback
