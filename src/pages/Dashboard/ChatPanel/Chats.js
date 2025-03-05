@@ -159,12 +159,27 @@ const Chats = ({
   return (
     <>
       <div className="chat-container" ref={chatContainerRef}>
-        {channel?.name == "General" && ( <> <FacebookIntegration isInIntegrationComponent={false} /> </> )}
-        {(channel?.name == "General" && current_account?.is_facebook_connected )&& <RoboMarketerMessage />}
-        {(channel?.name == "General" && current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup) && <AddProductMessage />}
-        {(channel?.name == "General" && current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup && current_account?.is_product_setup) && <AddFunnelMessage />}
+        {channel?.name == "General" && (
+          <>
+            <FacebookIntegration isInIntegrationComponent={false} />
+          </>
+        )}
+
+        {channel?.name == "General" && current_account?.is_facebook_connected && <RoboMarketerMessage />}
+        {channel?.name == "General" && current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup && <AddProductMessage />}
+        {channel?.name == "General" && current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup && current_account?.is_product_setup && <AddFunnelMessage />}
 
         {ChatData?.map((item, index) => {
+          // Check if the meta_data is a string, and only parse if it is
+          const metaData = (typeof item.meta_data === 'string') 
+          ? JSON.parse(item.meta_data)  // Parse the string to an object
+          : item.meta_data;  // Use as is if already an object
+
+          // Check if the json_message is a string, and only parse if it is
+          const jsonMessage = (typeof item.json_message === 'string') 
+          ? JSON.parse(item.json_message)  // Parse the string to an object
+          : item.json_message; 
+
           const isPositive = item?.feedback
             ? item.feedback.feedback_type === "positive" &&
               item.feedback.response === item.id
@@ -224,21 +239,21 @@ const Chats = ({
                               {item.message}
                             </Markdown>
                           ) : item.message_type === "JSON" &&
-                            item.json_message &&
-                            item.meta_data.contains === "summarize_data" ? (
+                          jsonMessage &&
+                            metaData.contains === "summarize_data" ? (
                             <SummaryMessageView
-                              data={item.json_message}
-                              level={item.json_message.level}
-                              currency={item.json_message.currency}
+                              data={jsonMessage}
+                              level={jsonMessage.level}
+                              currency={jsonMessage.currency}
                             />
                           ) : item.message_type === "JSON" &&
-                            item.json_message &&
-                            item.meta_data.contains ===
+                            jsonMessage &&
+                            metaData.contains ===
                               "recommendation_on_data" ? (
                             <RecommendationsList data={item.recommendations} />
                           ) : item.message_type === "JSON" &&
-                            item.json_message &&
-                            item.meta_data.contains === "create_campaign" ? (
+                            jsonMessage &&
+                            metaData.contains === "create_campaign" ? (
                             <CampaignMessage data={item} />
                           ) : (
                             <span className="response-text">

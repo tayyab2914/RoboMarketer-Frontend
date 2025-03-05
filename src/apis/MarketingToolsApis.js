@@ -120,9 +120,7 @@ console.log(newProduct)
         // message.success("Product created successfully!")
         return response.data;
     } catch (error) {
-        message.error(
-          error.response?.data?.message 
-        );
+       console.log(error)
         return null; 
     } finally {
         // setShowSpinner(false);

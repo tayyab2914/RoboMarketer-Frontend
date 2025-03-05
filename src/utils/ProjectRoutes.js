@@ -17,7 +17,7 @@ import LandingPageMain from "../pages/LandingPage/LandingPageMain";
 const ProjectRoutes = () => {
   const { isLoggedIn, isAdmin, token, facebook_state, current_account } =
     useSelector((state) => state.authToken);
-
+console.log('isLoggedIn',isLoggedIn)
   return (
     <BrowserRouter>
       <Routes>

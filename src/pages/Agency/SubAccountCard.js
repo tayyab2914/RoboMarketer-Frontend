@@ -47,7 +47,7 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
     const response = await API_SWITCH_ACCOUNT(token, subAccountID, null);
     dispatch(setAuthToken(response));
     dispatch(setRerenderDashboard(!rerender_dashboard));
-    navigate("/");
+    navigate("/chat");
   };
 
   const handleDelete = async () => {
