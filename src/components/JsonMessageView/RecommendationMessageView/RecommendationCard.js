@@ -41,7 +41,8 @@ export default function RecommendationCard({ data, onAccept, onDeny }) {
         <div className="card-title">{name}</div>
         <span className="badge">{capitalizeFirstCharacter(level)}</span>
       </div>
-
+    <div className="recommendation-card-wrapper">
+        
       <div className="section">
         <img
           src={ICONS.recommendation_icon}
@@ -88,6 +89,7 @@ export default function RecommendationCard({ data, onAccept, onDeny }) {
       <div className="content">
         <p className="mt-2"> {projection?.slice(0, charLimit)} {charLimit < projection?.length && "..."} </p>
         {charLimit < projection?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
+    </div>
     </div>
       {/* Show status label if ACCEPTED/DECLINED/ERROR */}
       {renderStatusLabel()}
