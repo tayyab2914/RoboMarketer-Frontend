@@ -112,5 +112,5 @@ export default function RecommendationCard({ data, onAccept, onDeny }) {
         </div>
       )}
     </div>
-  );
+  ); 
 }
