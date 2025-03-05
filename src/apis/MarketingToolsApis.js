@@ -107,8 +107,6 @@ export const API_UPDATE_FUNNEL = async ( token, updatedFunnel,funnelId, setShowS
 
 export const API_CREATE_PRODUCT = async ( token, newProduct, setShowSpinner ) => {
     
-    // setShowSpinner(true);
-console.log(newProduct)
     try {
         const response = await axios.post(`${DOMAIN_NAME}/tools/create_product/`, 
             newProduct

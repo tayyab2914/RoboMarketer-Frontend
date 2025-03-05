@@ -85,7 +85,6 @@ const DashboardLeftPanel = ({
   const getPrompts = async () => {
     const response = await API_GET_PROMPTS(token, setShowSpinner);
     setFetchedPrompts(response);
-    console.log("setFetchedPrompts", response);
   };
 
   const handlePromptClick = async (message, id) => {
@@ -142,7 +141,6 @@ const DashboardLeftPanel = ({
   };
 
   const handleEditPrompt = (item, category_name, category_id) => {
-    console.log("item", item, category_name);
     setselectedPrompt(item);
     setselectedCategory({
       category_name: category_name,

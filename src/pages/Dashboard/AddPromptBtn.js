@@ -27,7 +27,6 @@ const AddPromptBtn = () => {
   const [file_group, setFileGroup] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect", category);
   }, [category]);
   const showModal = () => {
     setIsModalVisible(true);

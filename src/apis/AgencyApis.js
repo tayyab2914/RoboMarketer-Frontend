@@ -25,7 +25,6 @@ export const API_CREATE_ACCOUNT = async ( token, newAccount, setShowSpinner ) =>
         message.error(
           error.response?.data?.message 
         );
-        console.log(error)
         return null; 
     } finally {
         // setShowSpinner(false);
@@ -34,7 +33,6 @@ export const API_CREATE_ACCOUNT = async ( token, newAccount, setShowSpinner ) =>
 
 export const API_AGENCY_GET_INSIGHTS = async ( token, date_start, date_stop ) => {
 
-    console.log(date_start,date_stop)
     const formatted_date_start = moment(date_start, "MM/DD/YY").format("YYYY-MM-DD");
     const formatted_date_stop = moment(date_stop, "MM/DD/YY").format("YYYY-MM-DD");
     try {
@@ -121,10 +119,6 @@ export const API_DELETE_ACCOUNT = async (token, id,  setShowSpinner) => {
 
 export const API_UPDATE_ACCOUNT = async ( token, updatedAccount,id, setShowSpinner ) => {
     
-    // setShowSpinner(true);
-for (let [key, value] of updatedAccount.entries()) {
-    console.log(`${key}:`, value);
-  }
     try {
         const response = await axios.put(`${DOMAIN_NAME}/agency/update_account/${id}/`, 
             updatedAccount

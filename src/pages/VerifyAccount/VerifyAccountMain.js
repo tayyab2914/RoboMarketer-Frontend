@@ -23,7 +23,6 @@ const VerifyAccountMain = () => {
         return;
       }
       const response = await API_SET_CLIENT_ACCOUNT_PASSWORD(password,id)
-      console.log(response)
       if(response)
       {
             dispatch(setAuthToken(response?.token))

@@ -65,7 +65,6 @@ export const API_UPDATE_ACCESS = async (token, id, is_lifetime_access) => {
     }
 };
 export const API_DOES_LINK_EXIST = async ( link_token, setShowSpinner ) => {
-    console.log('API_DOES_LINK_EXIST',link_token)
     try {
       const response = await axios.get(`${DOMAIN_NAME}/authentication/is_link_exist/`, {
         params: { link_token: link_token },
@@ -78,7 +77,6 @@ export const API_DOES_LINK_EXIST = async ( link_token, setShowSpinner ) => {
     }
 };
 export const API_SEND_VERIFICATION_EMAIL = async ( email,  ) => {
-console.log(email)
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/authentication/forgot_password/`,
@@ -200,8 +198,6 @@ export const API_GET_USERS_LIST = async (token, setShowSpinner) => {
     }
 };
 export const API_UPDATE_USER = async (token, id, updatedUser, setShowSpinner) => {
-    // setShowSpinner(true);
-console.log(updatedUser)
     try {
         const response = await axios.put(`${DOMAIN_NAME}/authentication/edit_user/${id}/`, {
             username: updatedUser.username,

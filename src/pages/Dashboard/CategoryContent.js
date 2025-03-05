@@ -19,7 +19,6 @@ const CategoryContent = ({  setCategory,onClose}) => {
   const fetchCategoryOrdering = async () => {
     const response = await API_GET_CATEGORY_ORDERING(token, null);
     setFetchedCategories(response?.category_order);
-    console.log(response);
   };
 
   useEffect(() => {
@@ -33,7 +32,6 @@ const CategoryContent = ({  setCategory,onClose}) => {
 
   // Open Edit Category Modal
   const handleEditCategoryClick = (category) => {
-    console.log(category)
     setEditingCategory(category);
     setCategoryName(category.category_name);
     setEditModalVisible(true);

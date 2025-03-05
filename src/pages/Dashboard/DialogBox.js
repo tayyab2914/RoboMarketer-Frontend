@@ -77,7 +77,6 @@ export default function DialogBox({
     dispatch(setTemporaryLoading(true));
     onClose();
 
-    console.log("redo", currentChannelId);
 
     try {
       const response = await API_REDO_FEEDBACK(token, {

@@ -37,8 +37,6 @@ export const API_CREATE_CATEGORY = async (
   newCategory,
   setShowSpinner
 ) => {
-  // setShowSpinner(true);
-  console.log(newCategory);
 
   try {
     const response = await axios.post(
@@ -53,7 +51,6 @@ export const API_CREATE_CATEGORY = async (
     return response.data;
   } catch (error) {
     console.log(error);
-    message.error(error.response?.data?.message);
     return null;
   } finally {
     // setShowSpinner(false);
@@ -89,7 +86,6 @@ export const API_GET_PROMPTS = async (token, setShowSpinner) => {
         Authorization: token,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     // message.error(
@@ -190,7 +186,6 @@ export const API_GET_RESPONSE = async (
   setShowSpinner
 ) => {
   // setShowSpinner(true);
-  console.log("API_GET_RESPONSE START");
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/chat/get_response/`,
@@ -201,7 +196,6 @@ export const API_GET_RESPONSE = async (
         },
       }
     );
-    console.log("API_GET_RESPONSE RESPONSE", response);
     return response.data;
   } catch (error) {
     message.error(error.response?.data?.details);
@@ -240,7 +234,6 @@ export const API_GET_RESPONSE = async (
 // };
 
 export const API_GET_HISTORY = async (token, account_id, selectedChannel) => {
-  console.log(selectedChannel);
   // setShowSpinner(true);
   try {
     const response = await axios.get(`${DOMAIN_NAME}/chat/get_history/`, {
@@ -266,9 +259,6 @@ export const API_UPDATE_PROMPT = async (
   setShowSpinner
 ) => {
   setShowSpinner(true);
-  for (let [key, value] of updatedPrompt.entries()) {
-    console.log(`${key}:`, value);
-  }
   try {
     const response = await axios.put(
       `${DOMAIN_NAME}/chat/update_prompt/${promptId}/`,
@@ -369,8 +359,6 @@ export const API_UPDATE_API_KEY = async (token, updated_key, aiModelType) => {
   }
 };
 export const API_UPDATE_CHANNEL = async (token, id, name) => {
-  // setShowSpinner(true);
-  console.log(id, name);
   try {
     const response = await axios.put(
       `${DOMAIN_NAME}/chat/update_channel/${id}/`,
@@ -399,7 +387,6 @@ export const API_GET_CHANNELS = async (token) => {
         Authorization: token,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     // message.error(
@@ -440,7 +427,6 @@ export const API_GENERATE_OUTLINE_CAMPAIGN = async (
   id
 ) => {
   // setShowSpinner(true);
-  console.log("API_GENERATE_OUTLINE_CAMPAIGN_START");
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/chat/generate_outline_campaign/`,
@@ -451,7 +437,6 @@ export const API_GENERATE_OUTLINE_CAMPAIGN = async (
         },
       }
     );
-    console.log("API_GENERATE_OUTLINE_CAMPAIGN_Rwsponse", response);
 
     return response.data;
   } catch (error) {

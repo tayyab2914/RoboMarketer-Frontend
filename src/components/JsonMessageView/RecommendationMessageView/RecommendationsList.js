@@ -25,7 +25,6 @@ export default function RecommendationsList({ data }) {
       });
       return response;
     } catch (error) {
-      console.error("Error applying recommendation:", error);
       return null;
     }
   };

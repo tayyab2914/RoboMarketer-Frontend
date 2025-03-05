@@ -71,6 +71,7 @@ const DashboardRightPanel = () => {
 
   const getInsights = async (startDate, endDate) => {
     const response = await API_GET_INSIGHTS( token, startDate, endDate, setShowSpinner );
+    console.log(response)
     const updatedMetrics = updateMetrics(availableMetrics, response);
     setMetrics(updatedMetrics);
   };
@@ -93,7 +94,6 @@ const DashboardRightPanel = () => {
   };
   
 const handleFetchHistoricalData = async()=>{
-    console.log("CALLING API_GET_HISTORICAL_DATA")
     await API_GET_HISTORICAL_DATA(token);
     dispatch(setRerenderDashboard(!rerender_dashboard));
 }

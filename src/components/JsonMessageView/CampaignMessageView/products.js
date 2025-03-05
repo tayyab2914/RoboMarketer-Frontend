@@ -36,6 +36,10 @@ const CampaignMessage = ({ data }) => {
   const [step, setStep] = useState(1);
   const [charLimit, setCharLimit] = useState(400);
 
+  const jsonMessage = (typeof data.json_message === 'string') 
+          ? JSON.parse(data.json_message)  // Parse the string to an object 
+          : data.json_message; 
+
   const handleShowMore = () => {
     setCharLimit((prevLimit) => prevLimit + 400);
   };
@@ -64,7 +68,7 @@ const CampaignMessage = ({ data }) => {
   }, []);
 
   const handleProductSelection = (productId) => {
-    const updatedProducts = data?.json_message.products.map((product) =>
+    const updatedProducts = jsonMessage.products.map((product) =>
       product.id === productId ? { ...product, selected: true } : product
     );
     data.json_message.products = updatedProducts; // Updating data
@@ -73,7 +77,7 @@ const CampaignMessage = ({ data }) => {
 
   // Function to update the selected funnel
   const handleFunnelSelection = (funnelId) => {
-    const updatedFunnels = data?.json_message.funnels.map((funnel) =>
+    const updatedFunnels = jsonMessage.funnels.map((funnel) =>
       funnel.id === funnelId ? { ...funnel, selected: true } : funnel
     );
     data.json_message.funnels = updatedFunnels; // Updating data
@@ -145,8 +149,8 @@ const CampaignMessage = ({ data }) => {
           )}
           <div className="space-y-5">
             {step === 1 ? (
-              data?.json_message?.products?.length > 0 &&
-              data?.json_message?.products?.map((item, index) => (
+              jsonMessage?.products?.length > 0 &&
+              jsonMessage?.products?.map((item, index) => (
                 <div className="p-3 card-campaign" key={index}>
                   <div className="product-section">
                     <div className="product-section">
@@ -564,8 +568,8 @@ const CampaignMessage = ({ data }) => {
                 )
               )
             ) : (
-              data?.json_message?.funnels?.length > 0 &&
-              data?.json_message?.funnels?.map((item, index) => (
+              jsonMessage?.funnels?.length > 0 &&
+              jsonMessage?.funnels?.map((item, index) => (
                 <div className="p-3 card-campaign" key={index}>
                   <div className="product-section">
                     <div className="product-section">
