@@ -24,8 +24,10 @@ import client6 from './../../assets/images/client6.jpg'
 import client7 from './../../assets/images/client7.jpg'
 import client8 from './../../assets/images/client8.jpg'
 import VideoPopup from "./VideoPopup";
+import { useNavigate } from "react-router-dom";
 
 const LandingPageMain = () => {
+    const navigate = useNavigate()
   return (
     <div>
       <header class="header_main">
@@ -59,19 +61,19 @@ const LandingPageMain = () => {
                     </li>
                   </ul>
                   <div class="header_btns header_btns_menu">
-                    <a href="#" class="btn_style">
+                    <a  class="btn_style" >
                       Login
                     </a>
-                    <a href="#" class="btn_style btn_style2">
+                    <a  class="btn_style btn_style2">
                       Get Started
                     </a>
                   </div>
                 </div>
                 <div class="header_btns">
-                  <a href="#" class="btn_style">
+                  <a  class="btn_style" onClick={()=>navigate('/account')}>
                     Login
                   </a>
-                  <a href="#" class="btn_style btn_style2">
+                  <a  class="btn_style btn_style2" onClick={()=>navigate('/account')}>
                     Get Started
                   </a>
                 </div>

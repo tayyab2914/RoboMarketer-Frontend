@@ -22,7 +22,7 @@ const ProjectRoutes = () => {
     <BrowserRouter>
       <Routes>
       <Route path="/" element={<LandingPageMain />} />
-        <Route path="/dashboard" element={ isLoggedIn ? <DashboardMain /> : <Navigate to="/account" replace /> } />
+        <Route path="/chat" element={ isLoggedIn ? <DashboardMain /> : <Navigate to="/account" replace /> } />
         <Route path="/admin" element={isAdmin ? <AdminMain /> : <Navigate to="/account" replace />} />
         <Route path="/account" element={<Account />} />
         <Route path="/forgot_password" element={<GetNewPassword />} />

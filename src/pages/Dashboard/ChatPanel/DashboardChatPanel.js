@@ -9,15 +9,14 @@ import { CircleArrowDown } from "lucide-react";
 import { API_GET_PROMPTS } from "../../../apis/ChatApis";
 import { API_GET_HISTORY } from "../../../apis/ChatApis";
 import ChannelsPopup from "./Channels/ChannelsPopup";
-
 const DashboardChatPanel = ({
-  onLikeDislikeClick,
-  submittedFeedback,
-  FetchedPrompts,
-  limitEnded,
-  setLimitEnded,
-  isAIResponseLoading,
-  setIsAIResponseLoading,
+  onLikeDislikeClick = () => {}, 
+  submittedFeedback = null, 
+  FetchedPrompts = [],
+  limitEnded = false, 
+  setLimitEnded = () => {}, 
+  isAIResponseLoading = false, 
+  setIsAIResponseLoading = () => {},
 }) => {
   const {
     isLoggedIn,
@@ -26,11 +25,13 @@ const DashboardChatPanel = ({
     facebook_state,
     rerender_chat_panel,
     current_account,
-   channel
+    channel,
   } = useSelector((state) => state.authToken);
+
   const [isAccountSetup, setisAccountSetup] = useState(
     current_account?.is_facebook_connected
   );
+
   const [prompts, setPrompts] = useState([]);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const DashboardChatPanel = ({
     }
   };
 
+  // Define the missing scrollableRef
   const scrollableRef = useRef(null);
 
   const [ChatData, setChatData] = useState([]);
@@ -56,12 +58,12 @@ const DashboardChatPanel = ({
   const [selectedChannel, setSelectedChannel] = useState(null);
 
   const get_history = async () => {
-    const response = await API_GET_HISTORY(
-      token,
-      current_account?.id,
-      channel
-    );
-    setChatData(response?.reverse() || []);
+    try {
+      const response = await API_GET_HISTORY(token, current_account?.id, channel);
+      setChatData(response?.reverse() || []);
+    } catch (error) {
+      console.error("Error fetching chat history:", error);
+    }
   };
 
   useEffect(() => {
@@ -70,14 +72,8 @@ const DashboardChatPanel = ({
 
   return (
     <Row className="dashboard-chat-panel-main">
-      <Col
-        ref={scrollableRef}
-        style={{ overflowY: "auto", maxHeight: "100vh" }}
-      >
-        <ChannelsPopup
-          setSelectedChannel={setSelectedChannel}
-          selectedChannel={selectedChannel}
-        />
+      <Col ref={scrollableRef} style={{ overflowY: "auto", maxHeight: "100vh" }}>
+        <ChannelsPopup setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} />
         <Chats
           isaccount_open={!isAccountSetup}
           chat_data={ChatData}

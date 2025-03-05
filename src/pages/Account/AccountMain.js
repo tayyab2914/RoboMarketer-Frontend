@@ -15,7 +15,7 @@ const {link_token}=useParams()
   const navigate = useNavigate()
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      navigate("/chat");
     }
   }, []);
   

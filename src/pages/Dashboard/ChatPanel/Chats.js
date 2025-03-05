@@ -165,20 +165,43 @@ const Chats = ({
         {(channel?.name == "General" && current_account?.is_facebook_connected && current_account?.is_robomarketeriq_setup && current_account?.is_product_setup) && <AddFunnelMessage />}
 
         {ChatData?.map((item, index) => {
-          const isPositive = item?.feedback ? item.feedback.feedback_type === "positive" && item.feedback.response === item.id : !submittedFeedback?.id || (submittedFeedback.id === item.id && submittedFeedback.type === "positive");
-          const isNegative = item?.feedback ? item.feedback.feedback_type === "negative" && item.feedback.response === item.id : !submittedFeedback?.id || (submittedFeedback.id === item.id && submittedFeedback.type === "negative");
+          const isPositive = item?.feedback
+            ? item.feedback.feedback_type === "positive" &&
+              item.feedback.response === item.id
+            : !submittedFeedback?.id ||
+              (submittedFeedback.id === item.id &&
+                submittedFeedback.type === "positive");
+          const isNegative = item?.feedback
+            ? item.feedback.feedback_type === "negative" &&
+              item.feedback.response === item.id
+            : !submittedFeedback?.id ||
+              (submittedFeedback.id === item.id &&
+                submittedFeedback.type === "negative");
           const isFeedBackSubmitted = submittedFeedback.id || item?.feedback;
           return (
             <div key={index} className="chat-message-container">
               {item.type === "USER" && (
                 <div className="user-message">
                   <div style={{ display: "block" }}>
-                    {item?.uploads && item.uploads.map((upload, idx) => (
-                        <div key={idx}> {renderFile( `${DOMAIN_NAME}${upload.file}`, upload.file )} </div>
+                    {item?.uploads &&
+                      item.uploads.map((upload, idx) => (
+                        <div key={idx}>
+                          {renderFile(
+                            `${DOMAIN_NAME}${upload.file}`,
+                            upload.file
+                          )}
+                        </div>
                       ))}
                   </div>
                   <div className="user-message-div">
-                    <span className="message" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize( formatTextToHTML(item?.message, prompts) ), }} ></span>
+                    <span
+                      className="message"
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(
+                          formatTextToHTML(item?.message, prompts)
+                        ),
+                      }}
+                    ></span>
                   </div>
                 </div>
               )}
@@ -196,11 +219,31 @@ const Chats = ({
                     ) : (
                       <div>
                         <div className="response-text-wrapper">
-                          {item.message_type === "TEXT" && item.message ? ( <Markdown remarkPlugins={[remarkGfm]}> {item.message} </Markdown>
-                          ) : item.message_type === "JSON" && item.json_message && item.meta_data.contains === "summarize_data" ? ( <SummaryMessageView data={item.json_message} level={item.json_message.level} currency={item.json_message.currency} />
-                          ) : item.message_type === "JSON" && item.json_message && item.meta_data.contains === "recommendation_on_data" ? ( <RecommendationsList data={item.recommendations} />
-                          ) : item.message_type === "JSON" && item.json_message && item.meta_data.contains === "create_campaign" ? ( <CampaignMessage data={item} />  
-                          ) : ( <span className="response-text"> No response available </span>
+                          {item.message_type === "TEXT" && item.message ? (
+                            <Markdown remarkPlugins={[remarkGfm]}>
+                              {item.message}
+                            </Markdown>
+                          ) : item.message_type === "JSON" &&
+                            item.json_message &&
+                            item.meta_data.contains === "summarize_data" ? (
+                            <SummaryMessageView
+                              data={item.json_message}
+                              level={item.json_message.level}
+                              currency={item.json_message.currency}
+                            />
+                          ) : item.message_type === "JSON" &&
+                            item.json_message &&
+                            item.meta_data.contains ===
+                              "recommendation_on_data" ? (
+                            <RecommendationsList data={item.recommendations} />
+                          ) : item.message_type === "JSON" &&
+                            item.json_message &&
+                            item.meta_data.contains === "create_campaign" ? (
+                            <CampaignMessage data={item} />
+                          ) : (
+                            <span className="response-text">
+                              No response available
+                            </span>
                           )}
                         </div>
                         {index === ChatData.length - 1 && (
@@ -208,9 +251,19 @@ const Chats = ({
                             <div className="flex gap-2">
                               {item.message_type === "TEXT" &&
                                 item?.message && (
-                                  <button className="view-ads-button flex gap-2" onClick={() => handleCopy(item?.message)} > <Forward size={15} /> Share </button>
+                                  <button
+                                    className="view-ads-button flex gap-2"
+                                    onClick={() => handleCopy(item?.message)}
+                                  >
+                                    <Forward size={15} /> Share
+                                  </button>
                                 )}
-                              <button className="view-ads-button" onClick={() => onLikeDislikeClick(item?.id, "redo") } >
+                              <button
+                                className="view-ads-button"
+                                onClick={() =>
+                                  onLikeDislikeClick(item?.id, "redo")
+                                }
+                              >
                                 <RotateCw size={15} /> Redo
                               </button>
                             </div>
@@ -220,13 +273,35 @@ const Chats = ({
                                 <span className="feedback-text">Feedback</span>
                               </div>
                               {isPositive && (
-                                <button className="like-dislike" onClick={() => { if (!isFeedBackSubmitted) onLikeDislikeClick(item?.id, "positive"); }} >
-                                  <ThumbsUp size={15} fill={ isFeedBackSubmitted ? "black" : "white" } />
+                                <button
+                                  className="like-dislike"
+                                  onClick={() => {
+                                    if (!isFeedBackSubmitted)
+                                      onLikeDislikeClick(item?.id, "positive");
+                                  }}
+                                >
+                                  <ThumbsUp
+                                    size={15}
+                                    fill={
+                                      isFeedBackSubmitted ? "black" : "white"
+                                    }
+                                  />
                                 </button>
                               )}
                               {isNegative && (
-                                <button className="like-dislike" onClick={() => { if (!isFeedBackSubmitted) onLikeDislikeClick(item?.id, "negative");  }} >
-                                  <ThumbsDown size={15} fill={ isFeedBackSubmitted ? "black" : "white" } />
+                                <button
+                                  className="like-dislike"
+                                  onClick={() => {
+                                    if (!isFeedBackSubmitted)
+                                      onLikeDislikeClick(item?.id, "negative");
+                                  }}
+                                >
+                                  <ThumbsDown
+                                    size={15}
+                                    fill={
+                                      isFeedBackSubmitted ? "black" : "white"
+                                    }
+                                  />
                                 </button>
                               )}
                             </div>
