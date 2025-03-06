@@ -49,7 +49,7 @@ const disconnectFacebook = async () => {
                 dispatch(setFacebookState(null))
                 setAccountList(null);
             }
-            navigate('/')
+            navigate('/chat')
         }
         else
         {

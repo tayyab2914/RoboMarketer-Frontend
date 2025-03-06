@@ -28,7 +28,7 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 const LandingPageMain = () => {
   const navigate = useNavigate();
   const handleNext = (section) => {
-    navigate(`/agency/support?next=${section}`);
+    navigate(`/${section}`);
   };
   return (
     <div className="LandingPageMain-div">
@@ -147,7 +147,7 @@ const LandingPageMain = () => {
 
                 <VideoPopup />
 
-                <div class="banner_bottom_contents">
+                {/* <div class="banner_bottom_contents">
                   <div class="banner_content_single">
                     <h1>1,000+</h1>
                     <p>Campaigns Created</p>
@@ -160,7 +160,7 @@ const LandingPageMain = () => {
                     <h1>$5M+</h1>
                     <p>Revenue Generated</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -297,7 +297,7 @@ const LandingPageMain = () => {
       {/* <!--================  End Autopilot Section  ================-->
 
         <!--================  Start Lifetime Plans Section  ================--> */}
-      <div class="lifetime_plans_main">
+      {/* <div class="lifetime_plans_main">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -375,7 +375,7 @@ const LandingPageMain = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <!--================  End Lifetime Plans Section  ================-->
 
         <!--================  Start RoboMarketer Reviews Section  ================--> */}
@@ -654,7 +654,7 @@ const LandingPageMain = () => {
       {/* <!--================  End RoboMarketer Education Section  ================-->
 
         <!--================  Start Lifetime Deal Section  ================--> */}
-      <div class="robomarketer_lifetimedeal_main">
+      {/* <div class="robomarketer_lifetimedeal_main">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -667,7 +667,7 @@ const LandingPageMain = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <!--================  End Lifetime Deal Section  ================-->
 
         <!--================  Start Frequently Asked Questions Section  ================--> */}
@@ -930,7 +930,7 @@ const LandingPageMain = () => {
                       </a>
                     </li>
                     <li>
-                      <a onClick={() => handleNext("terms-of-service")}>
+                      <a onClick={() => handleNext("terms-and-conditions")}>
                         Terms of Service
                       </a>
                     </li>

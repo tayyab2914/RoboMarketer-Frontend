@@ -13,6 +13,7 @@ import VerifyAccountMain from "../pages/VerifyAccount/VerifyAccountMain";
 import AuthenticateVerification from "../pages/Account/AuthenticateVerification";
 import GetNewPassword from "../pages/Account/GetNewPassword";
 import LandingPageMain from "../pages/LandingPage/LandingPageMain";
+import PoliciesPage from "../pages/LandingPage/PoliciesPage";
 
 const ProjectRoutes = () => {
   const { isLoggedIn, isAdmin, token, facebook_state, current_account } =
@@ -28,8 +29,12 @@ const ProjectRoutes = () => {
         {/* <Route path="/account/:link_token" element={<Account />} /> */}
         <Route path="/account/signup" element={<SignUp />} />
         <Route path="/verify_account/:id" element={<VerifyAccountMain />} />
+        <Route path="/privacy-policy" element={<PoliciesPage pageType={"privacy-policy"} />} />
+        <Route path="/terms-and-conditions" element={<PoliciesPage pageType={"terms-and-conditions"} />} />
+        <Route path="/data-protection-policy" element={<PoliciesPage pageType={"data-protection-policy"} />} />
         <Route path="/agency" element={ isLoggedIn && current_account?.is_main_user ? ( <AgencyMain /> ) : ( <Navigate to="/account" replace /> ) } />
         <Route path="/agency/:page" element={ isLoggedIn && current_account?.is_main_user ? ( <AgencyMain /> ) : ( <Navigate to="/account" replace /> ) } />
+
         <Route path="/notfound" element={<Error404 />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>

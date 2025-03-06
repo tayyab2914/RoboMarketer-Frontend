@@ -33,6 +33,7 @@ const AgencyWorkArea = () => {
   const fetchAccounts = async () => {
     try {
       const response = await API_GET_ACCOUNTS(token);
+      console.log(response)
       setAccounts(response?.accounts || []);
       setAccountsAvailable(response?.accounts_available || 0);
     } catch (error) {

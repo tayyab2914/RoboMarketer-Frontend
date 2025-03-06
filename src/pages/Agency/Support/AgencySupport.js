@@ -8,24 +8,6 @@ import { useSearchParams } from "react-router-dom";
 
 const AgencySupport = () => {
 const [CurrentMode, setCurrentMode] = useState(0);
-const [searchParams] = useSearchParams();
-
-  useEffect(() => {
-    const next = searchParams.get("next");
-    switch (next) {
-      case "data-protection-policy":
-        setCurrentMode(1);
-        break;
-      case "privacy-policy":
-        setCurrentMode(2);
-        break;
-      case "terms-of-service":
-        setCurrentMode(3);
-        break;
-      default:
-        setCurrentMode(0); 
-    }
-  }, [searchParams]); 
 
   return (
     <div>

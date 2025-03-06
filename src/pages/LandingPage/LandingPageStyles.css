@@ -96,6 +96,9 @@
   border: 1px solid #000;
   color: #fff;
 }
+.btn_style2 a {
+    text-decoration: none;
+}
 .btn_style2:hover {
   background-color: transparent;
   color: #000;
@@ -234,6 +237,9 @@
   color: #000;
   font-size: 14px;
   transition: 0.2s;
+}
+.btn_style a {
+    text-decoration: none;
 }
 .btn_style:hover i {
   color: #fff;
