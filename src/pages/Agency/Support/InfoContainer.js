@@ -101,7 +101,7 @@ const InfoContainer = ({ dataType }) => {
               <p className="info-contact">Website: robomarketer.bot</p>
             </>
           )}
-          {dataType == "terms-of-service" && (
+          {dataType == "terms-and-conditions" && (
             <>
               <div className="info-header">
                 <h1 className="info-title">Terms Of Service</h1>

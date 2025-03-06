@@ -647,6 +647,7 @@
   color: #2e2e2e;
   border-bottom: 1px solid;
   transition: 0.2s;
+  cursor: pointer;
 }
 .footer_contents ul li a:hover {
   border-bottom: none;
