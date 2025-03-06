@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import bannerVideo from "./../../assets/images/banner-video.png";
+import { PlayCircleFilled } from "@ant-design/icons";
+import './LandingPageStyles.css'
 
 const VideoPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +16,27 @@ const VideoPopup = () => {
 
   return (
     <div>
-      <button id="playVideoTrigger" onClick={openPopup}>
-        Play Video
-      </button>
+      <div
+        class="banner_video"
+        id="playVideoTrigger"
+        style={{ cursor: "pointer", position: "relative" }}
+        onClick={openPopup} 
+      >
+        <img src={bannerVideo} alt="" />
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            fontSize: "60px",
+            color: "white",
+            cursor: "pointer",
+          }}
+        >
+          <PlayCircleFilled />
+        </div>
+      </div>
 
       {isOpen && (
         <div

@@ -40,7 +40,7 @@ const AccountSwitcherPopup = () => {
          dispatch(setAuthToken(response));
         dispatch(setRerenderDashboard(!rerender_dashboard));
         dispatch(setRerenderChatPanel(!rerender_chat_panel));
-       navigate('/')
+       navigate('/chat')
 
   };
   const goToAgencyHandler = async()=>{

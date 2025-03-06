@@ -1,35 +1,37 @@
 import React from "react";
-import './LandingPageStyles.css'
-import logo from './../../assets/images/logo.png'
-import logoDark from './../../assets/images/dark-logo.png'
-import facebook from './../../assets/images/facebook.png'
-import instagram from './../../assets/images/instagram.png'
-import youtube from './../../assets/images/youtube.png'
-import linkedin from './../../assets/images/linkedin.png'
-import x from './../../assets/images/x.png'
-import tiktok from './../../assets/images/tiktok.png'
-import bannerVideo from './../../assets/images/banner-video.png'
-import business1 from './../../assets/images/business1.png'
-import business2 from './../../assets/images/business2.png'
-import business3 from './../../assets/images/business3.png'
-import autopilot1 from './../../assets/images/autopilot1.png'
-import autopilot2 from './../../assets/images/autopilot2.png'
-import autopilot3 from './../../assets/images/autopilot3.png'
-import Joe from './../../assets/images/Joe.jpg'
-import client2 from './../../assets/images/client2.jpg'
-import client3 from './../../assets/images/client3.jpg'
-import client4 from './../../assets/images/client4.jpg'
-import client5 from './../../assets/images/client5.jpg'
-import client6 from './../../assets/images/client6.jpg'
-import client7 from './../../assets/images/client7.jpg'
-import client8 from './../../assets/images/client8.jpg'
+import "./LandingPageStyles.css";
+import logo from "./../../assets/images/logo.png";
+import logoDark from "./../../assets/images/dark-logo.png";
+import facebook from "./../../assets/images/facebook.png";
+import instagram from "./../../assets/images/instagram.png";
+import youtube from "./../../assets/images/youtube.png";
+import linkedin from "./../../assets/images/linkedin.png";
+import x from "./../../assets/images/x.png";
+import tiktok from "./../../assets/images/tiktok.png";
+import business1 from "./../../assets/images/business1.png";
+import business2 from "./../../assets/images/business2.png";
+import business3 from "./../../assets/images/business3.png";
+import autopilot1 from "./../../assets/images/autopilot1.png";
+import autopilot2 from "./../../assets/images/autopilot2.png";
+import autopilot3 from "./../../assets/images/autopilot3.png";
+import Joe from "./../../assets/images/Joe.jpg";
+import client2 from "./../../assets/images/client2.jpg";
+import client3 from "./../../assets/images/client3.jpg";
+import client4 from "./../../assets/images/client4.jpg";
+import client5 from "./../../assets/images/client5.jpg";
+import client6 from "./../../assets/images/client6.jpg";
+import client7 from "./../../assets/images/client7.jpg";
+import client8 from "./../../assets/images/client8.jpg";
 import VideoPopup from "./VideoPopup";
 import { useNavigate } from "react-router-dom";
-
+import { ArrowRightOutlined } from "@ant-design/icons";
 const LandingPageMain = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const handleNext = (section) => {
+    navigate(`/agency/support?next=${section}`);
+  };
   return (
-    <div>
+    <div className="LandingPageMain-div">
       <header class="header_main">
         <div class="container">
           <div class="row">
@@ -61,19 +63,18 @@ const LandingPageMain = () => {
                     </li>
                   </ul>
                   <div class="header_btns header_btns_menu">
-                    <a  class="btn_style" >
-                      Login
-                    </a>
-                    <a  class="btn_style btn_style2">
-                      Get Started
-                    </a>
+                    <a class="btn_style">Login</a>
+                    <a class="btn_style btn_style2"  onClick={() => navigate("/account")}>Get Started</a>
                   </div>
                 </div>
                 <div class="header_btns">
-                  <a  class="btn_style" onClick={()=>navigate('/account')}>
+                  <a class="btn_style" onClick={() => navigate("/account")}>
                     Login
                   </a>
-                  <a  class="btn_style btn_style2" onClick={()=>navigate('/account')}>
+                  <a
+                    class="btn_style btn_style2"
+                    onClick={() => navigate("/account")}
+                  >
                     Get Started
                   </a>
                 </div>
@@ -104,8 +105,8 @@ const LandingPageMain = () => {
                     Autopilot
                   </p>
                   <div class="banner_btns">
-                    <a href="#" class="btn_style">
-                      <i class="fas fa-arrow-right"></i>Get Started
+                    <a  class="btn_style" onClick={() => navigate("/account")}>
+                      <ArrowRightOutlined /> Get Started
                     </a>
                   </div>
                   <div class="banner_social">
@@ -122,7 +123,7 @@ const LandingPageMain = () => {
                       </li>
                       <li>
                         <a href="https://www.youtube.com/@RoboMarketer">
-                          <img src= {youtube} alt="" />
+                          <img src={youtube} alt="" />
                         </a>
                       </li>
                       <li>
@@ -143,28 +144,8 @@ const LandingPageMain = () => {
                     </ul>
                   </div>
                 </div>
-                <div
-                  class="banner_video"
-                  id="playVideoTrigger"
-                  style={{ cursor: "pointer", position: "relative" }}
-                >
-                  <img src={bannerVideo} alt="" />
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      fontSize: "60px",
-                      color: "white",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <i class="fas fa-play-circle"></i>
-                  </div>
-                </div>
-<VideoPopup/>
-               
+
+                <VideoPopup />
 
                 <div class="banner_bottom_contents">
                   <div class="banner_content_single">
@@ -214,7 +195,7 @@ const LandingPageMain = () => {
                   </div>
                   <div class="business_single_box">
                     <span>
-                      <img src={business2}alt="" />
+                      <img src={business2} alt="" />
                     </span>
                     <h4>Local Businesses & Startups</h4>
                     <p>
@@ -340,7 +321,7 @@ const LandingPageMain = () => {
                       <div class="lpc_single_contents_top">
                         <h1>$1,500</h1>
                         <p>One-Time Payment Own It For LIFE!</p>
-                        <a href="#">Get Started</a>
+                        <a >Get Started</a>
                       </div>
                       <div class="lpc_single_contents_bottom">
                         <p>Whats Included:</p>
@@ -941,16 +922,20 @@ const LandingPageMain = () => {
                     <img src={logo} alt="" />
                   </a>
                 </div>
-                <div class="footer_contents">
+                <div className="footer_contents">
                   <ul>
                     <li>
-                      <a href="/privacy-policy/">Privacy Policy</a>
+                      <a onClick={() => handleNext("privacy-policy")}>
+                        Privacy Policy
+                      </a>
                     </li>
                     <li>
-                      <a href="/terms-and-conditions/">Terms of Service</a>
+                      <a onClick={() => handleNext("terms-of-service")}>
+                        Terms of Service
+                      </a>
                     </li>
                     <li>
-                      <a href="/data-protection-compliance-policy/">
+                      <a onClick={() => handleNext("data-protection-policy")}>
                         Data Protection Policy
                       </a>
                     </li>

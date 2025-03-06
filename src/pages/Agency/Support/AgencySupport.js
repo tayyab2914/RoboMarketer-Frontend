@@ -1,13 +1,32 @@
 import { Col, Row } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyIcon from "../../../components/Icon/MyIcon";
 import '../styles/AgencySupport.css'
 import SupportContainers from "./SupportContainers";
 import InfoContainer from "./InfoContainer";
-import { PRIVACY_POLICY_DATA } from "./PolicyData";
+import { useSearchParams } from "react-router-dom";
 
 const AgencySupport = () => {
 const [CurrentMode, setCurrentMode] = useState(0);
+const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const next = searchParams.get("next");
+    switch (next) {
+      case "data-protection-policy":
+        setCurrentMode(1);
+        break;
+      case "privacy-policy":
+        setCurrentMode(2);
+        break;
+      case "terms-of-service":
+        setCurrentMode(3);
+        break;
+      default:
+        setCurrentMode(0); 
+    }
+  }, [searchParams]); 
+
   return (
     <div>
       <Row>

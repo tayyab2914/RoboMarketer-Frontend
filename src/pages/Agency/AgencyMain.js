@@ -13,6 +13,7 @@ import AgencyProfile from "./AgencyProfile";
 import AgencyWhitelabel from "./AgencyWhitelabel";
 import AgencySupport from "./Support/AgencySupport";
 import AgencyTrainingOS from "./TrainingOS/AgencyTrainingOS";
+import { useParams } from "react-router-dom";
 
 const AgencyMain = () => {
   const windowWidth = useWindowWidth();
@@ -22,7 +23,9 @@ const AgencyMain = () => {
   const [isLeftDrawerVisible, setIsLeftDrawerVisible] = useState(false);
   const showLeftDrawer = () => setIsLeftDrawerVisible(true);
   const closeLeftDrawer = () => setIsLeftDrawerVisible(false);
+  const { page } = useParams(); // Get the dynamic 'page' param from the route
   const [CurrentMode, setCurrentMode] = useState(0);
+
 
 
   useEffect(() => {
@@ -36,7 +39,24 @@ const AgencyMain = () => {
         logoutUser()
     }
   }
-
+  useEffect(() => {
+    switch (page) {
+      case "support":
+        setCurrentMode(3);
+        break;
+      case "profile":
+        setCurrentMode(1);
+        break;
+      case "whitelabel":
+        setCurrentMode(2);
+        break;
+      case "training":
+        setCurrentMode(4);
+        break;
+      default:
+        setCurrentMode(0); // Default to WorkArea
+    }
+  }, [page]);
   useEffect(() => {
     testToken()
   }, [rerender_dashboard]);

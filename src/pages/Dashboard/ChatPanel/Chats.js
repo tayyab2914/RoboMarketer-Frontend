@@ -171,12 +171,12 @@ const Chats = ({
 
         {ChatData?.map((item, index) => {
           // Check if the meta_data is a string, and only parse if it is
-          const metaData = (typeof item.meta_data === 'string') 
+          item.meta_data = (typeof item.meta_data === 'string') 
           ? JSON.parse(item.meta_data)  // Parse the string to an object
           : item.meta_data;  // Use as is if already an object
 
           // Check if the json_message is a string, and only parse if it is
-          const jsonMessage = (typeof item.json_message === 'string') 
+          item.json_message = (typeof item.json_message === 'string') 
           ? JSON.parse(item.json_message)  // Parse the string to an object 
           : item.json_message; 
 
@@ -239,21 +239,21 @@ const Chats = ({
                               {item.message}
                             </Markdown>
                           ) : item.message_type === "JSON" &&
-                          jsonMessage &&
-                            metaData.contains === "summarize_data" ? (
+                          item.json_message &&
+                            item.meta_data.contains === "summarize_data" ? (
                             <SummaryMessageView
-                              data={jsonMessage}
-                              level={jsonMessage.level}
-                              currency={jsonMessage.currency}
+                              data={item.json_message}
+                              level={item.json_message.level}
+                              currency={item.json_message.currency}
                             />
                           ) : item.message_type === "JSON" &&
-                            jsonMessage &&
-                            metaData.contains ===
+                            item.json_message &&
+                            item.meta_data.contains ===
                               "recommendation_on_data" ? (
                             <RecommendationsList data={item.recommendations} />
                           ) : item.message_type === "JSON" &&
-                            jsonMessage &&
-                            metaData.contains === "create_campaign" ? (
+                            item.json_message &&
+                            item.meta_data.contains === "create_campaign" ? (
                             <CampaignMessage data={item} />
                           ) : (
                             <span className="response-text">

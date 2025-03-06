@@ -29,6 +29,7 @@ const ProjectRoutes = () => {
         <Route path="/account/signup" element={<SignUp />} />
         <Route path="/verify_account/:id" element={<VerifyAccountMain />} />
         <Route path="/agency" element={ isLoggedIn && current_account?.is_main_user ? ( <AgencyMain /> ) : ( <Navigate to="/account" replace /> ) } />
+        <Route path="/agency/:page" element={ isLoggedIn && current_account?.is_main_user ? ( <AgencyMain /> ) : ( <Navigate to="/account" replace /> ) } />
         <Route path="/notfound" element={<Error404 />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
