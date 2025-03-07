@@ -518,3 +518,24 @@ export const rangePresets = [
     value: [dayjs("2010-01-01"), dayjs()],
   },
 ];
+export const HIGHLIGHT_AT_TEXT = (text) => {
+    const regex = /@[^\s]+/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+      const start = match.index;
+      const end = start + match[0].length;
+
+      if (lastIndex < start) {
+        parts.push(text.slice(lastIndex, start));
+      }
+      parts.push( <span key={start} style={{ color: "#1890ff" }}> {" "} {match[0]} </span> );
+      lastIndex = end;
+    }
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+    return parts;
+  };

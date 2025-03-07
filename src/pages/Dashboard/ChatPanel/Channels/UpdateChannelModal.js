@@ -26,42 +26,20 @@ const UpdateChannelModal = ({ channel, visible, onClose, fetchChannels }) => {
   };
 
   return (
-    <Modal
-      title={false}
-      open={visible}
-      onCancel={onClose}
-      closable={false}
-      footer={null}
-      zIndex={1200}
-    >
+    <Modal title={false} open={visible} onCancel={onClose} closable={false} footer={null} zIndex={1200} >
       <div className="custom-modal-header">
         <span className="modal-header">
           <b style={{marginRight:"5px"}}># </b> Edit Channel{" "}
         </span>
         <span>
-          <MyIcon
-            type={"close_icon"}
-            onClick={onClose}
-            size="lg"
-            className="close-icon"
-          />
+          <MyIcon type={"close_icon"} onClick={onClose} size="lg" className="close-icon" />
         </span>
       </div>
 
       <div className="modal-content">
         <p className="input-group-label" style={{marginTop:"0px"}}>Channel Name</p>
-        <Input
-          placeholder="Enter channel name"
-          value={channelName}
-          onChange={(e) => setChannelName(e.target.value)}
-          style={{ height: "40px" }}
-        />
-        <Button
-          type="primary"
-          block
-          onClick={handleUpdateChannel}
-          style={{ height: "40px" }}
-        >
+        <Input placeholder="Enter channel name" value={channelName} onChange={(e) => setChannelName(e.target.value)} style={{ height: "40px" }} />
+        <Button type="primary" block onClick={handleUpdateChannel} style={{ height: "40px" }} >
           Save Changes
         </Button>
       </div>

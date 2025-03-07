@@ -15,34 +15,38 @@ import { setRerenderDashboard } from "../../redux/AuthToken/Action";
 const { Panel } = Collapse;
 const { RangePicker } = DatePicker; 
 const availableMetrics = [
-  { key: "spend", label: "Ad Spend", value: "", trend: "green" },
-  { key: "impressions", label: "Impressions", value: "", trend: "red" },
-  { key: "clicks", label: "Clicks", value: "", trend: "red" },
-  { key: "cpm", label: "CPM", value: "", trend: "green" },
-  { key: "ctr", label: "CTR", value: "", trend: "green" },
-  { key: "cpc", label: "CPC", value: "", trend: "red" },
-  { key: "optin_rate", label: "Optin Rate", value: "", trend: "green" },
-  { key: "cpl", label: "CPL", value: "", trend: "red" },
-  { key: "cpa", label: "CPA", value: "", trend: "red" },
-  { key: "appointment_rate", label: "Appt Rate", value: "", trend: "green" },
-  { key: "cost_per_appointment", label: "Cost Per Appt", value: "", trend: "red", },
-  { key: "leads", label: "Leads", value: "", trend: "green" },
-  { key: "appointments", label: "Appts", value: "", trend: "red" },
-  { key: "close_rate", label: "Close Rate", value: "", trend: "red" },
-  { key: "sales", label: "Sales", value: "", trend: "red" },
-  { key: "roas", label: "Return on Ad Spend", value: "", trend: "red" },
-  { key: "profit", label: "Profit", value: "", trend: "red" },
-  { key: "revenue", label: "Revenue", value: "", trend: "red" },
+  { key: "spend", label: "Ad Spend",   },
+  { key: "impressions", label: "Impressions"  },
+  { key: "clicks", label: "Clicks"  },
+  { key: "cpm", label: "CPM",   },
+  { key: "ctr", label: "CTR",   },
+  { key: "cpc", label: "CPC"  },
+  { key: "optin_rate", label: "Optin Rate",   },
+  { key: "cpl", label: "CPL"  },
+  { key: "cpa", label: "CPA"  },
+  { key: "appointment_rate", label: "Appt Rate",   },
+  { key: "cost_per_appointment", label: "Cost Per Appt" , },
+  { key: "leads", label: "Leads",   },
+  { key: "appointments", label: "Appts"  },
+  { key: "close_rate", label: "Close Rate"  },
+  { key: "sales", label: "Sales"  },
+  { key: "roas", label: "Return on Ad Spend"  },
+  { key: "profit", label: "Profit"  },
+  { key: "revenue", label: "Revenue"  },
 ];
 
-function updateMetrics(metrics, values) {
-  return metrics.map((metric) => {
-    if (values?.hasOwnProperty(metric.key)) {
-      return { ...metric, value: values[metric.key] };
-    }
-    return metric;
-  });
-}
+const transformResponseToMetrics = (response, availableMetrics) => {
+    return availableMetrics.map((metric) => {
+      const metricData = response[metric.key] || {};
+      return {
+        key: metric.key,
+        label: metric.label,
+        value: metricData.value ?? 0,
+        color: metricData.color ?? "gray",
+      };
+    });
+  };
+  
 
 const DashboardRightPanel = () => {
   const dispatch = useDispatch();
@@ -54,6 +58,7 @@ const DashboardRightPanel = () => {
   const [dateRange, setDateRange] = useState([moment().startOf("day"), moment().endOf("day")]);
   const [collapseKey, setCollapseKey] = useState("0");
   const [DecreaseFontSize, setDecreaseFontSize] = useState(false);
+
 
   const { isLoggedIn, token,rerender_dashboard,current_account,rerender_right_panel } = useSelector((state) => state.authToken);
 
@@ -71,8 +76,9 @@ const DashboardRightPanel = () => {
 
   const getInsights = async (startDate, endDate) => {
     const response = await API_GET_INSIGHTS( token, startDate, endDate, setShowSpinner );
-    console.log(response)
-    const updatedMetrics = updateMetrics(availableMetrics, response);
+    console.log('response',response)
+    const updatedMetrics = transformResponseToMetrics(response, availableMetrics); //extracts only values from response and not color 
+    console.log('updatedMetrics',updatedMetrics)
     setMetrics(updatedMetrics);
   };
 

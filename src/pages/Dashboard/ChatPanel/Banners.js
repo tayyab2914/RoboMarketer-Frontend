@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MyIcon from "../../../components/Icon/MyIcon";
 import "./styles/Banners.css";
-import {
-  setFacebookState,
-  setisIntegrationsModalClosedByUser,
-} from "../../../redux/AuthToken/Action";
+import { setFacebookState, setisIntegrationsModalClosedByUser } from "../../../redux/AuthToken/Action";
 import { API_GENERATE_AUTH_URL } from "../../../apis/FacebookInsightsApis";
 import AIModelAPIModal from "../../../components/Modals/AIModelAPIModal";
 
@@ -42,10 +39,7 @@ const Banners = () => {
           <button className="integrate_btn" onClick={integrateAPIhandler}> Integrate API </button>
         </Col>
       </Row>}
-      <AIModelAPIModal
-        isVisible={isIntegrateModalVisible}
-        onClose={() => setisIntegrateModalVisible(false)}
-      />
+      <AIModelAPIModal isVisible={isIntegrateModalVisible} onClose={() => setisIntegrateModalVisible(false)} />
     </div>
   );
 };

@@ -55,13 +55,7 @@ const Chats = ({ onLikeDislikeClick, submittedFeedback, prompts, chat_data }) =>
     console.log("chat_data", chat_data);
     if (temporary_loading) {
       setChatData((prev) => {
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...prev[prev.length - 1],
-            isLoading: true,
-          },
-        ];
+        return [ ...prev.slice(0, -1), { ...prev[prev.length - 1], isLoading: true, },];
       });
     }
   }, [temporary_loading, temporary_response]);

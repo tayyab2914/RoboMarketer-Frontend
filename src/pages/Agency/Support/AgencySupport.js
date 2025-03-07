@@ -41,7 +41,7 @@ const [CurrentMode, setCurrentMode] = useState(0);
             {CurrentMode == 2 &&<InfoContainer dataType={"privacy-policy"}/>}
         </Col>
         <Col xs={24}>
-            {CurrentMode == 3 &&<InfoContainer dataType={"terms-of-service"}/>}
+            {CurrentMode == 3 &&<InfoContainer dataType={"terms-and-conditions"}/>}
         </Col>
       </Row>
     </div>

@@ -29,22 +29,12 @@ const ChannelItem = ({ channel, onSelectChannel, fetchChannels }) => {
   // Dropdown menu for edit and delete
   const renderDropdownMenu = (channel) => (
     <Menu>
-      <Menu.Item key="edit" onClick={handleEditChannel}>
-        <span style={{ display: "flex", alignItems: "center" }}>
-          <EditOutlined style={{ marginRight: "10px" }} /> Edit
-        </span>
+      <Menu.Item key="edit" onClick={handleEditChannel}> 
+        <span style={{ display: "flex", alignItems: "center" }}> <EditOutlined style={{ marginRight: "10px" }} /> Edit </span>
       </Menu.Item>
       <Menu.Item key="delete">
-        <Popconfirm
-          title="Are you sure you want to delete this channel?"
-          onConfirm={() => handleDeleteChannel(channel?.id)}
-          okText="Yes"
-          cancelText="No"
-          placement="topLeft"
-        >
-          <span style={{ display: "flex", alignItems: "center" }}>
-            <DeleteOutlined style={{ marginRight: "10px" }} /> Delete
-          </span>
+        <Popconfirm title="Are you sure you want to delete this channel?" onConfirm={() => handleDeleteChannel(channel?.id)} okText="Yes" cancelText="No" placement="topLeft" >
+          <span style={{ display: "flex", alignItems: "center" }}> <DeleteOutlined style={{ marginRight: "10px" }} /> Delete </span>
         </Popconfirm>
       </Menu.Item>
     </Menu>
@@ -57,12 +47,7 @@ const ChannelItem = ({ channel, onSelectChannel, fetchChannels }) => {
           <span style={{ width: "100%", padding: "5px 0px" }} onClick={() => onSelectChannel(channel)}>
             {channel.name}
           </span>
-          <Dropdown
-            overlay={renderDropdownMenu(channel)}
-            trigger={["click"]}
-            open={dropdownVisible}
-            onOpenChange={setDropdownVisible}
-            overlayStyle={{zIndex:"999 !important"}}
+          <Dropdown overlay={renderDropdownMenu(channel)} trigger={["click"]} open={dropdownVisible} onOpenChange={setDropdownVisible} overlayStyle={{zIndex:"999 !important"}}
             
           >
             <MyIcon type="elipsis" style={{ cursor: "pointer", marginLeft: 10, height: "12px" }} />
@@ -70,12 +55,7 @@ const ChannelItem = ({ channel, onSelectChannel, fetchChannels }) => {
         </div>
       </div>
 
-      <UpdateChannelModal
-        channel={channel}
-        visible={showUpdateChannelModal}
-        onClose={() => setShowUpdateChannelModal(false)}
-        fetchChannels={fetchChannels}
-        
+      <UpdateChannelModal channel={channel} visible={showUpdateChannelModal} onClose={() => setShowUpdateChannelModal(false)} fetchChannels={fetchChannels} 
       />
     </>
   );

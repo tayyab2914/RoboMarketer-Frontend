@@ -15,7 +15,6 @@ import PoliciesPage from "../pages/LandingPage/PoliciesPage";
 const ProjectRoutes = () => {
   const { isLoggedIn, isAdmin, token, facebook_state, current_account } = useSelector((state) => state.authToken);
 
-    console.log(current_account)
 
   return (
     <BrowserRouter>

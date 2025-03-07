@@ -20,7 +20,6 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
   const [aiModelType, setAiModelType] = useState("gpt-4o");
   const [selectedModelName, setSelectedModelName] = useState("GPT-4o");
 
-  console.log(current_account)
   const handleModelChange = (value, name) => {
     setAiModelType(value);
     setSelectedModelName(name);

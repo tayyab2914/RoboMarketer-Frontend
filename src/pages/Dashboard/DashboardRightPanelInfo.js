@@ -6,21 +6,16 @@ import { Spin } from "antd";
 import { getPrefix, getSuffix } from "../../utils/Methods";
 
 const DashboardRightPanelInfo = ({ reportingData }) => {
-  const {
-    isLoggedIn,
-    token,
-    rerender_dashboard,
-    current_account,
-    rerender_right_panel,
-  } = useSelector((state) => state.authToken);
+  const {rerender_dashboard,current_account,} = useSelector((state) => state.authToken);
 
   function formatWithCommas(number) {
-    // Convert the number to a string and use a regular expression to format it
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   useEffect(()=>{
+    
+  },[rerender_dashboard,reportingData])
 
-  },[rerender_dashboard])
+
   return current_account?.historical_data_progress != "In Progress" ? (
     <div className="right-panel-scrollable">
       {reportingData?.map((item, index) => (
@@ -28,7 +23,7 @@ const DashboardRightPanelInfo = ({ reportingData }) => {
           <span className="reporting-text">
             <MyIcon type={item.key} /> {item.label}
           </span>
-          <span className={`reporting-data rd-${item.trend}`}>
+          <span className={`reporting-data rd-${item.color}`}>
             {getPrefix(item.label)}
             {item.value ? formatWithCommas(item.value) : 0}
             {getSuffix(item.label)}

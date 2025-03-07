@@ -20,11 +20,15 @@
     padding: 2px 10px;
 }
 .rd-green{
-    background-color: rgba(186, 186, 186, 0.5);
+    background-color: rgb(171, 255, 173);
     color: #000000 !important;
 }
 .rd-red{
-    background-color: rgba(186, 186, 186, 0.5);
+    background-color: rgb(255, 160, 160);
+    color: #000000  !important;
+}
+.rd-gray{
+    background-color: rgba(202, 202, 202, 0.5);
     color: #000000  !important;
 }
 .right-panel-scrollable {

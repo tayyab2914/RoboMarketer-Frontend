@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Spin } from "antd";
 import useWindowWidth from "../../hooks/useWindowWidth";
+import './ChatPanel/styles/AccountSetupComponent.css'
 
 const FacebookIntegration = ({
   isInIntegrationComponent,

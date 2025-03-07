@@ -17,7 +17,12 @@ import {
   API_SEND_INVITE_EMAIL,
 } from "../../apis/AgencyApis";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_METRIC_NAME_FROM_KEY, getPrefix, getSuffix, TRUNCATE_STRING } from "../../utils/Methods";
+import {
+  GET_METRIC_NAME_FROM_KEY,
+  getPrefix,
+  getSuffix,
+  TRUNCATE_STRING,
+} from "../../utils/Methods";
 import {
   setAuthToken,
   setRerenderDashboard,
@@ -25,7 +30,15 @@ import {
 import { useNavigate } from "react-router-dom";
 import { API_SWITCH_ACCOUNT } from "../../apis/AuthApis";
 
-const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, fetchAccounts, Metrics }) => {
+const SubAccountCard = ({
+  companyLogo,
+  subAccountID,
+  companyName,
+  email,
+  phone,
+  fetchAccounts,
+  Metrics,
+}) => {
   const [ShowEditModal, setShowEditModal] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState(false);
   const { token, rerender_dashboard } = useSelector((state) => state.authToken);
@@ -35,10 +48,11 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
 
   const getInsightsByAccountId = () => {
     const account = Metrics.find((acc) => acc.account_id === subAccountID);
+    console.log(account)
     setInsights(account?.insights);
     console.log(account);
   };
-      
+
   useEffect(() => {
     getInsightsByAccountId();
   }, [Metrics]);
@@ -72,61 +86,102 @@ const SubAccountCard = ({ companyLogo, subAccountID, companyName, email, phone, 
     <>
       <Row className="sub-account-card-wrapper">
         <Col xs={24} sm={12} md={8} xl={6}>
-        <div className="sub-account-card">
-        <div className="sac-company-info">
-          <img src={ companyLogo ? `${DOMAIN_NAME}/media/${companyLogo}` : IMAGES.user } alt="Company Logo" height={24} className="sac-company-logo" />
-        </div>
-
-        <div className="sac-contact-info">
-          <div className="sac-company-name"> <MyIcon type={"sub_accounts"} />{TRUNCATE_STRING(companyName, 25)} </div>
-          <div className="sac-email"> <MyIcon type={"sa_message"} /> {TRUNCATE_STRING(email, 24)} </div>
-          <div className="sac-phone"> <MyIcon type={"sa_phone"} /> {phone} </div>
-        </div>
-
-        <div className="sac-icons">
-          <span onClick={handleView}>
-            <MyIcon type={"sa_eye"} />
-          </span>
-
-          <Popconfirm title="Are you sure you want to delete this account?" onConfirm={handleDelete} okText="Yes" cancelText="No" >
-            <span> <MyIcon type={"sa_delete"} /></span>
-          </Popconfirm>
-
-          <span onClick={handleEdit}>
-          
-            <MyIcon type={"sa_edit"} />
-          </span>
-          <span onClick={handleMessage}>
-            {loadingMessage ? (
-              <LoadingOutlined spin style={{ border: "none" }} />
-            ) : (
-              <MyIcon type={"sa_message"} />
-            )}
-          </span>
-        </div>
-      </div>
-      </Col>
-      
-      <Col xs={24} sm={12} md={16} xl={18} id="sub-account-card-reporting">
-      <p className="title"><MyIcon type={"reporting"}/>Reporting</p>
-      <div className="metrics">
-      {Insights && Object.entries(Insights).map(([key, value]) => (
-            <div key={key} className="checkbox-item">
-                        <MyIcon type={key}/>
-                        {GET_METRIC_NAME_FROM_KEY(key)}
-                        <span className="value">{getPrefix(GET_METRIC_NAME_FROM_KEY(key))}
-                                {value ? formatWithCommas(value) : 0}
-                                {getSuffix(GET_METRIC_NAME_FROM_KEY(key))}
-                        </span>
-                
+          <div className="sub-account-card">
+            <div className="sac-company-info">
+              <img
+                src={
+                  companyLogo
+                    ? `${DOMAIN_NAME}/media/${companyLogo}`
+                    : IMAGES.user
+                }
+                alt="Company Logo"
+                height={24}
+                className="sac-company-logo"
+              />
             </div>
-        ))}
-      </div>
-      </Col>
-      </Row>
-     
 
-      <NewSubAccountModal isVisible={ShowEditModal} onClose={() => setShowEditModal(false)} defaultValues={{ companyName: companyName, email: email, phone: phone, logo: companyLogo, id: subAccountID, }} editMode={true} fetchAccounts={fetchAccounts} />
+            <div className="sac-contact-info">
+              <div className="sac-company-name">
+                {" "}
+                <MyIcon type={"sub_accounts"} />
+                {TRUNCATE_STRING(companyName, 25)}{" "}
+              </div>
+              <div className="sac-email">
+                {" "}
+                <MyIcon type={"sa_message"} /> {TRUNCATE_STRING(email, 24)}{" "}
+              </div>
+              <div className="sac-phone">
+                {" "}
+                <MyIcon type={"sa_phone"} /> {phone}{" "}
+              </div>
+            </div>
+
+            <div className="sac-icons">
+              <span onClick={handleView}>
+                <MyIcon type={"sa_eye"} />
+              </span>
+
+              <Popconfirm
+                title="Are you sure you want to delete this account?"
+                onConfirm={handleDelete}
+                okText="Yes"
+                cancelText="No"
+              >
+                <span>
+                  {" "}
+                  <MyIcon type={"sa_delete"} />
+                </span>
+              </Popconfirm>
+
+              <span onClick={handleEdit}>
+                <MyIcon type={"sa_edit"} />
+              </span>
+              <span onClick={handleMessage}>
+                {loadingMessage ? (
+                  <LoadingOutlined spin style={{ border: "none" }} />
+                ) : (
+                  <MyIcon type={"sa_message"} />
+                )}
+              </span>
+            </div>
+          </div>
+        </Col>
+
+        <Col xs={24} sm={12} md={16} xl={18} id="sub-account-card-reporting">
+          <p className="title">
+            <MyIcon type={"reporting"} />
+            Reporting
+          </p>
+          <div className="metrics">
+            {Insights &&
+              Object.entries(Insights).map(([key, pair]) => (
+                <div key={key} className="checkbox-item">
+                  <MyIcon type={key} />
+                  {GET_METRIC_NAME_FROM_KEY(key)}
+                  <span className={`value rd-${pair?.color ? pair?.color : "gray"}`}>
+                    {getPrefix(GET_METRIC_NAME_FROM_KEY(key))}
+                    {pair?.value ? formatWithCommas(pair?.value) : 0}
+                    {getSuffix(GET_METRIC_NAME_FROM_KEY(key))}
+                  </span>
+                </div>
+              ))}
+          </div>
+        </Col>
+      </Row>
+
+      <NewSubAccountModal
+        isVisible={ShowEditModal}
+        onClose={() => setShowEditModal(false)}
+        defaultValues={{
+          companyName: companyName,
+          email: email,
+          phone: phone,
+          logo: companyLogo,
+          id: subAccountID,
+        }}
+        editMode={true}
+        fetchAccounts={fetchAccounts}
+      />
     </>
   );
 };

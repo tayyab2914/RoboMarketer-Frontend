@@ -2,25 +2,14 @@ import { Col, Row } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import "./styles/DashboardChatPanel.css";
 import MessageBar from "./MessageBar";
-import AccountSetupComponent from "./AccountSetupComponent";
 import Chats from "./Chats";
 import { useSelector } from "react-redux";
-import { CircleArrowDown } from "lucide-react";
 import { API_GET_PROMPTS } from "../../../apis/ChatApis";
 import { API_GET_HISTORY } from "../../../apis/ChatApis";
 import ChannelsPopup from "./Channels/ChannelsPopup";
 const DashboardChatPanel = ({ onLikeDislikeClick = () => {},  submittedFeedback = null,  FetchedPrompts = [], limitEnded = false,  setLimitEnded = () => {},  isAIResponseLoading = false,  setIsAIResponseLoading = () => {} }) => {
-  const {
-    token,
-    rerender_dashboard,
-    current_account,
-    channel,
-  } = useSelector((state) => state.authToken);
-
-  const [isAccountSetup, setisAccountSetup] = useState(
-    current_account?.is_facebook_connected
-  );
-
+  const { token, rerender_dashboard, current_account, channel, } = useSelector((state) => state.authToken);
+  const [isAccountSetup, setisAccountSetup] = useState( current_account?.is_facebook_connected );
   const [prompts, setPrompts] = useState([]);
 
   useEffect(() => {
