@@ -17,7 +17,7 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
     current_account,
   } = useSelector((state) => state.authToken);
 
-  const accessTypeMap = { 0: 'None', 1: 'Unlimited Accounts', 2: 'Lifetime Access', 3: 'Unlimited Verified Accounts',};
+  const accessTypeMap = { 0: 'None', 2: 'Unlimited Accounts', 1: 'Lifetime Access', 3: 'Unlimited Verified Accounts',};
 
 
     const formattedData = UsersList.map((user, index) => ({
@@ -138,8 +138,8 @@ const AdminMainTable = ({ UsersList, onSaveUserData,onDeleteUserData }) => {
                         <Form.Item label="Access Type" name="access_type" rules={[{ required: true, message: 'Access type is required' }]} className="admin-main-table-edit-input-field">
                             <Select>
                                 <Select.Option value={0}>None</Select.Option>
-                                <Select.Option value={2}>Lifetime Access</Select.Option>
-                                <Select.Option value={1}>Unlimited Accounts</Select.Option>
+                                <Select.Option value={1}>Lifetime Access</Select.Option>
+                                <Select.Option value={2}>Unlimited Accounts</Select.Option>
                                 <Select.Option value={3}>Unlimited Verified Accounts</Select.Option>
                             </Select>
                         </Form.Item>

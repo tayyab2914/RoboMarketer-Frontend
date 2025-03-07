@@ -350,7 +350,7 @@ const DashboardLeftPanel = ({
           <SettingsBtn />
         </span>
 
-        <div style={{ height: "130px" }}></div>
+        {/* <div style={{ height: "130px" }}></div> */}
         {isEditModalVisible && (
           <EditPromptModal
             visible={isEditModalVisible}
