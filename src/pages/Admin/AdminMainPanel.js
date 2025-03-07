@@ -76,7 +76,7 @@ const AdminMainPanel = () => {
           <Col xs={24} className="admin-main-panel-search-under-lg">
             <div className="header-data">
               <Input placeholder="Search" className="admin-main-panel-search-bar" prefix={<SearchOutlined style={{ marginRight: "10px" }} />} size="large" value={searchQuery} onChange={(e) => handleSearch(e.target.value)} />
-              <CreateSignUpLinkBtn />
+              {/* <CreateSignUpLinkBtn /> */}
             </div>
           </Col>
         )}

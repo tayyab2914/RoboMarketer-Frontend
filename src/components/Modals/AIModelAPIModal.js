@@ -15,11 +15,12 @@ const { Panel } = Collapse;
 const AIModelAPIModal = ({ isVisible, onClose }) => {
   const [form] = Form.useForm();
   const [showSpinner, setShowSpinner] = useState(false);
-  const { token, rerender_dashboard } = useSelector((state) => state.authToken);
+  const { token, rerender_dashboard,current_account } = useSelector((state) => state.authToken);
   const dispatch = useDispatch();
   const [aiModelType, setAiModelType] = useState("gpt-4o");
   const [selectedModelName, setSelectedModelName] = useState("GPT-4o");
 
+  console.log(current_account)
   const handleModelChange = (value, name) => {
     setAiModelType(value);
     setSelectedModelName(name);
@@ -103,7 +104,7 @@ const AIModelAPIModal = ({ isVisible, onClose }) => {
 
             <Form.Item name="api_key" rules={API_KEY_RULES_REQUIRED}>
               <Input
-                placeholder="Enter API key"
+                placeholder={current_account?.is_openapi_setup ? "*************":"Enter API key"}
                 style={{ height: "40px", margin: "0px" }}
                 min={5}
               />

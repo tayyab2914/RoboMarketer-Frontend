@@ -16,9 +16,9 @@
   font-size: 14px;
   font-weight: 500;
 }
-#banners .text  img{
-    margin-right: 10px;
-  }
+#banners .text img {
+  margin-right: 10px;
+}
 #banners .facebook_btn {
   background-color: #1877f2;
   color: #fff;
@@ -37,3 +37,35 @@
   cursor: pointer;
   font-weight: 500;
 }
+
+@media screen and (max-width: 660px) {
+  #banners .banner-inner {
+    height: 66px;
+  }
+  #banners .banner-inner button {
+    width: 170px !important;
+    font-size: 12px;
+  }
+  #banners .text {
+    font-size: 12px;
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+    #banners .banner-inner {
+      height:100px;
+      display:block;
+      border-radius: 8px;
+    }
+    #banners .banner-inner button {
+      width: 100% !important;
+      font-size: 14px;
+    }
+    #banners .text {
+      font-size: 14px;
+      width: 100%;
+      margin-bottom: 10px;
+
+    }
+  }

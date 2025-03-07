@@ -9,21 +9,10 @@ import { CircleArrowDown } from "lucide-react";
 import { API_GET_PROMPTS } from "../../../apis/ChatApis";
 import { API_GET_HISTORY } from "../../../apis/ChatApis";
 import ChannelsPopup from "./Channels/ChannelsPopup";
-const DashboardChatPanel = ({
-  onLikeDislikeClick = () => {}, 
-  submittedFeedback = null, 
-  FetchedPrompts = [],
-  limitEnded = false, 
-  setLimitEnded = () => {}, 
-  isAIResponseLoading = false, 
-  setIsAIResponseLoading = () => {},
-}) => {
+const DashboardChatPanel = ({ onLikeDislikeClick = () => {},  submittedFeedback = null,  FetchedPrompts = [], limitEnded = false,  setLimitEnded = () => {},  isAIResponseLoading = false,  setIsAIResponseLoading = () => {} }) => {
   const {
-    isLoggedIn,
     token,
     rerender_dashboard,
-    facebook_state,
-    rerender_chat_panel,
     current_account,
     channel,
   } = useSelector((state) => state.authToken);

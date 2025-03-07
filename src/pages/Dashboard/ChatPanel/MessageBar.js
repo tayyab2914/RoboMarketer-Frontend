@@ -359,14 +359,7 @@ const MessageBar = ({
       {showPromptSuggestions && filteredPrompts.length > 0 && (
         <div className="suggestions-panel">
           {filteredPrompts.map((prompt, index) => (
-            <div
-              key={prompt.id}
-              ref={index === selectedSuggestionIndex ? selectedPromptRef : null}
-              className={`suggestion-item ${
-                index === selectedSuggestionIndex ? "suggestion-selected" : ""
-              }`}
-              onClick={() => selectPrompt(prompt)}
-            >
+            <div key={prompt.id} ref={index === selectedSuggestionIndex ? selectedPromptRef : null} className={`suggestion-item ${ index === selectedSuggestionIndex ? "suggestion-selected" : "" }`} onClick={() => selectPrompt(prompt)} >
               @{prompt.prompt_hashtag}
             </div>
           ))}
@@ -378,15 +371,7 @@ const MessageBar = ({
         <Col xs={24}>
           {file && (
             <div className="file-preview-container">
-              <Badge
-                count={
-                  <CloseOutlined
-                    onClick={handleRemoveFile}
-                    className="file-preview-container-badge-icon"
-                  />
-                }
-                className="file-preview-container-badge"
-              >
+              <Badge count={ <CloseOutlined onClick={handleRemoveFile} className="file-preview-container-badge-icon" /> } className="file-preview-container-badge" >
                 {RENDER_FILE_PREVIEW(file, 30, false)}
               </Badge>
             </div>
@@ -396,92 +381,31 @@ const MessageBar = ({
         {/* "+" icon for file upload */}
         <Col>
           <label htmlFor="file-upload">
-            <div
-              className={`message-bar-plus ${
-                isFileUploading ? "disabled" : ""
-              }`}
-              style={{ cursor: isFileUploading ? "not-allowed" : "pointer" }}
-            >
+            <div className={`message-bar-plus ${ isFileUploading ? "disabled" : "" }`} style={{ cursor: isFileUploading ? "not-allowed" : "pointer" }} >
               +
             </div>
           </label>
-          <input
-            id="file-upload"
-            type="file"
-            style={{ display: "none" }}
-            onChange={handleFileSelect}
-            accept=".docs, .docx"
-            disabled={isFileUploading}
-          />
+          <input id="file-upload" type="file" style={{ display: "none" }} onChange={handleFileSelect} accept=".docs, .docx" disabled={isFileUploading} />
         </Col>
 
         <Col flex="auto">
-          <div
-            className="message-input-wrapper"
-            style={{ position: "relative" }}
-          >
-            <div
-              className="message-display"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                pointerEvents: "none",
-                padding: "0 8px",
-                display: "flex",
-                alignItems: "center",
-                color: "#000",
-                backgroundColor: "transparent",
-                overflowWrap: "break-word",
-              }}
-            >
+          <div className="message-input-wrapper" style={{ position: "relative" }} >
+            <div className="message-display" style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, pointerEvents: "none", padding: "0 8px", display: "flex", alignItems: "center", color: "#000", backgroundColor: "transparent", overflowWrap: "break-word", }} >
               {highlightAtText(message)}
             </div>
 
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Type @ to use preset prompts..."
-              value={message}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              className="message-bar-input"
-              style={{
-                position: "relative",
-                backgroundColor: "transparent",
-                color: "transparent",
-                caretColor: "#000",
-              }}
-            />
+            <input ref={inputRef} type="text" placeholder="Type @ to use preset prompts..." value={message} onChange={handleInputChange} onKeyDown={handleKeyDown} className="message-bar-input" style={{ position: "relative", backgroundColor: "transparent", color: "transparent", caretColor: "#000", }}/>
           </div>
         </Col>
 
         {showLimitEnded && (
-          <UpdateAccessComponent
-            visible={showLimitEnded}
-            onClose={() => {
-              setLimitEnded(false);
-              if (typeof setLimitEnded_Redo === "function") {
-                setLimitEnded_Redo(false);
-              }
-            }}
-            modal={true}
-          />
+          <UpdateAccessComponent visible={showLimitEnded} onClose={() => { setLimitEnded(false); if (typeof setLimitEnded_Redo === "function") { setLimitEnded_Redo(false); } }}  modal={true} />
         )}
         <Col>
           {isShowSpinner ? (
-            <div className="message-arrow-up">
-              <Spin size="small" style={{ color: "#fff" }} />
-            </div>
+            <div className="message-arrow-up"> <Spin size="small" style={{ color: "#fff" }} /> </div>
           ) : (
-            <div
-              className={`message-arrow-up ${
-                isFileUploading ? "disabled-icon" : ""
-              }`}
-              onClick={!isFileUploading ? handleSendMessage : undefined}
-            >
+            <div className={`message-arrow-up ${ isFileUploading ? "disabled-icon" : "" }`} onClick={!isFileUploading ? handleSendMessage : undefined} >
               ↑
             </div>
           )}

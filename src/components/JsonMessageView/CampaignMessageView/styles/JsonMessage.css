@@ -3,18 +3,32 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   gap: 1rem;
-  border-bottom: 1px solid #e5e7eb;
+  /* border-bottom: 1px solid #e5e7eb; */
 }
-
+.card-header {
+  border: none;
+  padding: 10px 16px;
+}
 .card-campaign {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   /* padding: 24px; */
   background: white;
 }
-
+.view-ads-button{
+    width: 100px;
+}
+.accept-button-all-recommendations {
+  height: 40px;
+}
+.border-b {
+  border-bottom: 1px solid #e5e7eb;
+}
+.border-t {
+  border-top: 1px solid #e5e7eb;
+}
 .space-y-5 > * + * {
   margin-top: 1.25rem;
 }
@@ -52,13 +66,13 @@
   align-items: center;
   gap: 5px;
 }
-.show-more-btn{
-    background-color: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    font-size: 14px;
-    padding: 5px 10px;
-    margin-top: 5px;
+.show-more-btn {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-top: 5px;
 }
 .text-start {
   text-align: left !important;

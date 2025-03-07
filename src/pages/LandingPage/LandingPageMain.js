@@ -25,7 +25,9 @@ import client8 from "./../../assets/images/client8.jpg";
 import VideoPopup from "./VideoPopup";
 import { useNavigate } from "react-router-dom";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 const LandingPageMain = () => {
+  const { isLoggedIn } = useSelector((state) => state.authToken);
   const navigate = useNavigate();
   const handleNext = (section) => {
     navigate(`/${section}`);
@@ -63,14 +65,19 @@ const LandingPageMain = () => {
                     </li>
                   </ul>
                   <div class="header_btns header_btns_menu">
-                    <a class="btn_style">Login</a>
-                    <a class="btn_style btn_style2"  onClick={() => navigate("/account")}>Get Started</a>
+                    {!isLoggedIn && <a class="btn_style">Login</a>}
+                    <a
+                      class="btn_style btn_style2"
+                      onClick={() => navigate("/account")}
+                    >
+                      Get Started
+                    </a>
                   </div>
                 </div>
                 <div class="header_btns">
-                  <a class="btn_style" onClick={() => navigate("/account")}>
+                  {!isLoggedIn && <a class="btn_style" onClick={() => navigate("/account")}>
                     Login
-                  </a>
+                  </a>}
                   <a
                     class="btn_style btn_style2"
                     onClick={() => navigate("/account")}
@@ -105,7 +112,7 @@ const LandingPageMain = () => {
                     Autopilot
                   </p>
                   <div class="banner_btns">
-                    <a  class="btn_style" onClick={() => navigate("/account")}>
+                    <a class="btn_style" onClick={() => navigate("/account")}>
                       <ArrowRightOutlined /> Get Started
                     </a>
                   </div>

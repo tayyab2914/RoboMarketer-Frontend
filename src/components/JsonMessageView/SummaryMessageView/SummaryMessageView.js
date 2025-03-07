@@ -75,13 +75,13 @@ const SummaryMessage = ({ data, level, currency }) => {
       ref={containerRef}
     >
       <div className="mb-6">
-        <div className="custom-container">
+        <div className="custom-container border-b">
           <div className="custom-heading-container">
             <span className="mb-0">Summary Report</span>
             <span className="custom-badge">
               <span className="custom-badge-text">
-                {moment(dateRange.from).format("DD MMM,YYYY")} -{" "}
-                {moment(dateRange.to).format("DD MMM,YYYY")}
+                    {moment(dateRange.from).format("MMM DD,YYYY")} -{" "}
+                    {moment(dateRange.to).format("MMM DD,YYYY")}
               </span>
             </span>
           </div>
@@ -127,11 +127,11 @@ const SummaryMessage = ({ data, level, currency }) => {
             <div className="card-wrapper">
               <div className="card">
                 <div
-                  className="active-container"
+                  className="active-container "
                   onClick={toggleActiveCampionExpand}
                 >
                   <div className="font-medium custom-heading-number">
-                    <div className="card-header-active-campaign">
+                    <div className="card-header-active-campaign ">
                       <img
                         src={ICONS.active_campaign}
                         alt="active campaign Icon"
@@ -161,7 +161,7 @@ const SummaryMessage = ({ data, level, currency }) => {
                   )}
                 </div>
                 {expandedAdset && (
-                  <div className="campaign-container pt-3 px-2">
+                  <div className="campaign-container border-t p-3">
                     {campaigns.map((campaign, index) => (
                       <CampaignView
                         key={campaign.campaign_id}

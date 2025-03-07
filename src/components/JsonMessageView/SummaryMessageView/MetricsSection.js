@@ -40,7 +40,7 @@ const MetricsSection = ({ data, currency }) => {
   };
 
   return (
-    <div className="metrics-section">
+    <div className="metrics-section border-top">
       {Object.keys(data).map((key) => {
         if (metricInfo[key]) {
           const { label, prefix, suffix } = metricInfo[key];

@@ -12,6 +12,7 @@ const CampaignView = ({
 }) => {
   return (
     <div className="card">
+      
       <div className="header-container">
         <div className="card-container-header" onClick={onToggleExpand}>
           <span className="expand-icon">

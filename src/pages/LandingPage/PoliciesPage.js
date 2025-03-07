@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
@@ -6,6 +6,9 @@ import InfoContainer from "../Agency/Support/InfoContainer";
 import './LandingPageStyles.css'
 const PoliciesPage = ({ pageType }) => {
   const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top-left corner of the page
+  }, []);
   return (
     <div>
       <header class="header_main">

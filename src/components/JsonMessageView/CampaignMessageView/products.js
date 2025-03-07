@@ -133,9 +133,9 @@ const CampaignMessage = ({ data }) => {
   const formatAudience = (audience) => audience .split("_") .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) .join(" ");
 
   return (
-    <div className="min-h-screen bg-gray-50 card-campaign fixed-width-container py-3">
+    <div className="min-h-screen bg-gray-50 card-campaign fixed-width-container">
       <div className="mb-6">
-        <div className="card-header-campaign pb-3 px-3">
+        <div className="card-header-campaign p-3 border-b">
           <span className="badge">Step {step}</span>
           <div className="">
             {step === 1 ? "Select Product / Service" : step === 3 ? "Confirm Campaign Settings" : "Select Funnel / Website"}
@@ -160,15 +160,15 @@ const CampaignMessage = ({ data }) => {
                         {item?.product_name}
                       </p>
                     </div>
-                    <div className="view-ads-container">
+                    <div className="view-ads-container p-0">
                       <button onClick={() => handleProductSelection(item.id)} className="view-ads-button" >
                         Select
                       </button>
                     </div>
                   </div>
                   
-                  <div className="content">
-                        <p className="mt-2"> {item?.product_description?.slice(0, charLimit)} {charLimit < item?.product_description?.length && "..."} </p>
+                  <div className="content m-0">
+                  {item?.product_description && <p className="mt-2"> {item?.product_description?.slice(0, charLimit)} {charLimit < item?.product_description?.length && "..."} </p>}
                         {charLimit < item?.product_description?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
                     </div>
                 </div>
@@ -185,7 +185,7 @@ const CampaignMessage = ({ data }) => {
                 campaignData && (
                   <>
                     <div className="card">
-                      <div className="card-header justify-end px-0 cursor-poiner" onClick={toggleActiveCampionExpand} >
+                      <div className="card-header justify-end  cursor-poiner" onClick={toggleActiveCampionExpand} >
                         <div>
                           <img src={ICONS.active_campaign} alt="Performance Icon" className="icon" style={{ width: "26px", height: "26px" }} />
                           <span className="font-medium mb-0">
@@ -202,7 +202,7 @@ const CampaignMessage = ({ data }) => {
                       </div>
 
                       {expandedAdset && (
-                        <div className="flex-wrap gap-4 mt-3">
+                        <div className="flex-wrap gap-4 p-3 border-t">
                           {/* {Object.entries(campaignData)
                             .filter(([key]) => displayKeys.includes(key))
                             .map(([key, value]) => (
@@ -605,9 +605,10 @@ const CampaignMessage = ({ data }) => {
           </div>
         </div>
         {step === 3 && !loading && (
-          <button
+          <div className="card-wrapper border-t">
+            <button
             onClick={launchCampaign}
-            className="button accept-button-all-recommendations mx-3"
+            className="button accept-button-all-recommendations"
             disabled={loading1 || response == "ACCEPTED" || response == "ERROR"}
           >
             <svg
@@ -622,6 +623,7 @@ const CampaignMessage = ({ data }) => {
             </svg>
             Launch Campaign
           </button>
+          </div>
         )}
       </div>
       {/* {step !== 3 && (
@@ -638,7 +640,7 @@ const CampaignMessage = ({ data }) => {
             </>
           )}
         </div>
-      )} */} 
+      )} */}
       {errorMessage?.length > 0 &&
         errorMessage?.map((item, index) => (
           <div className="status-label error px-3" key={index}>

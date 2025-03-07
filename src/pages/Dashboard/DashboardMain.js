@@ -84,6 +84,7 @@ const DashboardMain = () => {
 
   const testToken = async () => {
     const response = await API_TEST_TOKEN(token);
+    console.log('API_TEST_TOKEN',response)
     if (!response) {
       logoutUser();
     }
@@ -129,7 +130,7 @@ const DashboardMain = () => {
   return (
     <div>
       <Row style={{ width: "100vw" }}>
-        {/* {windowWidth > 1200 && ( */}
+        {windowWidth > 1200 && (
           <Col
             style={{
               width: "310px",
@@ -145,7 +146,7 @@ const DashboardMain = () => {
               setIsAIResponseLoading={setIsAIResponseLoading}
             />
           </Col>
-        {/* )} */}
+         )} 
 
         <Col
           style={{
