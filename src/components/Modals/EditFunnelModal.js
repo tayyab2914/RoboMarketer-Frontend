@@ -57,7 +57,7 @@ const EditFunnelModal = ({ isVisible, onClose, funnelId,ListFunnels }) => {
                    
                    <div className="custom-modal-header">
     <span className="modal-header"> <MyIcon type="marketing_funnels" style={{ marginRight: "5px" }} size="md"/> Edit Funnel / Website
- </span>a
+ </span>
     </div>
             
       {showSpinner && <Spin fullscreen />}

@@ -12,7 +12,7 @@ const AdSetListView = ({
   level = "",
   currency = "USD",
 }) => {
-    console.log(adsets)
+    console.log('AdSetListView',adsets)
   return (
     <div className="adset-list-container">
       <div className="list-header px-3 border-b m-0">

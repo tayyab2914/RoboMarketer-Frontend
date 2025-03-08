@@ -36,10 +36,9 @@ const CampaignMessage = ({ data }) => {
   const [step, setStep] = useState(1);
   const [charLimit, setCharLimit] = useState(400);
 
-  const jsonMessage = (typeof data.json_message === 'string') 
-          ? JSON.parse(data.json_message)  // Parse the string to an object 
-          : data.json_message; 
-
+  const jsonMessage = (typeof data.json_message === 'string') ? JSON.parse(data.json_message) : data.json_message; 
+    
+        
   const handleShowMore = () => {
     setCharLimit((prevLimit) => prevLimit + 400);
   };
@@ -193,11 +192,7 @@ const CampaignMessage = ({ data }) => {
                           </span>
                         </div>
                         <span className="expand-icon">
-                          {expandedAdset ? (
-                            <ChevronUp size={16} />
-                          ) : (
-                            <ChevronDown size={16} />
-                          )}
+                          {expandedAdset ? ( <ChevronUp size={16} /> ) : ( <ChevronDown size={16} /> )}
                         </span>
                       </div>
 
@@ -219,54 +214,38 @@ const CampaignMessage = ({ data }) => {
                             ))} */}
 
                           <div className="metric-badge">
-                            <span className="metric-badge-label">
-                              Campaign Name:
-                            </span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData.name}
-                            </span>
+                            <span className="metric-badge-label"> Campaign Name: </span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData.name} </span>
                           </div>
                           <div className="metric-badge">
-                            <span className="metric-badge-label">
-                              Objective:
-                            </span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData.objective}
-                            </span>
+                            <span className="metric-badge-label"> Objective: </span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData.objective} </span>
                           </div>
                           <div className="metric-badge">
                             <span className="metric-badge-label">Product:</span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData.product}
-                            </span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData.product} </span>
                           </div>
                           <div className="metric-badge">
                             <span className="metric-badge-label">Funnel:</span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData.funnel}
-                            </span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData.funnel} </span>
                           </div>
                           <div className="metric-badge">
-                            <span className="metric-badge-label">
-                              Budget Type:
-                            </span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData.budget_type}
-                            </span>
+                            <span className="metric-badge-label"> Budget Type: </span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData.budget_type} </span>
                           </div>
-                          {/* <div className="metric-badge">
-                            <span className="metric-badge-label">
-                              Conversion Location:
-                            </span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {}
-                            </span>
-                          </div> */}
+                       
                           <div className="metric-badge">
                             <span className="metric-badge-label">Pixel:</span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData.pixel}
-                            </span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData.pixel} </span>
+                          </div>
+                          <div className="metric-badge">
+                            <span className="metric-badge-label"> Daily Budget:</span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData?.daily_budget ? `${campaignData.daily_budget} ${campaignData.currency}` : "-"} </span>
+                          </div>
+
+                          <div className="metric-badge">
+                            <span className="metric-badge-label"> Audience: </span>
+                            <span className="metric-badge-value metric-badge-neutral"> {campaignData?.audience ? formatAudience(campaignData.audience) : "-"} </span>
                           </div>
                           {/* <div className="metric-badge">
                             <span className="metric-badge-label">
@@ -276,35 +255,23 @@ const CampaignMessage = ({ data }) => {
                               {}
                             </span>
                           </div> */}
-                          <div className="metric-badge">
+                             {/* <div className="metric-badge">
                             <span className="metric-badge-label">
-                              Daily Budget:
+                              Conversion Location:
                             </span>
                             <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData?.daily_budget
-                                ? `${campaignData.daily_budget} ${campaignData.currency}`
-                                : "-"}
+                              {}
                             </span>
-                          </div>
-
-                          <div className="metric-badge">
-                            <span className="metric-badge-label">
-                              Audience:
-                            </span>
-                            <span className="metric-badge-value metric-badge-neutral">
-                              {campaignData?.audience
-                                ? formatAudience(campaignData.audience)
-                                : "-"}
-                            </span>
-                          </div>
+                          </div> */}
+                          
                         </div>
                       )}
                     </div>
-                    {!campaignData?.adset_data?.length > 0 && (
+                    {campaignData?.adset_data?.length > 0 && (
                       <>
                         <div className="card">
                           <div
-                            className="card-header justify-end px-0 cursor-poiner"
+                            className="card-header justify-end cursor-poiner"
                             onClick={toggleAds}
                           >
                             <div className="select-mess gap-2">
@@ -315,31 +282,20 @@ const CampaignMessage = ({ data }) => {
                                 style={{ width: "26px", height: "26px" }}
                               /> */}
                               <HiOutlineComputerDesktop />
-                              <span className="font-medium mb-0 break-words select-mess gap-2">
-                                Adset{" "}
-                                <span className="metric-badge-value metric-badge-neutral">
-                                  {campaignData?.adset_data?.length}
-                                </span>
+                              <span className="font-medium mb-0 break-words select-mess gap-2"> Adset{" "} 
+                                <span className="metric-badge-value metric-badge-neutral"> {campaignData?.adset_data?.length} </span>
                               </span>
                             </div>
                             <span className="expand-icon">
-                              {expandedAdIndex ? (
-                                <ChevronUp size={16} />
-                              ) : (
-                                <ChevronDown size={16} />
-                              )}
+                              {expandedAdIndex ? ( <ChevronUp size={16} /> ) : ( <ChevronDown size={16} />  )}
                             </span>
                           </div>
                           {expandedAdIndex &&
                             campaignData?.adset_data.map((item, index) => (
-                              <div className="card mt-3 w-full" key={index}>
-                                <div
-                                  className="card-header px-0 cursor-poiner gap-1 flex-wrap select-mess"
-                                  onClick={() => {
-                                    toggleActiveAdsetExpand(index);
-                                  }}
-                                >
-                                  <span className="expand-icon me-0">
+                             <div className="card-wrapper  border-t">
+                                 <div className="card w-full" key={index}>
+                                <div className="card-header  cursor-poiner gap-1 flex-wrap select-mess" onClick={() => { toggleActiveAdsetExpand(index); }} >
+                                  <span className="expand-icon me-2">
                                     {expandedAd == index ? ( <ChevronUp size={16} /> ) : ( <ChevronDown size={16} /> )}
                                   </span>
                                   {/* <img
@@ -349,36 +305,22 @@ const CampaignMessage = ({ data }) => {
                                       style={{ width: "26px", height: "26px" }}
                                     /> */}
                                   <FaClipboardList />
-                                  <span className="font-medium mb-0 text-sm break-words">
-                                    {item.name}
-                                  </span>
+                                  <span className="font-medium mb-0 text-sm break-words"> {item.name} </span>
                                 </div>
                                 {expandedAd == index && (
-                                  <div className="campaign-container pt-3 px-2">
+                                  <div className="campaign-container pt-3 px-2  border-t">
                                     <div className="flex flex-wrap gap-4">
                                       <div className="metric-badge">
-                                        <span className="metric-badge-label">
-                                          Daily Budget:
-                                        </span>
+                                        <span className="metric-badge-label">  Daily Budget: </span>
                                         <span className="metric-badge-value metric-badge-neutral">
-                                          {/* {item?.daily_budget}/Day {campaignData.currency} || {"-"} */}
-                                          {item?.daily_budget
-                                            ? `${item.daily_budget} ${campaignData.currency}`
-                                            : "-"}
-                                        </span>
+                                          {/* {item?.daily_budget}/Day {campaignData.currency} || {"-"} */} {item?.daily_budget ? `${item.daily_budget} ${campaignData.currency}` : "-"} </span>
                                       </div>
                                     </div>
                                     <div className="flex flex-wrap gap-4">
                                       <div className="metric-badge">
-                                        <span className="metric-badge-label">
-                                          Placement:
-                                        </span>
+                                        <span className="metric-badge-label"> Placement: </span>
                                         <span className="metric-badge-value metric-badge-neutral">
-                                          {item?.publisher_platforms?.length > 0
-                                            ? item.publisher_platforms?.join(
-                                                ", "
-                                              )
-                                            : "-"}
+                                          {item?.publisher_platforms?.length > 0 ? item.publisher_platforms?.join( ", " ) : "-"}
                                         </span>
                                       </div>
                                     </div>
@@ -397,24 +339,16 @@ const CampaignMessage = ({ data }) => {
                                         <span className="metric-badge-label">
                                           Age Range:
                                         </span>
-                                        <span className="metric-badge-value metric-badge-neutral">
-                                          {item?.targeting?.age_min} -{" "}
-                                          {item?.targeting?.age_max}
+                                        <span className="metric-badge-value metric-badge-neutral"> 
+                                            {item?.targeting?.age_min} -{" "} {item?.targeting?.age_max}
                                         </span>
                                       </div>
                                     </div>
                                     <div className="flex flex-wrap gap-4">
                                       <div className="metric-badge">
-                                        <span className="metric-badge-label">
-                                          Gender:
-                                        </span>
+                                        <span className="metric-badge-label"> Gender: </span>
                                         <span className="metric-badge-value metric-badge-neutral">
-                                          {item?.targeting?.genders == 1
-                                            ? "Male"
-                                            : 2
-                                            ? "Female"
-                                            : "all"}
-                                        </span>
+                                          {item?.targeting?.genders == 1 ? "Male" : 2 ? "Female" : "all"} </span>
                                       </div>
                                     </div>
                                     {/* <div className="flex flex-wrap gap-4">
@@ -434,30 +368,12 @@ const CampaignMessage = ({ data }) => {
                                           {item.ad_data.map((ad, index) => (
                                             <>
                                               <div key={index} className="my-2">
-                                                <img
-                                                  src={ad.image_url}
-                                                  alt={ad.name}
-                                                  style={{
-                                                    width: "100%",
-                                                    height: "auto",
-                                                  }}
-                                                  className="w-full object-cover"
-                                                />
+                                                <img src={ad.image_url} alt={ad.name} style={{ width: "100%", height: "auto", }} className="w-full object-cover" />
                                               </div>
                                               <div className="flex flex-wrap gap-1">
                                                 <div className="metric-badge add-data">
-                                                  <span
-                                                    className="metric-badge-label"
-                                                    style={{
-                                                      marginRight: "0px",
-                                                      fontWeight: 600,
-                                                    }}
-                                                  >
-                                                    Ad:
-                                                  </span>
-                                                  <span className="text-base text-start">
-                                                    {ad.name}
-                                                  </span>
+                                                  <span className="metric-badge-label" style={{ marginRight: "0px", fontWeight: 600, }} > Ad: </span>
+                                                  <span className="text-base text-start"> {ad.name}</span>
                                                 </div>
                                               </div>
                                               {/* <div className="flex flex-wrap gap-1">
@@ -478,78 +394,26 @@ const CampaignMessage = ({ data }) => {
                                               </div> */}
                                               <div className="flex flex-wrap gap-1">
                                                 <div className="metric-badge add-data">
-                                                  <span
-                                                    className="metric-badge-label"
-                                                    style={{
-                                                      marginRight: "0px",
-                                                      fontWeight: 600,
-                                                    }}
-                                                  >
-                                                    Headline:
-                                                  </span>
-                                                  <span className="text-base text-start">
-                                                    {ad.creative.name}
-                                                  </span>
+                                                  <span className="metric-badge-label" style={{ marginRight: "0px", fontWeight: 600, }} >  Headline: </span>
+                                                  <span className="text-base text-start"> {ad.creative.name} </span>
                                                 </div>
                                               </div>
                                               <div className="">
                                                 <div className="metric-badge">
-                                                  <span
-                                                    className="metric-badge-label"
-                                                    style={{
-                                                      marginRight: "0px",
-                                                      fontWeight: 600,
-                                                    }}
-                                                  >
-                                                    Body Text:
-                                                  </span>
+                                                  <span className="metric-badge-label" style={{ marginRight: "0px", fontWeight: 600, }} > Body Text: </span>
                                                 </div>
-                                                <span className="text-base text-start p-0">
-                                                  {
-                                                    ad.creative
-                                                      .object_story_spec
-                                                      .link_data.message
-                                                  }
-                                                </span>
+                                                <span className="text-base text-start p-0"> { ad.creative.object_story_spec.link_data.message } </span>
                                               </div>
-                                              {/* <button
-                                          onClick={() =>
-                                            handleFunnelSelection(item.id)
-                                          }
-                                          className="view-ads-button"
-                                        >
-                                          Show More
-                                        </button> */}
+                                              {/* <button onClick={() => handleFunnelSelection(item.id) } className="view-ads-button" > Show More </button> */}
                                               <div className="flex flex-wrap gap-1">
                                                 <div className="metric-badge add-data">
-                                                  <span
-                                                    className="metric-badge-label"
-                                                    style={{
-                                                      marginRight: "0px",
-                                                      fontWeight: 600,
-                                                    }}
-                                                  >
-                                                    Destination URL:
-                                                  </span>
-                                                  <a
-                                                    className="text-base"
-                                                    href={
-                                                      ad.creative
-                                                        .object_story_spec
-                                                        .link_data.link
-                                                    }
-                                                  >
-                                                    {
-                                                      ad.creative
-                                                        .object_story_spec
-                                                        .link_data.link
-                                                    }
+                                                  <span className="metric-badge-label" style={{ marginRight: "0px", fontWeight: 600, }} > Destination URL: </span>
+                                                  <a className="text-base" href={ad.creative.object_story_spec.link_data.link }> 
+                                                    {ad.creative.object_story_spec.link_data.link }
                                                   </a>
                                                 </div>
                                               </div>
-                                              {/* <button className="view-ads-button">
-                                          Show Preview
-                                        </button> */}
+                                              {/* <button className="view-ads-button"> Show Preview </button> */}
                                             </>
                                           ))}
                                         </Slider>
@@ -560,6 +424,7 @@ const CampaignMessage = ({ data }) => {
                                   </div>
                                 )}
                               </div>
+                             </div>
                             ))}
                         </div>
                       </>
@@ -568,26 +433,15 @@ const CampaignMessage = ({ data }) => {
                 )
               )
             ) : (
-              jsonMessage?.funnels?.length > 0 &&
-              jsonMessage?.funnels?.map((item, index) => (
+              jsonMessage?.funnels?.length > 0 && jsonMessage?.funnels?.map((item, index) => (
                 <div className="p-3 card-campaign" key={index}>
                   <div className="product-section">
                     <div className="product-section">
-                      <TbChartFunnel
-                        className="icon"
-                        style={{ width: "23px", height: "23px" }}
-                      />
-                      <p style={{ fontWeight: 600 }} className="mb-0">
-                        {item?.name}
-                      </p>
+                      <TbChartFunnel className="icon" style={{ width: "23px", height: "23px" }} />
+                      <p style={{ fontWeight: 600 }} className="mb-0"> {item?.name}</p>
                     </div>
                     <div className="view-ads-container">
-                      <button
-                        onClick={() => handleFunnelSelection(item.id)}
-                        className="view-ads-button"
-                      >
-                        Select
-                      </button>
+                      <button onClick={() => handleFunnelSelection(item.id)} className="view-ads-button" > Select </button>
                     </div>
                   </div>
                   <div className="content">
@@ -606,23 +460,10 @@ const CampaignMessage = ({ data }) => {
         </div>
         {step === 3 && !loading && (
           <div className="card-wrapper border-t">
-            <button
-            onClick={launchCampaign}
-            className="button accept-button-all-recommendations"
-            disabled={loading1 || response == "ACCEPTED" || response == "ERROR"}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
-            Launch Campaign
-          </button>
+            <button onClick={launchCampaign} className="button accept-button-all-recommendations" disabled={loading1 || response == "ACCEPTED" || response == "ERROR"} >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"> <path d="M20 6L9 17l-5-5" /> </svg>
+                Launch Campaign
+            </button>
           </div>
         )}
       </div>
@@ -641,11 +482,9 @@ const CampaignMessage = ({ data }) => {
           )}
         </div>
       )} */}
-      {errorMessage?.length > 0 &&
-        errorMessage?.map((item, index) => (
+      {errorMessage?.length > 0 && errorMessage?.map((item, index) => (
           <div className="status-label error px-3" key={index}>
-            <ShieldAlert />
-            {item || "Unknown error."}
+            <ShieldAlert /> {item || "Unknown error."}
           </div>
         ))}
     </div>
