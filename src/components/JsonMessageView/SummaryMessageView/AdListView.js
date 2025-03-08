@@ -34,7 +34,7 @@ const AdListView = ({
 
   return (
     <div className="ad-list-container">
-      <div className="list-header">
+      <div className="list-header border-b m-0">
         {level !== "ad" && (
           // <button onClick={onBack} className="back-button">
           //   <ArrowLeft size={16} />
@@ -48,43 +48,28 @@ const AdListView = ({
       </div>
 
       <div className="ads-container">
-        {Array.isArray(ads) && ads.length > 0 ? (
-          <Slider {...sliderSettings}>
-            {ads.map((ad, index) => (
-              <div key={ad.ad_id} className="my-2">
-                <AdView
-                  key={ad.ad_id}
-                  ad={ad}
-                  adsetName={adsetName}
-                  onBack={onBack}
-                  expanded={expandedAdsetIndex === index}
-                  onToggleExpand={() => onToggleExpand(index)}
-                  onSelectAd={onSelectAd}
-                  currency={currency}
-                />
-              </div>
-            ))}
-          </Slider>
-        ) : (
-          <p>No ads available.</p>
-        )}
-        {/* {Array.isArray(ads) && ads.length > 1 ? (
-          ads.map((ad, index) => (
-            <AdView
-              key={ad.ad_id}
-              ad={ad}
-              adsetName={adsetName}
-              onBack={onBack}
-              expanded={expandedAdsetIndex === index}
-              onToggleExpand={() => onToggleExpand(index)}
-              onSelectAd={onSelectAd}
-              currency={currency}
-            />
-          )) */}
-        {/* ) : (
-          <p>No ads available.</p>
-        )
-        } */}
+        <div className="card-wrapper">
+          {Array.isArray(ads) && ads.length > 0 ? (
+            <Slider {...sliderSettings}>
+              {ads.map((ad, index) => (
+                <div key={ad.ad_id} className="my-2">
+                  <AdView
+                    key={ad.ad_id}
+                    ad={ad}
+                    adsetName={adsetName}
+                    onBack={onBack}
+                    expanded={expandedAdsetIndex === index}
+                    onToggleExpand={() => onToggleExpand(index)}
+                    onSelectAd={onSelectAd}
+                    currency={currency}
+                  />
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <p>No ads available.</p>
+          )}
+        </div>
       </div>
     </div>
   );

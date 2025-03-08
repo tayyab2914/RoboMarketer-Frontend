@@ -1,45 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { IMAGES } from "../../data/ImageData";
-import {
-  Button,
-  Collapse,
-  Popconfirm,
-  Spin,
-  Dropdown,
-  Menu,
-  Tooltip,
-} from "antd";
-import {
-  SettingOutlined,
-  DownOutlined,
-  EllipsisOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons"; // Import EllipsisOutlined for the dropdown
+import { Button, Collapse, Popconfirm, Spin, Dropdown, Menu, Tooltip } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons"; // Import EllipsisOutlined for the dropdown
 import "./styles/DashboardLeftPanel.css";
-import MyButton from "../../components/Button/Button";
 import MyIcon from "../../components/Icon/MyIcon";
 import { ICONS } from "../../data/IconData";
 import AddPromptBtn from "./AddPromptBtn";
 import SettingsBtn from "./SettingsBtn";
-import {
-  FILTER_PROMPTS_BY_CATEGORY,
-  GET_PROMPT_CATEGORIES,
-  TRUNCATE_STRING,
-} from "../../utils/Methods";
-import {
-  API_DELETE_PROMPT,
-  API_GET_CATEGORY_ORDERING,
-  API_GET_PROMPTS,
-  API_GET_RESPONSE,
-} from "../../apis/ChatApis";
+import { TRUNCATE_STRING } from "../../utils/Methods";
+import { API_DELETE_PROMPT, API_GET_CATEGORY_ORDERING, API_GET_PROMPTS, API_GET_RESPONSE } from "../../apis/ChatApis";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setFacebookState,
-  setRerenderChatPanel,
-  setRerenderDashboard,
-  setTemporaryMessage,
-} from "../../redux/AuthToken/Action";
+import { setRerenderChatPanel, setRerenderDashboard, setTemporaryMessage } from "../../redux/AuthToken/Action";
 import { DOMAIN_NAME } from "../../utils/GlobalSettings";
 import EditPromptModal from "../../components/Modals/EditPromptModal";
 import AccountSwitcher from "../Agency/AccountSwitcher/AccountSwitcher";
@@ -47,27 +18,12 @@ import UpdateAccessComponent from "./UpdateAccessComponent";
 
 const { Panel } = Collapse;
 
-const DashboardLeftPanel = ({
-  Accounts,
-  SwitchAccount,
-  isAIResponseLoading,
-  setIsAIResponseLoading,
-}) => {
+const DashboardLeftPanel = ({ Accounts, isAIResponseLoading, setIsAIResponseLoading }) => {
   const dispatch = useDispatch();
   const [showSpinner, setShowSpinner] = useState(false);
-  const {
-    isLoggedIn,
-    channel,
-    token,
-    rerender_dashboard,
-    rerender_chat_panel,
-    current_account,
-  } = useSelector((state) => state.authToken);
+  const { channel, token, rerender_dashboard, rerender_chat_panel, } = useSelector((state) => state.authToken);
   const [CurrentAccount, setCurrentAccount] = useState(null);
   const [FetchedPrompts, setFetchedPrompts] = useState([]);
-  const [AccountCollapseActiveKey, setAccountCollapseActiveKey] = useState([
-    "0",
-  ]);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [selectedPrompt, setselectedPrompt] = useState(null);
   const [FetchedCategories, setFetchedCategories] = useState([]);
@@ -75,8 +31,7 @@ const DashboardLeftPanel = ({
   const [selectedCategory, setselectedCategory] = useState("");
 
   useEffect(() => {
-    if (Accounts && Accounts.length) {
-        
+    if (Accounts && Accounts.length) { 
       const current = Accounts.find((account) => account.is_current_account);
       setCurrentAccount(current);
     }
@@ -99,12 +54,7 @@ const DashboardLeftPanel = ({
       formData.append("prompt", id);
       formData.append("channel_id", channel?.id);
       try {
-        const response = await API_GET_RESPONSE(
-          token,
-          id,
-          formData,
-          setShowSpinner
-        );
+        const response = await API_GET_RESPONSE( token, id, formData, setShowSpinner );
         if (response?.limit_end) {
           setLimitEnded(true);
         }
@@ -129,11 +79,7 @@ const DashboardLeftPanel = ({
     getPrompts();
   }, [rerender_dashboard]);
 
-  const handleAccountSwitch = (accountId) => {
-    SwitchAccount(accountId);
-    setAccountCollapseActiveKey([]);
-    dispatch(setFacebookState(null));
-  };
+
 
   const handleDeletePrompt = async (id) => {
     await API_DELETE_PROMPT(token, id, setShowSpinner);
@@ -142,10 +88,7 @@ const DashboardLeftPanel = ({
 
   const handleEditPrompt = (item, category_name, category_id) => {
     setselectedPrompt(item);
-    setselectedCategory({
-      category_name: category_name,
-      category_id: category_id,
-    });
+    setselectedCategory({ category_name: category_name, category_id: category_id, });
     setIsEditModalVisible(true);
   };
 
@@ -156,27 +99,14 @@ const DashboardLeftPanel = ({
 
   const renderDropdownMenu = (item, category_name, category_id) => (
     <Menu>
-      <Menu.Item
-        key="edit"
-        onClick={() => handleEditPrompt(item, category_name, category_id)}
-      >
-        {" "}
+      <Menu.Item key="edit" onClick={() => handleEditPrompt(item, category_name, category_id)} >
         <span style={{ display: "flex", alignItems: "center" }}>
-          {" "}
           <EditOutlined style={{ marginRight: "10px" }} /> Edit{" "}
         </span>
       </Menu.Item>
       <Menu.Item key="delete">
-        <Popconfirm
-          title="Are you sure you want to delete this prompt?"
-          onConfirm={() => handleDeletePrompt(item?.id)}
-          okText="Yes"
-          cancelText="No"
-        >
-          <span style={{ display: "flex", alignItems: "center" }}>
-            {" "}
-            <DeleteOutlined style={{ marginRight: "10px" }} /> Delete{" "}
-          </span>
+        <Popconfirm title="Are you sure you want to delete this prompt?" onConfirm={() => handleDeletePrompt(item?.id)} okText="Yes" cancelText="No" >
+          <span style={{ display: "flex", alignItems: "center" }}> {" "} <DeleteOutlined style={{ marginRight: "10px" }} /> Delete{" "} </span>
         </Popconfirm>
       </Menu.Item>
     </Menu>
@@ -199,15 +129,7 @@ const DashboardLeftPanel = ({
         {showSpinner && <Spin fullscreen />}
         <div className="left-panel-container-inner">
           <div className="left-panel-logo-wrapper">
-            <img
-              src={
-                CurrentAccount?.logo
-                  ? `${DOMAIN_NAME}${CurrentAccount?.logo}`
-                  : IMAGES.logo_png
-              }
-              alt="Panel Logo"
-              className="left-panel-logo"
-            />
+            <img src={ CurrentAccount?.logo ? `${DOMAIN_NAME}${CurrentAccount?.logo}` : IMAGES.logo_png } alt="Panel Logo" className="left-panel-logo" />
           </div>
 
           {CurrentAccount?.is_main_user ? (
@@ -216,17 +138,7 @@ const DashboardLeftPanel = ({
             <div className="side-bar-btn-wrapper" style={{ marginTop: "10px" }}>
               <span className="dashboard-account-name">
                 {CurrentAccount?.account_image ? (
-                  <img
-                    src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`}
-                    alt=""
-                    height={25}
-                    style={{
-                      height: "auto",
-                      maxWidth: "30px",
-                      maxHeight: "25px",
-                      borderRadius: "20px",
-                    }}
-                  />
+                  <img src={`${DOMAIN_NAME}${CurrentAccount?.account_image}`} alt="" height={25} style={{ height: "auto", maxWidth: "30px", maxHeight: "25px", borderRadius: "20px", }} />
                 ) : (
                   <MyIcon type={"user"} />
                 )}
@@ -243,89 +155,23 @@ const DashboardLeftPanel = ({
               className="left-panel-collapse"
               expandIconPosition={"end"}
               expandIcon={({ isActive }) => (
-                <img
-                  src={ICONS.arrow_down}
-                  style={{
-                    height: "5.5px",
-                    transition: "transform 0.3s ease",
-                    transform: isActive ? "rotate(-180deg)" : "rotate(0deg)",
-                  }}
-                />
+                <img src={ICONS.arrow_down} style={{ height: "5.5px", transition: "transform 0.3s ease", transform: isActive ? "rotate(-180deg)" : "rotate(0deg)", }} />
               )}
             >
               {FetchedPrompts &&
                 FetchedPrompts?.map((panel) => (
-                  <Panel
-                    header={
-                      <span className="panel-header-span">
-                        {" "}
-                        {panel.category_name}{" "}
-                      </span>
-                    }
-                    key={panel.category_id}
-                  >
-                    {/* {panel?.prompts?.map((item) => (
-                    <div key={item.category_id}>
-                      <Button type="text" className="left-panel-btn">
-                        <span
-                          style={{ width: "100%", textAlign: "start" }}
-                          onClick={() =>
-                            handlePromptClick(item?.prompt, item?.id)
-                          }
-                        >
-                          {" "}
-                          {TRUNCATE_STRING(item?.prompt_name, 25)}{" "}
-                        </span>
-                        <Dropdown
-                          overlay={renderDropdownMenu(item)}
-                          trigger={["click"]}
-                        >
-                          <MyIcon
-                            type="elipsis"
-                            style={{
-                              cursor: "pointer",
-                              marginLeft: 10,
-                              marginRight: "0px",
-                            }}
-                          />
-                        </Dropdown>
-                      </Button>
-                    </div>
-                  ))} */}
+                  <Panel header={ <span className="panel-header-span"> {panel.category_name}{" "} </span> } key={panel.category_id} >
+     
                     {panel?.prompts?.map((item) => (
                       <div key={item.category_id}>
-                        <Button
-                          type="text"
-                          className="left-panel-btn"
-                          style={{ width: "100%" }}
-                        >
+                        <Button type="text" className="left-panel-btn" style={{ width: "100%" }} >
                           <Tooltip title={item?.prompt_name}>
-                            <span
-                              className="two-line-ellipsis"
-                              style={{ textAlign: "start" }}
-                              onClick={() =>
-                                handlePromptClick(item?.prompt, item?.id)
-                              }
-                            >
-                              {TRUNCATE_STRING(item?.prompt_name, 55)}
+                            <span className="two-line-ellipsis" style={{ textAlign: "start" }} onClick={() => handlePromptClick(item?.prompt, item?.id) } >
+                              {TRUNCATE_STRING(item?.prompt_name, 45)}
                             </span>
                           </Tooltip>
-                          <Dropdown
-                            overlay={renderDropdownMenu(
-                              item,
-                              panel?.category_name,
-                              panel?.category_id
-                            )}
-                            trigger={["click"]}
-                          >
-                            <MyIcon
-                              type="elipsis"
-                              style={{
-                                cursor: "pointer",
-                                marginLeft: 10,
-                                marginRight: 0,
-                              }}
-                            />
+                          <Dropdown overlay={renderDropdownMenu( item, panel?.category_name, panel?.category_id )} trigger={["click"]} >
+                            <MyIcon type="elipsis" style={{ cursor: "pointer", marginLeft: 10, marginRight: 0, }} />
                           </Dropdown>
                         </Button>
                       </div>
@@ -335,30 +181,14 @@ const DashboardLeftPanel = ({
             </Collapse>
           </div>
         </div>
-        {/* <UpdateAccessComponent visible={true} modal={true}/> */}
-        {LimitEnded && (
-          <UpdateAccessComponent
-            visible={LimitEnded}
-            onClose={() => setLimitEnded(false)}
-            modal={true}
-          />
-        )}
-        {CurrentAccount?.access_type == 0 && (
-          <UpdateAccessComponent chatCount={CurrentAccount?.chat_count} />
-        )}
+        {LimitEnded && ( <UpdateAccessComponent visible={LimitEnded} onClose={() => setLimitEnded(false)} modal={true} />)}
+        {CurrentAccount?.access_type == 0 && ( <UpdateAccessComponent chatCount={CurrentAccount?.chat_count} /> )}
         <span>
           <SettingsBtn />
         </span>
 
         {/* <div style={{ height: "130px" }}></div> */}
-        {isEditModalVisible && (
-          <EditPromptModal
-            visible={isEditModalVisible}
-            onClose={closeEditModal}
-            prompt={selectedPrompt}
-            CATEGORY={selectedCategory}
-          />
-        )}
+        {isEditModalVisible && ( <EditPromptModal visible={isEditModalVisible} onClose={closeEditModal} prompt={selectedPrompt} CATEGORY={selectedCategory} /> )}
       </div>
     </>
   );

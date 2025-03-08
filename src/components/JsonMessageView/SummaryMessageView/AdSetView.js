@@ -10,13 +10,14 @@ const AdSetView = ({
   onSelectAd = () => {},
   currency = "USD",
 }) => (
-  <div className="card">
-    <div className="header-container">
+  <div className="card-wrapper">
+    <div className="card">
+    <div className="header-container py-2">
       <div className="card-container-header" onClick={onToggleExpand}>
-        <span className="expand-icon">
+        <span className="expand-icon me-2">
           {expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
         </span>
-        <h5 className="mb-0">{adset?.adset_name || "Unnamed Ad Set"}</h5>
+        <h6  className="mb-0" >{adset?.adset_name || "Unnamed Ad Set"}</h6>
       </div>
       {/* <button
         onClick={() => {
@@ -28,7 +29,7 @@ const AdSetView = ({
       </button> */}
     </div>
     {expanded && (
-      <div className="card-body px-0">
+      <div className="card-body p-0">
         <MetricsSection data={adset} currency={currency} />
         <div className="view-ads-container">
           <button
@@ -44,6 +45,7 @@ const AdSetView = ({
         </div>
       </div>
     )}
+  </div>
   </div>
 );
 

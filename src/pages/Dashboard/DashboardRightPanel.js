@@ -76,9 +76,7 @@ const DashboardRightPanel = () => {
 
   const getInsights = async (startDate, endDate) => {
     const response = await API_GET_INSIGHTS( token, startDate, endDate, setShowSpinner );
-    console.log('response',response)
     const updatedMetrics = transformResponseToMetrics(response, availableMetrics); //extracts only values from response and not color 
-    console.log('updatedMetrics',updatedMetrics)
     setMetrics(updatedMetrics);
   };
 

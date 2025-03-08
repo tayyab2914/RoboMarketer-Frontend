@@ -35,7 +35,6 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
   const [FormValues, setFormValues] = useState({ max_daily_budget: "", clickthrough_rate_percentage: "", cost_per_click_cpc: "", cost_per_lead_cpl: "", cost_per_appointment: "", cost_per_sale_cpa: "",return_on_ad_spend_roas:"", leads: "", appointments: "", sales: "", revenue: "", industry_type: "", preferences: "", file_group: [] });
 
   const handleValueChange = (field, value) => {
-    console.log(value.label)
     if(field == 'industry_type'){
         setFormValues((prev) => ({ ...prev, industry_type: value.label }));  
     } else if (field === "file_group") {
@@ -55,7 +54,6 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
     const response = await API_GET_ROBOMARKETER_IQ(token,setShowSpinner)
     if(response)
     {
-        console.log('getRobomarketerIq',response)
         setFormValues(response)
     }
   }
@@ -88,7 +86,6 @@ const RoboMarketerModal = ({ isVisible, onClose }) => {
     const response = await API_UPDATE_ROBOMARKETER_IQ(token, formData, setShowSpinner);
     
     if (response) {
-      console.log("Form submitted successfully", response);
       onClose();
     }
   };

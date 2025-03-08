@@ -2,6 +2,9 @@ import React from "react";
 import "./styles/JsonMessage.css";
 
 const MetricBadge = ({ label, value, prefix = "", suffix = "" }) => {
+    function formatWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
   if (value === undefined || value === null) return null;
 
   const formattedValue =
@@ -33,7 +36,7 @@ const MetricBadge = ({ label, value, prefix = "", suffix = "" }) => {
             : ""
         }`}
       >
-        {formattedValue}
+        {formatWithCommas(formattedValue)}
       </span>
     </div>
   );

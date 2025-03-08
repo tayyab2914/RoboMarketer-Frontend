@@ -124,7 +124,7 @@ const SummaryMessage = ({ data, level, currency }) => {
                 <MetricsSection data={accountData} currency={currency} />
               </div>
             </div>
-            <div className="card-wrapper">
+            <div className="card-wrapper pt-0">
               <div className="card">
                 <div
                   className="active-container "

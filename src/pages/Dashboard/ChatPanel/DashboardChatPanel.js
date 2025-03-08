@@ -38,6 +38,7 @@ const DashboardChatPanel = ({ onLikeDislikeClick = () => {},  submittedFeedback 
   const get_history = async () => {
     try {
       const response = await API_GET_HISTORY(token, current_account?.id, channel);
+      console.log(response)
       setChatData(response?.reverse() || []);
     } catch (error) {
       console.error("Error fetching chat history:", error);

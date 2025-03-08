@@ -1,4 +1,4 @@
-import { Col, Row, Button, DatePicker, Popover, Space } from "antd";
+import { Col, Row, Button, DatePicker, Popover, Space, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import MyIcon from "../../components/Icon/MyIcon";
 import "./styles/AgencyWorkArea.css";
@@ -19,6 +19,7 @@ const AgencyWorkArea = () => {
   const [Metrics, setMetrics] = useState([]);
   const [AccountsAvailable, setAccountsAvailable] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+  const [ShowSpinner, setShowSpinner] = useState(false);
   
   // ✅ State for Date Range Picker
   const [dateRange, setDateRange] = useState([
@@ -32,6 +33,7 @@ const AgencyWorkArea = () => {
 
   const fetchAccounts = async () => {
     try {
+        setShowSpinner(true)
       const response = await API_GET_ACCOUNTS(token);
       console.log(response)
       setAccounts(response?.accounts || []);
@@ -39,6 +41,7 @@ const AgencyWorkArea = () => {
     } catch (error) {
       console.error("Error fetching accounts:", error);
     }
+    setShowSpinner(false)
   };
 
   useEffect(() => {
@@ -119,7 +122,7 @@ const AgencyWorkArea = () => {
 
         <Col xs={24} className="awa-sub-accounts-main">
           <Row gutter={[25, 25]}>
-            {accounts
+            {accounts?.length > 0 ? accounts
               ?.filter((account) => !account.is_current_account && account?.name?.toLowerCase())
               .map((account, index) => (
                 <Col xs={24} key={index}>
@@ -133,7 +136,14 @@ const AgencyWorkArea = () => {
                     Metrics={Metrics}
                   />
                 </Col>
-              ))}
+              )) :
+              <Col xs={24} className="no-sub-acc-component">
+               {ShowSpinner ? <Spin/> : <><p>No Sub-Accounts Created Yet</p>
+                <button className="awa-heading-btns" onClick={() => setModalVisible(true)}>  
+                  + Create New 
+                </button></>}
+              </Col>
+              }
           </Row>
         </Col>
       </Row>

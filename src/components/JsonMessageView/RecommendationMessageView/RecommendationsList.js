@@ -134,7 +134,7 @@ export default function RecommendationsList({ data }) {
   return (
     <div className="min-h-screen bg-gray-50 card fixed-width-container">
       <div className="recommendations-container">
-        <div className="recommendations-header">
+        <div className="recommendations-header border-b">
           <h1>Optimization Recommendations</h1>
           <span className="recommendations-count">
             {recommendations.length}

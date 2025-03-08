@@ -84,7 +84,6 @@ const DashboardMain = () => {
 
   const testToken = async () => {
     const response = await API_TEST_TOKEN(token);
-    console.log('API_TEST_TOKEN',response)
     if (!response) {
       logoutUser();
     }
@@ -216,15 +215,16 @@ const DashboardMain = () => {
           <DashboardRightPanel />
         </Drawer>
       )}
-      {dialogData.open && (
+    
         <DialogBox
           type={dialogData.type}
           onClose={handleCloseDialog}
           responseId={dialogData.id}
           setSubmittedFeedback={setSubmittedFeedback}
           setLimitEnded={setLimitEnded}
+          isVisible ={dialogData.open}
         />
-      )}
+      
     </div>
   );
 };
