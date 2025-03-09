@@ -426,16 +426,37 @@ const CampaignMessage = ({ data }) => {
                                                   />
                                                 )}
                                                 {ad.is_video && (
+                                                 <div style={{ width: "100%", height: "500px" }}>
+                                                 {/* <iframe
+                                                   src={`https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61567499648168%2Fvideos%2F615646601195781%2F&show_text=false&width=560&t=0`}
+                                                   width="100%"
+                                                   height="100%"
+                                                   style={{
+                                                     border: "none",
+                                                     overflow: "hidden",
+                                                     borderRadius: "8px",
+                                                   }}
+                                                   scrolling="no"
+                                                   frameBorder="0"
+                                                   allowFullScreen={true}
+                                                   title={`ad-video-${ad.video_id}`}
+                                                 ></iframe>  */}
                                                   <iframe
-                                                    src={`https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${ad.video_id}`}
-                                                    width="500"
-                                                    height="500"
-                                                    style={{ border: "none", overflow: "hidden", borderRadius:"8px" }}
-                                                    scrolling="no"
-                                                    frameBorder="0"
-                                                    allowFullScreen={true}
-                                                    title={`ad-video-${ad.video_id}`}
-                                                  ></iframe>
+                                                 src={`https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${ad.video_id}`}
+                                                 width={"100%"}
+                                                 height={"100%"}
+                                                 style={{
+                                                   border: "none",
+                                                   overflow: "hidden",
+                                                   borderRadius: "8px",
+                                                 }}
+                                                 scrolling="no"
+                                                 frameBorder="0"
+                                                 allowFullScreen={true}
+                                                 title={`ad-video-${ad.video_id}`}
+                                               ></iframe>
+                                               </div>
+                                               
                                                 )}
                                               </div>
                                               <div className="flex flex-wrap gap-1">
