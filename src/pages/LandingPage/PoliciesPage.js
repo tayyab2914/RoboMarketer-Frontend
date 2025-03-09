@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
 import InfoContainer from "../Agency/Support/InfoContainer";
 import './LandingPageStyles.css'
-const PoliciesPage = ({ pageType }) => {
+const PoliciesPage = ({ CurrentMode }) => {
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top-left corner of the page
@@ -69,13 +69,7 @@ const PoliciesPage = ({ pageType }) => {
       </header>
       <Row>
         <Col xs={24}>
-          <InfoContainer dataType={pageType} />
-        </Col>
-        <Col xs={24}>
-          <InfoContainer dataType={pageType} />
-        </Col>
-        <Col xs={24}>
-          <InfoContainer dataType={pageType} />
+          <InfoContainer CurrentMode={CurrentMode} />
         </Col>
       </Row>
     </div>

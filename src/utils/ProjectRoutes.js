@@ -27,9 +27,9 @@ const ProjectRoutes = () => {
         {/* <Route path="/account/:link_token" element={<Account />} /> */}
         <Route path="/account/signup" element={<SignUp />} />
         <Route path="/verify_account/:id" element={<VerifyAccountMain />} />
-        <Route path="/privacy-policy" element={<PoliciesPage pageType={"privacy-policy"} />} />
-        <Route path="/terms-and-conditions" element={<PoliciesPage pageType={"terms-and-conditions"} />} />
-        <Route path="/data-protection-policy" element={<PoliciesPage pageType={"data-protection-policy"} />} />
+        <Route path="/privacy-policy" element={<PoliciesPage CurrentMode={1} />} />
+        <Route path="/terms-and-conditions" element={<PoliciesPage CurrentMode={2} />} />
+        <Route path="/data-protection-policy" element={<PoliciesPage CurrentMode={3} />} />
         <Route path="/agency" element={ isLoggedIn && current_account?.is_main_user ? ( <AgencyMain /> ) : ( <Navigate to="/account" replace /> ) } />
         <Route path="/agency/:page" element={ isLoggedIn && current_account?.is_main_user ? ( <AgencyMain /> ) : ( <Navigate to="/account" replace /> ) } />
 

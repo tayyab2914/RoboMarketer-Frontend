@@ -3,7 +3,10 @@ import "./styles/JsonMessage.css";
 import { ChevronDown, ChevronUp, Package, ShieldAlert } from "lucide-react";
 import { TbChartFunnel } from "react-icons/tb";
 import { useSelector } from "react-redux";
-import { API_GENERATE_OUTLINE_CAMPAIGN, API_LAUNCH_CAMPAIGN } from "../../../apis/ChatApis";
+import {
+  API_GENERATE_OUTLINE_CAMPAIGN,
+  API_LAUNCH_CAMPAIGN,
+} from "../../../apis/ChatApis";
 import Slider from "react-slick";
 import { HiOutlineComputerDesktop } from "react-icons/hi2";
 import { FaClipboardList } from "react-icons/fa";
@@ -26,8 +29,11 @@ const CampaignMessage = ({ data }) => {
   const [charLimit, setCharLimit] = useState(400);
 
   const { token } = useSelector((state) => state.authToken);
-  const jsonMessage = (typeof data.json_message === 'string') ? JSON.parse(data.json_message) : data.json_message; 
-    
+  const jsonMessage =
+    typeof data.json_message === "string"
+      ? JSON.parse(data.json_message)
+      : data.json_message;
+
   const handleShowMore = () => {
     setCharLimit((prevLimit) => prevLimit + 400);
   };
@@ -52,7 +58,18 @@ const CampaignMessage = ({ data }) => {
 
   useEffect(() => {
     if (data.campaign_outline.length > 0) {
-      setCampaignData(data.campaign_outline[0]?.campaign_configuration);
+      let campaignConfig = data.campaign_outline[0]?.campaign_configuration;
+
+      // Convert to JSON if it's a string
+      if (typeof campaignConfig === "string") {
+        try {
+          campaignConfig = JSON.parse(campaignConfig);
+        } catch (error) {
+          console.error("Error parsing campaign_configuration:", error);
+        }
+      }
+
+      setCampaignData(campaignConfig);
       setReqData({ ...data.campaign_outline[0], message_id: data?.id });
       setStep(3);
     }
@@ -84,8 +101,22 @@ const CampaignMessage = ({ data }) => {
         data.meta_data.original_query,
         data.id
       );
+
       setReqData({ ...response?.campaign_outline[0], message_id: data?.id });
-      setCampaignData(response?.campaign_outline[0]?.campaign_configuration);
+
+      let campaignConfig =
+        response?.campaign_outline[0]?.campaign_configuration;
+
+      // Convert to JSON if it's a string
+      if (typeof campaignConfig === "string") {
+        try {
+          campaignConfig = JSON.parse(campaignConfig);
+        } catch (error) {
+          console.error("Error parsing campaign_configuration:", error);
+        }
+      }
+
+      setCampaignData(campaignConfig);
     } catch (error) {
       console.error("Error sending data:", error);
     } finally {
@@ -143,7 +174,7 @@ const CampaignMessage = ({ data }) => {
               : "Select Funnel / Website"}
           </div>
         </div>
-        <div className="p-3">
+        <div className="p-3 border-t">
           {step !== 3 && (
             <p style={{ fontWeight: 600 }}>
               {step === 1
@@ -191,7 +222,7 @@ const CampaignMessage = ({ data }) => {
                   <>
                     <div className="card">
                       <div
-                        className="card-header justify-end px-0 cursor-poiner"
+                        className="card-header justify-end  cursor-poiner"
                         onClick={toggleActiveCampionExpand}
                       >
                         <div>
@@ -214,7 +245,7 @@ const CampaignMessage = ({ data }) => {
                         </span>
                       </div>
                       {expandedAdset && (
-                        <div className="flex-wrap gap-4 mt-3">
+                        <div className="flex-wrap gap-4 p-3 border-t">
                           <div className="metric-badge">
                             <span className="metric-badge-label">
                               Campaign Name:
@@ -283,7 +314,7 @@ const CampaignMessage = ({ data }) => {
                     {campaignData?.adset_data?.length > 0 && (
                       <div className="card">
                         <div
-                          className="card-header justify-end px-0 cursor-poiner"
+                          className="card-header justify-end cursor-poiner"
                           onClick={toggleAds}
                         >
                           <div className="select-mess gap-2">
@@ -305,195 +336,197 @@ const CampaignMessage = ({ data }) => {
                         </div>
                         {expandedAdIndex &&
                           campaignData?.adset_data.map((item, index) => (
-                            <div className="card mt-3 w-full" key={index}>
-                              <div
-                                className="card-header px-0 cursor-poiner gap-1 flex-wrap select-mess"
-                                onClick={() => toggleActiveAdsetExpand(index)}
-                              >
-                                <span className="expand-icon me-0">
-                                  {expandedAd === index ? (
-                                    <ChevronUp size={16} />
-                                  ) : (
-                                    <ChevronDown size={16} />
-                                  )}
-                                </span>
-                                <FaClipboardList />
-                                <span className="font-medium mb-0 text-sm break-words">
-                                  {item.name}
-                                </span>
-                              </div>
-                              {expandedAd === index && (
-                                <div className="campaign-container pt-3 px-2">
-                                  <div className="flex flex-wrap gap-4">
-                                    <div className="metric-badge">
-                                      <span className="metric-badge-label">
-                                        Daily Budget:
-                                      </span>
-                                      <span className="metric-badge-value metric-badge-neutral">
-                                        {item?.daily_budget
-                                          ? `${item.daily_budget} ${campaignData.currency}`
-                                          : "-"}
-                                      </span>
+                            <div className="card-wrapper  border-t">
+                              <div className="card w-full" key={index}>
+                                <div
+                                  className="card-header  cursor-poiner gap-1 flex-wrap select-mess"
+                                  onClick={() => toggleActiveAdsetExpand(index)}
+                                >
+                                  <span className="expand-icon me-0">
+                                    {expandedAd === index ? (
+                                      <ChevronUp size={16} />
+                                    ) : (
+                                      <ChevronDown size={16} />
+                                    )}
+                                  </span>
+                                  <FaClipboardList />
+                                  <span className="font-medium mb-0 text-sm break-words">
+                                    {item.name}
+                                  </span>
+                                </div>
+                                {expandedAd === index && (
+                                  <div className="campaign-container pt-3 px-3  border-t">
+                                    <div className="flex flex-wrap gap-4">
+                                      <div className="metric-badge">
+                                        <span className="metric-badge-label">
+                                          Daily Budget:
+                                        </span>
+                                        <span className="metric-badge-value metric-badge-neutral">
+                                          {item?.daily_budget
+                                            ? `${item.daily_budget} ${campaignData.currency}`
+                                            : "-"}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="flex flex-wrap gap-4">
-                                    <div className="metric-badge">
-                                      <span className="metric-badge-label">
-                                        Placement:
-                                      </span>
-                                      <span className="metric-badge-value metric-badge-neutral">
-                                        {item?.publisher_platforms?.length > 0
-                                          ? item.publisher_platforms.join(", ")
-                                          : "-"}
-                                      </span>
+                                    <div className="flex flex-wrap gap-4">
+                                      <div className="metric-badge">
+                                        <span className="metric-badge-label">
+                                          Placement:
+                                        </span>
+                                        <span className="metric-badge-value metric-badge-neutral">
+                                          {item?.publisher_platforms?.length > 0
+                                            ? item.publisher_platforms.join(
+                                                ", "
+                                              )
+                                            : "-"}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="flex flex-wrap gap-4">
-                                    <div className="metric-badge">
-                                      <span className="metric-badge-label">
-                                        Age Range:
-                                      </span>
-                                      <span className="metric-badge-value metric-badge-neutral">
-                                        {item?.targeting?.age_min} -{" "}
-                                        {item?.targeting?.age_max}
-                                      </span>
+                                    <div className="flex flex-wrap gap-4">
+                                      <div className="metric-badge">
+                                        <span className="metric-badge-label">
+                                          Age Range:
+                                        </span>
+                                        <span className="metric-badge-value metric-badge-neutral">
+                                          {item?.targeting?.age_min} -{" "}
+                                          {item?.targeting?.age_max}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="flex flex-wrap gap-4">
-                                    <div className="metric-badge">
-                                      <span className="metric-badge-label">
-                                        Gender:
-                                      </span>
-                                      <span className="metric-badge-value metric-badge-neutral">
-                                        {item?.targeting?.genders == 1
-                                          ? "Male"
-                                          : 2
-                                          ? "Female"
-                                          : "all"}
-                                      </span>
+                                    <div className="flex flex-wrap gap-4">
+                                      <div className="metric-badge">
+                                        <span className="metric-badge-label">
+                                          Gender:
+                                        </span>
+                                        <span className="metric-badge-value metric-badge-neutral">
+                                          {item?.targeting?.genders == 1
+                                            ? "Male"
+                                            : 2
+                                            ? "Female"
+                                            : "all"}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="ads-container">
-                                    {Array.isArray(item.ad_data) &&
-                                    item.ad_data.length > 0 ? (
-                                      <Slider {...sliderSettings}>
-                                        {item.ad_data.map((ad, index) => (
-                                          <React.Fragment key={index}>
-                                            <div className="my-2">
-                                              {ad.image_url && (
-                                                <img
-                                                  src={ad.image_url}
-                                                  alt={ad.name}
-                                                  style={{
-                                                    width: "100%",
-                                                    height: "auto",
-                                                  }}
-                                                  className="w-full object-cover"
-                                                />
-                                              )}
-                                              {ad.is_video && (
-                                                <iframe
-                                                  src={`https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${ad.video_id}`}
-                                                  width="500"
-                                                  height="300"
-                                                  style={{
-                                                    border: "none",
-                                                    overflow: "hidden",
-                                                  }}
-                                                  scrolling="no"
-                                                  frameBorder="0"
-                                                  allowFullScreen={true}
-                                                  title={`ad-video-${ad.video_id}`}
-                                                ></iframe>
-                                              )}
-                                            </div>
-                                            <div className="flex flex-wrap gap-1">
-                                              <div className="metric-badge add-data">
-                                                <span
-                                                  className="metric-badge-label"
-                                                  style={{
-                                                    marginRight: "0px",
-                                                    fontWeight: 600,
-                                                  }}
-                                                >
-                                                  Ad:
-                                                </span>
-                                                <span className="text-base text-start">
-                                                  {ad.name}
-                                                </span>
+                                    <div className="ads-container">
+                                      {Array.isArray(item.ad_data) &&
+                                      item.ad_data.length > 0 ? (
+                                        <Slider {...sliderSettings}>
+                                          {item.ad_data.map((ad, index) => (
+                                            <React.Fragment key={index}>
+                                              <div className="my-2">
+                                                {ad.image_url && (
+                                                  <img
+                                                    src={ad.image_url}
+                                                    alt={ad.name}
+                                                    style={{
+                                                      width: "100%",
+                                                      height: "auto",
+                                                    }}
+                                                    className="w-full object-cover"
+                                                  />
+                                                )}
+                                                {ad.is_video && (
+                                                  <iframe
+                                                    src={`https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${ad.video_id}`}
+                                                    width="500"
+                                                    height="500"
+                                                    style={{ border: "none", overflow: "hidden", borderRadius:"8px" }}
+                                                    scrolling="no"
+                                                    frameBorder="0"
+                                                    allowFullScreen={true}
+                                                    title={`ad-video-${ad.video_id}`}
+                                                  ></iframe>
+                                                )}
                                               </div>
-                                            </div>
-                                            <div className="flex flex-wrap gap-1">
-                                              <div className="metric-badge add-data">
-                                                <span
-                                                  className="metric-badge-label"
-                                                  style={{
-                                                    marginRight: "0px",
-                                                    fontWeight: 600,
-                                                  }}
-                                                >
-                                                  Headline:
-                                                </span>
-                                                <span className="text-base text-start">
-                                                  {ad.creative.name}
-                                                </span>
+                                              <div className="flex flex-wrap gap-1">
+                                                <div className="metric-badge add-data">
+                                                  <span
+                                                    className="metric-badge-label"
+                                                    style={{
+                                                      marginRight: "0px",
+                                                      fontWeight: 600,
+                                                    }}
+                                                  >
+                                                    Ad:
+                                                  </span>
+                                                  <span className="text-base text-start">
+                                                    {ad.name}
+                                                  </span>
+                                                </div>
                                               </div>
-                                            </div>
-                                            <div>
-                                              <div className="metric-badge">
-                                                <span
-                                                  className="metric-badge-label"
-                                                  style={{
-                                                    marginRight: "0px",
-                                                    fontWeight: 600,
-                                                  }}
-                                                >
-                                                  Body Text:
-                                                </span>
+                                              <div className="flex flex-wrap gap-1">
+                                                <div className="metric-badge add-data">
+                                                  <span
+                                                    className="metric-badge-label"
+                                                    style={{
+                                                      marginRight: "0px",
+                                                      fontWeight: 600,
+                                                    }}
+                                                  >
+                                                    Headline:
+                                                  </span>
+                                                  <span className="text-base text-start">
+                                                    {ad.creative.name}
+                                                  </span>
+                                                </div>
                                               </div>
-                                              <span className="text-base text-start p-0">
-                                                {
-                                                  ad.creative.object_story_spec
-                                                    .link_data.message
-                                                }
-                                              </span>
-                                            </div>
-                                            <div className="flex flex-wrap gap-1">
-                                              <div className="metric-badge add-data">
-                                                <span
-                                                  className="metric-badge-label"
-                                                  style={{
-                                                    marginRight: "0px",
-                                                    fontWeight: 600,
-                                                  }}
-                                                >
-                                                  Destination URL:
-                                                </span>
-                                                <a
-                                                  className="text-base"
-                                                  href={
-                                                    ad.creative
-                                                      .object_story_spec
-                                                      .link_data.link
-                                                  }
-                                                >
+                                              <div>
+                                                <div className="metric-badge">
+                                                  <span
+                                                    className="metric-badge-label"
+                                                    style={{
+                                                      marginRight: "0px",
+                                                      fontWeight: 600,
+                                                    }}
+                                                  >
+                                                    Body Text:
+                                                  </span>
+                                                </div>
+                                                <span className="text-base text-start p-0">
                                                   {
                                                     ad.creative
                                                       .object_story_spec
-                                                      .link_data.link
+                                                      .link_data.message
                                                   }
-                                                </a>
+                                                </span>
                                               </div>
-                                            </div>
-                                          </React.Fragment>
-                                        ))}
-                                      </Slider>
-                                    ) : (
-                                      <p>No ads available.</p>
-                                    )}
+                                              <div className="flex flex-wrap gap-1">
+                                                <div className="metric-badge add-data">
+                                                  <span
+                                                    className="metric-badge-label"
+                                                    style={{
+                                                      marginRight: "0px",
+                                                      fontWeight: 600,
+                                                    }}
+                                                  >
+                                                    Destination URL:
+                                                  </span>
+                                                  <a
+                                                    className="text-base"
+                                                    href={
+                                                      ad.creative
+                                                        .object_story_spec
+                                                        .link_data.link
+                                                    }
+                                                  >
+                                                    {
+                                                      ad.creative
+                                                        .object_story_spec
+                                                        .link_data.link
+                                                    }
+                                                  </a>
+                                                </div>
+                                              </div>
+                                            </React.Fragment>
+                                          ))}
+                                        </Slider>
+                                      ) : (
+                                        <p>No ads available.</p>
+                                      )}
+                                    </div>
                                   </div>
-                                </div>
-                              )}
+                                )}
+                              </div>
                             </div>
                           ))}
                       </div>

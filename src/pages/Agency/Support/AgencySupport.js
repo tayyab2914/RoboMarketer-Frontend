@@ -8,7 +8,9 @@ import { useSearchParams } from "react-router-dom";
 
 const AgencySupport = () => {
 const [CurrentMode, setCurrentMode] = useState(0);
+useEffect(()=>{
 
+},[CurrentMode])
   return (
     <div>
       <Row>
@@ -18,9 +20,9 @@ const [CurrentMode, setCurrentMode] = useState(0);
               <span className="awa-heading support-heading">
                 <span onClick={()=>setCurrentMode(0)} className="support-icon-btn"><MyIcon type={"support"} /> Support</span>
                 <span className="support-btn-group">
-                    <button onClick={()=>setCurrentMode(1)}>Data Protection Policy</button>
-                    <button onClick={()=>setCurrentMode(2)}>Privacy Policy</button>
-                    <button onClick={()=>setCurrentMode(3)}>Terms & Conditions</button>
+                    <button onClick={()=>setCurrentMode(1)}>Privacy Policy</button>
+                    <button onClick={()=>setCurrentMode(2)}>Terms & Conditions</button>
+                    <button onClick={()=>setCurrentMode(3)}>Data Protection Policy</button>
                 </span>
               </span>
             </Col>
@@ -35,13 +37,7 @@ const [CurrentMode, setCurrentMode] = useState(0);
             <SupportContainers title={"Feature Requests"} icon={"support_feature_request"} description={"Request New Features That You Would Like Us To Add To RoboMarketer"}/>
         </Col>}
         <Col xs={24}>
-            {CurrentMode == 1 &&<InfoContainer dataType={"data-protection-policy"}/>}
-        </Col>
-        <Col xs={24}>
-            {CurrentMode == 2 &&<InfoContainer dataType={"privacy-policy"}/>}
-        </Col>
-        <Col xs={24}>
-            {CurrentMode == 3 &&<InfoContainer dataType={"terms-and-conditions"}/>}
+            <InfoContainer CurrentMode={CurrentMode}/>
         </Col>
       </Row>
     </div>
