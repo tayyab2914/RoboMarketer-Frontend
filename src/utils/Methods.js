@@ -539,3 +539,173 @@ export const HIGHLIGHT_AT_TEXT = (text) => {
     }
     return parts;
   };
+
+
+  export const TEMPORARY_TESTING_DATA = {
+    id: 185,
+    account: 2,
+    message: "",
+    type: "LLM",
+    created_at: "2025-03-08T23:57:16.245615+05:00",
+    uploads: [],
+    meta_data: {
+      contains: "create_campaign",
+      original_query: "Create Facebook ad website lead generation campaign"
+    },
+    message_type: "JSON",
+    json_message: {
+      products: [
+        {
+          id: 2,
+          account: 2,
+          product_name: "Cloud Integration",
+          product_description: "In today’s digital landscape, seamless cloud integration is essential for businesses looking to enhance efficiency, security, and scalability. As an independent cloud integration specialist, I help businesses connect their cloud platforms, on-premises systems, and third-party applications to create a unified, efficient, and secure digital ecosystem. My expertise ensures smooth data flow, enhanced security, and optimized performance, allowing organizations to harness the full potential of cloud computing without disruptions.",
+          product_core_benefits: "Cloud integration brings numerous advantages to businesses of all sizes. One of the key benefits is seamless connectivity, ensuring that different systems work together harmoniously without data silos or compatibility issues. Security is another crucial factor—by implementing industry-best security measures, I help businesses protect their sensitive data while maintaining compliance with relevant regulations. Scalability is a significant advantage of cloud integration, allowing companies to expand their digital infrastructure as their business grows. Additionally, optimized cloud usage reduces operational costs, making IT investments more efficient. With real-time data synchronization, decision-making becomes faster and more informed, driving business success.",
+          product_features: "My services cover a wide range of cloud integration solutions designed to fit different business needs. I specialize in multi-cloud and hybrid cloud integration, ensuring businesses can operate efficiently across different cloud platforms. API management and automation streamline business processes, reducing manual work and improving system efficiency. Real-time data synchronization ensures that all connected systems receive up-to-date information instantly. I also provide AI-powered monitoring and optimization, allowing businesses to track system performance and enhance efficiency proactively. Customizable dashboards and analytics offer businesses complete visibility into their cloud infrastructure, and my security and compliance frameworks ensure that all integrations meet industry standards.",
+          product_problems_solved: "Many businesses face challenges with disconnected IT systems, which slow down operations and create inefficiencies. Security risks in cloud data management are another common concern, making businesses hesitant to move fully to the cloud. High operational costs due to inefficient cloud usage can also be a burden. Additionally, limited scalability in existing infrastructure can restrict business growth, and data silos prevent real-time insights that are essential for decision-making. My cloud integration solutions address these challenges, ensuring smooth, secure, and efficient operations.",
+          product_ideal_use_case: "My services are ideal for businesses and professionals who want to transition to the cloud or enhance their current cloud infrastructure. Enterprises migrating from on-premises systems to cloud platforms benefit from my expertise in ensuring a smooth and secure transition. SaaS providers looking for API integration can streamline their software offerings with my assistance. E-commerce businesses that require real-time inventory updates can maintain accurate stock levels effortlessly. Financial institutions can ensure secure cloud transactions while complying with regulations, and healthcare organizations can efficiently manage patient data across multiple systems with my integration solutions.",
+          product_unique_selling_proposition: "Unlike traditional cloud integration providers that rely on generic solutions, I offer personalized services tailored to each client’s specific needs. My AI-driven cloud automation and real-time data synchronization ensure businesses experience minimal downtime while maximizing efficiency. Additionally, my end-to-end security approach provides businesses with peace of mind, knowing that their data and systems are protected at all times.",
+          product_customer_testimonials: null,
+          product_pricing: "-2.00",
+          target_audience_description: null,
+          demographics_age_range: null,
+          demographics_gender: null,
+          demographics_education_level: null,
+          demographics_income_range: null,
+          demographics_occupation: null,
+          primary_interest: null,
+          secondary_interest: null,
+          paid_points_or_challenges: null,
+          goals_motivation: null,
+          desired_benefits: null,
+          emotional_drivers: null,
+          unique_needs_or_preferences: null,
+          selected: true
+        }
+      ],
+      funnels: [
+        {
+          id: 2,
+          account: 2,
+          name: "Lead Generation Funnel",
+          funnel_type: "leadGeneration",
+          description: "description",
+          steps: [
+            {
+              id: 1,
+              name: "mywebsite.com",
+              description: "description",
+              url: "https://www.mywebsite.com"
+            }
+          ],
+          selected: true
+        }
+      ]
+    },
+    recommendations: [],
+    campaign_outline: [
+      {
+        id: 37,
+        campaign_configuration: {
+          name: "Campaign | OUTCOME_LEADS | Cloud Integration",
+          objective: "OUTCOME_LEADS",
+          status: "PAUSED",
+          isCBOEnabled: true,
+          bid_strategy: "LOWEST_COST_WITHOUT_CAP",
+          daily_budget: 1,
+          audience: "N/A",
+          budget_type: "CBO",
+          product: "Cloud Integration",
+          funnel: "Lead Generation Funnel",
+          pixel_id: "1091677351507875",
+          pixel: "DFYDealFinder Pixel",
+          account_id: "398925883313675",
+          account_name: "RoboMarketer",
+          currency: "USD",
+          adset_data: [
+            {
+              name: "OUTCOME_LEADS | Cloud Integration | General Audience",
+              status: "PAUSED",
+              targeting: {
+                age_min: 18,
+                age_max: 65,
+                genders: 0,
+                device_platforms: []
+              },
+              publisher_platforms: [
+                "advance+"
+              ],
+              conversion_domain: "website",
+              daily_budget: null,
+              bid_strategy: null,
+              custom_event_type: "LEAD",
+              ad_data: [
+                {
+                  name: "Cloud Integration | General Audience | Maximize Your Cloud Efficiency",
+                  creative: {
+                    name: "Maximize Your Cloud Efficiency",
+                    object_story_spec: {
+                      link_data: {
+                        link: "https://www.mywebsite.com",
+                        message: "Is your business struggling with disconnected IT systems? Cloud integration is your solution! It ensures smooth connectivity between your platforms, optimizes costs, and enhances scalability. With tailored services, enjoy minimal downtime and top-notch security for your data. Don't miss out on the digital transformation—discover how to unify your cloud systems today!",
+                        call_to_action: {
+                          type: "LEARN_MORE"
+                        }
+                      }
+                    }
+                  },
+                  is_video: true,
+                  image_hash: "99d395d4f4be57857331f4f5004436bf",
+                  video_id: "928869855744262"
+                },
+                {
+                  name: "Cloud Integration | General Audience | Seamless Cloud Integration Solutions",
+                  creative: {
+                    name: "Seamless Cloud Integration Solutions",
+                    object_story_spec: {
+                      link_data: {
+                        link: "https://www.mywebsite.com",
+                        message: "Are you experiencing inefficiencies and high operational costs with your current cloud setup? Our cloud integration services solve these problems by synchronizing your data in real-time and providing unmatched scalability. Experience personalized support and AI-driven optimization—your cloud will never be the same!",
+                        call_to_action: {
+                          type: "CONTACT_US"
+                        }
+                      }
+                    }
+                  },
+                  is_video: true,
+                  image_hash: "99d395d4f4be57857331f4f5004436bf",
+                  video_id: "928869855744262"
+                },
+                {
+                  name: "Cloud Integration | General Audience | Transform Your Business Operations Now!",
+                  creative: {
+                    name: "Transform Your Business Operations Now!",
+                    object_story_spec: {
+                      link_data: {
+                        link: "https://www.mywebsite.com",
+                        message: "Ready to take your business to the next level? Cloud integration simplifies your operations and ensures your systems work together seamlessly, enhancing security and reducing costs. Don't let inefficiencies hold you back; get tailored solutions that fit your unique needs and drive growth. Act fast—your transformation awaits!",
+                        call_to_action: {
+                          type: "BOOK_NOW"
+                        }
+                      }
+                    }
+                  },
+                  is_video: true,
+                  image_hash: "99d395d4f4be57857331f4f5004436bf",
+                  video_id: "928869855744262"
+                }
+              ]
+            },
+            // More adsets...
+          ]
+        },
+        status: "DRAFT",
+        error_message: null,
+        campaign_creation_error_messages: {},
+        created_at: "2025-03-08T23:57:41.570810+05:00",
+        updated_at: "2025-03-08T23:57:41.570824+05:00"
+      }
+    ],
+    feedback: null
+  };
+  
