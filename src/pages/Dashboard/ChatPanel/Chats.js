@@ -165,7 +165,7 @@ const Chats = ({ onLikeDislikeClick, submittedFeedback, prompts, chat_data }) =>
                         {index === ChatData.length - 1 && (
                           <div className="response-buttons mt-2">
                             <div className="flex gap-2">
-                              {item.message_type === "TEXT" && item?.message && ( <button className="view-ads-button flex gap-2" onClick={() => handleCopy(item?.message)} > <Forward size={15} /> Share </button> )}
+                              {item.message_type === "TEXT" && item?.message && ( <button className="view-ads-button flex gap-2" style={{width:"110px"}} onClick={() => handleCopy(item?.message)} > <Forward size={15} /> Share </button> )}
                               <button className="view-ads-button" style={{width:"110px"}} onClick={() => onLikeDislikeClick(item?.id, "redo") } > <RotateCw size={15} /> Redo </button>
                             </div>
                             <div className="feedback-btns flex">

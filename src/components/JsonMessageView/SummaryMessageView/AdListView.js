@@ -50,7 +50,7 @@ const AdListView = ({
       <div className="ads-container">
         <div className="card-wrapper">
           {Array.isArray(ads) && ads.length > 0 ? (
-            <Slider {...sliderSettings}>
+            <Slider {...sliderSettings} >
               {ads.map((ad, index) => (
                 <div key={ad.ad_id} className="my-2">
                   <AdView

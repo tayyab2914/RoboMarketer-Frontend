@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import MetricsSection from "./MetricsSection";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import "./styles/JsonMessage.css";
 
 const AdView = ({ ad, adsetName, currency = "USD" }) => {
+  const [charLimit, setCharLimit] = useState(400);
+  const handleShowMore = () => {
+    setCharLimit((prevLimit) => prevLimit + 400);
+  };
   const handleVideoPlay = (e) => {
     // Prevent the default action and scroll behavior
     e.preventDefault();
@@ -38,18 +42,14 @@ const AdView = ({ ad, adsetName, currency = "USD" }) => {
                     />
                   )}
                   {ad.ad_creative.video_id && (
-                     <div style={{ width: "100%", height: "500px" }}>
+                    <div style={{ width: "500px", height: "500px" }}>
                       <iframe
                         src={`https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${ad.ad_creative.video_id}`}
-                        width="100%"
-                        height="100%"
+                        width={"100%"}
+                        height={"100%"}
                         style={{
                           border: "none",
-                          overflow: "hidden",
                           borderRadius: "8px",
-                          position: "absolute",
-                          top: "0",
-                          left: "0",
                         }}
                         scrolling="no"
                         frameBorder="0"
@@ -63,7 +63,19 @@ const AdView = ({ ad, adsetName, currency = "USD" }) => {
                   <strong>Title:</strong> {ad.ad_creative.title}
                 </p>
                 <p>
-                  <strong>Body:</strong> {ad.ad_creative.body}
+                  <strong>Body:</strong>
+
+                  {ad.ad_creative.body && (
+                    <p className="mt-2 text-base" style={{overflow:"auto"}}>
+                      {ad.ad_creative.body?.slice(0, charLimit)}
+                      {charLimit < ad.ad_creative.body?.length && "..."}
+                    </p>
+                  )}
+                  {charLimit < ad.ad_creative.body?.length && (
+                    <button onClick={handleShowMore} className="show-more-btn">
+                      Show More{" "}
+                    </button>
+                  )}
                 </p>
                 {ad.ad_creative?.object_story_spec?.link_data?.link && (
                   <p>

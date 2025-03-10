@@ -37,7 +37,7 @@ export const API_SIGN_IN = async ( email, password, dispatch, navigate, setShowS
     dispatch(setAuthToken(response.data.token));
     dispatch(setLoggedIn(true));
     dispatch(setIsAdmin(response.data.admin))
-    navigate('/');
+    navigate('/chat');
     // message.success("Signed in successfully");
     return response.data;
   } catch (error) {

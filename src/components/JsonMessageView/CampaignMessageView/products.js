@@ -29,10 +29,6 @@ const CampaignMessage = ({ data }) => {
   const [charLimit, setCharLimit] = useState(400);
 
   const { token } = useSelector((state) => state.authToken);
-  const jsonMessage =
-    typeof data.json_message === "string"
-      ? JSON.parse(data.json_message)
-      : data.json_message;
 
   const handleShowMore = () => {
     setCharLimit((prevLimit) => prevLimit + 400);
@@ -205,10 +201,11 @@ const CampaignMessage = ({ data }) => {
                         Select
                       </button>
                     </div>
-                  </div>
-                  <div className="content">
-                    <p className="mt-2">{item?.product_description}</p>
-                  </div>
+                  </div><div className="content m-0">
+                  {item?.product_description && <p className="mt-2"> {item?.product_description?.slice(0, charLimit)} {charLimit < item?.product_description?.length && "..."} </p>}
+                        {charLimit < item?.product_description?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
+                    </div>
+                  
                 </div>
               ))
             ) : step === 3 ? (
@@ -447,7 +444,6 @@ const CampaignMessage = ({ data }) => {
                                                  height={"100%"}
                                                  style={{
                                                    border: "none",
-                                                   overflow: "hidden",
                                                    borderRadius: "8px",
                                                  }}
                                                  scrolling="no"
@@ -504,11 +500,23 @@ const CampaignMessage = ({ data }) => {
                                                   </span>
                                                 </div>
                                                 <span className="text-base text-start p-0">
-                                                  {
+                                                  {/* {
                                                     ad.creative
                                                       .object_story_spec
                                                       .link_data.message
-                                                  }
+                                                  } */}
+                                                {ad.creative.object_story_spec.link_data.message && (
+                                                    <p className="mt-2">
+                                                    {ad.creative?.object_story_spec?.link_data?.message?.slice( 0, charLimit )}
+                                                    {charLimit < ad.creative?.object_story_spec?.link_data?.message?.length && "..."}
+                                                    </p>
+                                                )}
+                                                {charLimit <
+                                                    ad.creative?.object_story_spec?.link_data?.message?.length && (
+                                                    <button onClick={handleShowMore} className="show-more-btn">
+                                                        Show More{" "}
+                                                    </button>
+                                                )}
                                                 </span>
                                               </div>
                                               <div className="flex flex-wrap gap-1">

@@ -37,7 +37,7 @@ const availableMetrics = [
 
 const transformResponseToMetrics = (response, availableMetrics) => {
     return availableMetrics.map((metric) => {
-      const metricData = response[metric.key] || {};
+      const metricData = response[metric?.key] || {};
       return {
         key: metric.key,
         label: metric.label,

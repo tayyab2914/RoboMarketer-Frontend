@@ -9,13 +9,15 @@ const InfoContainer = ({ CurrentMode }) => {
   }, [CurrentMode]);
   return (
     <>
-      <div id="info-container">
-        <div className="info-wrapper">
-          {CurrentMode == 1 && <PrivacyPolicy />}
-          {CurrentMode == 2 && <TermsAndConditions />}
-          {CurrentMode == 3 && <DataProtectionPolicy />}
+      {CurrentMode != 0 && (
+        <div id="info-container">
+          <div className="info-wrapper">
+            {CurrentMode == 1 && <PrivacyPolicy />}
+            {CurrentMode == 2 && <TermsAndConditions />}
+            {CurrentMode == 3 && <DataProtectionPolicy />}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

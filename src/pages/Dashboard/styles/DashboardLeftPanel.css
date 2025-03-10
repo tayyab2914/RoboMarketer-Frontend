@@ -168,10 +168,34 @@ height: 100%;
 }
 
 .two-line-ellipsis {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;     
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;       
-}
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-size: 13px;
+  /* overflow: auto;
+  scrollbar-width: none; */
+}.flex-parent {
+    display: flex;
+  }
+  
+
+  
+  .long-and-truncated {
+    margin: 0 0px;
+    flex: 1;
+    min-width: 0; /* Important for long words! */
+    font-size: 14px;
+  }
+  
+  .long-and-truncated span {
+    display: inline;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word; /* Important for long words! */
+  }
+  

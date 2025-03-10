@@ -11,7 +11,9 @@ import { DOMAIN_NAME } from "../utils/GlobalSettings";
 
 export const API_CREATE_PROMPT = async (token, newPrompt, setShowSpinner) => {
   // setShowSpinner(true);
-
+//   for (let [key, value] of newPrompt.entries()) {
+//     console.log(`${key}: ${value}`);
+//   }
   try {
     const response = await axios.post(
       `${DOMAIN_NAME}/chat/create_prompt/`,

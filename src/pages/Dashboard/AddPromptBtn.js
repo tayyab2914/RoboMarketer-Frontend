@@ -42,7 +42,17 @@ const AddPromptBtn = () => {
     }
     setFileGroup(info?.fileList);
   };
-
+  const handlePromptHashtagChange = (e) => {
+    let value = e.target.value;
+  
+    // Ensure the hashtag starts with @, if not, add it
+    if (value && !value.startsWith('@')) {
+      value = '@' + value;
+    }
+  
+    setPromptHashtag(value);
+  };
+  
   const handleCreatePrompt = async () => {
     // Validate required fields
     if (!category || !prompt_name || !prompt) {
@@ -54,11 +64,13 @@ const AddPromptBtn = () => {
     formData.append("category", category?.category_id || "");
     formData.append("prompt_name", prompt_name || "");
     formData.append("prompt", prompt || "");
-    formData.append("prompt_hashtag", prompt_hashtag || "");
+    formData.append("prompt_hashtag", prompt_hashtag.replace('@', '') || "");
+
 
     file_group?.forEach((file, index) => {
       formData.append(`file_group[${index}]`, file.originFileObj);
     });
+    
 
     await API_CREATE_PROMPT(token, formData, setShowSpinner);
     setCategory("");
@@ -143,12 +155,13 @@ const AddPromptBtn = () => {
           <div className="">
             <p className="modal-field-label-block">Quick Prompt @HashTag</p>
             <Input
-              height={70}
-              value={prompt_hashtag}
-              onChange={(e) => setPromptHashtag(e.target.value)}
-              placeholder="Type @hashtag"
-              className="add-prompt-btn-input"
-            />
+  height={70}
+  value={prompt_hashtag}
+  onChange={handlePromptHashtagChange}  // Updated here
+  placeholder="Type @hashtag"
+  className="add-prompt-btn-input"
+/>
+
           </div>
 
           {/* <div className="add-prompt-upload-sop-docs">

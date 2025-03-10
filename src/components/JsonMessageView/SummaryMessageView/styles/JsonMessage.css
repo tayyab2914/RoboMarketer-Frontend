@@ -12,6 +12,10 @@
     padding: 5px 10px;
     margin-top: 5px;
 }
+.slick-list{
+    height: auto !important;
+    overflow-y: auto !important;
+}
 .slick-next {
   right: -5px !important;
   z-index: 99 !important;
@@ -140,6 +144,7 @@
 .card-body p{
     color: #4b5563;
     margin-top: 15px;
+    overflow-x: auto;
 }
 .card-body-title {
   font-weight: 600;

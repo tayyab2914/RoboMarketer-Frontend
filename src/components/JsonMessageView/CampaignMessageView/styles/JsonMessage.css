@@ -39,22 +39,7 @@
   align-items: center;
   gap: 5px;
 }
-.iframe-container {
-    position: relative;
-    width: 100%;            /* Full width of its parent */
-    height: 0;              /* Height set to 0 initially */
-    padding-bottom: 56.25%; /* Default aspect ratio (16:9) */
-    overflow: hidden;
-  }
-  
-  .iframe-container iframe {
-    position: absolute;    /* Position absolutely within the container */
-    top: 0;
-    left: 0;
-    width: 100%;            /* Ensure full width */
-    height: 100%;           /* Ensure full height */
-    object-fit: contain;    /* Makes sure the video content is resized without cropping */
-  }
+
   
 .select-mess {
   display: flex;
@@ -121,5 +106,5 @@
 }
 
 .text-base {
-  font-size: 0.8rem;
+  font-size: 14px;
 }

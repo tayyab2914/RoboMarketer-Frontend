@@ -154,7 +154,13 @@ const CampaignMessage = ({ data }) => {
                       </button>
                     </div>
                   </div>
-                  
+                   {ad.creative.object_story_spec.link_data.message}
+                                                  {ad.creative.object_story_spec.link_data.message && <p className="mt-2">
+                                                    {ad.creative?.object_story_spec?.link_data?.message?.slice(0, charLimit)} 
+                                                    {charLimit < ad.creative?.object_story_spec?.link_data?.message && "..."} 
+                                                    
+                                                     </p>}{charLimit < ad.creative?.object_story_spec?.link_data?.message && 
+                        ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}
                   <div className="content m-0">
                   {item?.product_description && <p className="mt-2"> {item?.product_description?.slice(0, charLimit)} {charLimit < item?.product_description?.length && "..."} </p>}
                         {charLimit < item?.product_description?.length && ( <button onClick={handleShowMore} className="show-more-btn"> Show More </button> )}

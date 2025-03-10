@@ -167,7 +167,18 @@ const DashboardLeftPanel = ({ Accounts, isAIResponseLoading, setIsAIResponseLoad
                         <Button type="text" className="left-panel-btn" style={{ width: "100%" }} >
                           <Tooltip title={item?.prompt_name}>
                             <span className="two-line-ellipsis" style={{ textAlign: "start" }} onClick={() => handlePromptClick(item?.prompt, item?.id) } >
-                              {TRUNCATE_STRING(item?.prompt_name, 45)}
+               
+                              <div className="flex-parent">
+                                    <div className="flex-child short-and-fixed"></div>
+                                    
+                                    <div className="flex-child long-and-truncated">
+                                        <span>
+                                        {item?.prompt_name}
+                                            </span>
+                                    </div>
+                                    
+                                    <div className="flex-child short-and-fixed"></div>
+                                </div>
                             </span>
                           </Tooltip>
                           <Dropdown overlay={renderDropdownMenu( item, panel?.category_name, panel?.category_id )} trigger={["click"]} >

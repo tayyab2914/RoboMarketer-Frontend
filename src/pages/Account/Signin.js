@@ -42,7 +42,7 @@ const Signin = ({ toggleCurrentMode }) => {
                 navigate(next)
             }
                 else {
-                navigate('/');
+                navigate('/chat');
             }
         }
     }

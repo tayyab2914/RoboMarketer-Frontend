@@ -78,7 +78,7 @@ export default function DialogBox({ type, onClose, responseId, setSubmittedFeedb
   };
 
   return (
-    <Modal className="" title={false} centereda visible={isVisible} onCancel={onClose} closable={false} footer={null} >
+    <Modal className="" title={false} centered visible={isVisible} onCancel={onClose} closable={false} footer={null} >
       <div className="custom-modal-header">
         <span className="modal-header">
           <MessageSquareWarning size={18} style={{ marginRight: "8px" }} />
